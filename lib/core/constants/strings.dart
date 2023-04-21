@@ -15,6 +15,8 @@ class AppStrings{
   static const String cancel = 'Cancel';
   static const String warning = 'Warning';
   static const String areYouSure = 'Are you sure you want to logout?';
+  static const String areYouDelete = 'Are you sure you want to delete this bucket?';
+  static const String areYouQuestion = 'Are you sure you want to delete this question?';
   static const String all = 'All';
   static const String manager = 'Manager';
   static const String employee = 'Employee';

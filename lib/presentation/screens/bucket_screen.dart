@@ -4,18 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:micqui_admin/data/models/questions/questions.dart';
+import 'package:micqui_admin/presentation/bloc/questionnarie/questionnarie_bloc.dart';
 import 'package:micqui_admin/presentation/widgets/app_elevated_button.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/strings.dart';
 import '../../core/services/service_locator.dart';
 import '../../core/themes/theme.dart';
+import '../../data/models/answer/answer.dart';
+import '../../data/models/bucket/bucket.dart';
 import '../bloc/bucket/bucket_bloc.dart';
 import '../widgets/app_checkbox.dart';
 import '../widgets/search_field.dart';
 
 class BucketScreen extends StatefulWidget {
-  final String bucketId;
+  final int bucketId;
 
   const BucketScreen({
     Key? key,
@@ -29,15 +32,24 @@ class BucketScreen extends StatefulWidget {
 class _BucketScreenState extends State<BucketScreen> {
   final BucketBloc _bloc = sl<BucketBloc>();
   final _searchController = TextEditingController();
-  List<Map<String, TextEditingController>> controllers = [];
-  List<Map<String, FocusNode>> focuses = [];
-  late bool? published;
+  List<Map<String, TextEditingController>> questionControllers = [];
+  List<Map<String, TextEditingController>> answerControllers = [];
+  List<Map<String, FocusNode>> questionFocuses = [];
+  List<Map<String, FocusNode>> answerFocuses = [];
+  late List<Questions> questions;
+  late List<Answer>? answerVariant;
+  late bool published;
+  late Bucket bucket;
 
   List<bool> isChecked = [];
 
   @override
   void initState() {
-    _bloc.add(BucketEvent.init(bucketId: widget.bucketId));
+    bucket = context.read<QuestionnarieBloc>().state.bucket![widget.bucketId];
+    questions = List.generate(
+        bucket.questions?.length ?? 0, (index) => bucket.questions![index]);
+
+    published = bucket.published!;
     super.initState();
   }
 
@@ -54,6 +66,12 @@ class _BucketScreenState extends State<BucketScreen> {
         bloc: _bloc,
         listener: (context, state) {
           state.maybeMap(
+              searchLoaded: (_) => questions = state.questionsList!,
+              loaded: (_)=> questions = List.generate(
+                  bucket.questions?.length ?? 0, (index) => bucket.questions![index]),
+              isPublished: (_) => published = state.isPublished!,
+              questionAdded: (_) => questions.add(state.questions!),
+              answerAdded: (i) => questions[i.questionIndex] = i.question!,
               error: (e) => ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       backgroundColor: AppColors.accent,
@@ -80,46 +98,103 @@ class _BucketScreenState extends State<BucketScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    AppStrings.bucket,
-                    style: AppTheme.themeData.textTheme.headlineLarge!
-                        .copyWith(color: AppColors.text),
-                  ),
-                  Text(
-                    state.bucket!.name!,
-                    style: AppTheme.themeData.textTheme.labelMedium,
-                  ),
-                  state.bucket!.published!
+                  published
                       ? Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const FaIcon(
-                              FontAwesomeIcons.solidCircle,
-                              size: 8,
-                              color: AppColors.green,
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  AppStrings.bucket,
+                                  style: AppTheme
+                                      .themeData.textTheme.headlineLarge!
+                                      .copyWith(color: AppColors.text),
+                                ),
+                                Text(
+                                  bucket.name!,
+                                  style:
+                                      AppTheme.themeData.textTheme.labelMedium,
+                                ),
+                                Row(
+                                  children: [
+                                    const FaIcon(
+                                      FontAwesomeIcons.solidCircle,
+                                      size: 8,
+                                      color: AppColors.green,
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      AppStrings.published,
+                                      style: AppTheme
+                                          .themeData.textTheme.labelMedium,
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              AppStrings.published,
-                              style: AppTheme.themeData.textTheme.labelMedium,
-                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  '${bucket.id}',
+                                  style: AppTheme
+                                      .themeData.textTheme.titleMedium!
+                                      .copyWith(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 32,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 48,
+                                ),
+                                const FaIcon(
+                                  FontAwesomeIcons.qrcode,
+                                  size: 64,
+                                  color: AppColors.text,
+                                ),
+                              ],
+                            )
                           ],
                         )
                       : Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const FaIcon(
-                              FontAwesomeIcons.solidCircle,
-                              size: 8,
-                              color: AppColors.lightGrey,
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  AppStrings.bucket,
+                                  style: AppTheme
+                                      .themeData.textTheme.headlineLarge!
+                                      .copyWith(color: AppColors.text),
+                                ),
+                                Text(
+                                  bucket.name!,
+                                  style:
+                                      AppTheme.themeData.textTheme.labelMedium,
+                                ),
+                                Row(
+                                  children: [
+                                    const FaIcon(
+                                      FontAwesomeIcons.solidCircle,
+                                      size: 8,
+                                      color: AppColors.lightGrey,
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      AppStrings.draft,
+                                      style: AppTheme
+                                          .themeData.textTheme.labelMedium,
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              AppStrings.draft,
-                              style: AppTheme.themeData.textTheme.labelMedium,
-                            ),
+                            SizedBox(),
                           ],
                         ),
                   const SizedBox(
@@ -137,7 +212,7 @@ class _BucketScreenState extends State<BucketScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "${AppStrings.questions} (${state.bucket!.questions?.length ?? 0})",
+                                  "${AppStrings.questions} (${questions.isEmpty ? 0 : questions.length})",
                                   style: AppTheme
                                       .themeData.textTheme.titleLarge!
                                       .copyWith(color: AppColors.text),
@@ -150,9 +225,10 @@ class _BucketScreenState extends State<BucketScreen> {
                                     child: SearchField(
                                         searchController: _searchController,
                                         onChange: (name) {
-                                          // context.read<QuestionnarieBloc>().add(
-                                          //     QuestionnarieEvent.searchByName(
-                                          //         name: name, category: value));
+                                          _bloc.add(BucketEvent.searchByName(
+                                            name: name,
+                                            bucket: bucket,
+                                          ));
                                         }),
                                   ),
                                 ),
@@ -163,9 +239,8 @@ class _BucketScreenState extends State<BucketScreen> {
                                     height: 50,
                                     child: IconButton(
                                       onPressed: () {
-                                        context.read<BucketBloc>().add(
-                                            BucketEvent.addQuestion(
-                                                bucket: state.bucket));
+                                        _bloc.add(
+                                            const BucketEvent.addQuestion());
                                       },
                                       icon: const FaIcon(
                                         FontAwesomeIcons.circlePlus,
@@ -181,9 +256,14 @@ class _BucketScreenState extends State<BucketScreen> {
                             color: Colors.grey.shade300,
                             thickness: 1,
                           ),
-                          state.bucket!.questions == null
+                          questions.isEmpty
                               ? const SizedBox()
-                              : questionList(state),
+                              : state.maybeMap(
+                                  searchLoading: (_) => const Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                  orElse: () => questionList(state),
+                                ),
                         ],
                       ),
                     ),
@@ -191,18 +271,14 @@ class _BucketScreenState extends State<BucketScreen> {
                   const SizedBox(
                     height: 38,
                   ),
-                  state.bucket!.published!
+                  published
                       ? SizedBox(
                           width: 278,
                           child: AppElevatedButton(
                             text: AppStrings.removeFromRelease,
                             onPressed: () {
-                              published = false;
-                              context.read<BucketBloc>().add(
-                                  BucketEvent.removeFromRelease(
-                                      bucketId: state.bucket!.id!,
-                                      bucket: state.bucket,
-                                      stateQuestions: state.bucket!.questions));
+                              _bloc.add(BucketEvent.removeFromRelease(
+                                  bucketId: bucket.id!));
                             },
                           ),
                         )
@@ -214,9 +290,8 @@ class _BucketScreenState extends State<BucketScreen> {
                               child: AppElevatedButton(
                                 text: AppStrings.publish,
                                 onPressed: () {
-                                  context.read<BucketBloc>().add(
-                                      BucketEvent.publish(
-                                          bucketId: state.bucket!.id!));
+                                  _bloc.add(BucketEvent.publish(
+                                      bucketId: bucket.id!));
                                 },
                               ),
                             ),
@@ -225,7 +300,10 @@ class _BucketScreenState extends State<BucketScreen> {
                                 child: AppElevatedButton(
                                     color: AppColors.accent,
                                     text: AppStrings.delete,
-                                    onPressed: () {}))
+                                    onPressed: () {
+                                      showAlertDialog(context,
+                                          text: AppStrings.areYouDelete);
+                                    }))
                           ],
                         ),
                 ],
@@ -243,23 +321,26 @@ class _BucketScreenState extends State<BucketScreen> {
         children: [
           Expanded(
             child: ListView.builder(
-                itemCount: state.bucket!.questions!.length,
+                itemCount: questions.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  if (controllers.length <= index) {
-                    controllers.add({
+                  if (questionControllers.length <= index) {
+                    questionControllers.add({
                       'name': TextEditingController(
-                          text: state.bucket!.questions![index].name ?? 'Name'),
+                          text: questions[index].name ?? 'Name'),
                     });
                   }
-                  if (focuses.length <= index) {
-                    focuses.add({
+                  if (questionFocuses.length <= index) {
+                    questionFocuses.add({
                       'name': FocusNode(),
                     });
                   }
-                  List<String>? variants =
-                      state.bucket!.questions![index].variants;
-                  isChecked = List.generate(variants!.length, (index) => false);
+
+                  answerVariant = List.generate(
+                      questions[index].variants?.length ?? 0,
+                      (i) => questions[index].variants![i]);
+                  isChecked = List.generate(
+                      answerVariant?.length ?? 0, (index) => false);
                   return Container(
                     decoration: BoxDecoration(
                       border: Border(
@@ -270,7 +351,7 @@ class _BucketScreenState extends State<BucketScreen> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(
-                          bottom: 19, top: 14, left: 23, right: 23),
+                          bottom: 19, top: 14, left: 23, right: 37),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -280,8 +361,9 @@ class _BucketScreenState extends State<BucketScreen> {
                               Flexible(
                                 child: EditableText(
                                   textAlign: TextAlign.start,
-                                  controller: controllers[index]['name']!,
-                                  focusNode: focuses[index]['name']!,
+                                  controller: questionControllers[index]
+                                      ['name']!,
+                                  focusNode: questionFocuses[index]['name']!,
                                   cursorColor: AppColors.primary,
                                   backgroundCursorColor: AppColors.primary,
                                   style: AppTheme
@@ -294,19 +376,16 @@ class _BucketScreenState extends State<BucketScreen> {
                                   keyboardType: TextInputType.text,
                                   maxLines: 1,
                                   onSubmitted: (text) {
-                                    focuses[index]['name']!.unfocus();
-                                    context.read<BucketBloc>().add(
-                                          BucketEvent.setQuestion(
-                                            stateQuestions:
-                                                state.bucket!.questions,
-                                            bucket: state.bucket,
-                                            bucketId: state.bucket!.id!,
-                                            questions: Questions(
-                                                name: controllers[index]
-                                                        ['name']!
-                                                    .text),
-                                          ),
-                                        );
+                                    questionFocuses[index]['name']!.unfocus();
+                                    _bloc.add(BucketEvent.setQuestion(
+                                        bucketId: bucket.id!,
+                                        questionId: questions[index].id,
+                                        question: Questions(
+                                            id: questions[index].id,
+                                            name: questionControllers[index]
+                                                    ['name']!
+                                                .text),
+                                        questionIndex: index));
                                   },
                                   onSelectionHandleTapped: () {
                                     showAboutDialog(context: context);
@@ -317,8 +396,13 @@ class _BucketScreenState extends State<BucketScreen> {
                                 constraints: const BoxConstraints(),
                                 padding: const EdgeInsets.all(2),
                                 onPressed: () {
+                                  _bloc.add(BucketEvent.deleteQuestion(bucketId: bucket.id!, index: index));
+
                                   setState(() {
-                                    state.bucket!.questions!.removeAt(index);
+                                    // showAlertDialog(context,
+                                    //     text: AppStrings.areYouQuestion);
+                                    questions.removeAt(index);
+
                                   });
                                 },
                                 icon: const FaIcon(
@@ -329,24 +413,22 @@ class _BucketScreenState extends State<BucketScreen> {
                               ),
                             ],
                           ),
-                          state.bucket!.questions![index].variants!.isEmpty ||
-                                  state.bucket!.questions![index].variants ==
-                                      null
+                          answerVariant == null
                               ? const SizedBox()
                               : Padding(
                                   padding: const EdgeInsets.only(top: 20),
-                                  child: answersList(variants),
+                                  child: answersList(
+                                      answerVariant!, questions[index]),
                                 ),
                           const SizedBox(
                             height: 23,
                           ),
                           IconButton(
                               onPressed: () {
-                                setState(() {
-                                  variants.add('value');
-
-                                  print(isChecked);
-                                });
+                                _bloc.add(BucketEvent.addAnswer(
+                                    question: questions[index],
+                                    questionIndex: index,
+                                    answerList: questions[index].variants));
                               },
                               icon: const FaIcon(
                                 FontAwesomeIcons.circlePlus,
@@ -363,11 +445,22 @@ class _BucketScreenState extends State<BucketScreen> {
     );
   }
 
-  Widget answersList(List<dynamic> variants) {
+  Widget answersList(List<Answer> answer, Questions currentQuestion) {
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: variants.length,
+      itemCount: answerVariant!.length,
       itemBuilder: (context, index) {
+        if (answerControllers.length <= index) {
+          answerControllers.add({
+            'answer': TextEditingController(
+                text: answer[index].name ?? 'Answer Name'),
+          });
+        }
+        if (answerFocuses.length <= index) {
+          answerFocuses.add({
+            'answer': FocusNode(),
+          });
+        }
         return Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -396,14 +489,24 @@ class _BucketScreenState extends State<BucketScreen> {
                   EditableText(
                     textAlign: TextAlign.start,
                     style: AppTheme.themeData.textTheme.labelMedium!
-                        .copyWith(fontWeight: FontWeight.w600),
+                        .copyWith(fontSize: 14),
                     cursorColor: AppColors.primary,
                     backgroundCursorColor: AppColors.primary,
                     selectionControls: MaterialTextSelectionControls(),
                     keyboardType: TextInputType.text,
                     maxLines: 1,
-                    focusNode: FocusNode(),
-                    controller: _searchController,
+                    focusNode: answerFocuses[index]['answer']!,
+                    controller: answerControllers[index]['answer']!,
+                    onSubmitted: (text) {
+                      answerFocuses[index]['answer']!.unfocus();
+                      _bloc.add(BucketEvent.setAnswer(
+                        bucketId: bucket.id!,
+                        questionIndex: 1,
+                        question: currentQuestion,
+                        answer: Answer(
+                            name: answerControllers[index]['answer']!.text,isRight: false),
+                      ));
+                    },
                   ),
                 ],
               ),
@@ -412,8 +515,12 @@ class _BucketScreenState extends State<BucketScreen> {
               constraints: const BoxConstraints(),
               padding: const EdgeInsets.all(2),
               onPressed: () {
+                _bloc.add(BucketEvent.deleteAnswer(
+                    bucketId: bucket.id!,
+                    existedQuestions: currentQuestion,
+                    indexToDelete: index));
                 setState(() {
-                  variants.removeAt(index);
+                  answer.removeAt(index);
                 });
               },
               icon: const FaIcon(
@@ -424,6 +531,47 @@ class _BucketScreenState extends State<BucketScreen> {
             ),
           ],
         );
+      },
+    );
+  }
+
+  showAlertDialog(BuildContext context, {required String text}) {
+    Widget cancelButton = TextButton(
+      child: const Text(
+        AppStrings.cancel,
+        style: TextStyle(color: AppColors.text),
+      ),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+    Widget continueButton = TextButton(
+      child: const Text(
+        AppStrings.delete,
+        style: TextStyle(color: AppColors.text),
+      ),
+      onPressed: () {
+        // context.read<AuthBloc>().add(const AuthEvent.logout());
+      },
+    );
+
+    AlertDialog alert = AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      title: Text(AppStrings.warning,
+          style: AppTheme.themeData.textTheme.titleSmall),
+      content: Text(text, style: AppTheme.themeData.textTheme.bodySmall),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
       },
     );
   }

@@ -19,49 +19,67 @@ mixin _$BucketEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? bucketId) init,
-    required TResult Function(Bucket? bucket) addQuestion,
-    required TResult Function(String bucketId, Questions questions,
-            Bucket? bucket, List<Questions>? stateQuestions)
+    required TResult Function() addQuestion,
+    required TResult Function(String bucketId, int? questionIndex,
+            String? questionId, Questions question)
         setQuestion,
-    required TResult Function() addVariant,
-    required TResult Function(String name, String category) searchByName,
     required TResult Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)
-        removeFromRelease,
+            Questions question, int questionIndex, List<Answer>? answerList)
+        addAnswer,
+    required TResult Function(String bucketId, int? questionIndex,
+            Questions question, Answer answer)
+        setAnswer,
+    required TResult Function(String name, Bucket? bucket) searchByName,
+    required TResult Function(String bucketId) removeFromRelease,
     required TResult Function(String bucketId) publish,
-    required TResult Function(String name, String category) deleteQuestion,
+    required TResult Function(String bucketId, int index) deleteQuestion,
+    required TResult Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)
+        deleteAnswer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? bucketId)? init,
-    TResult? Function(Bucket? bucket)? addQuestion,
-    TResult? Function(String bucketId, Questions questions, Bucket? bucket,
-            List<Questions>? stateQuestions)?
+    TResult? Function()? addQuestion,
+    TResult? Function(String bucketId, int? questionIndex, String? questionId,
+            Questions question)?
         setQuestion,
-    TResult? Function()? addVariant,
-    TResult? Function(String name, String category)? searchByName,
     TResult? Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)?
-        removeFromRelease,
+            Questions question, int questionIndex, List<Answer>? answerList)?
+        addAnswer,
+    TResult? Function(String bucketId, int? questionIndex, Questions question,
+            Answer answer)?
+        setAnswer,
+    TResult? Function(String name, Bucket? bucket)? searchByName,
+    TResult? Function(String bucketId)? removeFromRelease,
     TResult? Function(String bucketId)? publish,
-    TResult? Function(String name, String category)? deleteQuestion,
+    TResult? Function(String bucketId, int index)? deleteQuestion,
+    TResult? Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)?
+        deleteAnswer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? bucketId)? init,
-    TResult Function(Bucket? bucket)? addQuestion,
-    TResult Function(String bucketId, Questions questions, Bucket? bucket,
-            List<Questions>? stateQuestions)?
+    TResult Function()? addQuestion,
+    TResult Function(String bucketId, int? questionIndex, String? questionId,
+            Questions question)?
         setQuestion,
-    TResult Function()? addVariant,
-    TResult Function(String name, String category)? searchByName,
     TResult Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)?
-        removeFromRelease,
+            Questions question, int questionIndex, List<Answer>? answerList)?
+        addAnswer,
+    TResult Function(String bucketId, int? questionIndex, Questions question,
+            Answer answer)?
+        setAnswer,
+    TResult Function(String name, Bucket? bucket)? searchByName,
+    TResult Function(String bucketId)? removeFromRelease,
     TResult Function(String bucketId)? publish,
-    TResult Function(String name, String category)? deleteQuestion,
+    TResult Function(String bucketId, int index)? deleteQuestion,
+    TResult Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)?
+        deleteAnswer,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -70,11 +88,13 @@ mixin _$BucketEvent {
     required TResult Function(_Init value) init,
     required TResult Function(_AddQuestion value) addQuestion,
     required TResult Function(_SetQuestion value) setQuestion,
-    required TResult Function(_AddVariant value) addVariant,
+    required TResult Function(_AddAnswer value) addAnswer,
+    required TResult Function(_SetAnswer value) setAnswer,
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_RemoveFromRelease value) removeFromRelease,
     required TResult Function(_Publish value) publish,
     required TResult Function(_DeleteQuestion value) deleteQuestion,
+    required TResult Function(_DeleteAnswer value) deleteAnswer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -82,11 +102,13 @@ mixin _$BucketEvent {
     TResult? Function(_Init value)? init,
     TResult? Function(_AddQuestion value)? addQuestion,
     TResult? Function(_SetQuestion value)? setQuestion,
-    TResult? Function(_AddVariant value)? addVariant,
+    TResult? Function(_AddAnswer value)? addAnswer,
+    TResult? Function(_SetAnswer value)? setAnswer,
     TResult? Function(_SearchByName value)? searchByName,
     TResult? Function(_RemoveFromRelease value)? removeFromRelease,
     TResult? Function(_Publish value)? publish,
     TResult? Function(_DeleteQuestion value)? deleteQuestion,
+    TResult? Function(_DeleteAnswer value)? deleteAnswer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -94,11 +116,13 @@ mixin _$BucketEvent {
     TResult Function(_Init value)? init,
     TResult Function(_AddQuestion value)? addQuestion,
     TResult Function(_SetQuestion value)? setQuestion,
-    TResult Function(_AddVariant value)? addVariant,
+    TResult Function(_AddAnswer value)? addAnswer,
+    TResult Function(_SetAnswer value)? setAnswer,
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_RemoveFromRelease value)? removeFromRelease,
     TResult Function(_Publish value)? publish,
     TResult Function(_DeleteQuestion value)? deleteQuestion,
+    TResult Function(_DeleteAnswer value)? deleteAnswer,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -186,17 +210,23 @@ class _$_Init implements _Init {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? bucketId) init,
-    required TResult Function(Bucket? bucket) addQuestion,
-    required TResult Function(String bucketId, Questions questions,
-            Bucket? bucket, List<Questions>? stateQuestions)
+    required TResult Function() addQuestion,
+    required TResult Function(String bucketId, int? questionIndex,
+            String? questionId, Questions question)
         setQuestion,
-    required TResult Function() addVariant,
-    required TResult Function(String name, String category) searchByName,
     required TResult Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)
-        removeFromRelease,
+            Questions question, int questionIndex, List<Answer>? answerList)
+        addAnswer,
+    required TResult Function(String bucketId, int? questionIndex,
+            Questions question, Answer answer)
+        setAnswer,
+    required TResult Function(String name, Bucket? bucket) searchByName,
+    required TResult Function(String bucketId) removeFromRelease,
     required TResult Function(String bucketId) publish,
-    required TResult Function(String name, String category) deleteQuestion,
+    required TResult Function(String bucketId, int index) deleteQuestion,
+    required TResult Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)
+        deleteAnswer,
   }) {
     return init(bucketId);
   }
@@ -205,17 +235,23 @@ class _$_Init implements _Init {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? bucketId)? init,
-    TResult? Function(Bucket? bucket)? addQuestion,
-    TResult? Function(String bucketId, Questions questions, Bucket? bucket,
-            List<Questions>? stateQuestions)?
+    TResult? Function()? addQuestion,
+    TResult? Function(String bucketId, int? questionIndex, String? questionId,
+            Questions question)?
         setQuestion,
-    TResult? Function()? addVariant,
-    TResult? Function(String name, String category)? searchByName,
     TResult? Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)?
-        removeFromRelease,
+            Questions question, int questionIndex, List<Answer>? answerList)?
+        addAnswer,
+    TResult? Function(String bucketId, int? questionIndex, Questions question,
+            Answer answer)?
+        setAnswer,
+    TResult? Function(String name, Bucket? bucket)? searchByName,
+    TResult? Function(String bucketId)? removeFromRelease,
     TResult? Function(String bucketId)? publish,
-    TResult? Function(String name, String category)? deleteQuestion,
+    TResult? Function(String bucketId, int index)? deleteQuestion,
+    TResult? Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)?
+        deleteAnswer,
   }) {
     return init?.call(bucketId);
   }
@@ -224,17 +260,23 @@ class _$_Init implements _Init {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? bucketId)? init,
-    TResult Function(Bucket? bucket)? addQuestion,
-    TResult Function(String bucketId, Questions questions, Bucket? bucket,
-            List<Questions>? stateQuestions)?
+    TResult Function()? addQuestion,
+    TResult Function(String bucketId, int? questionIndex, String? questionId,
+            Questions question)?
         setQuestion,
-    TResult Function()? addVariant,
-    TResult Function(String name, String category)? searchByName,
     TResult Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)?
-        removeFromRelease,
+            Questions question, int questionIndex, List<Answer>? answerList)?
+        addAnswer,
+    TResult Function(String bucketId, int? questionIndex, Questions question,
+            Answer answer)?
+        setAnswer,
+    TResult Function(String name, Bucket? bucket)? searchByName,
+    TResult Function(String bucketId)? removeFromRelease,
     TResult Function(String bucketId)? publish,
-    TResult Function(String name, String category)? deleteQuestion,
+    TResult Function(String bucketId, int index)? deleteQuestion,
+    TResult Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)?
+        deleteAnswer,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -249,11 +291,13 @@ class _$_Init implements _Init {
     required TResult Function(_Init value) init,
     required TResult Function(_AddQuestion value) addQuestion,
     required TResult Function(_SetQuestion value) setQuestion,
-    required TResult Function(_AddVariant value) addVariant,
+    required TResult Function(_AddAnswer value) addAnswer,
+    required TResult Function(_SetAnswer value) setAnswer,
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_RemoveFromRelease value) removeFromRelease,
     required TResult Function(_Publish value) publish,
     required TResult Function(_DeleteQuestion value) deleteQuestion,
+    required TResult Function(_DeleteAnswer value) deleteAnswer,
   }) {
     return init(this);
   }
@@ -264,11 +308,13 @@ class _$_Init implements _Init {
     TResult? Function(_Init value)? init,
     TResult? Function(_AddQuestion value)? addQuestion,
     TResult? Function(_SetQuestion value)? setQuestion,
-    TResult? Function(_AddVariant value)? addVariant,
+    TResult? Function(_AddAnswer value)? addAnswer,
+    TResult? Function(_SetAnswer value)? setAnswer,
     TResult? Function(_SearchByName value)? searchByName,
     TResult? Function(_RemoveFromRelease value)? removeFromRelease,
     TResult? Function(_Publish value)? publish,
     TResult? Function(_DeleteQuestion value)? deleteQuestion,
+    TResult? Function(_DeleteAnswer value)? deleteAnswer,
   }) {
     return init?.call(this);
   }
@@ -279,11 +325,13 @@ class _$_Init implements _Init {
     TResult Function(_Init value)? init,
     TResult Function(_AddQuestion value)? addQuestion,
     TResult Function(_SetQuestion value)? setQuestion,
-    TResult Function(_AddVariant value)? addVariant,
+    TResult Function(_AddAnswer value)? addAnswer,
+    TResult Function(_SetAnswer value)? setAnswer,
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_RemoveFromRelease value)? removeFromRelease,
     TResult Function(_Publish value)? publish,
     TResult Function(_DeleteQuestion value)? deleteQuestion,
+    TResult Function(_DeleteAnswer value)? deleteAnswer,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -306,10 +354,6 @@ abstract class _$$_AddQuestionCopyWith<$Res> {
   factory _$$_AddQuestionCopyWith(
           _$_AddQuestion value, $Res Function(_$_AddQuestion) then) =
       __$$_AddQuestionCopyWithImpl<$Res>;
-  @useResult
-  $Res call({Bucket? bucket});
-
-  $BucketCopyWith<$Res>? get bucket;
 }
 
 /// @nodoc
@@ -319,120 +363,102 @@ class __$$_AddQuestionCopyWithImpl<$Res>
   __$$_AddQuestionCopyWithImpl(
       _$_AddQuestion _value, $Res Function(_$_AddQuestion) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? bucket = freezed,
-  }) {
-    return _then(_$_AddQuestion(
-      bucket: freezed == bucket
-          ? _value.bucket
-          : bucket // ignore: cast_nullable_to_non_nullable
-              as Bucket?,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $BucketCopyWith<$Res>? get bucket {
-    if (_value.bucket == null) {
-      return null;
-    }
-
-    return $BucketCopyWith<$Res>(_value.bucket!, (value) {
-      return _then(_value.copyWith(bucket: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_AddQuestion implements _AddQuestion {
-  const _$_AddQuestion({required this.bucket});
-
-  @override
-  final Bucket? bucket;
+  const _$_AddQuestion();
 
   @override
   String toString() {
-    return 'BucketEvent.addQuestion(bucket: $bucket)';
+    return 'BucketEvent.addQuestion()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_AddQuestion &&
-            (identical(other.bucket, bucket) || other.bucket == bucket));
+        (other.runtimeType == runtimeType && other is _$_AddQuestion);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, bucket);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_AddQuestionCopyWith<_$_AddQuestion> get copyWith =>
-      __$$_AddQuestionCopyWithImpl<_$_AddQuestion>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? bucketId) init,
-    required TResult Function(Bucket? bucket) addQuestion,
-    required TResult Function(String bucketId, Questions questions,
-            Bucket? bucket, List<Questions>? stateQuestions)
+    required TResult Function() addQuestion,
+    required TResult Function(String bucketId, int? questionIndex,
+            String? questionId, Questions question)
         setQuestion,
-    required TResult Function() addVariant,
-    required TResult Function(String name, String category) searchByName,
     required TResult Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)
-        removeFromRelease,
+            Questions question, int questionIndex, List<Answer>? answerList)
+        addAnswer,
+    required TResult Function(String bucketId, int? questionIndex,
+            Questions question, Answer answer)
+        setAnswer,
+    required TResult Function(String name, Bucket? bucket) searchByName,
+    required TResult Function(String bucketId) removeFromRelease,
     required TResult Function(String bucketId) publish,
-    required TResult Function(String name, String category) deleteQuestion,
+    required TResult Function(String bucketId, int index) deleteQuestion,
+    required TResult Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)
+        deleteAnswer,
   }) {
-    return addQuestion(bucket);
+    return addQuestion();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? bucketId)? init,
-    TResult? Function(Bucket? bucket)? addQuestion,
-    TResult? Function(String bucketId, Questions questions, Bucket? bucket,
-            List<Questions>? stateQuestions)?
+    TResult? Function()? addQuestion,
+    TResult? Function(String bucketId, int? questionIndex, String? questionId,
+            Questions question)?
         setQuestion,
-    TResult? Function()? addVariant,
-    TResult? Function(String name, String category)? searchByName,
     TResult? Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)?
-        removeFromRelease,
+            Questions question, int questionIndex, List<Answer>? answerList)?
+        addAnswer,
+    TResult? Function(String bucketId, int? questionIndex, Questions question,
+            Answer answer)?
+        setAnswer,
+    TResult? Function(String name, Bucket? bucket)? searchByName,
+    TResult? Function(String bucketId)? removeFromRelease,
     TResult? Function(String bucketId)? publish,
-    TResult? Function(String name, String category)? deleteQuestion,
+    TResult? Function(String bucketId, int index)? deleteQuestion,
+    TResult? Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)?
+        deleteAnswer,
   }) {
-    return addQuestion?.call(bucket);
+    return addQuestion?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? bucketId)? init,
-    TResult Function(Bucket? bucket)? addQuestion,
-    TResult Function(String bucketId, Questions questions, Bucket? bucket,
-            List<Questions>? stateQuestions)?
+    TResult Function()? addQuestion,
+    TResult Function(String bucketId, int? questionIndex, String? questionId,
+            Questions question)?
         setQuestion,
-    TResult Function()? addVariant,
-    TResult Function(String name, String category)? searchByName,
     TResult Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)?
-        removeFromRelease,
+            Questions question, int questionIndex, List<Answer>? answerList)?
+        addAnswer,
+    TResult Function(String bucketId, int? questionIndex, Questions question,
+            Answer answer)?
+        setAnswer,
+    TResult Function(String name, Bucket? bucket)? searchByName,
+    TResult Function(String bucketId)? removeFromRelease,
     TResult Function(String bucketId)? publish,
-    TResult Function(String name, String category)? deleteQuestion,
+    TResult Function(String bucketId, int index)? deleteQuestion,
+    TResult Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)?
+        deleteAnswer,
     required TResult orElse(),
   }) {
     if (addQuestion != null) {
-      return addQuestion(bucket);
+      return addQuestion();
     }
     return orElse();
   }
@@ -443,11 +469,13 @@ class _$_AddQuestion implements _AddQuestion {
     required TResult Function(_Init value) init,
     required TResult Function(_AddQuestion value) addQuestion,
     required TResult Function(_SetQuestion value) setQuestion,
-    required TResult Function(_AddVariant value) addVariant,
+    required TResult Function(_AddAnswer value) addAnswer,
+    required TResult Function(_SetAnswer value) setAnswer,
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_RemoveFromRelease value) removeFromRelease,
     required TResult Function(_Publish value) publish,
     required TResult Function(_DeleteQuestion value) deleteQuestion,
+    required TResult Function(_DeleteAnswer value) deleteAnswer,
   }) {
     return addQuestion(this);
   }
@@ -458,11 +486,13 @@ class _$_AddQuestion implements _AddQuestion {
     TResult? Function(_Init value)? init,
     TResult? Function(_AddQuestion value)? addQuestion,
     TResult? Function(_SetQuestion value)? setQuestion,
-    TResult? Function(_AddVariant value)? addVariant,
+    TResult? Function(_AddAnswer value)? addAnswer,
+    TResult? Function(_SetAnswer value)? setAnswer,
     TResult? Function(_SearchByName value)? searchByName,
     TResult? Function(_RemoveFromRelease value)? removeFromRelease,
     TResult? Function(_Publish value)? publish,
     TResult? Function(_DeleteQuestion value)? deleteQuestion,
+    TResult? Function(_DeleteAnswer value)? deleteAnswer,
   }) {
     return addQuestion?.call(this);
   }
@@ -473,11 +503,13 @@ class _$_AddQuestion implements _AddQuestion {
     TResult Function(_Init value)? init,
     TResult Function(_AddQuestion value)? addQuestion,
     TResult Function(_SetQuestion value)? setQuestion,
-    TResult Function(_AddVariant value)? addVariant,
+    TResult Function(_AddAnswer value)? addAnswer,
+    TResult Function(_SetAnswer value)? setAnswer,
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_RemoveFromRelease value)? removeFromRelease,
     TResult Function(_Publish value)? publish,
     TResult Function(_DeleteQuestion value)? deleteQuestion,
+    TResult Function(_DeleteAnswer value)? deleteAnswer,
     required TResult orElse(),
   }) {
     if (addQuestion != null) {
@@ -488,12 +520,7 @@ class _$_AddQuestion implements _AddQuestion {
 }
 
 abstract class _AddQuestion implements BucketEvent {
-  const factory _AddQuestion({required final Bucket? bucket}) = _$_AddQuestion;
-
-  Bucket? get bucket;
-  @JsonKey(ignore: true)
-  _$$_AddQuestionCopyWith<_$_AddQuestion> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _AddQuestion() = _$_AddQuestion;
 }
 
 /// @nodoc
@@ -504,12 +531,11 @@ abstract class _$$_SetQuestionCopyWith<$Res> {
   @useResult
   $Res call(
       {String bucketId,
-      Questions questions,
-      Bucket? bucket,
-      List<Questions>? stateQuestions});
+      int? questionIndex,
+      String? questionId,
+      Questions question});
 
-  $QuestionsCopyWith<$Res> get questions;
-  $BucketCopyWith<$Res>? get bucket;
+  $QuestionsCopyWith<$Res> get question;
 }
 
 /// @nodoc
@@ -524,47 +550,35 @@ class __$$_SetQuestionCopyWithImpl<$Res>
   @override
   $Res call({
     Object? bucketId = null,
-    Object? questions = null,
-    Object? bucket = freezed,
-    Object? stateQuestions = freezed,
+    Object? questionIndex = freezed,
+    Object? questionId = freezed,
+    Object? question = null,
   }) {
     return _then(_$_SetQuestion(
       bucketId: null == bucketId
           ? _value.bucketId
           : bucketId // ignore: cast_nullable_to_non_nullable
               as String,
-      questions: null == questions
-          ? _value.questions
-          : questions // ignore: cast_nullable_to_non_nullable
+      questionIndex: freezed == questionIndex
+          ? _value.questionIndex
+          : questionIndex // ignore: cast_nullable_to_non_nullable
+              as int?,
+      questionId: freezed == questionId
+          ? _value.questionId
+          : questionId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      question: null == question
+          ? _value.question
+          : question // ignore: cast_nullable_to_non_nullable
               as Questions,
-      bucket: freezed == bucket
-          ? _value.bucket
-          : bucket // ignore: cast_nullable_to_non_nullable
-              as Bucket?,
-      stateQuestions: freezed == stateQuestions
-          ? _value._stateQuestions
-          : stateQuestions // ignore: cast_nullable_to_non_nullable
-              as List<Questions>?,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $QuestionsCopyWith<$Res> get questions {
-    return $QuestionsCopyWith<$Res>(_value.questions, (value) {
-      return _then(_value.copyWith(questions: value));
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $BucketCopyWith<$Res>? get bucket {
-    if (_value.bucket == null) {
-      return null;
-    }
-
-    return $BucketCopyWith<$Res>(_value.bucket!, (value) {
-      return _then(_value.copyWith(bucket: value));
+  $QuestionsCopyWith<$Res> get question {
+    return $QuestionsCopyWith<$Res>(_value.question, (value) {
+      return _then(_value.copyWith(question: value));
     });
   }
 }
@@ -574,30 +588,22 @@ class __$$_SetQuestionCopyWithImpl<$Res>
 class _$_SetQuestion implements _SetQuestion {
   const _$_SetQuestion(
       {required this.bucketId,
-      required this.questions,
-      this.bucket,
-      final List<Questions>? stateQuestions})
-      : _stateQuestions = stateQuestions;
+      required this.questionIndex,
+      required this.questionId,
+      required this.question});
 
   @override
   final String bucketId;
   @override
-  final Questions questions;
+  final int? questionIndex;
   @override
-  final Bucket? bucket;
-  final List<Questions>? _stateQuestions;
+  final String? questionId;
   @override
-  List<Questions>? get stateQuestions {
-    final value = _stateQuestions;
-    if (value == null) return null;
-    if (_stateQuestions is EqualUnmodifiableListView) return _stateQuestions;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  final Questions question;
 
   @override
   String toString() {
-    return 'BucketEvent.setQuestion(bucketId: $bucketId, questions: $questions, bucket: $bucket, stateQuestions: $stateQuestions)';
+    return 'BucketEvent.setQuestion(bucketId: $bucketId, questionIndex: $questionIndex, questionId: $questionId, question: $question)';
   }
 
   @override
@@ -607,16 +613,17 @@ class _$_SetQuestion implements _SetQuestion {
             other is _$_SetQuestion &&
             (identical(other.bucketId, bucketId) ||
                 other.bucketId == bucketId) &&
-            (identical(other.questions, questions) ||
-                other.questions == questions) &&
-            (identical(other.bucket, bucket) || other.bucket == bucket) &&
-            const DeepCollectionEquality()
-                .equals(other._stateQuestions, _stateQuestions));
+            (identical(other.questionIndex, questionIndex) ||
+                other.questionIndex == questionIndex) &&
+            (identical(other.questionId, questionId) ||
+                other.questionId == questionId) &&
+            (identical(other.question, question) ||
+                other.question == question));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, bucketId, questions, bucket,
-      const DeepCollectionEquality().hash(_stateQuestions));
+  int get hashCode =>
+      Object.hash(runtimeType, bucketId, questionIndex, questionId, question);
 
   @JsonKey(ignore: true)
   @override
@@ -628,59 +635,77 @@ class _$_SetQuestion implements _SetQuestion {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? bucketId) init,
-    required TResult Function(Bucket? bucket) addQuestion,
-    required TResult Function(String bucketId, Questions questions,
-            Bucket? bucket, List<Questions>? stateQuestions)
+    required TResult Function() addQuestion,
+    required TResult Function(String bucketId, int? questionIndex,
+            String? questionId, Questions question)
         setQuestion,
-    required TResult Function() addVariant,
-    required TResult Function(String name, String category) searchByName,
     required TResult Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)
-        removeFromRelease,
+            Questions question, int questionIndex, List<Answer>? answerList)
+        addAnswer,
+    required TResult Function(String bucketId, int? questionIndex,
+            Questions question, Answer answer)
+        setAnswer,
+    required TResult Function(String name, Bucket? bucket) searchByName,
+    required TResult Function(String bucketId) removeFromRelease,
     required TResult Function(String bucketId) publish,
-    required TResult Function(String name, String category) deleteQuestion,
+    required TResult Function(String bucketId, int index) deleteQuestion,
+    required TResult Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)
+        deleteAnswer,
   }) {
-    return setQuestion(bucketId, questions, bucket, stateQuestions);
+    return setQuestion(bucketId, questionIndex, questionId, question);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? bucketId)? init,
-    TResult? Function(Bucket? bucket)? addQuestion,
-    TResult? Function(String bucketId, Questions questions, Bucket? bucket,
-            List<Questions>? stateQuestions)?
+    TResult? Function()? addQuestion,
+    TResult? Function(String bucketId, int? questionIndex, String? questionId,
+            Questions question)?
         setQuestion,
-    TResult? Function()? addVariant,
-    TResult? Function(String name, String category)? searchByName,
     TResult? Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)?
-        removeFromRelease,
+            Questions question, int questionIndex, List<Answer>? answerList)?
+        addAnswer,
+    TResult? Function(String bucketId, int? questionIndex, Questions question,
+            Answer answer)?
+        setAnswer,
+    TResult? Function(String name, Bucket? bucket)? searchByName,
+    TResult? Function(String bucketId)? removeFromRelease,
     TResult? Function(String bucketId)? publish,
-    TResult? Function(String name, String category)? deleteQuestion,
+    TResult? Function(String bucketId, int index)? deleteQuestion,
+    TResult? Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)?
+        deleteAnswer,
   }) {
-    return setQuestion?.call(bucketId, questions, bucket, stateQuestions);
+    return setQuestion?.call(bucketId, questionIndex, questionId, question);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? bucketId)? init,
-    TResult Function(Bucket? bucket)? addQuestion,
-    TResult Function(String bucketId, Questions questions, Bucket? bucket,
-            List<Questions>? stateQuestions)?
+    TResult Function()? addQuestion,
+    TResult Function(String bucketId, int? questionIndex, String? questionId,
+            Questions question)?
         setQuestion,
-    TResult Function()? addVariant,
-    TResult Function(String name, String category)? searchByName,
     TResult Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)?
-        removeFromRelease,
+            Questions question, int questionIndex, List<Answer>? answerList)?
+        addAnswer,
+    TResult Function(String bucketId, int? questionIndex, Questions question,
+            Answer answer)?
+        setAnswer,
+    TResult Function(String name, Bucket? bucket)? searchByName,
+    TResult Function(String bucketId)? removeFromRelease,
     TResult Function(String bucketId)? publish,
-    TResult Function(String name, String category)? deleteQuestion,
+    TResult Function(String bucketId, int index)? deleteQuestion,
+    TResult Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)?
+        deleteAnswer,
     required TResult orElse(),
   }) {
     if (setQuestion != null) {
-      return setQuestion(bucketId, questions, bucket, stateQuestions);
+      return setQuestion(bucketId, questionIndex, questionId, question);
     }
     return orElse();
   }
@@ -691,11 +716,13 @@ class _$_SetQuestion implements _SetQuestion {
     required TResult Function(_Init value) init,
     required TResult Function(_AddQuestion value) addQuestion,
     required TResult Function(_SetQuestion value) setQuestion,
-    required TResult Function(_AddVariant value) addVariant,
+    required TResult Function(_AddAnswer value) addAnswer,
+    required TResult Function(_SetAnswer value) setAnswer,
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_RemoveFromRelease value) removeFromRelease,
     required TResult Function(_Publish value) publish,
     required TResult Function(_DeleteQuestion value) deleteQuestion,
+    required TResult Function(_DeleteAnswer value) deleteAnswer,
   }) {
     return setQuestion(this);
   }
@@ -706,11 +733,13 @@ class _$_SetQuestion implements _SetQuestion {
     TResult? Function(_Init value)? init,
     TResult? Function(_AddQuestion value)? addQuestion,
     TResult? Function(_SetQuestion value)? setQuestion,
-    TResult? Function(_AddVariant value)? addVariant,
+    TResult? Function(_AddAnswer value)? addAnswer,
+    TResult? Function(_SetAnswer value)? setAnswer,
     TResult? Function(_SearchByName value)? searchByName,
     TResult? Function(_RemoveFromRelease value)? removeFromRelease,
     TResult? Function(_Publish value)? publish,
     TResult? Function(_DeleteQuestion value)? deleteQuestion,
+    TResult? Function(_DeleteAnswer value)? deleteAnswer,
   }) {
     return setQuestion?.call(this);
   }
@@ -721,11 +750,13 @@ class _$_SetQuestion implements _SetQuestion {
     TResult Function(_Init value)? init,
     TResult Function(_AddQuestion value)? addQuestion,
     TResult Function(_SetQuestion value)? setQuestion,
-    TResult Function(_AddVariant value)? addVariant,
+    TResult Function(_AddAnswer value)? addAnswer,
+    TResult Function(_SetAnswer value)? setAnswer,
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_RemoveFromRelease value)? removeFromRelease,
     TResult Function(_Publish value)? publish,
     TResult Function(_DeleteQuestion value)? deleteQuestion,
+    TResult Function(_DeleteAnswer value)? deleteAnswer,
     required TResult orElse(),
   }) {
     if (setQuestion != null) {
@@ -738,111 +769,196 @@ class _$_SetQuestion implements _SetQuestion {
 abstract class _SetQuestion implements BucketEvent {
   const factory _SetQuestion(
       {required final String bucketId,
-      required final Questions questions,
-      final Bucket? bucket,
-      final List<Questions>? stateQuestions}) = _$_SetQuestion;
+      required final int? questionIndex,
+      required final String? questionId,
+      required final Questions question}) = _$_SetQuestion;
 
   String get bucketId;
-  Questions get questions;
-  Bucket? get bucket;
-  List<Questions>? get stateQuestions;
+  int? get questionIndex;
+  String? get questionId;
+  Questions get question;
   @JsonKey(ignore: true)
   _$$_SetQuestionCopyWith<_$_SetQuestion> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_AddVariantCopyWith<$Res> {
-  factory _$$_AddVariantCopyWith(
-          _$_AddVariant value, $Res Function(_$_AddVariant) then) =
-      __$$_AddVariantCopyWithImpl<$Res>;
+abstract class _$$_AddAnswerCopyWith<$Res> {
+  factory _$$_AddAnswerCopyWith(
+          _$_AddAnswer value, $Res Function(_$_AddAnswer) then) =
+      __$$_AddAnswerCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Questions question, int questionIndex, List<Answer>? answerList});
+
+  $QuestionsCopyWith<$Res> get question;
 }
 
 /// @nodoc
-class __$$_AddVariantCopyWithImpl<$Res>
-    extends _$BucketEventCopyWithImpl<$Res, _$_AddVariant>
-    implements _$$_AddVariantCopyWith<$Res> {
-  __$$_AddVariantCopyWithImpl(
-      _$_AddVariant _value, $Res Function(_$_AddVariant) _then)
+class __$$_AddAnswerCopyWithImpl<$Res>
+    extends _$BucketEventCopyWithImpl<$Res, _$_AddAnswer>
+    implements _$$_AddAnswerCopyWith<$Res> {
+  __$$_AddAnswerCopyWithImpl(
+      _$_AddAnswer _value, $Res Function(_$_AddAnswer) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? question = null,
+    Object? questionIndex = null,
+    Object? answerList = freezed,
+  }) {
+    return _then(_$_AddAnswer(
+      question: null == question
+          ? _value.question
+          : question // ignore: cast_nullable_to_non_nullable
+              as Questions,
+      questionIndex: null == questionIndex
+          ? _value.questionIndex
+          : questionIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      answerList: freezed == answerList
+          ? _value._answerList
+          : answerList // ignore: cast_nullable_to_non_nullable
+              as List<Answer>?,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $QuestionsCopyWith<$Res> get question {
+    return $QuestionsCopyWith<$Res>(_value.question, (value) {
+      return _then(_value.copyWith(question: value));
+    });
+  }
 }
 
 /// @nodoc
 
-class _$_AddVariant implements _AddVariant {
-  const _$_AddVariant();
+class _$_AddAnswer implements _AddAnswer {
+  const _$_AddAnswer(
+      {required this.question,
+      required this.questionIndex,
+      required final List<Answer>? answerList})
+      : _answerList = answerList;
+
+  @override
+  final Questions question;
+  @override
+  final int questionIndex;
+  final List<Answer>? _answerList;
+  @override
+  List<Answer>? get answerList {
+    final value = _answerList;
+    if (value == null) return null;
+    if (_answerList is EqualUnmodifiableListView) return _answerList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'BucketEvent.addVariant()';
+    return 'BucketEvent.addAnswer(question: $question, questionIndex: $questionIndex, answerList: $answerList)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_AddVariant);
+        (other.runtimeType == runtimeType &&
+            other is _$_AddAnswer &&
+            (identical(other.question, question) ||
+                other.question == question) &&
+            (identical(other.questionIndex, questionIndex) ||
+                other.questionIndex == questionIndex) &&
+            const DeepCollectionEquality()
+                .equals(other._answerList, _answerList));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, question, questionIndex,
+      const DeepCollectionEquality().hash(_answerList));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AddAnswerCopyWith<_$_AddAnswer> get copyWith =>
+      __$$_AddAnswerCopyWithImpl<_$_AddAnswer>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? bucketId) init,
-    required TResult Function(Bucket? bucket) addQuestion,
-    required TResult Function(String bucketId, Questions questions,
-            Bucket? bucket, List<Questions>? stateQuestions)
+    required TResult Function() addQuestion,
+    required TResult Function(String bucketId, int? questionIndex,
+            String? questionId, Questions question)
         setQuestion,
-    required TResult Function() addVariant,
-    required TResult Function(String name, String category) searchByName,
     required TResult Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)
-        removeFromRelease,
+            Questions question, int questionIndex, List<Answer>? answerList)
+        addAnswer,
+    required TResult Function(String bucketId, int? questionIndex,
+            Questions question, Answer answer)
+        setAnswer,
+    required TResult Function(String name, Bucket? bucket) searchByName,
+    required TResult Function(String bucketId) removeFromRelease,
     required TResult Function(String bucketId) publish,
-    required TResult Function(String name, String category) deleteQuestion,
+    required TResult Function(String bucketId, int index) deleteQuestion,
+    required TResult Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)
+        deleteAnswer,
   }) {
-    return addVariant();
+    return addAnswer(question, questionIndex, answerList);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? bucketId)? init,
-    TResult? Function(Bucket? bucket)? addQuestion,
-    TResult? Function(String bucketId, Questions questions, Bucket? bucket,
-            List<Questions>? stateQuestions)?
+    TResult? Function()? addQuestion,
+    TResult? Function(String bucketId, int? questionIndex, String? questionId,
+            Questions question)?
         setQuestion,
-    TResult? Function()? addVariant,
-    TResult? Function(String name, String category)? searchByName,
     TResult? Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)?
-        removeFromRelease,
+            Questions question, int questionIndex, List<Answer>? answerList)?
+        addAnswer,
+    TResult? Function(String bucketId, int? questionIndex, Questions question,
+            Answer answer)?
+        setAnswer,
+    TResult? Function(String name, Bucket? bucket)? searchByName,
+    TResult? Function(String bucketId)? removeFromRelease,
     TResult? Function(String bucketId)? publish,
-    TResult? Function(String name, String category)? deleteQuestion,
+    TResult? Function(String bucketId, int index)? deleteQuestion,
+    TResult? Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)?
+        deleteAnswer,
   }) {
-    return addVariant?.call();
+    return addAnswer?.call(question, questionIndex, answerList);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? bucketId)? init,
-    TResult Function(Bucket? bucket)? addQuestion,
-    TResult Function(String bucketId, Questions questions, Bucket? bucket,
-            List<Questions>? stateQuestions)?
+    TResult Function()? addQuestion,
+    TResult Function(String bucketId, int? questionIndex, String? questionId,
+            Questions question)?
         setQuestion,
-    TResult Function()? addVariant,
-    TResult Function(String name, String category)? searchByName,
     TResult Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)?
-        removeFromRelease,
+            Questions question, int questionIndex, List<Answer>? answerList)?
+        addAnswer,
+    TResult Function(String bucketId, int? questionIndex, Questions question,
+            Answer answer)?
+        setAnswer,
+    TResult Function(String name, Bucket? bucket)? searchByName,
+    TResult Function(String bucketId)? removeFromRelease,
     TResult Function(String bucketId)? publish,
-    TResult Function(String name, String category)? deleteQuestion,
+    TResult Function(String bucketId, int index)? deleteQuestion,
+    TResult Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)?
+        deleteAnswer,
     required TResult orElse(),
   }) {
-    if (addVariant != null) {
-      return addVariant();
+    if (addAnswer != null) {
+      return addAnswer(question, questionIndex, answerList);
     }
     return orElse();
   }
@@ -853,13 +969,15 @@ class _$_AddVariant implements _AddVariant {
     required TResult Function(_Init value) init,
     required TResult Function(_AddQuestion value) addQuestion,
     required TResult Function(_SetQuestion value) setQuestion,
-    required TResult Function(_AddVariant value) addVariant,
+    required TResult Function(_AddAnswer value) addAnswer,
+    required TResult Function(_SetAnswer value) setAnswer,
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_RemoveFromRelease value) removeFromRelease,
     required TResult Function(_Publish value) publish,
     required TResult Function(_DeleteQuestion value) deleteQuestion,
+    required TResult Function(_DeleteAnswer value) deleteAnswer,
   }) {
-    return addVariant(this);
+    return addAnswer(this);
   }
 
   @override
@@ -868,13 +986,15 @@ class _$_AddVariant implements _AddVariant {
     TResult? Function(_Init value)? init,
     TResult? Function(_AddQuestion value)? addQuestion,
     TResult? Function(_SetQuestion value)? setQuestion,
-    TResult? Function(_AddVariant value)? addVariant,
+    TResult? Function(_AddAnswer value)? addAnswer,
+    TResult? Function(_SetAnswer value)? setAnswer,
     TResult? Function(_SearchByName value)? searchByName,
     TResult? Function(_RemoveFromRelease value)? removeFromRelease,
     TResult? Function(_Publish value)? publish,
     TResult? Function(_DeleteQuestion value)? deleteQuestion,
+    TResult? Function(_DeleteAnswer value)? deleteAnswer,
   }) {
-    return addVariant?.call(this);
+    return addAnswer?.call(this);
   }
 
   @override
@@ -883,22 +1003,298 @@ class _$_AddVariant implements _AddVariant {
     TResult Function(_Init value)? init,
     TResult Function(_AddQuestion value)? addQuestion,
     TResult Function(_SetQuestion value)? setQuestion,
-    TResult Function(_AddVariant value)? addVariant,
+    TResult Function(_AddAnswer value)? addAnswer,
+    TResult Function(_SetAnswer value)? setAnswer,
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_RemoveFromRelease value)? removeFromRelease,
     TResult Function(_Publish value)? publish,
     TResult Function(_DeleteQuestion value)? deleteQuestion,
+    TResult Function(_DeleteAnswer value)? deleteAnswer,
     required TResult orElse(),
   }) {
-    if (addVariant != null) {
-      return addVariant(this);
+    if (addAnswer != null) {
+      return addAnswer(this);
     }
     return orElse();
   }
 }
 
-abstract class _AddVariant implements BucketEvent {
-  const factory _AddVariant() = _$_AddVariant;
+abstract class _AddAnswer implements BucketEvent {
+  const factory _AddAnswer(
+      {required final Questions question,
+      required final int questionIndex,
+      required final List<Answer>? answerList}) = _$_AddAnswer;
+
+  Questions get question;
+  int get questionIndex;
+  List<Answer>? get answerList;
+  @JsonKey(ignore: true)
+  _$$_AddAnswerCopyWith<_$_AddAnswer> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SetAnswerCopyWith<$Res> {
+  factory _$$_SetAnswerCopyWith(
+          _$_SetAnswer value, $Res Function(_$_SetAnswer) then) =
+      __$$_SetAnswerCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {String bucketId, int? questionIndex, Questions question, Answer answer});
+
+  $QuestionsCopyWith<$Res> get question;
+  $AnswerCopyWith<$Res> get answer;
+}
+
+/// @nodoc
+class __$$_SetAnswerCopyWithImpl<$Res>
+    extends _$BucketEventCopyWithImpl<$Res, _$_SetAnswer>
+    implements _$$_SetAnswerCopyWith<$Res> {
+  __$$_SetAnswerCopyWithImpl(
+      _$_SetAnswer _value, $Res Function(_$_SetAnswer) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? bucketId = null,
+    Object? questionIndex = freezed,
+    Object? question = null,
+    Object? answer = null,
+  }) {
+    return _then(_$_SetAnswer(
+      bucketId: null == bucketId
+          ? _value.bucketId
+          : bucketId // ignore: cast_nullable_to_non_nullable
+              as String,
+      questionIndex: freezed == questionIndex
+          ? _value.questionIndex
+          : questionIndex // ignore: cast_nullable_to_non_nullable
+              as int?,
+      question: null == question
+          ? _value.question
+          : question // ignore: cast_nullable_to_non_nullable
+              as Questions,
+      answer: null == answer
+          ? _value.answer
+          : answer // ignore: cast_nullable_to_non_nullable
+              as Answer,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $QuestionsCopyWith<$Res> get question {
+    return $QuestionsCopyWith<$Res>(_value.question, (value) {
+      return _then(_value.copyWith(question: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AnswerCopyWith<$Res> get answer {
+    return $AnswerCopyWith<$Res>(_value.answer, (value) {
+      return _then(_value.copyWith(answer: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_SetAnswer implements _SetAnswer {
+  const _$_SetAnswer(
+      {required this.bucketId,
+      required this.questionIndex,
+      required this.question,
+      required this.answer});
+
+  @override
+  final String bucketId;
+  @override
+  final int? questionIndex;
+  @override
+  final Questions question;
+  @override
+  final Answer answer;
+
+  @override
+  String toString() {
+    return 'BucketEvent.setAnswer(bucketId: $bucketId, questionIndex: $questionIndex, question: $question, answer: $answer)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SetAnswer &&
+            (identical(other.bucketId, bucketId) ||
+                other.bucketId == bucketId) &&
+            (identical(other.questionIndex, questionIndex) ||
+                other.questionIndex == questionIndex) &&
+            (identical(other.question, question) ||
+                other.question == question) &&
+            (identical(other.answer, answer) || other.answer == answer));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, bucketId, questionIndex, question, answer);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SetAnswerCopyWith<_$_SetAnswer> get copyWith =>
+      __$$_SetAnswerCopyWithImpl<_$_SetAnswer>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? bucketId) init,
+    required TResult Function() addQuestion,
+    required TResult Function(String bucketId, int? questionIndex,
+            String? questionId, Questions question)
+        setQuestion,
+    required TResult Function(
+            Questions question, int questionIndex, List<Answer>? answerList)
+        addAnswer,
+    required TResult Function(String bucketId, int? questionIndex,
+            Questions question, Answer answer)
+        setAnswer,
+    required TResult Function(String name, Bucket? bucket) searchByName,
+    required TResult Function(String bucketId) removeFromRelease,
+    required TResult Function(String bucketId) publish,
+    required TResult Function(String bucketId, int index) deleteQuestion,
+    required TResult Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)
+        deleteAnswer,
+  }) {
+    return setAnswer(bucketId, questionIndex, question, answer);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? bucketId)? init,
+    TResult? Function()? addQuestion,
+    TResult? Function(String bucketId, int? questionIndex, String? questionId,
+            Questions question)?
+        setQuestion,
+    TResult? Function(
+            Questions question, int questionIndex, List<Answer>? answerList)?
+        addAnswer,
+    TResult? Function(String bucketId, int? questionIndex, Questions question,
+            Answer answer)?
+        setAnswer,
+    TResult? Function(String name, Bucket? bucket)? searchByName,
+    TResult? Function(String bucketId)? removeFromRelease,
+    TResult? Function(String bucketId)? publish,
+    TResult? Function(String bucketId, int index)? deleteQuestion,
+    TResult? Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)?
+        deleteAnswer,
+  }) {
+    return setAnswer?.call(bucketId, questionIndex, question, answer);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? bucketId)? init,
+    TResult Function()? addQuestion,
+    TResult Function(String bucketId, int? questionIndex, String? questionId,
+            Questions question)?
+        setQuestion,
+    TResult Function(
+            Questions question, int questionIndex, List<Answer>? answerList)?
+        addAnswer,
+    TResult Function(String bucketId, int? questionIndex, Questions question,
+            Answer answer)?
+        setAnswer,
+    TResult Function(String name, Bucket? bucket)? searchByName,
+    TResult Function(String bucketId)? removeFromRelease,
+    TResult Function(String bucketId)? publish,
+    TResult Function(String bucketId, int index)? deleteQuestion,
+    TResult Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)?
+        deleteAnswer,
+    required TResult orElse(),
+  }) {
+    if (setAnswer != null) {
+      return setAnswer(bucketId, questionIndex, question, answer);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_AddQuestion value) addQuestion,
+    required TResult Function(_SetQuestion value) setQuestion,
+    required TResult Function(_AddAnswer value) addAnswer,
+    required TResult Function(_SetAnswer value) setAnswer,
+    required TResult Function(_SearchByName value) searchByName,
+    required TResult Function(_RemoveFromRelease value) removeFromRelease,
+    required TResult Function(_Publish value) publish,
+    required TResult Function(_DeleteQuestion value) deleteQuestion,
+    required TResult Function(_DeleteAnswer value) deleteAnswer,
+  }) {
+    return setAnswer(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Init value)? init,
+    TResult? Function(_AddQuestion value)? addQuestion,
+    TResult? Function(_SetQuestion value)? setQuestion,
+    TResult? Function(_AddAnswer value)? addAnswer,
+    TResult? Function(_SetAnswer value)? setAnswer,
+    TResult? Function(_SearchByName value)? searchByName,
+    TResult? Function(_RemoveFromRelease value)? removeFromRelease,
+    TResult? Function(_Publish value)? publish,
+    TResult? Function(_DeleteQuestion value)? deleteQuestion,
+    TResult? Function(_DeleteAnswer value)? deleteAnswer,
+  }) {
+    return setAnswer?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_AddQuestion value)? addQuestion,
+    TResult Function(_SetQuestion value)? setQuestion,
+    TResult Function(_AddAnswer value)? addAnswer,
+    TResult Function(_SetAnswer value)? setAnswer,
+    TResult Function(_SearchByName value)? searchByName,
+    TResult Function(_RemoveFromRelease value)? removeFromRelease,
+    TResult Function(_Publish value)? publish,
+    TResult Function(_DeleteQuestion value)? deleteQuestion,
+    TResult Function(_DeleteAnswer value)? deleteAnswer,
+    required TResult orElse(),
+  }) {
+    if (setAnswer != null) {
+      return setAnswer(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetAnswer implements BucketEvent {
+  const factory _SetAnswer(
+      {required final String bucketId,
+      required final int? questionIndex,
+      required final Questions question,
+      required final Answer answer}) = _$_SetAnswer;
+
+  String get bucketId;
+  int? get questionIndex;
+  Questions get question;
+  Answer get answer;
+  @JsonKey(ignore: true)
+  _$$_SetAnswerCopyWith<_$_SetAnswer> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -907,7 +1303,9 @@ abstract class _$$_SearchByNameCopyWith<$Res> {
           _$_SearchByName value, $Res Function(_$_SearchByName) then) =
       __$$_SearchByNameCopyWithImpl<$Res>;
   @useResult
-  $Res call({String name, String category});
+  $Res call({String name, Bucket? bucket});
+
+  $BucketCopyWith<$Res>? get bucket;
 }
 
 /// @nodoc
@@ -922,217 +1320,17 @@ class __$$_SearchByNameCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
-    Object? category = null,
+    Object? bucket = freezed,
   }) {
     return _then(_$_SearchByName(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      category: null == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_SearchByName implements _SearchByName {
-  const _$_SearchByName({required this.name, required this.category});
-
-  @override
-  final String name;
-  @override
-  final String category;
-
-  @override
-  String toString() {
-    return 'BucketEvent.searchByName(name: $name, category: $category)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_SearchByName &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.category, category) ||
-                other.category == category));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, name, category);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_SearchByNameCopyWith<_$_SearchByName> get copyWith =>
-      __$$_SearchByNameCopyWithImpl<_$_SearchByName>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? bucketId) init,
-    required TResult Function(Bucket? bucket) addQuestion,
-    required TResult Function(String bucketId, Questions questions,
-            Bucket? bucket, List<Questions>? stateQuestions)
-        setQuestion,
-    required TResult Function() addVariant,
-    required TResult Function(String name, String category) searchByName,
-    required TResult Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)
-        removeFromRelease,
-    required TResult Function(String bucketId) publish,
-    required TResult Function(String name, String category) deleteQuestion,
-  }) {
-    return searchByName(name, category);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? bucketId)? init,
-    TResult? Function(Bucket? bucket)? addQuestion,
-    TResult? Function(String bucketId, Questions questions, Bucket? bucket,
-            List<Questions>? stateQuestions)?
-        setQuestion,
-    TResult? Function()? addVariant,
-    TResult? Function(String name, String category)? searchByName,
-    TResult? Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)?
-        removeFromRelease,
-    TResult? Function(String bucketId)? publish,
-    TResult? Function(String name, String category)? deleteQuestion,
-  }) {
-    return searchByName?.call(name, category);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? bucketId)? init,
-    TResult Function(Bucket? bucket)? addQuestion,
-    TResult Function(String bucketId, Questions questions, Bucket? bucket,
-            List<Questions>? stateQuestions)?
-        setQuestion,
-    TResult Function()? addVariant,
-    TResult Function(String name, String category)? searchByName,
-    TResult Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)?
-        removeFromRelease,
-    TResult Function(String bucketId)? publish,
-    TResult Function(String name, String category)? deleteQuestion,
-    required TResult orElse(),
-  }) {
-    if (searchByName != null) {
-      return searchByName(name, category);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Init value) init,
-    required TResult Function(_AddQuestion value) addQuestion,
-    required TResult Function(_SetQuestion value) setQuestion,
-    required TResult Function(_AddVariant value) addVariant,
-    required TResult Function(_SearchByName value) searchByName,
-    required TResult Function(_RemoveFromRelease value) removeFromRelease,
-    required TResult Function(_Publish value) publish,
-    required TResult Function(_DeleteQuestion value) deleteQuestion,
-  }) {
-    return searchByName(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Init value)? init,
-    TResult? Function(_AddQuestion value)? addQuestion,
-    TResult? Function(_SetQuestion value)? setQuestion,
-    TResult? Function(_AddVariant value)? addVariant,
-    TResult? Function(_SearchByName value)? searchByName,
-    TResult? Function(_RemoveFromRelease value)? removeFromRelease,
-    TResult? Function(_Publish value)? publish,
-    TResult? Function(_DeleteQuestion value)? deleteQuestion,
-  }) {
-    return searchByName?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Init value)? init,
-    TResult Function(_AddQuestion value)? addQuestion,
-    TResult Function(_SetQuestion value)? setQuestion,
-    TResult Function(_AddVariant value)? addVariant,
-    TResult Function(_SearchByName value)? searchByName,
-    TResult Function(_RemoveFromRelease value)? removeFromRelease,
-    TResult Function(_Publish value)? publish,
-    TResult Function(_DeleteQuestion value)? deleteQuestion,
-    required TResult orElse(),
-  }) {
-    if (searchByName != null) {
-      return searchByName(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _SearchByName implements BucketEvent {
-  const factory _SearchByName(
-      {required final String name,
-      required final String category}) = _$_SearchByName;
-
-  String get name;
-  String get category;
-  @JsonKey(ignore: true)
-  _$$_SearchByNameCopyWith<_$_SearchByName> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_RemoveFromReleaseCopyWith<$Res> {
-  factory _$$_RemoveFromReleaseCopyWith(_$_RemoveFromRelease value,
-          $Res Function(_$_RemoveFromRelease) then) =
-      __$$_RemoveFromReleaseCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String bucketId, Bucket? bucket, List<Questions>? stateQuestions});
-
-  $BucketCopyWith<$Res>? get bucket;
-}
-
-/// @nodoc
-class __$$_RemoveFromReleaseCopyWithImpl<$Res>
-    extends _$BucketEventCopyWithImpl<$Res, _$_RemoveFromRelease>
-    implements _$$_RemoveFromReleaseCopyWith<$Res> {
-  __$$_RemoveFromReleaseCopyWithImpl(
-      _$_RemoveFromRelease _value, $Res Function(_$_RemoveFromRelease) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? bucketId = null,
-    Object? bucket = freezed,
-    Object? stateQuestions = freezed,
-  }) {
-    return _then(_$_RemoveFromRelease(
-      bucketId: null == bucketId
-          ? _value.bucketId
-          : bucketId // ignore: cast_nullable_to_non_nullable
-              as String,
       bucket: freezed == bucket
           ? _value.bucket
           : bucket // ignore: cast_nullable_to_non_nullable
               as Bucket?,
-      stateQuestions: freezed == stateQuestions
-          ? _value._stateQuestions
-          : stateQuestions // ignore: cast_nullable_to_non_nullable
-              as List<Questions>?,
     ));
   }
 
@@ -1151,30 +1349,226 @@ class __$$_RemoveFromReleaseCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RemoveFromRelease implements _RemoveFromRelease {
-  const _$_RemoveFromRelease(
-      {required this.bucketId,
-      this.bucket,
-      final List<Questions>? stateQuestions})
-      : _stateQuestions = stateQuestions;
+class _$_SearchByName implements _SearchByName {
+  const _$_SearchByName({required this.name, required this.bucket});
 
   @override
-  final String bucketId;
+  final String name;
   @override
   final Bucket? bucket;
-  final List<Questions>? _stateQuestions;
-  @override
-  List<Questions>? get stateQuestions {
-    final value = _stateQuestions;
-    if (value == null) return null;
-    if (_stateQuestions is EqualUnmodifiableListView) return _stateQuestions;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
 
   @override
   String toString() {
-    return 'BucketEvent.removeFromRelease(bucketId: $bucketId, bucket: $bucket, stateQuestions: $stateQuestions)';
+    return 'BucketEvent.searchByName(name: $name, bucket: $bucket)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SearchByName &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.bucket, bucket) || other.bucket == bucket));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, name, bucket);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SearchByNameCopyWith<_$_SearchByName> get copyWith =>
+      __$$_SearchByNameCopyWithImpl<_$_SearchByName>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? bucketId) init,
+    required TResult Function() addQuestion,
+    required TResult Function(String bucketId, int? questionIndex,
+            String? questionId, Questions question)
+        setQuestion,
+    required TResult Function(
+            Questions question, int questionIndex, List<Answer>? answerList)
+        addAnswer,
+    required TResult Function(String bucketId, int? questionIndex,
+            Questions question, Answer answer)
+        setAnswer,
+    required TResult Function(String name, Bucket? bucket) searchByName,
+    required TResult Function(String bucketId) removeFromRelease,
+    required TResult Function(String bucketId) publish,
+    required TResult Function(String bucketId, int index) deleteQuestion,
+    required TResult Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)
+        deleteAnswer,
+  }) {
+    return searchByName(name, bucket);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? bucketId)? init,
+    TResult? Function()? addQuestion,
+    TResult? Function(String bucketId, int? questionIndex, String? questionId,
+            Questions question)?
+        setQuestion,
+    TResult? Function(
+            Questions question, int questionIndex, List<Answer>? answerList)?
+        addAnswer,
+    TResult? Function(String bucketId, int? questionIndex, Questions question,
+            Answer answer)?
+        setAnswer,
+    TResult? Function(String name, Bucket? bucket)? searchByName,
+    TResult? Function(String bucketId)? removeFromRelease,
+    TResult? Function(String bucketId)? publish,
+    TResult? Function(String bucketId, int index)? deleteQuestion,
+    TResult? Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)?
+        deleteAnswer,
+  }) {
+    return searchByName?.call(name, bucket);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? bucketId)? init,
+    TResult Function()? addQuestion,
+    TResult Function(String bucketId, int? questionIndex, String? questionId,
+            Questions question)?
+        setQuestion,
+    TResult Function(
+            Questions question, int questionIndex, List<Answer>? answerList)?
+        addAnswer,
+    TResult Function(String bucketId, int? questionIndex, Questions question,
+            Answer answer)?
+        setAnswer,
+    TResult Function(String name, Bucket? bucket)? searchByName,
+    TResult Function(String bucketId)? removeFromRelease,
+    TResult Function(String bucketId)? publish,
+    TResult Function(String bucketId, int index)? deleteQuestion,
+    TResult Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)?
+        deleteAnswer,
+    required TResult orElse(),
+  }) {
+    if (searchByName != null) {
+      return searchByName(name, bucket);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_AddQuestion value) addQuestion,
+    required TResult Function(_SetQuestion value) setQuestion,
+    required TResult Function(_AddAnswer value) addAnswer,
+    required TResult Function(_SetAnswer value) setAnswer,
+    required TResult Function(_SearchByName value) searchByName,
+    required TResult Function(_RemoveFromRelease value) removeFromRelease,
+    required TResult Function(_Publish value) publish,
+    required TResult Function(_DeleteQuestion value) deleteQuestion,
+    required TResult Function(_DeleteAnswer value) deleteAnswer,
+  }) {
+    return searchByName(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Init value)? init,
+    TResult? Function(_AddQuestion value)? addQuestion,
+    TResult? Function(_SetQuestion value)? setQuestion,
+    TResult? Function(_AddAnswer value)? addAnswer,
+    TResult? Function(_SetAnswer value)? setAnswer,
+    TResult? Function(_SearchByName value)? searchByName,
+    TResult? Function(_RemoveFromRelease value)? removeFromRelease,
+    TResult? Function(_Publish value)? publish,
+    TResult? Function(_DeleteQuestion value)? deleteQuestion,
+    TResult? Function(_DeleteAnswer value)? deleteAnswer,
+  }) {
+    return searchByName?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_AddQuestion value)? addQuestion,
+    TResult Function(_SetQuestion value)? setQuestion,
+    TResult Function(_AddAnswer value)? addAnswer,
+    TResult Function(_SetAnswer value)? setAnswer,
+    TResult Function(_SearchByName value)? searchByName,
+    TResult Function(_RemoveFromRelease value)? removeFromRelease,
+    TResult Function(_Publish value)? publish,
+    TResult Function(_DeleteQuestion value)? deleteQuestion,
+    TResult Function(_DeleteAnswer value)? deleteAnswer,
+    required TResult orElse(),
+  }) {
+    if (searchByName != null) {
+      return searchByName(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SearchByName implements BucketEvent {
+  const factory _SearchByName(
+      {required final String name,
+      required final Bucket? bucket}) = _$_SearchByName;
+
+  String get name;
+  Bucket? get bucket;
+  @JsonKey(ignore: true)
+  _$$_SearchByNameCopyWith<_$_SearchByName> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_RemoveFromReleaseCopyWith<$Res> {
+  factory _$$_RemoveFromReleaseCopyWith(_$_RemoveFromRelease value,
+          $Res Function(_$_RemoveFromRelease) then) =
+      __$$_RemoveFromReleaseCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String bucketId});
+}
+
+/// @nodoc
+class __$$_RemoveFromReleaseCopyWithImpl<$Res>
+    extends _$BucketEventCopyWithImpl<$Res, _$_RemoveFromRelease>
+    implements _$$_RemoveFromReleaseCopyWith<$Res> {
+  __$$_RemoveFromReleaseCopyWithImpl(
+      _$_RemoveFromRelease _value, $Res Function(_$_RemoveFromRelease) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? bucketId = null,
+  }) {
+    return _then(_$_RemoveFromRelease(
+      bucketId: null == bucketId
+          ? _value.bucketId
+          : bucketId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_RemoveFromRelease implements _RemoveFromRelease {
+  const _$_RemoveFromRelease({required this.bucketId});
+
+  @override
+  final String bucketId;
+
+  @override
+  String toString() {
+    return 'BucketEvent.removeFromRelease(bucketId: $bucketId)';
   }
 
   @override
@@ -1183,15 +1577,11 @@ class _$_RemoveFromRelease implements _RemoveFromRelease {
         (other.runtimeType == runtimeType &&
             other is _$_RemoveFromRelease &&
             (identical(other.bucketId, bucketId) ||
-                other.bucketId == bucketId) &&
-            (identical(other.bucket, bucket) || other.bucket == bucket) &&
-            const DeepCollectionEquality()
-                .equals(other._stateQuestions, _stateQuestions));
+                other.bucketId == bucketId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, bucketId, bucket,
-      const DeepCollectionEquality().hash(_stateQuestions));
+  int get hashCode => Object.hash(runtimeType, bucketId);
 
   @JsonKey(ignore: true)
   @override
@@ -1204,59 +1594,77 @@ class _$_RemoveFromRelease implements _RemoveFromRelease {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? bucketId) init,
-    required TResult Function(Bucket? bucket) addQuestion,
-    required TResult Function(String bucketId, Questions questions,
-            Bucket? bucket, List<Questions>? stateQuestions)
+    required TResult Function() addQuestion,
+    required TResult Function(String bucketId, int? questionIndex,
+            String? questionId, Questions question)
         setQuestion,
-    required TResult Function() addVariant,
-    required TResult Function(String name, String category) searchByName,
     required TResult Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)
-        removeFromRelease,
+            Questions question, int questionIndex, List<Answer>? answerList)
+        addAnswer,
+    required TResult Function(String bucketId, int? questionIndex,
+            Questions question, Answer answer)
+        setAnswer,
+    required TResult Function(String name, Bucket? bucket) searchByName,
+    required TResult Function(String bucketId) removeFromRelease,
     required TResult Function(String bucketId) publish,
-    required TResult Function(String name, String category) deleteQuestion,
+    required TResult Function(String bucketId, int index) deleteQuestion,
+    required TResult Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)
+        deleteAnswer,
   }) {
-    return removeFromRelease(bucketId, bucket, stateQuestions);
+    return removeFromRelease(bucketId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? bucketId)? init,
-    TResult? Function(Bucket? bucket)? addQuestion,
-    TResult? Function(String bucketId, Questions questions, Bucket? bucket,
-            List<Questions>? stateQuestions)?
+    TResult? Function()? addQuestion,
+    TResult? Function(String bucketId, int? questionIndex, String? questionId,
+            Questions question)?
         setQuestion,
-    TResult? Function()? addVariant,
-    TResult? Function(String name, String category)? searchByName,
     TResult? Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)?
-        removeFromRelease,
+            Questions question, int questionIndex, List<Answer>? answerList)?
+        addAnswer,
+    TResult? Function(String bucketId, int? questionIndex, Questions question,
+            Answer answer)?
+        setAnswer,
+    TResult? Function(String name, Bucket? bucket)? searchByName,
+    TResult? Function(String bucketId)? removeFromRelease,
     TResult? Function(String bucketId)? publish,
-    TResult? Function(String name, String category)? deleteQuestion,
+    TResult? Function(String bucketId, int index)? deleteQuestion,
+    TResult? Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)?
+        deleteAnswer,
   }) {
-    return removeFromRelease?.call(bucketId, bucket, stateQuestions);
+    return removeFromRelease?.call(bucketId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? bucketId)? init,
-    TResult Function(Bucket? bucket)? addQuestion,
-    TResult Function(String bucketId, Questions questions, Bucket? bucket,
-            List<Questions>? stateQuestions)?
+    TResult Function()? addQuestion,
+    TResult Function(String bucketId, int? questionIndex, String? questionId,
+            Questions question)?
         setQuestion,
-    TResult Function()? addVariant,
-    TResult Function(String name, String category)? searchByName,
     TResult Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)?
-        removeFromRelease,
+            Questions question, int questionIndex, List<Answer>? answerList)?
+        addAnswer,
+    TResult Function(String bucketId, int? questionIndex, Questions question,
+            Answer answer)?
+        setAnswer,
+    TResult Function(String name, Bucket? bucket)? searchByName,
+    TResult Function(String bucketId)? removeFromRelease,
     TResult Function(String bucketId)? publish,
-    TResult Function(String name, String category)? deleteQuestion,
+    TResult Function(String bucketId, int index)? deleteQuestion,
+    TResult Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)?
+        deleteAnswer,
     required TResult orElse(),
   }) {
     if (removeFromRelease != null) {
-      return removeFromRelease(bucketId, bucket, stateQuestions);
+      return removeFromRelease(bucketId);
     }
     return orElse();
   }
@@ -1267,11 +1675,13 @@ class _$_RemoveFromRelease implements _RemoveFromRelease {
     required TResult Function(_Init value) init,
     required TResult Function(_AddQuestion value) addQuestion,
     required TResult Function(_SetQuestion value) setQuestion,
-    required TResult Function(_AddVariant value) addVariant,
+    required TResult Function(_AddAnswer value) addAnswer,
+    required TResult Function(_SetAnswer value) setAnswer,
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_RemoveFromRelease value) removeFromRelease,
     required TResult Function(_Publish value) publish,
     required TResult Function(_DeleteQuestion value) deleteQuestion,
+    required TResult Function(_DeleteAnswer value) deleteAnswer,
   }) {
     return removeFromRelease(this);
   }
@@ -1282,11 +1692,13 @@ class _$_RemoveFromRelease implements _RemoveFromRelease {
     TResult? Function(_Init value)? init,
     TResult? Function(_AddQuestion value)? addQuestion,
     TResult? Function(_SetQuestion value)? setQuestion,
-    TResult? Function(_AddVariant value)? addVariant,
+    TResult? Function(_AddAnswer value)? addAnswer,
+    TResult? Function(_SetAnswer value)? setAnswer,
     TResult? Function(_SearchByName value)? searchByName,
     TResult? Function(_RemoveFromRelease value)? removeFromRelease,
     TResult? Function(_Publish value)? publish,
     TResult? Function(_DeleteQuestion value)? deleteQuestion,
+    TResult? Function(_DeleteAnswer value)? deleteAnswer,
   }) {
     return removeFromRelease?.call(this);
   }
@@ -1297,11 +1709,13 @@ class _$_RemoveFromRelease implements _RemoveFromRelease {
     TResult Function(_Init value)? init,
     TResult Function(_AddQuestion value)? addQuestion,
     TResult Function(_SetQuestion value)? setQuestion,
-    TResult Function(_AddVariant value)? addVariant,
+    TResult Function(_AddAnswer value)? addAnswer,
+    TResult Function(_SetAnswer value)? setAnswer,
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_RemoveFromRelease value)? removeFromRelease,
     TResult Function(_Publish value)? publish,
     TResult Function(_DeleteQuestion value)? deleteQuestion,
+    TResult Function(_DeleteAnswer value)? deleteAnswer,
     required TResult orElse(),
   }) {
     if (removeFromRelease != null) {
@@ -1312,14 +1726,10 @@ class _$_RemoveFromRelease implements _RemoveFromRelease {
 }
 
 abstract class _RemoveFromRelease implements BucketEvent {
-  const factory _RemoveFromRelease(
-      {required final String bucketId,
-      final Bucket? bucket,
-      final List<Questions>? stateQuestions}) = _$_RemoveFromRelease;
+  const factory _RemoveFromRelease({required final String bucketId}) =
+      _$_RemoveFromRelease;
 
   String get bucketId;
-  Bucket? get bucket;
-  List<Questions>? get stateQuestions;
   @JsonKey(ignore: true)
   _$$_RemoveFromReleaseCopyWith<_$_RemoveFromRelease> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1390,17 +1800,23 @@ class _$_Publish implements _Publish {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? bucketId) init,
-    required TResult Function(Bucket? bucket) addQuestion,
-    required TResult Function(String bucketId, Questions questions,
-            Bucket? bucket, List<Questions>? stateQuestions)
+    required TResult Function() addQuestion,
+    required TResult Function(String bucketId, int? questionIndex,
+            String? questionId, Questions question)
         setQuestion,
-    required TResult Function() addVariant,
-    required TResult Function(String name, String category) searchByName,
     required TResult Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)
-        removeFromRelease,
+            Questions question, int questionIndex, List<Answer>? answerList)
+        addAnswer,
+    required TResult Function(String bucketId, int? questionIndex,
+            Questions question, Answer answer)
+        setAnswer,
+    required TResult Function(String name, Bucket? bucket) searchByName,
+    required TResult Function(String bucketId) removeFromRelease,
     required TResult Function(String bucketId) publish,
-    required TResult Function(String name, String category) deleteQuestion,
+    required TResult Function(String bucketId, int index) deleteQuestion,
+    required TResult Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)
+        deleteAnswer,
   }) {
     return publish(bucketId);
   }
@@ -1409,17 +1825,23 @@ class _$_Publish implements _Publish {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? bucketId)? init,
-    TResult? Function(Bucket? bucket)? addQuestion,
-    TResult? Function(String bucketId, Questions questions, Bucket? bucket,
-            List<Questions>? stateQuestions)?
+    TResult? Function()? addQuestion,
+    TResult? Function(String bucketId, int? questionIndex, String? questionId,
+            Questions question)?
         setQuestion,
-    TResult? Function()? addVariant,
-    TResult? Function(String name, String category)? searchByName,
     TResult? Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)?
-        removeFromRelease,
+            Questions question, int questionIndex, List<Answer>? answerList)?
+        addAnswer,
+    TResult? Function(String bucketId, int? questionIndex, Questions question,
+            Answer answer)?
+        setAnswer,
+    TResult? Function(String name, Bucket? bucket)? searchByName,
+    TResult? Function(String bucketId)? removeFromRelease,
     TResult? Function(String bucketId)? publish,
-    TResult? Function(String name, String category)? deleteQuestion,
+    TResult? Function(String bucketId, int index)? deleteQuestion,
+    TResult? Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)?
+        deleteAnswer,
   }) {
     return publish?.call(bucketId);
   }
@@ -1428,17 +1850,23 @@ class _$_Publish implements _Publish {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? bucketId)? init,
-    TResult Function(Bucket? bucket)? addQuestion,
-    TResult Function(String bucketId, Questions questions, Bucket? bucket,
-            List<Questions>? stateQuestions)?
+    TResult Function()? addQuestion,
+    TResult Function(String bucketId, int? questionIndex, String? questionId,
+            Questions question)?
         setQuestion,
-    TResult Function()? addVariant,
-    TResult Function(String name, String category)? searchByName,
     TResult Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)?
-        removeFromRelease,
+            Questions question, int questionIndex, List<Answer>? answerList)?
+        addAnswer,
+    TResult Function(String bucketId, int? questionIndex, Questions question,
+            Answer answer)?
+        setAnswer,
+    TResult Function(String name, Bucket? bucket)? searchByName,
+    TResult Function(String bucketId)? removeFromRelease,
     TResult Function(String bucketId)? publish,
-    TResult Function(String name, String category)? deleteQuestion,
+    TResult Function(String bucketId, int index)? deleteQuestion,
+    TResult Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)?
+        deleteAnswer,
     required TResult orElse(),
   }) {
     if (publish != null) {
@@ -1453,11 +1881,13 @@ class _$_Publish implements _Publish {
     required TResult Function(_Init value) init,
     required TResult Function(_AddQuestion value) addQuestion,
     required TResult Function(_SetQuestion value) setQuestion,
-    required TResult Function(_AddVariant value) addVariant,
+    required TResult Function(_AddAnswer value) addAnswer,
+    required TResult Function(_SetAnswer value) setAnswer,
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_RemoveFromRelease value) removeFromRelease,
     required TResult Function(_Publish value) publish,
     required TResult Function(_DeleteQuestion value) deleteQuestion,
+    required TResult Function(_DeleteAnswer value) deleteAnswer,
   }) {
     return publish(this);
   }
@@ -1468,11 +1898,13 @@ class _$_Publish implements _Publish {
     TResult? Function(_Init value)? init,
     TResult? Function(_AddQuestion value)? addQuestion,
     TResult? Function(_SetQuestion value)? setQuestion,
-    TResult? Function(_AddVariant value)? addVariant,
+    TResult? Function(_AddAnswer value)? addAnswer,
+    TResult? Function(_SetAnswer value)? setAnswer,
     TResult? Function(_SearchByName value)? searchByName,
     TResult? Function(_RemoveFromRelease value)? removeFromRelease,
     TResult? Function(_Publish value)? publish,
     TResult? Function(_DeleteQuestion value)? deleteQuestion,
+    TResult? Function(_DeleteAnswer value)? deleteAnswer,
   }) {
     return publish?.call(this);
   }
@@ -1483,11 +1915,13 @@ class _$_Publish implements _Publish {
     TResult Function(_Init value)? init,
     TResult Function(_AddQuestion value)? addQuestion,
     TResult Function(_SetQuestion value)? setQuestion,
-    TResult Function(_AddVariant value)? addVariant,
+    TResult Function(_AddAnswer value)? addAnswer,
+    TResult Function(_SetAnswer value)? setAnswer,
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_RemoveFromRelease value)? removeFromRelease,
     TResult Function(_Publish value)? publish,
     TResult Function(_DeleteQuestion value)? deleteQuestion,
+    TResult Function(_DeleteAnswer value)? deleteAnswer,
     required TResult orElse(),
   }) {
     if (publish != null) {
@@ -1512,7 +1946,7 @@ abstract class _$$_DeleteQuestionCopyWith<$Res> {
           _$_DeleteQuestion value, $Res Function(_$_DeleteQuestion) then) =
       __$$_DeleteQuestionCopyWithImpl<$Res>;
   @useResult
-  $Res call({String name, String category});
+  $Res call({String bucketId, int index});
 }
 
 /// @nodoc
@@ -1526,18 +1960,18 @@ class __$$_DeleteQuestionCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
-    Object? category = null,
+    Object? bucketId = null,
+    Object? index = null,
   }) {
     return _then(_$_DeleteQuestion(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      bucketId: null == bucketId
+          ? _value.bucketId
+          : bucketId // ignore: cast_nullable_to_non_nullable
               as String,
-      category: null == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as String,
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -1545,16 +1979,16 @@ class __$$_DeleteQuestionCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_DeleteQuestion implements _DeleteQuestion {
-  const _$_DeleteQuestion({required this.name, required this.category});
+  const _$_DeleteQuestion({required this.bucketId, required this.index});
 
   @override
-  final String name;
+  final String bucketId;
   @override
-  final String category;
+  final int index;
 
   @override
   String toString() {
-    return 'BucketEvent.deleteQuestion(name: $name, category: $category)';
+    return 'BucketEvent.deleteQuestion(bucketId: $bucketId, index: $index)';
   }
 
   @override
@@ -1562,13 +1996,13 @@ class _$_DeleteQuestion implements _DeleteQuestion {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DeleteQuestion &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.category, category) ||
-                other.category == category));
+            (identical(other.bucketId, bucketId) ||
+                other.bucketId == bucketId) &&
+            (identical(other.index, index) || other.index == index));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, category);
+  int get hashCode => Object.hash(runtimeType, bucketId, index);
 
   @JsonKey(ignore: true)
   @override
@@ -1580,59 +2014,77 @@ class _$_DeleteQuestion implements _DeleteQuestion {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? bucketId) init,
-    required TResult Function(Bucket? bucket) addQuestion,
-    required TResult Function(String bucketId, Questions questions,
-            Bucket? bucket, List<Questions>? stateQuestions)
+    required TResult Function() addQuestion,
+    required TResult Function(String bucketId, int? questionIndex,
+            String? questionId, Questions question)
         setQuestion,
-    required TResult Function() addVariant,
-    required TResult Function(String name, String category) searchByName,
     required TResult Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)
-        removeFromRelease,
+            Questions question, int questionIndex, List<Answer>? answerList)
+        addAnswer,
+    required TResult Function(String bucketId, int? questionIndex,
+            Questions question, Answer answer)
+        setAnswer,
+    required TResult Function(String name, Bucket? bucket) searchByName,
+    required TResult Function(String bucketId) removeFromRelease,
     required TResult Function(String bucketId) publish,
-    required TResult Function(String name, String category) deleteQuestion,
+    required TResult Function(String bucketId, int index) deleteQuestion,
+    required TResult Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)
+        deleteAnswer,
   }) {
-    return deleteQuestion(name, category);
+    return deleteQuestion(bucketId, index);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? bucketId)? init,
-    TResult? Function(Bucket? bucket)? addQuestion,
-    TResult? Function(String bucketId, Questions questions, Bucket? bucket,
-            List<Questions>? stateQuestions)?
+    TResult? Function()? addQuestion,
+    TResult? Function(String bucketId, int? questionIndex, String? questionId,
+            Questions question)?
         setQuestion,
-    TResult? Function()? addVariant,
-    TResult? Function(String name, String category)? searchByName,
     TResult? Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)?
-        removeFromRelease,
+            Questions question, int questionIndex, List<Answer>? answerList)?
+        addAnswer,
+    TResult? Function(String bucketId, int? questionIndex, Questions question,
+            Answer answer)?
+        setAnswer,
+    TResult? Function(String name, Bucket? bucket)? searchByName,
+    TResult? Function(String bucketId)? removeFromRelease,
     TResult? Function(String bucketId)? publish,
-    TResult? Function(String name, String category)? deleteQuestion,
+    TResult? Function(String bucketId, int index)? deleteQuestion,
+    TResult? Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)?
+        deleteAnswer,
   }) {
-    return deleteQuestion?.call(name, category);
+    return deleteQuestion?.call(bucketId, index);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? bucketId)? init,
-    TResult Function(Bucket? bucket)? addQuestion,
-    TResult Function(String bucketId, Questions questions, Bucket? bucket,
-            List<Questions>? stateQuestions)?
+    TResult Function()? addQuestion,
+    TResult Function(String bucketId, int? questionIndex, String? questionId,
+            Questions question)?
         setQuestion,
-    TResult Function()? addVariant,
-    TResult Function(String name, String category)? searchByName,
     TResult Function(
-            String bucketId, Bucket? bucket, List<Questions>? stateQuestions)?
-        removeFromRelease,
+            Questions question, int questionIndex, List<Answer>? answerList)?
+        addAnswer,
+    TResult Function(String bucketId, int? questionIndex, Questions question,
+            Answer answer)?
+        setAnswer,
+    TResult Function(String name, Bucket? bucket)? searchByName,
+    TResult Function(String bucketId)? removeFromRelease,
     TResult Function(String bucketId)? publish,
-    TResult Function(String name, String category)? deleteQuestion,
+    TResult Function(String bucketId, int index)? deleteQuestion,
+    TResult Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)?
+        deleteAnswer,
     required TResult orElse(),
   }) {
     if (deleteQuestion != null) {
-      return deleteQuestion(name, category);
+      return deleteQuestion(bucketId, index);
     }
     return orElse();
   }
@@ -1643,11 +2095,13 @@ class _$_DeleteQuestion implements _DeleteQuestion {
     required TResult Function(_Init value) init,
     required TResult Function(_AddQuestion value) addQuestion,
     required TResult Function(_SetQuestion value) setQuestion,
-    required TResult Function(_AddVariant value) addVariant,
+    required TResult Function(_AddAnswer value) addAnswer,
+    required TResult Function(_SetAnswer value) setAnswer,
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_RemoveFromRelease value) removeFromRelease,
     required TResult Function(_Publish value) publish,
     required TResult Function(_DeleteQuestion value) deleteQuestion,
+    required TResult Function(_DeleteAnswer value) deleteAnswer,
   }) {
     return deleteQuestion(this);
   }
@@ -1658,11 +2112,13 @@ class _$_DeleteQuestion implements _DeleteQuestion {
     TResult? Function(_Init value)? init,
     TResult? Function(_AddQuestion value)? addQuestion,
     TResult? Function(_SetQuestion value)? setQuestion,
-    TResult? Function(_AddVariant value)? addVariant,
+    TResult? Function(_AddAnswer value)? addAnswer,
+    TResult? Function(_SetAnswer value)? setAnswer,
     TResult? Function(_SearchByName value)? searchByName,
     TResult? Function(_RemoveFromRelease value)? removeFromRelease,
     TResult? Function(_Publish value)? publish,
     TResult? Function(_DeleteQuestion value)? deleteQuestion,
+    TResult? Function(_DeleteAnswer value)? deleteAnswer,
   }) {
     return deleteQuestion?.call(this);
   }
@@ -1673,11 +2129,13 @@ class _$_DeleteQuestion implements _DeleteQuestion {
     TResult Function(_Init value)? init,
     TResult Function(_AddQuestion value)? addQuestion,
     TResult Function(_SetQuestion value)? setQuestion,
-    TResult Function(_AddVariant value)? addVariant,
+    TResult Function(_AddAnswer value)? addAnswer,
+    TResult Function(_SetAnswer value)? setAnswer,
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_RemoveFromRelease value)? removeFromRelease,
     TResult Function(_Publish value)? publish,
     TResult Function(_DeleteQuestion value)? deleteQuestion,
+    TResult Function(_DeleteAnswer value)? deleteAnswer,
     required TResult orElse(),
   }) {
     if (deleteQuestion != null) {
@@ -1689,13 +2147,256 @@ class _$_DeleteQuestion implements _DeleteQuestion {
 
 abstract class _DeleteQuestion implements BucketEvent {
   const factory _DeleteQuestion(
-      {required final String name,
-      required final String category}) = _$_DeleteQuestion;
+      {required final String bucketId,
+      required final int index}) = _$_DeleteQuestion;
 
-  String get name;
-  String get category;
+  String get bucketId;
+  int get index;
   @JsonKey(ignore: true)
   _$$_DeleteQuestionCopyWith<_$_DeleteQuestion> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_DeleteAnswerCopyWith<$Res> {
+  factory _$$_DeleteAnswerCopyWith(
+          _$_DeleteAnswer value, $Res Function(_$_DeleteAnswer) then) =
+      __$$_DeleteAnswerCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String bucketId, Questions existedQuestions, int indexToDelete});
+
+  $QuestionsCopyWith<$Res> get existedQuestions;
+}
+
+/// @nodoc
+class __$$_DeleteAnswerCopyWithImpl<$Res>
+    extends _$BucketEventCopyWithImpl<$Res, _$_DeleteAnswer>
+    implements _$$_DeleteAnswerCopyWith<$Res> {
+  __$$_DeleteAnswerCopyWithImpl(
+      _$_DeleteAnswer _value, $Res Function(_$_DeleteAnswer) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? bucketId = null,
+    Object? existedQuestions = null,
+    Object? indexToDelete = null,
+  }) {
+    return _then(_$_DeleteAnswer(
+      bucketId: null == bucketId
+          ? _value.bucketId
+          : bucketId // ignore: cast_nullable_to_non_nullable
+              as String,
+      existedQuestions: null == existedQuestions
+          ? _value.existedQuestions
+          : existedQuestions // ignore: cast_nullable_to_non_nullable
+              as Questions,
+      indexToDelete: null == indexToDelete
+          ? _value.indexToDelete
+          : indexToDelete // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $QuestionsCopyWith<$Res> get existedQuestions {
+    return $QuestionsCopyWith<$Res>(_value.existedQuestions, (value) {
+      return _then(_value.copyWith(existedQuestions: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_DeleteAnswer implements _DeleteAnswer {
+  const _$_DeleteAnswer(
+      {required this.bucketId,
+      required this.existedQuestions,
+      required this.indexToDelete});
+
+  @override
+  final String bucketId;
+  @override
+  final Questions existedQuestions;
+  @override
+  final int indexToDelete;
+
+  @override
+  String toString() {
+    return 'BucketEvent.deleteAnswer(bucketId: $bucketId, existedQuestions: $existedQuestions, indexToDelete: $indexToDelete)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DeleteAnswer &&
+            (identical(other.bucketId, bucketId) ||
+                other.bucketId == bucketId) &&
+            (identical(other.existedQuestions, existedQuestions) ||
+                other.existedQuestions == existedQuestions) &&
+            (identical(other.indexToDelete, indexToDelete) ||
+                other.indexToDelete == indexToDelete));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, bucketId, existedQuestions, indexToDelete);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DeleteAnswerCopyWith<_$_DeleteAnswer> get copyWith =>
+      __$$_DeleteAnswerCopyWithImpl<_$_DeleteAnswer>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? bucketId) init,
+    required TResult Function() addQuestion,
+    required TResult Function(String bucketId, int? questionIndex,
+            String? questionId, Questions question)
+        setQuestion,
+    required TResult Function(
+            Questions question, int questionIndex, List<Answer>? answerList)
+        addAnswer,
+    required TResult Function(String bucketId, int? questionIndex,
+            Questions question, Answer answer)
+        setAnswer,
+    required TResult Function(String name, Bucket? bucket) searchByName,
+    required TResult Function(String bucketId) removeFromRelease,
+    required TResult Function(String bucketId) publish,
+    required TResult Function(String bucketId, int index) deleteQuestion,
+    required TResult Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)
+        deleteAnswer,
+  }) {
+    return deleteAnswer(bucketId, existedQuestions, indexToDelete);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? bucketId)? init,
+    TResult? Function()? addQuestion,
+    TResult? Function(String bucketId, int? questionIndex, String? questionId,
+            Questions question)?
+        setQuestion,
+    TResult? Function(
+            Questions question, int questionIndex, List<Answer>? answerList)?
+        addAnswer,
+    TResult? Function(String bucketId, int? questionIndex, Questions question,
+            Answer answer)?
+        setAnswer,
+    TResult? Function(String name, Bucket? bucket)? searchByName,
+    TResult? Function(String bucketId)? removeFromRelease,
+    TResult? Function(String bucketId)? publish,
+    TResult? Function(String bucketId, int index)? deleteQuestion,
+    TResult? Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)?
+        deleteAnswer,
+  }) {
+    return deleteAnswer?.call(bucketId, existedQuestions, indexToDelete);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? bucketId)? init,
+    TResult Function()? addQuestion,
+    TResult Function(String bucketId, int? questionIndex, String? questionId,
+            Questions question)?
+        setQuestion,
+    TResult Function(
+            Questions question, int questionIndex, List<Answer>? answerList)?
+        addAnswer,
+    TResult Function(String bucketId, int? questionIndex, Questions question,
+            Answer answer)?
+        setAnswer,
+    TResult Function(String name, Bucket? bucket)? searchByName,
+    TResult Function(String bucketId)? removeFromRelease,
+    TResult Function(String bucketId)? publish,
+    TResult Function(String bucketId, int index)? deleteQuestion,
+    TResult Function(
+            String bucketId, Questions existedQuestions, int indexToDelete)?
+        deleteAnswer,
+    required TResult orElse(),
+  }) {
+    if (deleteAnswer != null) {
+      return deleteAnswer(bucketId, existedQuestions, indexToDelete);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_AddQuestion value) addQuestion,
+    required TResult Function(_SetQuestion value) setQuestion,
+    required TResult Function(_AddAnswer value) addAnswer,
+    required TResult Function(_SetAnswer value) setAnswer,
+    required TResult Function(_SearchByName value) searchByName,
+    required TResult Function(_RemoveFromRelease value) removeFromRelease,
+    required TResult Function(_Publish value) publish,
+    required TResult Function(_DeleteQuestion value) deleteQuestion,
+    required TResult Function(_DeleteAnswer value) deleteAnswer,
+  }) {
+    return deleteAnswer(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Init value)? init,
+    TResult? Function(_AddQuestion value)? addQuestion,
+    TResult? Function(_SetQuestion value)? setQuestion,
+    TResult? Function(_AddAnswer value)? addAnswer,
+    TResult? Function(_SetAnswer value)? setAnswer,
+    TResult? Function(_SearchByName value)? searchByName,
+    TResult? Function(_RemoveFromRelease value)? removeFromRelease,
+    TResult? Function(_Publish value)? publish,
+    TResult? Function(_DeleteQuestion value)? deleteQuestion,
+    TResult? Function(_DeleteAnswer value)? deleteAnswer,
+  }) {
+    return deleteAnswer?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_AddQuestion value)? addQuestion,
+    TResult Function(_SetQuestion value)? setQuestion,
+    TResult Function(_AddAnswer value)? addAnswer,
+    TResult Function(_SetAnswer value)? setAnswer,
+    TResult Function(_SearchByName value)? searchByName,
+    TResult Function(_RemoveFromRelease value)? removeFromRelease,
+    TResult Function(_Publish value)? publish,
+    TResult Function(_DeleteQuestion value)? deleteQuestion,
+    TResult Function(_DeleteAnswer value)? deleteAnswer,
+    required TResult orElse(),
+  }) {
+    if (deleteAnswer != null) {
+      return deleteAnswer(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteAnswer implements BucketEvent {
+  const factory _DeleteAnswer(
+      {required final String bucketId,
+      required final Questions existedQuestions,
+      required final int indexToDelete}) = _$_DeleteAnswer;
+
+  String get bucketId;
+  Questions get existedQuestions;
+  int get indexToDelete;
+  @JsonKey(ignore: true)
+  _$$_DeleteAnswerCopyWith<_$_DeleteAnswer> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1706,13 +2407,19 @@ mixin _$BucketState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
         loaded,
+    required TResult Function(Questions? questions) questionAdded,
+    required TResult Function(Questions? question, int questionIndex)
+        answerAdded,
     required TResult Function() success,
-    required TResult Function() isPublished,
+    required TResult Function(bool isPublished) isPublished,
     required TResult Function(String error) error,
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
+    required TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+        searchLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -1720,13 +2427,18 @@ mixin _$BucketState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)?
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
+    TResult? Function(Questions? questions)? questionAdded,
+    TResult? Function(Questions? question, int questionIndex)? answerAdded,
     TResult? Function()? success,
-    TResult? Function()? isPublished,
+    TResult? Function(bool isPublished)? isPublished,
     TResult? Function(String error)? error,
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
+    TResult? Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        searchLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -1734,13 +2446,18 @@ mixin _$BucketState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)?
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
+    TResult Function(Questions? questions)? questionAdded,
+    TResult Function(Questions? question, int questionIndex)? answerAdded,
     TResult Function()? success,
-    TResult Function()? isPublished,
+    TResult Function(bool isPublished)? isPublished,
     TResult Function(String error)? error,
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
+    TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        searchLoaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -1749,11 +2466,14 @@ mixin _$BucketState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_QuestionAdded value) questionAdded,
+    required TResult Function(_AnswerAdded value) answerAdded,
     required TResult Function(_Success value) success,
     required TResult Function(_IsPublished value) isPublished,
     required TResult Function(_Error value) error,
     required TResult Function(_SearchLoading value) searchLoading,
     required TResult Function(_SearchError value) searchError,
+    required TResult Function(_SearchLoaded value) searchLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -1761,11 +2481,14 @@ mixin _$BucketState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_QuestionAdded value)? questionAdded,
+    TResult? Function(_AnswerAdded value)? answerAdded,
     TResult? Function(_Success value)? success,
     TResult? Function(_IsPublished value)? isPublished,
     TResult? Function(_Error value)? error,
     TResult? Function(_SearchLoading value)? searchLoading,
     TResult? Function(_SearchError value)? searchError,
+    TResult? Function(_SearchLoaded value)? searchLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -1773,11 +2496,14 @@ mixin _$BucketState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_QuestionAdded value)? questionAdded,
+    TResult Function(_AnswerAdded value)? answerAdded,
     TResult Function(_Success value)? success,
     TResult Function(_IsPublished value)? isPublished,
     TResult Function(_Error value)? error,
     TResult Function(_SearchLoading value)? searchLoading,
     TResult Function(_SearchError value)? searchError,
+    TResult Function(_SearchLoaded value)? searchLoaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -1841,13 +2567,19 @@ class _$_Initial extends _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
         loaded,
+    required TResult Function(Questions? questions) questionAdded,
+    required TResult Function(Questions? question, int questionIndex)
+        answerAdded,
     required TResult Function() success,
-    required TResult Function() isPublished,
+    required TResult Function(bool isPublished) isPublished,
     required TResult Function(String error) error,
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
+    required TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+        searchLoaded,
   }) {
     return initial();
   }
@@ -1858,13 +2590,18 @@ class _$_Initial extends _Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)?
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
+    TResult? Function(Questions? questions)? questionAdded,
+    TResult? Function(Questions? question, int questionIndex)? answerAdded,
     TResult? Function()? success,
-    TResult? Function()? isPublished,
+    TResult? Function(bool isPublished)? isPublished,
     TResult? Function(String error)? error,
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
+    TResult? Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        searchLoaded,
   }) {
     return initial?.call();
   }
@@ -1875,13 +2612,18 @@ class _$_Initial extends _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)?
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
+    TResult Function(Questions? questions)? questionAdded,
+    TResult Function(Questions? question, int questionIndex)? answerAdded,
     TResult Function()? success,
-    TResult Function()? isPublished,
+    TResult Function(bool isPublished)? isPublished,
     TResult Function(String error)? error,
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
+    TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        searchLoaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1896,11 +2638,14 @@ class _$_Initial extends _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_QuestionAdded value) questionAdded,
+    required TResult Function(_AnswerAdded value) answerAdded,
     required TResult Function(_Success value) success,
     required TResult Function(_IsPublished value) isPublished,
     required TResult Function(_Error value) error,
     required TResult Function(_SearchLoading value) searchLoading,
     required TResult Function(_SearchError value) searchError,
+    required TResult Function(_SearchLoaded value) searchLoaded,
   }) {
     return initial(this);
   }
@@ -1911,11 +2656,14 @@ class _$_Initial extends _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_QuestionAdded value)? questionAdded,
+    TResult? Function(_AnswerAdded value)? answerAdded,
     TResult? Function(_Success value)? success,
     TResult? Function(_IsPublished value)? isPublished,
     TResult? Function(_Error value)? error,
     TResult? Function(_SearchLoading value)? searchLoading,
     TResult? Function(_SearchError value)? searchError,
+    TResult? Function(_SearchLoaded value)? searchLoaded,
   }) {
     return initial?.call(this);
   }
@@ -1926,11 +2674,14 @@ class _$_Initial extends _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_QuestionAdded value)? questionAdded,
+    TResult Function(_AnswerAdded value)? answerAdded,
     TResult Function(_Success value)? success,
     TResult Function(_IsPublished value)? isPublished,
     TResult Function(_Error value)? error,
     TResult Function(_SearchLoading value)? searchLoading,
     TResult Function(_SearchError value)? searchError,
+    TResult Function(_SearchLoaded value)? searchLoaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1985,13 +2736,19 @@ class _$_Loading extends _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
         loaded,
+    required TResult Function(Questions? questions) questionAdded,
+    required TResult Function(Questions? question, int questionIndex)
+        answerAdded,
     required TResult Function() success,
-    required TResult Function() isPublished,
+    required TResult Function(bool isPublished) isPublished,
     required TResult Function(String error) error,
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
+    required TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+        searchLoaded,
   }) {
     return loading();
   }
@@ -2002,13 +2759,18 @@ class _$_Loading extends _Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)?
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
+    TResult? Function(Questions? questions)? questionAdded,
+    TResult? Function(Questions? question, int questionIndex)? answerAdded,
     TResult? Function()? success,
-    TResult? Function()? isPublished,
+    TResult? Function(bool isPublished)? isPublished,
     TResult? Function(String error)? error,
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
+    TResult? Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        searchLoaded,
   }) {
     return loading?.call();
   }
@@ -2019,13 +2781,18 @@ class _$_Loading extends _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)?
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
+    TResult Function(Questions? questions)? questionAdded,
+    TResult Function(Questions? question, int questionIndex)? answerAdded,
     TResult Function()? success,
-    TResult Function()? isPublished,
+    TResult Function(bool isPublished)? isPublished,
     TResult Function(String error)? error,
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
+    TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        searchLoaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -2040,11 +2807,14 @@ class _$_Loading extends _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_QuestionAdded value) questionAdded,
+    required TResult Function(_AnswerAdded value) answerAdded,
     required TResult Function(_Success value) success,
     required TResult Function(_IsPublished value) isPublished,
     required TResult Function(_Error value) error,
     required TResult Function(_SearchLoading value) searchLoading,
     required TResult Function(_SearchError value) searchError,
+    required TResult Function(_SearchLoaded value) searchLoaded,
   }) {
     return loading(this);
   }
@@ -2055,11 +2825,14 @@ class _$_Loading extends _Loading {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_QuestionAdded value)? questionAdded,
+    TResult? Function(_AnswerAdded value)? answerAdded,
     TResult? Function(_Success value)? success,
     TResult? Function(_IsPublished value)? isPublished,
     TResult? Function(_Error value)? error,
     TResult? Function(_SearchLoading value)? searchLoading,
     TResult? Function(_SearchError value)? searchError,
+    TResult? Function(_SearchLoaded value)? searchLoaded,
   }) {
     return loading?.call(this);
   }
@@ -2070,11 +2843,14 @@ class _$_Loading extends _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_QuestionAdded value)? questionAdded,
+    TResult Function(_AnswerAdded value)? answerAdded,
     TResult Function(_Success value)? success,
     TResult Function(_IsPublished value)? isPublished,
     TResult Function(_Error value)? error,
     TResult Function(_SearchLoading value)? searchLoading,
     TResult Function(_SearchError value)? searchError,
+    TResult Function(_SearchLoaded value)? searchLoaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -2094,7 +2870,8 @@ abstract class _$$_LoadedCopyWith<$Res> {
   factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
       __$$_LoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Questions>? questions, Bucket? bucket, bool? isPublished});
+  $Res call(
+      {List<Questions>? questionsList, Bucket? bucket, bool? isPublished});
 
   $BucketCopyWith<$Res>? get bucket;
 }
@@ -2109,14 +2886,14 @@ class __$$_LoadedCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? questions = freezed,
+    Object? questionsList = freezed,
     Object? bucket = freezed,
     Object? isPublished = freezed,
   }) {
     return _then(_$_Loaded(
-      questions: freezed == questions
-          ? _value._questions
-          : questions // ignore: cast_nullable_to_non_nullable
+      questionsList: freezed == questionsList
+          ? _value._questionsList
+          : questionsList // ignore: cast_nullable_to_non_nullable
               as List<Questions>?,
       bucket: freezed == bucket
           ? _value.bucket
@@ -2146,16 +2923,16 @@ class __$$_LoadedCopyWithImpl<$Res>
 
 class _$_Loaded extends _Loaded {
   const _$_Loaded(
-      {final List<Questions>? questions, this.bucket, this.isPublished})
-      : _questions = questions,
+      {final List<Questions>? questionsList, this.bucket, this.isPublished})
+      : _questionsList = questionsList,
         super._();
 
-  final List<Questions>? _questions;
+  final List<Questions>? _questionsList;
   @override
-  List<Questions>? get questions {
-    final value = _questions;
+  List<Questions>? get questionsList {
+    final value = _questionsList;
     if (value == null) return null;
-    if (_questions is EqualUnmodifiableListView) return _questions;
+    if (_questionsList is EqualUnmodifiableListView) return _questionsList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -2167,7 +2944,7 @@ class _$_Loaded extends _Loaded {
 
   @override
   String toString() {
-    return 'BucketState.loaded(questions: $questions, bucket: $bucket, isPublished: $isPublished)';
+    return 'BucketState.loaded(questionsList: $questionsList, bucket: $bucket, isPublished: $isPublished)';
   }
 
   @override
@@ -2176,7 +2953,7 @@ class _$_Loaded extends _Loaded {
         (other.runtimeType == runtimeType &&
             other is _$_Loaded &&
             const DeepCollectionEquality()
-                .equals(other._questions, _questions) &&
+                .equals(other._questionsList, _questionsList) &&
             (identical(other.bucket, bucket) || other.bucket == bucket) &&
             (identical(other.isPublished, isPublished) ||
                 other.isPublished == isPublished));
@@ -2184,7 +2961,7 @@ class _$_Loaded extends _Loaded {
 
   @override
   int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_questions), bucket, isPublished);
+      const DeepCollectionEquality().hash(_questionsList), bucket, isPublished);
 
   @JsonKey(ignore: true)
   @override
@@ -2198,15 +2975,21 @@ class _$_Loaded extends _Loaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
         loaded,
+    required TResult Function(Questions? questions) questionAdded,
+    required TResult Function(Questions? question, int questionIndex)
+        answerAdded,
     required TResult Function() success,
-    required TResult Function() isPublished,
+    required TResult Function(bool isPublished) isPublished,
     required TResult Function(String error) error,
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
+    required TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+        searchLoaded,
   }) {
-    return loaded(questions, bucket, this.isPublished);
+    return loaded(questionsList, bucket, this.isPublished);
   }
 
   @override
@@ -2215,15 +2998,20 @@ class _$_Loaded extends _Loaded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)?
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
+    TResult? Function(Questions? questions)? questionAdded,
+    TResult? Function(Questions? question, int questionIndex)? answerAdded,
     TResult? Function()? success,
-    TResult? Function()? isPublished,
+    TResult? Function(bool isPublished)? isPublished,
     TResult? Function(String error)? error,
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
+    TResult? Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        searchLoaded,
   }) {
-    return loaded?.call(questions, bucket, this.isPublished);
+    return loaded?.call(questionsList, bucket, this.isPublished);
   }
 
   @override
@@ -2232,17 +3020,22 @@ class _$_Loaded extends _Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)?
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
+    TResult Function(Questions? questions)? questionAdded,
+    TResult Function(Questions? question, int questionIndex)? answerAdded,
     TResult Function()? success,
-    TResult Function()? isPublished,
+    TResult Function(bool isPublished)? isPublished,
     TResult Function(String error)? error,
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
+    TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        searchLoaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(questions, bucket, this.isPublished);
+      return loaded(questionsList, bucket, this.isPublished);
     }
     return orElse();
   }
@@ -2253,11 +3046,14 @@ class _$_Loaded extends _Loaded {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_QuestionAdded value) questionAdded,
+    required TResult Function(_AnswerAdded value) answerAdded,
     required TResult Function(_Success value) success,
     required TResult Function(_IsPublished value) isPublished,
     required TResult Function(_Error value) error,
     required TResult Function(_SearchLoading value) searchLoading,
     required TResult Function(_SearchError value) searchError,
+    required TResult Function(_SearchLoaded value) searchLoaded,
   }) {
     return loaded(this);
   }
@@ -2268,11 +3064,14 @@ class _$_Loaded extends _Loaded {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_QuestionAdded value)? questionAdded,
+    TResult? Function(_AnswerAdded value)? answerAdded,
     TResult? Function(_Success value)? success,
     TResult? Function(_IsPublished value)? isPublished,
     TResult? Function(_Error value)? error,
     TResult? Function(_SearchLoading value)? searchLoading,
     TResult? Function(_SearchError value)? searchError,
+    TResult? Function(_SearchLoaded value)? searchLoaded,
   }) {
     return loaded?.call(this);
   }
@@ -2283,11 +3082,14 @@ class _$_Loaded extends _Loaded {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_QuestionAdded value)? questionAdded,
+    TResult Function(_AnswerAdded value)? answerAdded,
     TResult Function(_Success value)? success,
     TResult Function(_IsPublished value)? isPublished,
     TResult Function(_Error value)? error,
     TResult Function(_SearchLoading value)? searchLoading,
     TResult Function(_SearchError value)? searchError,
+    TResult Function(_SearchLoaded value)? searchLoaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -2299,16 +3101,461 @@ class _$_Loaded extends _Loaded {
 
 abstract class _Loaded extends BucketState {
   const factory _Loaded(
-      {final List<Questions>? questions,
+      {final List<Questions>? questionsList,
       final Bucket? bucket,
       final bool? isPublished}) = _$_Loaded;
   const _Loaded._() : super._();
 
-  List<Questions>? get questions;
+  List<Questions>? get questionsList;
   Bucket? get bucket;
   bool? get isPublished;
   @JsonKey(ignore: true)
   _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_QuestionAddedCopyWith<$Res> {
+  factory _$$_QuestionAddedCopyWith(
+          _$_QuestionAdded value, $Res Function(_$_QuestionAdded) then) =
+      __$$_QuestionAddedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Questions? questions});
+
+  $QuestionsCopyWith<$Res>? get questions;
+}
+
+/// @nodoc
+class __$$_QuestionAddedCopyWithImpl<$Res>
+    extends _$BucketStateCopyWithImpl<$Res, _$_QuestionAdded>
+    implements _$$_QuestionAddedCopyWith<$Res> {
+  __$$_QuestionAddedCopyWithImpl(
+      _$_QuestionAdded _value, $Res Function(_$_QuestionAdded) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? questions = freezed,
+  }) {
+    return _then(_$_QuestionAdded(
+      questions: freezed == questions
+          ? _value.questions
+          : questions // ignore: cast_nullable_to_non_nullable
+              as Questions?,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $QuestionsCopyWith<$Res>? get questions {
+    if (_value.questions == null) {
+      return null;
+    }
+
+    return $QuestionsCopyWith<$Res>(_value.questions!, (value) {
+      return _then(_value.copyWith(questions: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_QuestionAdded extends _QuestionAdded {
+  const _$_QuestionAdded({this.questions}) : super._();
+
+  @override
+  final Questions? questions;
+
+  @override
+  String toString() {
+    return 'BucketState.questionAdded(questions: $questions)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_QuestionAdded &&
+            (identical(other.questions, questions) ||
+                other.questions == questions));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, questions);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_QuestionAddedCopyWith<_$_QuestionAdded> get copyWith =>
+      __$$_QuestionAddedCopyWithImpl<_$_QuestionAdded>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+        loaded,
+    required TResult Function(Questions? questions) questionAdded,
+    required TResult Function(Questions? question, int questionIndex)
+        answerAdded,
+    required TResult Function() success,
+    required TResult Function(bool isPublished) isPublished,
+    required TResult Function(String error) error,
+    required TResult Function() searchLoading,
+    required TResult Function(String error) searchError,
+    required TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+        searchLoaded,
+  }) {
+    return questionAdded(questions);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        loaded,
+    TResult? Function(Questions? questions)? questionAdded,
+    TResult? Function(Questions? question, int questionIndex)? answerAdded,
+    TResult? Function()? success,
+    TResult? Function(bool isPublished)? isPublished,
+    TResult? Function(String error)? error,
+    TResult? Function()? searchLoading,
+    TResult? Function(String error)? searchError,
+    TResult? Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        searchLoaded,
+  }) {
+    return questionAdded?.call(questions);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        loaded,
+    TResult Function(Questions? questions)? questionAdded,
+    TResult Function(Questions? question, int questionIndex)? answerAdded,
+    TResult Function()? success,
+    TResult Function(bool isPublished)? isPublished,
+    TResult Function(String error)? error,
+    TResult Function()? searchLoading,
+    TResult Function(String error)? searchError,
+    TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        searchLoaded,
+    required TResult orElse(),
+  }) {
+    if (questionAdded != null) {
+      return questionAdded(questions);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_QuestionAdded value) questionAdded,
+    required TResult Function(_AnswerAdded value) answerAdded,
+    required TResult Function(_Success value) success,
+    required TResult Function(_IsPublished value) isPublished,
+    required TResult Function(_Error value) error,
+    required TResult Function(_SearchLoading value) searchLoading,
+    required TResult Function(_SearchError value) searchError,
+    required TResult Function(_SearchLoaded value) searchLoaded,
+  }) {
+    return questionAdded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_QuestionAdded value)? questionAdded,
+    TResult? Function(_AnswerAdded value)? answerAdded,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_IsPublished value)? isPublished,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_SearchLoading value)? searchLoading,
+    TResult? Function(_SearchError value)? searchError,
+    TResult? Function(_SearchLoaded value)? searchLoaded,
+  }) {
+    return questionAdded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_QuestionAdded value)? questionAdded,
+    TResult Function(_AnswerAdded value)? answerAdded,
+    TResult Function(_Success value)? success,
+    TResult Function(_IsPublished value)? isPublished,
+    TResult Function(_Error value)? error,
+    TResult Function(_SearchLoading value)? searchLoading,
+    TResult Function(_SearchError value)? searchError,
+    TResult Function(_SearchLoaded value)? searchLoaded,
+    required TResult orElse(),
+  }) {
+    if (questionAdded != null) {
+      return questionAdded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _QuestionAdded extends BucketState {
+  const factory _QuestionAdded({final Questions? questions}) = _$_QuestionAdded;
+  const _QuestionAdded._() : super._();
+
+  Questions? get questions;
+  @JsonKey(ignore: true)
+  _$$_QuestionAddedCopyWith<_$_QuestionAdded> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_AnswerAddedCopyWith<$Res> {
+  factory _$$_AnswerAddedCopyWith(
+          _$_AnswerAdded value, $Res Function(_$_AnswerAdded) then) =
+      __$$_AnswerAddedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Questions? question, int questionIndex});
+
+  $QuestionsCopyWith<$Res>? get question;
+}
+
+/// @nodoc
+class __$$_AnswerAddedCopyWithImpl<$Res>
+    extends _$BucketStateCopyWithImpl<$Res, _$_AnswerAdded>
+    implements _$$_AnswerAddedCopyWith<$Res> {
+  __$$_AnswerAddedCopyWithImpl(
+      _$_AnswerAdded _value, $Res Function(_$_AnswerAdded) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? question = freezed,
+    Object? questionIndex = null,
+  }) {
+    return _then(_$_AnswerAdded(
+      question: freezed == question
+          ? _value.question
+          : question // ignore: cast_nullable_to_non_nullable
+              as Questions?,
+      questionIndex: null == questionIndex
+          ? _value.questionIndex
+          : questionIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $QuestionsCopyWith<$Res>? get question {
+    if (_value.question == null) {
+      return null;
+    }
+
+    return $QuestionsCopyWith<$Res>(_value.question!, (value) {
+      return _then(_value.copyWith(question: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_AnswerAdded extends _AnswerAdded {
+  const _$_AnswerAdded({this.question, required this.questionIndex})
+      : super._();
+
+  @override
+  final Questions? question;
+  @override
+  final int questionIndex;
+
+  @override
+  String toString() {
+    return 'BucketState.answerAdded(question: $question, questionIndex: $questionIndex)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AnswerAdded &&
+            (identical(other.question, question) ||
+                other.question == question) &&
+            (identical(other.questionIndex, questionIndex) ||
+                other.questionIndex == questionIndex));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, question, questionIndex);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AnswerAddedCopyWith<_$_AnswerAdded> get copyWith =>
+      __$$_AnswerAddedCopyWithImpl<_$_AnswerAdded>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+        loaded,
+    required TResult Function(Questions? questions) questionAdded,
+    required TResult Function(Questions? question, int questionIndex)
+        answerAdded,
+    required TResult Function() success,
+    required TResult Function(bool isPublished) isPublished,
+    required TResult Function(String error) error,
+    required TResult Function() searchLoading,
+    required TResult Function(String error) searchError,
+    required TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+        searchLoaded,
+  }) {
+    return answerAdded(question, questionIndex);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        loaded,
+    TResult? Function(Questions? questions)? questionAdded,
+    TResult? Function(Questions? question, int questionIndex)? answerAdded,
+    TResult? Function()? success,
+    TResult? Function(bool isPublished)? isPublished,
+    TResult? Function(String error)? error,
+    TResult? Function()? searchLoading,
+    TResult? Function(String error)? searchError,
+    TResult? Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        searchLoaded,
+  }) {
+    return answerAdded?.call(question, questionIndex);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        loaded,
+    TResult Function(Questions? questions)? questionAdded,
+    TResult Function(Questions? question, int questionIndex)? answerAdded,
+    TResult Function()? success,
+    TResult Function(bool isPublished)? isPublished,
+    TResult Function(String error)? error,
+    TResult Function()? searchLoading,
+    TResult Function(String error)? searchError,
+    TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        searchLoaded,
+    required TResult orElse(),
+  }) {
+    if (answerAdded != null) {
+      return answerAdded(question, questionIndex);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_QuestionAdded value) questionAdded,
+    required TResult Function(_AnswerAdded value) answerAdded,
+    required TResult Function(_Success value) success,
+    required TResult Function(_IsPublished value) isPublished,
+    required TResult Function(_Error value) error,
+    required TResult Function(_SearchLoading value) searchLoading,
+    required TResult Function(_SearchError value) searchError,
+    required TResult Function(_SearchLoaded value) searchLoaded,
+  }) {
+    return answerAdded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_QuestionAdded value)? questionAdded,
+    TResult? Function(_AnswerAdded value)? answerAdded,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_IsPublished value)? isPublished,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_SearchLoading value)? searchLoading,
+    TResult? Function(_SearchError value)? searchError,
+    TResult? Function(_SearchLoaded value)? searchLoaded,
+  }) {
+    return answerAdded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_QuestionAdded value)? questionAdded,
+    TResult Function(_AnswerAdded value)? answerAdded,
+    TResult Function(_Success value)? success,
+    TResult Function(_IsPublished value)? isPublished,
+    TResult Function(_Error value)? error,
+    TResult Function(_SearchLoading value)? searchLoading,
+    TResult Function(_SearchError value)? searchError,
+    TResult Function(_SearchLoaded value)? searchLoaded,
+    required TResult orElse(),
+  }) {
+    if (answerAdded != null) {
+      return answerAdded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AnswerAdded extends BucketState {
+  const factory _AnswerAdded(
+      {final Questions? question,
+      required final int questionIndex}) = _$_AnswerAdded;
+  const _AnswerAdded._() : super._();
+
+  Questions? get question;
+  int get questionIndex;
+  @JsonKey(ignore: true)
+  _$$_AnswerAddedCopyWith<_$_AnswerAdded> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2352,13 +3599,19 @@ class _$_Success extends _Success {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
         loaded,
+    required TResult Function(Questions? questions) questionAdded,
+    required TResult Function(Questions? question, int questionIndex)
+        answerAdded,
     required TResult Function() success,
-    required TResult Function() isPublished,
+    required TResult Function(bool isPublished) isPublished,
     required TResult Function(String error) error,
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
+    required TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+        searchLoaded,
   }) {
     return success();
   }
@@ -2369,13 +3622,18 @@ class _$_Success extends _Success {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)?
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
+    TResult? Function(Questions? questions)? questionAdded,
+    TResult? Function(Questions? question, int questionIndex)? answerAdded,
     TResult? Function()? success,
-    TResult? Function()? isPublished,
+    TResult? Function(bool isPublished)? isPublished,
     TResult? Function(String error)? error,
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
+    TResult? Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        searchLoaded,
   }) {
     return success?.call();
   }
@@ -2386,13 +3644,18 @@ class _$_Success extends _Success {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)?
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
+    TResult Function(Questions? questions)? questionAdded,
+    TResult Function(Questions? question, int questionIndex)? answerAdded,
     TResult Function()? success,
-    TResult Function()? isPublished,
+    TResult Function(bool isPublished)? isPublished,
     TResult Function(String error)? error,
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
+    TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        searchLoaded,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -2407,11 +3670,14 @@ class _$_Success extends _Success {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_QuestionAdded value) questionAdded,
+    required TResult Function(_AnswerAdded value) answerAdded,
     required TResult Function(_Success value) success,
     required TResult Function(_IsPublished value) isPublished,
     required TResult Function(_Error value) error,
     required TResult Function(_SearchLoading value) searchLoading,
     required TResult Function(_SearchError value) searchError,
+    required TResult Function(_SearchLoaded value) searchLoaded,
   }) {
     return success(this);
   }
@@ -2422,11 +3688,14 @@ class _$_Success extends _Success {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_QuestionAdded value)? questionAdded,
+    TResult? Function(_AnswerAdded value)? answerAdded,
     TResult? Function(_Success value)? success,
     TResult? Function(_IsPublished value)? isPublished,
     TResult? Function(_Error value)? error,
     TResult? Function(_SearchLoading value)? searchLoading,
     TResult? Function(_SearchError value)? searchError,
+    TResult? Function(_SearchLoaded value)? searchLoaded,
   }) {
     return success?.call(this);
   }
@@ -2437,11 +3706,14 @@ class _$_Success extends _Success {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_QuestionAdded value)? questionAdded,
+    TResult Function(_AnswerAdded value)? answerAdded,
     TResult Function(_Success value)? success,
     TResult Function(_IsPublished value)? isPublished,
     TResult Function(_Error value)? error,
     TResult Function(_SearchLoading value)? searchLoading,
     TResult Function(_SearchError value)? searchError,
+    TResult Function(_SearchLoaded value)? searchLoaded,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -2461,6 +3733,8 @@ abstract class _$$_IsPublishedCopyWith<$Res> {
   factory _$$_IsPublishedCopyWith(
           _$_IsPublished value, $Res Function(_$_IsPublished) then) =
       __$$_IsPublishedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isPublished});
 }
 
 /// @nodoc
@@ -2470,26 +3744,51 @@ class __$$_IsPublishedCopyWithImpl<$Res>
   __$$_IsPublishedCopyWithImpl(
       _$_IsPublished _value, $Res Function(_$_IsPublished) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isPublished = null,
+  }) {
+    return _then(_$_IsPublished(
+      isPublished: null == isPublished
+          ? _value.isPublished
+          : isPublished // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_IsPublished extends _IsPublished {
-  const _$_IsPublished() : super._();
+  const _$_IsPublished({required this.isPublished}) : super._();
+
+  @override
+  final bool isPublished;
 
   @override
   String toString() {
-    return 'BucketState.isPublished()';
+    return 'BucketState.isPublished(isPublished: $isPublished)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_IsPublished);
+        (other.runtimeType == runtimeType &&
+            other is _$_IsPublished &&
+            (identical(other.isPublished, isPublished) ||
+                other.isPublished == isPublished));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, isPublished);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_IsPublishedCopyWith<_$_IsPublished> get copyWith =>
+      __$$_IsPublishedCopyWithImpl<_$_IsPublished>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2497,15 +3796,21 @@ class _$_IsPublished extends _IsPublished {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
         loaded,
+    required TResult Function(Questions? questions) questionAdded,
+    required TResult Function(Questions? question, int questionIndex)
+        answerAdded,
     required TResult Function() success,
-    required TResult Function() isPublished,
+    required TResult Function(bool isPublished) isPublished,
     required TResult Function(String error) error,
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
+    required TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+        searchLoaded,
   }) {
-    return isPublished();
+    return isPublished(this.isPublished);
   }
 
   @override
@@ -2514,15 +3819,20 @@ class _$_IsPublished extends _IsPublished {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)?
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
+    TResult? Function(Questions? questions)? questionAdded,
+    TResult? Function(Questions? question, int questionIndex)? answerAdded,
     TResult? Function()? success,
-    TResult? Function()? isPublished,
+    TResult? Function(bool isPublished)? isPublished,
     TResult? Function(String error)? error,
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
+    TResult? Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        searchLoaded,
   }) {
-    return isPublished?.call();
+    return isPublished?.call(this.isPublished);
   }
 
   @override
@@ -2531,17 +3841,22 @@ class _$_IsPublished extends _IsPublished {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)?
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
+    TResult Function(Questions? questions)? questionAdded,
+    TResult Function(Questions? question, int questionIndex)? answerAdded,
     TResult Function()? success,
-    TResult Function()? isPublished,
+    TResult Function(bool isPublished)? isPublished,
     TResult Function(String error)? error,
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
+    TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        searchLoaded,
     required TResult orElse(),
   }) {
     if (isPublished != null) {
-      return isPublished();
+      return isPublished(this.isPublished);
     }
     return orElse();
   }
@@ -2552,11 +3867,14 @@ class _$_IsPublished extends _IsPublished {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_QuestionAdded value) questionAdded,
+    required TResult Function(_AnswerAdded value) answerAdded,
     required TResult Function(_Success value) success,
     required TResult Function(_IsPublished value) isPublished,
     required TResult Function(_Error value) error,
     required TResult Function(_SearchLoading value) searchLoading,
     required TResult Function(_SearchError value) searchError,
+    required TResult Function(_SearchLoaded value) searchLoaded,
   }) {
     return isPublished(this);
   }
@@ -2567,11 +3885,14 @@ class _$_IsPublished extends _IsPublished {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_QuestionAdded value)? questionAdded,
+    TResult? Function(_AnswerAdded value)? answerAdded,
     TResult? Function(_Success value)? success,
     TResult? Function(_IsPublished value)? isPublished,
     TResult? Function(_Error value)? error,
     TResult? Function(_SearchLoading value)? searchLoading,
     TResult? Function(_SearchError value)? searchError,
+    TResult? Function(_SearchLoaded value)? searchLoaded,
   }) {
     return isPublished?.call(this);
   }
@@ -2582,11 +3903,14 @@ class _$_IsPublished extends _IsPublished {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_QuestionAdded value)? questionAdded,
+    TResult Function(_AnswerAdded value)? answerAdded,
     TResult Function(_Success value)? success,
     TResult Function(_IsPublished value)? isPublished,
     TResult Function(_Error value)? error,
     TResult Function(_SearchLoading value)? searchLoading,
     TResult Function(_SearchError value)? searchError,
+    TResult Function(_SearchLoaded value)? searchLoaded,
     required TResult orElse(),
   }) {
     if (isPublished != null) {
@@ -2597,8 +3921,14 @@ class _$_IsPublished extends _IsPublished {
 }
 
 abstract class _IsPublished extends BucketState {
-  const factory _IsPublished() = _$_IsPublished;
+  const factory _IsPublished({required final bool isPublished}) =
+      _$_IsPublished;
   const _IsPublished._() : super._();
+
+  bool get isPublished;
+  @JsonKey(ignore: true)
+  _$$_IsPublishedCopyWith<_$_IsPublished> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -2666,13 +3996,19 @@ class _$_Error extends _Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
         loaded,
+    required TResult Function(Questions? questions) questionAdded,
+    required TResult Function(Questions? question, int questionIndex)
+        answerAdded,
     required TResult Function() success,
-    required TResult Function() isPublished,
+    required TResult Function(bool isPublished) isPublished,
     required TResult Function(String error) error,
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
+    required TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+        searchLoaded,
   }) {
     return error(this.error);
   }
@@ -2683,13 +4019,18 @@ class _$_Error extends _Error {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)?
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
+    TResult? Function(Questions? questions)? questionAdded,
+    TResult? Function(Questions? question, int questionIndex)? answerAdded,
     TResult? Function()? success,
-    TResult? Function()? isPublished,
+    TResult? Function(bool isPublished)? isPublished,
     TResult? Function(String error)? error,
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
+    TResult? Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        searchLoaded,
   }) {
     return error?.call(this.error);
   }
@@ -2700,13 +4041,18 @@ class _$_Error extends _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)?
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
+    TResult Function(Questions? questions)? questionAdded,
+    TResult Function(Questions? question, int questionIndex)? answerAdded,
     TResult Function()? success,
-    TResult Function()? isPublished,
+    TResult Function(bool isPublished)? isPublished,
     TResult Function(String error)? error,
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
+    TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        searchLoaded,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -2721,11 +4067,14 @@ class _$_Error extends _Error {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_QuestionAdded value) questionAdded,
+    required TResult Function(_AnswerAdded value) answerAdded,
     required TResult Function(_Success value) success,
     required TResult Function(_IsPublished value) isPublished,
     required TResult Function(_Error value) error,
     required TResult Function(_SearchLoading value) searchLoading,
     required TResult Function(_SearchError value) searchError,
+    required TResult Function(_SearchLoaded value) searchLoaded,
   }) {
     return error(this);
   }
@@ -2736,11 +4085,14 @@ class _$_Error extends _Error {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_QuestionAdded value)? questionAdded,
+    TResult? Function(_AnswerAdded value)? answerAdded,
     TResult? Function(_Success value)? success,
     TResult? Function(_IsPublished value)? isPublished,
     TResult? Function(_Error value)? error,
     TResult? Function(_SearchLoading value)? searchLoading,
     TResult? Function(_SearchError value)? searchError,
+    TResult? Function(_SearchLoaded value)? searchLoaded,
   }) {
     return error?.call(this);
   }
@@ -2751,11 +4103,14 @@ class _$_Error extends _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_QuestionAdded value)? questionAdded,
+    TResult Function(_AnswerAdded value)? answerAdded,
     TResult Function(_Success value)? success,
     TResult Function(_IsPublished value)? isPublished,
     TResult Function(_Error value)? error,
     TResult Function(_SearchLoading value)? searchLoading,
     TResult Function(_SearchError value)? searchError,
+    TResult Function(_SearchLoaded value)? searchLoaded,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -2816,13 +4171,19 @@ class _$_SearchLoading extends _SearchLoading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
         loaded,
+    required TResult Function(Questions? questions) questionAdded,
+    required TResult Function(Questions? question, int questionIndex)
+        answerAdded,
     required TResult Function() success,
-    required TResult Function() isPublished,
+    required TResult Function(bool isPublished) isPublished,
     required TResult Function(String error) error,
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
+    required TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+        searchLoaded,
   }) {
     return searchLoading();
   }
@@ -2833,13 +4194,18 @@ class _$_SearchLoading extends _SearchLoading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)?
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
+    TResult? Function(Questions? questions)? questionAdded,
+    TResult? Function(Questions? question, int questionIndex)? answerAdded,
     TResult? Function()? success,
-    TResult? Function()? isPublished,
+    TResult? Function(bool isPublished)? isPublished,
     TResult? Function(String error)? error,
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
+    TResult? Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        searchLoaded,
   }) {
     return searchLoading?.call();
   }
@@ -2850,13 +4216,18 @@ class _$_SearchLoading extends _SearchLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)?
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
+    TResult Function(Questions? questions)? questionAdded,
+    TResult Function(Questions? question, int questionIndex)? answerAdded,
     TResult Function()? success,
-    TResult Function()? isPublished,
+    TResult Function(bool isPublished)? isPublished,
     TResult Function(String error)? error,
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
+    TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        searchLoaded,
     required TResult orElse(),
   }) {
     if (searchLoading != null) {
@@ -2871,11 +4242,14 @@ class _$_SearchLoading extends _SearchLoading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_QuestionAdded value) questionAdded,
+    required TResult Function(_AnswerAdded value) answerAdded,
     required TResult Function(_Success value) success,
     required TResult Function(_IsPublished value) isPublished,
     required TResult Function(_Error value) error,
     required TResult Function(_SearchLoading value) searchLoading,
     required TResult Function(_SearchError value) searchError,
+    required TResult Function(_SearchLoaded value) searchLoaded,
   }) {
     return searchLoading(this);
   }
@@ -2886,11 +4260,14 @@ class _$_SearchLoading extends _SearchLoading {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_QuestionAdded value)? questionAdded,
+    TResult? Function(_AnswerAdded value)? answerAdded,
     TResult? Function(_Success value)? success,
     TResult? Function(_IsPublished value)? isPublished,
     TResult? Function(_Error value)? error,
     TResult? Function(_SearchLoading value)? searchLoading,
     TResult? Function(_SearchError value)? searchError,
+    TResult? Function(_SearchLoaded value)? searchLoaded,
   }) {
     return searchLoading?.call(this);
   }
@@ -2901,11 +4278,14 @@ class _$_SearchLoading extends _SearchLoading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_QuestionAdded value)? questionAdded,
+    TResult Function(_AnswerAdded value)? answerAdded,
     TResult Function(_Success value)? success,
     TResult Function(_IsPublished value)? isPublished,
     TResult Function(_Error value)? error,
     TResult Function(_SearchLoading value)? searchLoading,
     TResult Function(_SearchError value)? searchError,
+    TResult Function(_SearchLoaded value)? searchLoaded,
     required TResult orElse(),
   }) {
     if (searchLoading != null) {
@@ -2987,13 +4367,19 @@ class _$_SearchError extends _SearchError {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
         loaded,
+    required TResult Function(Questions? questions) questionAdded,
+    required TResult Function(Questions? question, int questionIndex)
+        answerAdded,
     required TResult Function() success,
-    required TResult Function() isPublished,
+    required TResult Function(bool isPublished) isPublished,
     required TResult Function(String error) error,
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
+    required TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+        searchLoaded,
   }) {
     return searchError(this.error);
   }
@@ -3004,13 +4390,18 @@ class _$_SearchError extends _SearchError {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)?
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
+    TResult? Function(Questions? questions)? questionAdded,
+    TResult? Function(Questions? question, int questionIndex)? answerAdded,
     TResult? Function()? success,
-    TResult? Function()? isPublished,
+    TResult? Function(bool isPublished)? isPublished,
     TResult? Function(String error)? error,
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
+    TResult? Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        searchLoaded,
   }) {
     return searchError?.call(this.error);
   }
@@ -3021,13 +4412,18 @@ class _$_SearchError extends _SearchError {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            List<Questions>? questions, Bucket? bucket, bool? isPublished)?
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
+    TResult Function(Questions? questions)? questionAdded,
+    TResult Function(Questions? question, int questionIndex)? answerAdded,
     TResult Function()? success,
-    TResult Function()? isPublished,
+    TResult Function(bool isPublished)? isPublished,
     TResult Function(String error)? error,
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
+    TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        searchLoaded,
     required TResult orElse(),
   }) {
     if (searchError != null) {
@@ -3042,11 +4438,14 @@ class _$_SearchError extends _SearchError {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_QuestionAdded value) questionAdded,
+    required TResult Function(_AnswerAdded value) answerAdded,
     required TResult Function(_Success value) success,
     required TResult Function(_IsPublished value) isPublished,
     required TResult Function(_Error value) error,
     required TResult Function(_SearchLoading value) searchLoading,
     required TResult Function(_SearchError value) searchError,
+    required TResult Function(_SearchLoaded value) searchLoaded,
   }) {
     return searchError(this);
   }
@@ -3057,11 +4456,14 @@ class _$_SearchError extends _SearchError {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_QuestionAdded value)? questionAdded,
+    TResult? Function(_AnswerAdded value)? answerAdded,
     TResult? Function(_Success value)? success,
     TResult? Function(_IsPublished value)? isPublished,
     TResult? Function(_Error value)? error,
     TResult? Function(_SearchLoading value)? searchLoading,
     TResult? Function(_SearchError value)? searchError,
+    TResult? Function(_SearchLoaded value)? searchLoaded,
   }) {
     return searchError?.call(this);
   }
@@ -3072,11 +4474,14 @@ class _$_SearchError extends _SearchError {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_QuestionAdded value)? questionAdded,
+    TResult Function(_AnswerAdded value)? answerAdded,
     TResult Function(_Success value)? success,
     TResult Function(_IsPublished value)? isPublished,
     TResult Function(_Error value)? error,
     TResult Function(_SearchLoading value)? searchLoading,
     TResult Function(_SearchError value)? searchError,
+    TResult Function(_SearchLoaded value)? searchLoaded,
     required TResult orElse(),
   }) {
     if (searchError != null) {
@@ -3093,5 +4498,256 @@ abstract class _SearchError extends BucketState {
   String get error;
   @JsonKey(ignore: true)
   _$$_SearchErrorCopyWith<_$_SearchError> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SearchLoadedCopyWith<$Res> {
+  factory _$$_SearchLoadedCopyWith(
+          _$_SearchLoaded value, $Res Function(_$_SearchLoaded) then) =
+      __$$_SearchLoadedCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {List<Questions>? questionsList, Bucket? bucket, bool? isPublished});
+
+  $BucketCopyWith<$Res>? get bucket;
+}
+
+/// @nodoc
+class __$$_SearchLoadedCopyWithImpl<$Res>
+    extends _$BucketStateCopyWithImpl<$Res, _$_SearchLoaded>
+    implements _$$_SearchLoadedCopyWith<$Res> {
+  __$$_SearchLoadedCopyWithImpl(
+      _$_SearchLoaded _value, $Res Function(_$_SearchLoaded) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? questionsList = freezed,
+    Object? bucket = freezed,
+    Object? isPublished = freezed,
+  }) {
+    return _then(_$_SearchLoaded(
+      questionsList: freezed == questionsList
+          ? _value._questionsList
+          : questionsList // ignore: cast_nullable_to_non_nullable
+              as List<Questions>?,
+      bucket: freezed == bucket
+          ? _value.bucket
+          : bucket // ignore: cast_nullable_to_non_nullable
+              as Bucket?,
+      isPublished: freezed == isPublished
+          ? _value.isPublished
+          : isPublished // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BucketCopyWith<$Res>? get bucket {
+    if (_value.bucket == null) {
+      return null;
+    }
+
+    return $BucketCopyWith<$Res>(_value.bucket!, (value) {
+      return _then(_value.copyWith(bucket: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_SearchLoaded extends _SearchLoaded {
+  const _$_SearchLoaded(
+      {final List<Questions>? questionsList, this.bucket, this.isPublished})
+      : _questionsList = questionsList,
+        super._();
+
+  final List<Questions>? _questionsList;
+  @override
+  List<Questions>? get questionsList {
+    final value = _questionsList;
+    if (value == null) return null;
+    if (_questionsList is EqualUnmodifiableListView) return _questionsList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final Bucket? bucket;
+  @override
+  final bool? isPublished;
+
+  @override
+  String toString() {
+    return 'BucketState.searchLoaded(questionsList: $questionsList, bucket: $bucket, isPublished: $isPublished)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SearchLoaded &&
+            const DeepCollectionEquality()
+                .equals(other._questionsList, _questionsList) &&
+            (identical(other.bucket, bucket) || other.bucket == bucket) &&
+            (identical(other.isPublished, isPublished) ||
+                other.isPublished == isPublished));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_questionsList), bucket, isPublished);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SearchLoadedCopyWith<_$_SearchLoaded> get copyWith =>
+      __$$_SearchLoadedCopyWithImpl<_$_SearchLoaded>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+        loaded,
+    required TResult Function(Questions? questions) questionAdded,
+    required TResult Function(Questions? question, int questionIndex)
+        answerAdded,
+    required TResult Function() success,
+    required TResult Function(bool isPublished) isPublished,
+    required TResult Function(String error) error,
+    required TResult Function() searchLoading,
+    required TResult Function(String error) searchError,
+    required TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+        searchLoaded,
+  }) {
+    return searchLoaded(questionsList, bucket, this.isPublished);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        loaded,
+    TResult? Function(Questions? questions)? questionAdded,
+    TResult? Function(Questions? question, int questionIndex)? answerAdded,
+    TResult? Function()? success,
+    TResult? Function(bool isPublished)? isPublished,
+    TResult? Function(String error)? error,
+    TResult? Function()? searchLoading,
+    TResult? Function(String error)? searchError,
+    TResult? Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        searchLoaded,
+  }) {
+    return searchLoaded?.call(questionsList, bucket, this.isPublished);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        loaded,
+    TResult Function(Questions? questions)? questionAdded,
+    TResult Function(Questions? question, int questionIndex)? answerAdded,
+    TResult Function()? success,
+    TResult Function(bool isPublished)? isPublished,
+    TResult Function(String error)? error,
+    TResult Function()? searchLoading,
+    TResult Function(String error)? searchError,
+    TResult Function(
+            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+        searchLoaded,
+    required TResult orElse(),
+  }) {
+    if (searchLoaded != null) {
+      return searchLoaded(questionsList, bucket, this.isPublished);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_QuestionAdded value) questionAdded,
+    required TResult Function(_AnswerAdded value) answerAdded,
+    required TResult Function(_Success value) success,
+    required TResult Function(_IsPublished value) isPublished,
+    required TResult Function(_Error value) error,
+    required TResult Function(_SearchLoading value) searchLoading,
+    required TResult Function(_SearchError value) searchError,
+    required TResult Function(_SearchLoaded value) searchLoaded,
+  }) {
+    return searchLoaded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_QuestionAdded value)? questionAdded,
+    TResult? Function(_AnswerAdded value)? answerAdded,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_IsPublished value)? isPublished,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_SearchLoading value)? searchLoading,
+    TResult? Function(_SearchError value)? searchError,
+    TResult? Function(_SearchLoaded value)? searchLoaded,
+  }) {
+    return searchLoaded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_QuestionAdded value)? questionAdded,
+    TResult Function(_AnswerAdded value)? answerAdded,
+    TResult Function(_Success value)? success,
+    TResult Function(_IsPublished value)? isPublished,
+    TResult Function(_Error value)? error,
+    TResult Function(_SearchLoading value)? searchLoading,
+    TResult Function(_SearchError value)? searchError,
+    TResult Function(_SearchLoaded value)? searchLoaded,
+    required TResult orElse(),
+  }) {
+    if (searchLoaded != null) {
+      return searchLoaded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SearchLoaded extends BucketState {
+  const factory _SearchLoaded(
+      {final List<Questions>? questionsList,
+      final Bucket? bucket,
+      final bool? isPublished}) = _$_SearchLoaded;
+  const _SearchLoaded._() : super._();
+
+  List<Questions>? get questionsList;
+  Bucket? get bucket;
+  bool? get isPublished;
+  @JsonKey(ignore: true)
+  _$$_SearchLoadedCopyWith<_$_SearchLoaded> get copyWith =>
       throw _privateConstructorUsedError;
 }

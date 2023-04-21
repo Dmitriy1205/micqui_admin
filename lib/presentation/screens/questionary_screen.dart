@@ -310,7 +310,7 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) =>
-                              BucketScreen(bucketId: state.bucket![index].id!),
+                              BucketScreen(bucketId: index),
                         ),
                       );
                     },
@@ -380,7 +380,7 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
                                     selectionControls:
                                         MaterialTextSelectionControls(),
                                     keyboardType: TextInputType.text,
-                                    maxLines: 1,
+                                    maxLines: 2,
                                     onSubmitted: (text) {
                                       focuses[index]['description']!.unfocus();
                                       context.read<QuestionnarieBloc>().add(
@@ -418,7 +418,7 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
                                         DropdownMenuItem(
                                           value: AppStrings.manager,
                                           child: Text(
-                                            AppStrings.manager,
+                                            '${AppStrings.manager} >',
                                             style: AppTheme.themeData.textTheme
                                                 .labelMedium!
                                                 .copyWith(
@@ -431,7 +431,7 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
                                         DropdownMenuItem(
                                           value: AppStrings.employee,
                                           child: Text(
-                                            AppStrings.employee,
+                                            '${AppStrings.employee} >',
                                             style: AppTheme.themeData.textTheme
                                                 .labelMedium!
                                                 .copyWith(

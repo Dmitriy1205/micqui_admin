@@ -23,5 +23,5 @@ Future<void> init() async {
   sl.registerLazySingleton(() => AuthBloc(authRepository: sl()));
   sl.registerFactory(() => SigninBloc(auth: sl()));
   sl.registerFactory(() => QuestionnarieBloc(firestore: sl()));
-  sl.registerLazySingleton(() => BucketBloc(firestore: sl()));
+  sl.registerLazySingleton(() => BucketBloc(firestore: sl(), questionnarieBloc: sl()));
 }

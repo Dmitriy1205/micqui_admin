@@ -20,8 +20,9 @@ Questions _$QuestionsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Questions {
+  String? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  List<String>? get variants => throw _privateConstructorUsedError;
+  List<Answer>? get variants => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,7 @@ abstract class $QuestionsCopyWith<$Res> {
   factory $QuestionsCopyWith(Questions value, $Res Function(Questions) then) =
       _$QuestionsCopyWithImpl<$Res, Questions>;
   @useResult
-  $Res call({String? name, List<String>? variants});
+  $Res call({String? id, String? name, List<Answer>? variants});
 }
 
 /// @nodoc
@@ -50,10 +51,15 @@ class _$QuestionsCopyWithImpl<$Res, $Val extends Questions>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
     Object? variants = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -61,7 +67,7 @@ class _$QuestionsCopyWithImpl<$Res, $Val extends Questions>
       variants: freezed == variants
           ? _value.variants
           : variants // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<Answer>?,
     ) as $Val);
   }
 }
@@ -73,7 +79,7 @@ abstract class _$$_QuestionsCopyWith<$Res> implements $QuestionsCopyWith<$Res> {
       __$$_QuestionsCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? name, List<String>? variants});
+  $Res call({String? id, String? name, List<Answer>? variants});
 }
 
 /// @nodoc
@@ -87,10 +93,15 @@ class __$$_QuestionsCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
     Object? variants = freezed,
   }) {
     return _then(_$_Questions(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -98,7 +109,7 @@ class __$$_QuestionsCopyWithImpl<$Res>
       variants: freezed == variants
           ? _value._variants
           : variants // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<Answer>?,
     ));
   }
 }
@@ -106,17 +117,19 @@ class __$$_QuestionsCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Questions implements _Questions {
-  const _$_Questions({this.name, final List<String>? variants})
+  const _$_Questions({this.id, this.name, final List<Answer>? variants})
       : _variants = variants;
 
   factory _$_Questions.fromJson(Map<String, dynamic> json) =>
       _$$_QuestionsFromJson(json);
 
   @override
-  final String? name;
-  final List<String>? _variants;
+  final String? id;
   @override
-  List<String>? get variants {
+  final String? name;
+  final List<Answer>? _variants;
+  @override
+  List<Answer>? get variants {
     final value = _variants;
     if (value == null) return null;
     if (_variants is EqualUnmodifiableListView) return _variants;
@@ -126,7 +139,7 @@ class _$_Questions implements _Questions {
 
   @override
   String toString() {
-    return 'Questions(name: $name, variants: $variants)';
+    return 'Questions(id: $id, name: $name, variants: $variants)';
   }
 
   @override
@@ -134,6 +147,7 @@ class _$_Questions implements _Questions {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Questions &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality().equals(other._variants, _variants));
   }
@@ -141,7 +155,7 @@ class _$_Questions implements _Questions {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, name, const DeepCollectionEquality().hash(_variants));
+      runtimeType, id, name, const DeepCollectionEquality().hash(_variants));
 
   @JsonKey(ignore: true)
   @override
@@ -158,16 +172,20 @@ class _$_Questions implements _Questions {
 }
 
 abstract class _Questions implements Questions {
-  const factory _Questions({final String? name, final List<String>? variants}) =
-      _$_Questions;
+  const factory _Questions(
+      {final String? id,
+      final String? name,
+      final List<Answer>? variants}) = _$_Questions;
 
   factory _Questions.fromJson(Map<String, dynamic> json) =
       _$_Questions.fromJson;
 
   @override
+  String? get id;
+  @override
   String? get name;
   @override
-  List<String>? get variants;
+  List<Answer>? get variants;
   @override
   @JsonKey(ignore: true)
   _$$_QuestionsCopyWith<_$_Questions> get copyWith =>
