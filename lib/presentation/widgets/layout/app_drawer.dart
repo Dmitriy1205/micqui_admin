@@ -109,6 +109,7 @@ showAlertDialog(BuildContext context) {
     ),
     onPressed: () {
       context.read<AuthBloc>().add(const AuthEvent.logout());
+      Navigator.pop(context);
     },
   );
 

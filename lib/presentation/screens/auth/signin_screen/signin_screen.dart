@@ -36,6 +36,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.text,
       body: BlocConsumer<SigninBloc, SignInState>(
         bloc: _bloc,
@@ -81,9 +82,12 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          AppStrings.adminPanel,
-                          style: AppTheme.themeData.textTheme.headlineLarge,
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            AppStrings.adminPanel,
+                            style: AppTheme.themeData.textTheme.headlineLarge,
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 42),

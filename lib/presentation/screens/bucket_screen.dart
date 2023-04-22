@@ -19,10 +19,22 @@ import '../widgets/search_field.dart';
 
 class BucketScreen extends StatefulWidget {
   final int bucketId;
+  final double? mobileCardPadding;
+  final double? mobileHeaderSize;
+  final double? mobileBucketSize;
+  final double? mobileRowSize;
+  final double? mobileSearchIconSize;
+  final double? mobileSearchIconSpace;
 
   const BucketScreen({
     Key? key,
     required this.bucketId,
+    this.mobileCardPadding,
+    this.mobileHeaderSize,
+    this.mobileBucketSize,
+    this.mobileRowSize,
+    this.mobileSearchIconSize,
+    this.mobileSearchIconSpace,
   }) : super(key: key);
 
   @override
@@ -67,8 +79,9 @@ class _BucketScreenState extends State<BucketScreen> {
         listener: (context, state) {
           state.maybeMap(
               searchLoaded: (_) => questions = state.questionsList!,
-              loaded: (_)=> questions = List.generate(
-                  bucket.questions?.length ?? 0, (index) => bucket.questions![index]),
+              loaded: (_) => questions = List.generate(
+                  bucket.questions?.length ?? 0,
+                  (index) => bucket.questions![index]),
               isPublished: (_) => published = state.isPublished!,
               questionAdded: (_) => questions.add(state.questions!),
               answerAdded: (i) => questions[i.questionIndex] = i.question!,
@@ -93,186 +106,212 @@ class _BucketScreenState extends State<BucketScreen> {
             loading: (_) => const Center(
               child: CircularProgressIndicator(),
             ),
-            orElse: () => Padding(
-              padding: const EdgeInsets.all(37),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  published
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  AppStrings.bucket,
-                                  style: AppTheme
-                                      .themeData.textTheme.headlineLarge!
-                                      .copyWith(color: AppColors.text),
-                                ),
-                                Text(
-                                  bucket.name!,
-                                  style:
-                                      AppTheme.themeData.textTheme.labelMedium,
-                                ),
-                                Row(
-                                  children: [
-                                    const FaIcon(
-                                      FontAwesomeIcons.solidCircle,
-                                      size: 8,
-                                      color: AppColors.green,
-                                    ),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      AppStrings.published,
-                                      style: AppTheme
-                                          .themeData.textTheme.labelMedium,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  '${bucket.id}',
-                                  style: AppTheme
-                                      .themeData.textTheme.titleMedium!
-                                      .copyWith(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 32,
+            orElse: () => SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.all(widget.mobileCardPadding ?? 37),
+                child:
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    published
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    AppStrings.bucket,
+                                    style: AppTheme
+                                        .themeData.textTheme.headlineLarge!
+                                        .copyWith(
+                                            color: AppColors.text,
+                                            fontSize:
+                                                widget.mobileHeaderSize ?? 38),
                                   ),
-                                ),
-                                const SizedBox(
-                                  width: 48,
-                                ),
-                                const FaIcon(
-                                  FontAwesomeIcons.qrcode,
-                                  size: 64,
-                                  color: AppColors.text,
-                                ),
-                              ],
-                            )
-                          ],
-                        )
-                      : Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  AppStrings.bucket,
-                                  style: AppTheme
-                                      .themeData.textTheme.headlineLarge!
-                                      .copyWith(color: AppColors.text),
-                                ),
-                                Text(
-                                  bucket.name!,
-                                  style:
-                                      AppTheme.themeData.textTheme.labelMedium,
-                                ),
-                                Row(
-                                  children: [
-                                    const FaIcon(
-                                      FontAwesomeIcons.solidCircle,
-                                      size: 8,
-                                      color: AppColors.lightGrey,
-                                    ),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      AppStrings.draft,
-                                      style: AppTheme
-                                          .themeData.textTheme.labelMedium,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            SizedBox(),
-                          ],
-                        ),
-                  const SizedBox(
-                    height: 17,
-                  ),
-                  Expanded(
-                    child: Card(
-                      elevation: 5,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 24, right: 24, top: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "${AppStrings.questions} (${questions.isEmpty ? 0 : questions.length})",
-                                  style: AppTheme
-                                      .themeData.textTheme.titleLarge!
-                                      .copyWith(color: AppColors.text),
-                                ),
-                                Flexible(
-                                  flex: 2,
-                                  child: SizedBox(
-                                    width: 706,
-                                    height: 38,
-                                    child: SearchField(
-                                        searchController: _searchController,
-                                        onChange: (name) {
-                                          _bloc.add(BucketEvent.searchByName(
-                                            name: name,
-                                            bucket: bucket,
-                                          ));
-                                        }),
+                                  Text(
+                                    bucket.name!,
+                                    style: AppTheme
+                                        .themeData.textTheme.labelMedium,
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: SizedBox(
-                                    width: 50,
-                                    height: 50,
-                                    child: IconButton(
-                                      onPressed: () {
-                                        _bloc.add(
-                                            const BucketEvent.addQuestion());
-                                      },
-                                      icon: const FaIcon(
-                                        FontAwesomeIcons.circlePlus,
+                                  Row(
+                                    children: [
+                                      const FaIcon(
+                                        FontAwesomeIcons.solidCircle,
+                                        size: 8,
                                         color: AppColors.green,
                                       ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        AppStrings.published,
+                                        style: AppTheme
+                                            .themeData.textTheme.labelMedium,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    '${bucket.id}',
+                                    style: AppTheme
+                                        .themeData.textTheme.titleMedium!
+                                        .copyWith(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: widget.mobileHeaderSize ?? 32,
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Divider(
-                            color: Colors.grey.shade300,
-                            thickness: 1,
-                          ),
-                          questions.isEmpty
-                              ? const SizedBox()
-                              : state.maybeMap(
-                                  searchLoading: (_) => const Center(
-                                    child: CircularProgressIndicator(),
+                                  SizedBox(
+                                    width: widget.mobileHeaderSize ?? 48,
                                   ),
-                                  orElse: () => questionList(state),
+                                  FaIcon(
+                                    FontAwesomeIcons.qrcode,
+                                    size: widget.mobileHeaderSize ?? 64,
+                                    color: AppColors.text,
+                                  ),
+                                ],
+                              )
+                            ],
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    AppStrings.bucket,
+                                    style: AppTheme
+                                        .themeData.textTheme.headlineLarge!
+                                        .copyWith(
+                                            color: AppColors.text,
+                                            fontSize:
+                                                widget.mobileHeaderSize ?? 38),
+                                  ),
+                                  Text(
+                                    bucket.name!,
+                                    style: AppTheme
+                                        .themeData.textTheme.labelMedium,
+                                  ),
+                                  Row(
+                                    children: [
+                                      const FaIcon(
+                                        FontAwesomeIcons.solidCircle,
+                                        size: 8,
+                                        color: AppColors.lightGrey,
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        AppStrings.draft,
+                                        style: AppTheme
+                                            .themeData.textTheme.labelMedium,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(),
+                            ],
+                          ),
+                    const SizedBox(
+                      height: 17,
+                    ),
+                    ConstrainedBox(
+                      constraints: const BoxConstraints(
+                        maxHeight:
+                        550.0, // set the maximum height of the sized box
+                      ),
+                      child: SizedBox(
+                         width: double.infinity,
+                        child: Card(
+                          elevation: 5,
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    left: widget.mobileRowSize ?? 24,
+                                    right: widget.mobileRowSize ?? 24,
+                                    top: 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "${AppStrings.questions} (${questions.isEmpty ? 0 : questions.length})",
+                                      style: AppTheme
+                                          .themeData.textTheme.titleLarge!
+                                          .copyWith(
+                                              color: AppColors.text,
+                                              fontSize:
+                                                  widget.mobileBucketSize ?? 16),
+                                    ),
+                                    Flexible(
+                                      flex: 2,
+                                      child: SizedBox(
+                                        width: 706,
+                                        height: 38,
+                                        child: SearchField(
+                                          spaceFromIcon:
+                                              widget.mobileSearchIconSpace ?? 45,
+                                          searchController: _searchController,
+                                          onChange: (name) {
+                                            _bloc.add(BucketEvent.searchByName(
+                                              name: name,
+                                              bucket: bucket,
+                                            ));
+                                          },
+                                          iconSize:
+                                              widget.mobileSearchIconSize ?? 20,
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: SizedBox(
+                                        width: 50,
+                                        height: 50,
+                                        child: IconButton(
+                                          onPressed: () {
+                                            _bloc.add(
+                                                const BucketEvent.addQuestion());
+                                          },
+                                          icon: const FaIcon(
+                                            FontAwesomeIcons.circlePlus,
+                                            color: AppColors.green,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                        ],
+                              ),
+                              Divider(
+                                color: Colors.grey.shade300,
+                                thickness: 1,
+                              ),
+                              questions.isEmpty
+                                  ? const SizedBox()
+                                  : state.maybeMap(
+                                      searchLoading: (_) => const Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                      orElse: () => questionList(state),
+                                    ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 38,
-                  ),
-                  published
-                      ? SizedBox(
+                    const SizedBox(
+                      height: 38,
+                    ),
+                    published
+                        ? SizedBox(
                           width: 278,
                           child: AppElevatedButton(
                             text: AppStrings.removeFromRelease,
@@ -282,31 +321,39 @@ class _BucketScreenState extends State<BucketScreen> {
                             },
                           ),
                         )
-                      : Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              width: 225,
-                              child: AppElevatedButton(
-                                text: AppStrings.publish,
-                                onPressed: () {
-                                  _bloc.add(BucketEvent.publish(
-                                      bucketId: bucket.id!));
-                                },
-                              ),
-                            ),
-                            SizedBox(
-                                width: 164,
-                                child: AppElevatedButton(
-                                    color: AppColors.accent,
-                                    text: AppStrings.delete,
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(
+                                child: SizedBox(
+                                  width: 225,
+                                  child: AppElevatedButton(
+                                    text: AppStrings.publish,
                                     onPressed: () {
-                                      showAlertDialog(context,
-                                          text: AppStrings.areYouDelete);
-                                    }))
-                          ],
-                        ),
-                ],
+                                      _bloc.add(BucketEvent.publish(
+                                          bucketId: bucket.id!));
+                                    },
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Flexible(
+                                child: SizedBox(
+                                    width: 164,
+                                    child: AppElevatedButton(
+                                        color: AppColors.accent,
+                                        text: AppStrings.delete,
+                                        onPressed: () {
+                                          showAlertDialog(context,
+                                              text: AppStrings.areYouDelete);
+                                        })),
+                              )
+                            ],
+                          ),
+                  ],
+                ),
               ),
             ),
           );
@@ -396,13 +443,13 @@ class _BucketScreenState extends State<BucketScreen> {
                                 constraints: const BoxConstraints(),
                                 padding: const EdgeInsets.all(2),
                                 onPressed: () {
-                                  _bloc.add(BucketEvent.deleteQuestion(bucketId: bucket.id!, index: index));
+                                  _bloc.add(BucketEvent.deleteQuestion(
+                                      bucketId: bucket.id!, index: index));
 
                                   setState(() {
                                     // showAlertDialog(context,
                                     //     text: AppStrings.areYouQuestion);
                                     questions.removeAt(index);
-
                                   });
                                 },
                                 icon: const FaIcon(
@@ -504,7 +551,8 @@ class _BucketScreenState extends State<BucketScreen> {
                         questionIndex: 1,
                         question: currentQuestion,
                         answer: Answer(
-                            name: answerControllers[index]['answer']!.text,isRight: false),
+                            name: answerControllers[index]['answer']!.text,
+                            isRight: false),
                       ));
                     },
                   ),

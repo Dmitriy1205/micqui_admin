@@ -5,14 +5,14 @@ import 'package:micqui_admin/presentation/widgets/layout/app_drawer.dart';
 
 import '../../screens/questionary_screen.dart';
 
-class WideLayout extends StatefulWidget {
-  const WideLayout({Key? key}) : super(key: key);
+class DesktopLayout extends StatefulWidget {
+  const DesktopLayout({Key? key}) : super(key: key);
 
   @override
-  State<WideLayout> createState() => _WideLayoutState();
+  State<DesktopLayout> createState() => _DesktopLayoutState();
 }
 
-class _WideLayoutState extends State<WideLayout> {
+class _DesktopLayoutState extends State<DesktopLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

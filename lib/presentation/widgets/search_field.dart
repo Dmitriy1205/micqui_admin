@@ -5,11 +5,13 @@ import 'package:micqui_admin/core/themes/theme.dart';
 import '../../core/constants/strings.dart';
 
 class SearchField extends StatelessWidget {
+  final double iconSize;
+  final double spaceFromIcon;
   const SearchField({
     super.key,
     required TextEditingController searchController,
 
-    required this.onChange,
+    required this.onChange, required this.iconSize, required this.spaceFromIcon,
   }) : _searchController = searchController;
 
   final TextEditingController _searchController;
@@ -23,21 +25,21 @@ class SearchField extends StatelessWidget {
       child: TextFormField(
         controller: _searchController,
         style: AppTheme.themeData.textTheme.labelMedium,
-        decoration: const InputDecoration(
-          contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        decoration: InputDecoration(
+          contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
           hintText: AppStrings.search,
           prefixIcon: Padding(
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
               left: 12,
               bottom: 10,
               top: 10,
             ),
             child: FaIcon(
               FontAwesomeIcons.magnifyingGlass,
-              size: 20,
+              size: iconSize,
             ),
           ),
-          prefixIconConstraints: BoxConstraints(minWidth: 45),
+          prefixIconConstraints: BoxConstraints(minWidth: spaceFromIcon),
         ),
         onChanged: (String name) {
           onChange(name);

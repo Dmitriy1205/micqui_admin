@@ -12,7 +12,22 @@ import '../../data/models/bucket/bucket.dart';
 import '../widgets/search_field.dart';
 
 class QuestionaireScreen extends StatefulWidget {
-  const QuestionaireScreen({Key? key}) : super(key: key);
+  final double? mobileCardPadding;
+  final double? mobileHeaderSize;
+  final double? mobileBucketSize;
+  final double? mobileRowSize;
+  final double? mobileSearchIconSize;
+  final double? mobileSearchIconSpace;
+
+  const QuestionaireScreen(
+      {Key? key,
+      this.mobileCardPadding,
+      this.mobileHeaderSize,
+      this.mobileBucketSize,
+      this.mobileRowSize,
+      this.mobileSearchIconSize,
+      this.mobileSearchIconSpace})
+      : super(key: key);
 
   @override
   State<QuestionaireScreen> createState() => _QuestionaireScreenState();
@@ -58,138 +73,172 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
             loading: (_) => const Center(
               child: CircularProgressIndicator(),
             ),
-            orElse: () => Padding(
-              padding: const EdgeInsets.all(37),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    AppStrings.questionnaires,
-                    style: AppTheme.themeData.textTheme.headlineLarge!
-                        .copyWith(color: AppColors.text),
-                  ),
-                  const SizedBox(
-                    height: 52,
-                  ),
-                  Expanded(
-                    child: Card(
-                      elevation: 5,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 24,
-                              right: 24,
-                              top: 10,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "${AppStrings.buckets} (${state.bucket?.length ?? 0})",
-                                  style: AppTheme
-                                      .themeData.textTheme.titleLarge!
-                                      .copyWith(color: AppColors.text),
+            orElse: () => SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.all(widget.mobileCardPadding ?? 37),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      AppStrings.questionnaires,
+                      style: AppTheme.themeData.textTheme.headlineLarge!
+                          .copyWith(
+                              color: AppColors.text,
+                              fontSize: widget.mobileHeaderSize ?? 38),
+                    ),
+                    const SizedBox(
+                      height: 52,
+                    ),
+                    ConstrainedBox(
+                      constraints: const BoxConstraints(
+                        maxHeight:
+                            550.0, // set the maximum height of the sized box
+                      ),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: Card(
+                          elevation: 5,
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  left: widget.mobileRowSize ?? 24,
+                                  right: widget.mobileRowSize ?? 24,
+                                  top: 10,
                                 ),
-                                Flexible(
-                                  flex: 2,
-                                  child: SizedBox(
-                                    width: 620,
-                                    height: 38,
-                                    child: SearchField(
-                                      searchController: _searchController,
-                                      onChange: (String name) {
-                                        context.read<QuestionnarieBloc>().add(
-                                            QuestionnarieEvent.searchByName(
-                                                name: name, category: value));
-                                      },
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "${AppStrings.buckets} (${state.bucket?.length ?? 0})",
+                                      style: AppTheme
+                                          .themeData.textTheme.titleLarge!
+                                          .copyWith(
+                                              color: AppColors.text,
+                                              fontSize:
+                                                  widget.mobileBucketSize ??
+                                                      16),
                                     ),
-                                  ),
-                                ),
-                                Flexible(
-                                  child: categoryPicker(context),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: SizedBox(
-                                    width: 50,
-                                    height: 50,
-                                    child: IconButton(
-                                      onPressed: () {
-                                        BlocProvider.of<QuestionnarieBloc>(
-                                                context)
-                                            .add(
-                                          const QuestionnarieEvent.addBucket(),
-                                        );
-                                      },
-                                      icon: const FaIcon(
-                                        FontAwesomeIcons.circlePlus,
-                                        color: AppColors.green,
+                                    Flexible(
+                                      flex: 2,
+                                      child: SizedBox(
+                                        width: 620,
+                                        height: 38,
+                                        child: SearchField(
+                                          spaceFromIcon: widget
+                                                  .mobileSearchIconSpace ??
+                                              45,
+                                          searchController:
+                                              _searchController,
+                                          onChange: (String name) {
+                                            context
+                                                .read<QuestionnarieBloc>()
+                                                .add(QuestionnarieEvent
+                                                    .searchByName(
+                                                        name: name,
+                                                        category: value));
+                                          },
+                                          iconSize:
+                                              widget.mobileSearchIconSize ??
+                                                  20,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          checkable.contains(true)
-                              ? Padding(
-                                  padding: const EdgeInsets.only(left: 20.0),
-                                  child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        IconButton(
-                                          onPressed: () {
-                                            state.bucket!.removeWhere(
-                                                (bucket) => checkable[state
-                                                    .bucket!
-                                                    .indexOf(bucket)]);
-                                            checkable.clear();
-                                            checkable.addAll(List.generate(
-                                                state.bucket!.length,
-                                                (index) => false));
-                                          },
-                                          icon: const FaIcon(
-                                            FontAwesomeIcons.solidTrashCan,
-                                            size: 20,
-                                            color: AppColors.accent,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 33,
-                                        ),
-                                        Text(
-                                          'Delete ${checkable.where((value) => value).length} bucket',
-                                          style: AppTheme
-                                              .themeData.textTheme.labelMedium!
-                                              .copyWith(
-                                                  color: AppColors.accent),
-                                        )
-                                      ],
+                                    Flexible(
+                                      child: categoryPicker(context),
                                     ),
-                                  ),
-                                )
-                              : const SizedBox(),
-                          Divider(
-                            color: Colors.grey.shade300,
-                            thickness: 1,
-                          ),
-                          state.bucket == null
-                              ? const SizedBox()
-                              : state.maybeMap(
-                                  searchLoading: (_) => const Center(
-                                    child: CircularProgressIndicator(),
-                                  ),
-                                  orElse: () => bucketList(state),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 10),
+                                      child: IconButton(
+                                        constraints: const BoxConstraints(),
+                                        padding: const EdgeInsets.all(2),
+                                        onPressed: () {
+                                          BlocProvider.of<
+                                                      QuestionnarieBloc>(
+                                                  context)
+                                              .add(
+                                            const QuestionnarieEvent
+                                                .addBucket(),
+                                          );
+                                        },
+                                        icon: const FaIcon(
+                                          FontAwesomeIcons.circlePlus,
+                                          color: AppColors.green,
+                                        ),
+                                      ),
+                                    )
+                                  ],
                                 ),
-                        ],
+                              ),
+                              checkable.contains(true)
+                                  ? Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 20.0),
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            IconButton(
+                                              onPressed: () {
+                                                state.bucket!.removeWhere(
+                                                    (bucket) => checkable[
+                                                        state
+                                                            .bucket!
+                                                            .indexOf(
+                                                                bucket)]);
+                                                checkable.clear();
+                                                checkable.addAll(
+                                                    List.generate(
+                                                        state
+                                                            .bucket!.length,
+                                                        (index) => false));
+                                              },
+                                              icon: const FaIcon(
+                                                FontAwesomeIcons
+                                                    .solidTrashCan,
+                                                size: 20,
+                                                color: AppColors.accent,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              width: 33,
+                                            ),
+                                            Text(
+                                              'Delete ${checkable.where((value) => value).length} bucket',
+                                              style: AppTheme.themeData
+                                                  .textTheme.labelMedium!
+                                                  .copyWith(
+                                                      color:
+                                                          AppColors.accent),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  : const SizedBox(),
+                              Divider(
+                                color: Colors.grey.shade300,
+                                thickness: 1,
+                              ),
+                              state.bucket == null
+                                  ? const SizedBox()
+                                  : state.maybeMap(
+                                      searchLoading: (_) => const Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                      orElse: () => bucketList(state),
+                                    ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           );
@@ -227,8 +276,9 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
               padding: const EdgeInsets.only(left: 10),
               child: Text(
                 AppStrings.all,
-                style: AppTheme.themeData.textTheme.titleSmall!
-                    .copyWith(color: AppColors.text),
+                style: AppTheme.themeData.textTheme.titleSmall!.copyWith(
+                    color: AppColors.text,
+                    fontSize: widget.mobileBucketSize ?? 15),
               ),
             ),
           ),
@@ -239,8 +289,8 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
               child: Text(
                 AppStrings.manager,
                 style: AppTheme.themeData.textTheme.titleSmall!.copyWith(
-                  color: AppColors.text,
-                ),
+                    color: AppColors.text,
+                    fontSize: widget.mobileBucketSize ?? 15),
                 overflow: TextOverflow.ellipsis,
                 softWrap: false,
               ),
@@ -252,8 +302,9 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
               padding: const EdgeInsets.only(left: 10),
               child: Text(
                 AppStrings.employee,
-                style: AppTheme.themeData.textTheme.titleSmall!
-                    .copyWith(color: AppColors.text),
+                style: AppTheme.themeData.textTheme.titleSmall!.copyWith(
+                    color: AppColors.text,
+                    fontSize: widget.mobileBucketSize ?? 15),
                 overflow: TextOverflow.ellipsis,
                 softWrap: false,
               ),
@@ -309,8 +360,15 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) =>
-                              BucketScreen(bucketId: index),
+                          builder: (context) => BucketScreen(
+                            bucketId: index,
+                            mobileSearchIconSpace: widget.mobileSearchIconSpace,
+                            mobileSearchIconSize: widget.mobileSearchIconSize,
+                            mobileRowSize: widget.mobileRowSize,
+                            mobileBucketSize: widget.mobileBucketSize,
+                            mobileHeaderSize: widget.mobileHeaderSize,
+                            mobileCardPadding: widget.mobileCardPadding,
+                          ),
                         ),
                       );
                     },
