@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:micqui_admin/app/providers.dart';
+import 'package:micqui_admin/app/router.dart';
 import 'package:micqui_admin/core/themes/theme.dart';
-import 'package:micqui_admin/presentation/screens/auth/signin_screen/signin_screen.dart';
 
 import '../presentation/bloc/auth/auth_bloc.dart';
-import '../presentation/screens/main_screen.dart';
 
 class App extends StatelessWidget {
-  App({super.key});
-
-  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,28 +15,19 @@ class App extends StatelessWidget {
       child: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           state.maybeMap(
-            authenticated: (_)=>navigatorKey.currentState?.pushAndRemoveUntil(
-                MaterialPageRoute(
-                  builder: (context) => const MainScreen(),
-                ),
-                    (route) => false),
-            unauthenticated: (_) =>
-                navigatorKey.currentState?.pushAndRemoveUntil(
-                    MaterialPageRoute(
-                      builder: (context) => const SignInScreen(),
-                    ),
-                    (route) => false),
+            authenticated: (_) => router.go('/questionnarie'),
+            unauthenticated: (_) => router.go('/'),
             orElse: () {},
           );
         },
         builder: (context, state) {
-          return MaterialApp(
+          return MaterialApp.router(
+            routeInformationProvider: router.routeInformationProvider,
+            routeInformationParser: router.routeInformationParser,
+            routerDelegate: router.routerDelegate,
+            backButtonDispatcher: RootBackButtonDispatcher(),
             theme: AppTheme.themeData,
             debugShowCheckedModeBanner: false,
-            home: state.maybeMap(
-              authenticated: (_) => const MainScreen(),
-              orElse: () => SignInScreen(),
-            ),
           );
         },
       ),

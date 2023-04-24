@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:micqui_admin/presentation/screens/questionary_screen.dart';
 import 'package:micqui_admin/presentation/widgets/layout/app_drawer.dart';
 
 
-class TabletLayout extends StatefulWidget {
-  const TabletLayout({Key? key}) : super(key: key);
 
+class TabletLayout extends StatefulWidget {
+  const TabletLayout({Key? key, required this.child}) : super(key: key);
+  final Widget child;
   @override
   State<TabletLayout> createState() => _TabletLayoutState();
 }
 
 class _TabletLayoutState extends State<TabletLayout> {
-  int? selectedIndex;
+
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +21,13 @@ class _TabletLayoutState extends State<TabletLayout> {
         centerTitle: false,
       ),
       drawer: AppDrawer(
-        backToFirstScreen: () {},
+        backToFirstScreen: () {
+          // context
+          //     .read<QuestionnarieBloc>()
+          //     .add(const QuestionnarieEvent.init());
+        },
       ),
-      body: const QuestionaireScreen(),
+      body: widget.child,
       // const QuestionaireScreen(),
     );
   }

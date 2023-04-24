@@ -7,6 +7,7 @@ import 'package:micqui_admin/data/models/questions/questions.dart';
 import 'package:micqui_admin/presentation/bloc/questionnarie/questionnarie_bloc.dart';
 import 'package:micqui_admin/presentation/widgets/app_elevated_button.dart';
 
+import '../../app/router.dart';
 import '../../core/constants/colors.dart';
 import '../../core/constants/strings.dart';
 import '../../core/services/service_locator.dart';
@@ -95,7 +96,9 @@ class _BucketScreenState extends State<BucketScreen> {
                       ),
                     ),
                   ),
-              success: (_) => Navigator.pop(context),
+              success: (_) => widget.mobileCardPadding == null
+                  ? router.pop()
+                  : Navigator.pop(context),
               orElse: () {});
         },
         builder: (context, state) {
@@ -109,10 +112,18 @@ class _BucketScreenState extends State<BucketScreen> {
             orElse: () => SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.all(widget.mobileCardPadding ?? 37),
-                child:
-                Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    IconButton(
+                        constraints: const BoxConstraints(),
+                        padding: const EdgeInsets.all(5),
+                        onPressed: () {
+                          widget.mobileCardPadding == null
+                              ? router.pop()
+                              : Navigator.pop(context);
+                        },
+                        icon: const Icon(Icons.arrow_back)),
                     published
                         ? Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -224,10 +235,10 @@ class _BucketScreenState extends State<BucketScreen> {
                     ConstrainedBox(
                       constraints: const BoxConstraints(
                         maxHeight:
-                        550.0, // set the maximum height of the sized box
+                            550.0, // set the maximum height of the sized box
                       ),
                       child: SizedBox(
-                         width: double.infinity,
+                        width: double.infinity,
                         child: Card(
                           elevation: 5,
                           child: Column(
@@ -248,7 +259,8 @@ class _BucketScreenState extends State<BucketScreen> {
                                           .copyWith(
                                               color: AppColors.text,
                                               fontSize:
-                                                  widget.mobileBucketSize ?? 16),
+                                                  widget.mobileBucketSize ??
+                                                      16),
                                     ),
                                     Flexible(
                                       flex: 2,
@@ -257,7 +269,8 @@ class _BucketScreenState extends State<BucketScreen> {
                                         height: 38,
                                         child: SearchField(
                                           spaceFromIcon:
-                                              widget.mobileSearchIconSpace ?? 45,
+                                              widget.mobileSearchIconSpace ??
+                                                  45,
                                           searchController: _searchController,
                                           onChange: (name) {
                                             _bloc.add(BucketEvent.searchByName(
@@ -277,8 +290,8 @@ class _BucketScreenState extends State<BucketScreen> {
                                         height: 50,
                                         child: IconButton(
                                           onPressed: () {
-                                            _bloc.add(
-                                                const BucketEvent.addQuestion());
+                                            _bloc.add(const BucketEvent
+                                                .addQuestion());
                                           },
                                           icon: const FaIcon(
                                             FontAwesomeIcons.circlePlus,
@@ -312,15 +325,15 @@ class _BucketScreenState extends State<BucketScreen> {
                     ),
                     published
                         ? SizedBox(
-                          width: 278,
-                          child: AppElevatedButton(
-                            text: AppStrings.removeFromRelease,
-                            onPressed: () {
-                              _bloc.add(BucketEvent.removeFromRelease(
-                                  bucketId: bucket.id!));
-                            },
-                          ),
-                        )
+                            width: 278,
+                            child: AppElevatedButton(
+                              text: AppStrings.removeFromRelease,
+                              onPressed: () {
+                                _bloc.add(BucketEvent.removeFromRelease(
+                                    bucketId: bucket.id!));
+                              },
+                            ),
+                          )
                         : Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [

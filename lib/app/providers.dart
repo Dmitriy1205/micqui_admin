@@ -20,6 +20,7 @@ class Providers extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => sl<QuestionnarieBloc>(),
+          lazy: false,
         ),
       ],
       child: child,

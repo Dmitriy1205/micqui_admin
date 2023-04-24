@@ -18,32 +18,35 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$QuestionnarieEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
+    required TResult Function(List<Bucket>? bucket) init,
     required TResult Function() addBucket,
     required TResult Function(Bucket bucket, String? bucketId) setBucket,
     required TResult Function(String bucketId, String category) updateCategory,
     required TResult Function(String name, String category) searchByName,
     required TResult Function(String category) sortByCategory,
+    required TResult Function() reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
+    TResult? Function(List<Bucket>? bucket)? init,
     TResult? Function()? addBucket,
     TResult? Function(Bucket bucket, String? bucketId)? setBucket,
     TResult? Function(String bucketId, String category)? updateCategory,
     TResult? Function(String name, String category)? searchByName,
     TResult? Function(String category)? sortByCategory,
+    TResult? Function()? reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
+    TResult Function(List<Bucket>? bucket)? init,
     TResult Function()? addBucket,
     TResult Function(Bucket bucket, String? bucketId)? setBucket,
     TResult Function(String bucketId, String category)? updateCategory,
     TResult Function(String name, String category)? searchByName,
     TResult Function(String category)? sortByCategory,
+    TResult Function()? reset,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -55,6 +58,7 @@ mixin _$QuestionnarieEvent {
     required TResult Function(_UpdateCategory value) updateCategory,
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_SortByCategory value) sortByCategory,
+    required TResult Function(_Reset value) reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +69,7 @@ mixin _$QuestionnarieEvent {
     TResult? Function(_UpdateCategory value)? updateCategory,
     TResult? Function(_SearchByName value)? searchByName,
     TResult? Function(_SortByCategory value)? sortByCategory,
+    TResult? Function(_Reset value)? reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,6 +80,7 @@ mixin _$QuestionnarieEvent {
     TResult Function(_UpdateCategory value)? updateCategory,
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_SortByCategory value)? sortByCategory,
+    TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -102,6 +108,8 @@ class _$QuestionnarieEventCopyWithImpl<$Res, $Val extends QuestionnarieEvent>
 abstract class _$$_InitCopyWith<$Res> {
   factory _$$_InitCopyWith(_$_Init value, $Res Function(_$_Init) then) =
       __$$_InitCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Bucket>? bucket});
 }
 
 /// @nodoc
@@ -110,66 +118,101 @@ class __$$_InitCopyWithImpl<$Res>
     implements _$$_InitCopyWith<$Res> {
   __$$_InitCopyWithImpl(_$_Init _value, $Res Function(_$_Init) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? bucket = freezed,
+  }) {
+    return _then(_$_Init(
+      bucket: freezed == bucket
+          ? _value._bucket
+          : bucket // ignore: cast_nullable_to_non_nullable
+              as List<Bucket>?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Init implements _Init {
-  const _$_Init();
+  const _$_Init({final List<Bucket>? bucket}) : _bucket = bucket;
+
+  final List<Bucket>? _bucket;
+  @override
+  List<Bucket>? get bucket {
+    final value = _bucket;
+    if (value == null) return null;
+    if (_bucket is EqualUnmodifiableListView) return _bucket;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'QuestionnarieEvent.init()';
+    return 'QuestionnarieEvent.init(bucket: $bucket)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Init);
+        (other.runtimeType == runtimeType &&
+            other is _$_Init &&
+            const DeepCollectionEquality().equals(other._bucket, _bucket));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_bucket));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InitCopyWith<_$_Init> get copyWith =>
+      __$$_InitCopyWithImpl<_$_Init>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
+    required TResult Function(List<Bucket>? bucket) init,
     required TResult Function() addBucket,
     required TResult Function(Bucket bucket, String? bucketId) setBucket,
     required TResult Function(String bucketId, String category) updateCategory,
     required TResult Function(String name, String category) searchByName,
     required TResult Function(String category) sortByCategory,
+    required TResult Function() reset,
   }) {
-    return init();
+    return init(bucket);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
+    TResult? Function(List<Bucket>? bucket)? init,
     TResult? Function()? addBucket,
     TResult? Function(Bucket bucket, String? bucketId)? setBucket,
     TResult? Function(String bucketId, String category)? updateCategory,
     TResult? Function(String name, String category)? searchByName,
     TResult? Function(String category)? sortByCategory,
+    TResult? Function()? reset,
   }) {
-    return init?.call();
+    return init?.call(bucket);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
+    TResult Function(List<Bucket>? bucket)? init,
     TResult Function()? addBucket,
     TResult Function(Bucket bucket, String? bucketId)? setBucket,
     TResult Function(String bucketId, String category)? updateCategory,
     TResult Function(String name, String category)? searchByName,
     TResult Function(String category)? sortByCategory,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (init != null) {
-      return init();
+      return init(bucket);
     }
     return orElse();
   }
@@ -183,6 +226,7 @@ class _$_Init implements _Init {
     required TResult Function(_UpdateCategory value) updateCategory,
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_SortByCategory value) sortByCategory,
+    required TResult Function(_Reset value) reset,
   }) {
     return init(this);
   }
@@ -196,6 +240,7 @@ class _$_Init implements _Init {
     TResult? Function(_UpdateCategory value)? updateCategory,
     TResult? Function(_SearchByName value)? searchByName,
     TResult? Function(_SortByCategory value)? sortByCategory,
+    TResult? Function(_Reset value)? reset,
   }) {
     return init?.call(this);
   }
@@ -209,6 +254,7 @@ class _$_Init implements _Init {
     TResult Function(_UpdateCategory value)? updateCategory,
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_SortByCategory value)? sortByCategory,
+    TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -219,7 +265,11 @@ class _$_Init implements _Init {
 }
 
 abstract class _Init implements QuestionnarieEvent {
-  const factory _Init() = _$_Init;
+  const factory _Init({final List<Bucket>? bucket}) = _$_Init;
+
+  List<Bucket>? get bucket;
+  @JsonKey(ignore: true)
+  _$$_InitCopyWith<_$_Init> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -260,12 +310,13 @@ class _$_AddBucket implements _AddBucket {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
+    required TResult Function(List<Bucket>? bucket) init,
     required TResult Function() addBucket,
     required TResult Function(Bucket bucket, String? bucketId) setBucket,
     required TResult Function(String bucketId, String category) updateCategory,
     required TResult Function(String name, String category) searchByName,
     required TResult Function(String category) sortByCategory,
+    required TResult Function() reset,
   }) {
     return addBucket();
   }
@@ -273,12 +324,13 @@ class _$_AddBucket implements _AddBucket {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
+    TResult? Function(List<Bucket>? bucket)? init,
     TResult? Function()? addBucket,
     TResult? Function(Bucket bucket, String? bucketId)? setBucket,
     TResult? Function(String bucketId, String category)? updateCategory,
     TResult? Function(String name, String category)? searchByName,
     TResult? Function(String category)? sortByCategory,
+    TResult? Function()? reset,
   }) {
     return addBucket?.call();
   }
@@ -286,12 +338,13 @@ class _$_AddBucket implements _AddBucket {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
+    TResult Function(List<Bucket>? bucket)? init,
     TResult Function()? addBucket,
     TResult Function(Bucket bucket, String? bucketId)? setBucket,
     TResult Function(String bucketId, String category)? updateCategory,
     TResult Function(String name, String category)? searchByName,
     TResult Function(String category)? sortByCategory,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (addBucket != null) {
@@ -309,6 +362,7 @@ class _$_AddBucket implements _AddBucket {
     required TResult Function(_UpdateCategory value) updateCategory,
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_SortByCategory value) sortByCategory,
+    required TResult Function(_Reset value) reset,
   }) {
     return addBucket(this);
   }
@@ -322,6 +376,7 @@ class _$_AddBucket implements _AddBucket {
     TResult? Function(_UpdateCategory value)? updateCategory,
     TResult? Function(_SearchByName value)? searchByName,
     TResult? Function(_SortByCategory value)? sortByCategory,
+    TResult? Function(_Reset value)? reset,
   }) {
     return addBucket?.call(this);
   }
@@ -335,6 +390,7 @@ class _$_AddBucket implements _AddBucket {
     TResult Function(_UpdateCategory value)? updateCategory,
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_SortByCategory value)? sortByCategory,
+    TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
     if (addBucket != null) {
@@ -431,12 +487,13 @@ class _$_SetBucket implements _SetBucket {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
+    required TResult Function(List<Bucket>? bucket) init,
     required TResult Function() addBucket,
     required TResult Function(Bucket bucket, String? bucketId) setBucket,
     required TResult Function(String bucketId, String category) updateCategory,
     required TResult Function(String name, String category) searchByName,
     required TResult Function(String category) sortByCategory,
+    required TResult Function() reset,
   }) {
     return setBucket(bucket, bucketId);
   }
@@ -444,12 +501,13 @@ class _$_SetBucket implements _SetBucket {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
+    TResult? Function(List<Bucket>? bucket)? init,
     TResult? Function()? addBucket,
     TResult? Function(Bucket bucket, String? bucketId)? setBucket,
     TResult? Function(String bucketId, String category)? updateCategory,
     TResult? Function(String name, String category)? searchByName,
     TResult? Function(String category)? sortByCategory,
+    TResult? Function()? reset,
   }) {
     return setBucket?.call(bucket, bucketId);
   }
@@ -457,12 +515,13 @@ class _$_SetBucket implements _SetBucket {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
+    TResult Function(List<Bucket>? bucket)? init,
     TResult Function()? addBucket,
     TResult Function(Bucket bucket, String? bucketId)? setBucket,
     TResult Function(String bucketId, String category)? updateCategory,
     TResult Function(String name, String category)? searchByName,
     TResult Function(String category)? sortByCategory,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (setBucket != null) {
@@ -480,6 +539,7 @@ class _$_SetBucket implements _SetBucket {
     required TResult Function(_UpdateCategory value) updateCategory,
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_SortByCategory value) sortByCategory,
+    required TResult Function(_Reset value) reset,
   }) {
     return setBucket(this);
   }
@@ -493,6 +553,7 @@ class _$_SetBucket implements _SetBucket {
     TResult? Function(_UpdateCategory value)? updateCategory,
     TResult? Function(_SearchByName value)? searchByName,
     TResult? Function(_SortByCategory value)? sortByCategory,
+    TResult? Function(_Reset value)? reset,
   }) {
     return setBucket?.call(this);
   }
@@ -506,6 +567,7 @@ class _$_SetBucket implements _SetBucket {
     TResult Function(_UpdateCategory value)? updateCategory,
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_SortByCategory value)? sortByCategory,
+    TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
     if (setBucket != null) {
@@ -601,12 +663,13 @@ class _$_UpdateCategory implements _UpdateCategory {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
+    required TResult Function(List<Bucket>? bucket) init,
     required TResult Function() addBucket,
     required TResult Function(Bucket bucket, String? bucketId) setBucket,
     required TResult Function(String bucketId, String category) updateCategory,
     required TResult Function(String name, String category) searchByName,
     required TResult Function(String category) sortByCategory,
+    required TResult Function() reset,
   }) {
     return updateCategory(bucketId, category);
   }
@@ -614,12 +677,13 @@ class _$_UpdateCategory implements _UpdateCategory {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
+    TResult? Function(List<Bucket>? bucket)? init,
     TResult? Function()? addBucket,
     TResult? Function(Bucket bucket, String? bucketId)? setBucket,
     TResult? Function(String bucketId, String category)? updateCategory,
     TResult? Function(String name, String category)? searchByName,
     TResult? Function(String category)? sortByCategory,
+    TResult? Function()? reset,
   }) {
     return updateCategory?.call(bucketId, category);
   }
@@ -627,12 +691,13 @@ class _$_UpdateCategory implements _UpdateCategory {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
+    TResult Function(List<Bucket>? bucket)? init,
     TResult Function()? addBucket,
     TResult Function(Bucket bucket, String? bucketId)? setBucket,
     TResult Function(String bucketId, String category)? updateCategory,
     TResult Function(String name, String category)? searchByName,
     TResult Function(String category)? sortByCategory,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (updateCategory != null) {
@@ -650,6 +715,7 @@ class _$_UpdateCategory implements _UpdateCategory {
     required TResult Function(_UpdateCategory value) updateCategory,
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_SortByCategory value) sortByCategory,
+    required TResult Function(_Reset value) reset,
   }) {
     return updateCategory(this);
   }
@@ -663,6 +729,7 @@ class _$_UpdateCategory implements _UpdateCategory {
     TResult? Function(_UpdateCategory value)? updateCategory,
     TResult? Function(_SearchByName value)? searchByName,
     TResult? Function(_SortByCategory value)? sortByCategory,
+    TResult? Function(_Reset value)? reset,
   }) {
     return updateCategory?.call(this);
   }
@@ -676,6 +743,7 @@ class _$_UpdateCategory implements _UpdateCategory {
     TResult Function(_UpdateCategory value)? updateCategory,
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_SortByCategory value)? sortByCategory,
+    TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
     if (updateCategory != null) {
@@ -770,12 +838,13 @@ class _$_SearchByName implements _SearchByName {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
+    required TResult Function(List<Bucket>? bucket) init,
     required TResult Function() addBucket,
     required TResult Function(Bucket bucket, String? bucketId) setBucket,
     required TResult Function(String bucketId, String category) updateCategory,
     required TResult Function(String name, String category) searchByName,
     required TResult Function(String category) sortByCategory,
+    required TResult Function() reset,
   }) {
     return searchByName(name, category);
   }
@@ -783,12 +852,13 @@ class _$_SearchByName implements _SearchByName {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
+    TResult? Function(List<Bucket>? bucket)? init,
     TResult? Function()? addBucket,
     TResult? Function(Bucket bucket, String? bucketId)? setBucket,
     TResult? Function(String bucketId, String category)? updateCategory,
     TResult? Function(String name, String category)? searchByName,
     TResult? Function(String category)? sortByCategory,
+    TResult? Function()? reset,
   }) {
     return searchByName?.call(name, category);
   }
@@ -796,12 +866,13 @@ class _$_SearchByName implements _SearchByName {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
+    TResult Function(List<Bucket>? bucket)? init,
     TResult Function()? addBucket,
     TResult Function(Bucket bucket, String? bucketId)? setBucket,
     TResult Function(String bucketId, String category)? updateCategory,
     TResult Function(String name, String category)? searchByName,
     TResult Function(String category)? sortByCategory,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (searchByName != null) {
@@ -819,6 +890,7 @@ class _$_SearchByName implements _SearchByName {
     required TResult Function(_UpdateCategory value) updateCategory,
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_SortByCategory value) sortByCategory,
+    required TResult Function(_Reset value) reset,
   }) {
     return searchByName(this);
   }
@@ -832,6 +904,7 @@ class _$_SearchByName implements _SearchByName {
     TResult? Function(_UpdateCategory value)? updateCategory,
     TResult? Function(_SearchByName value)? searchByName,
     TResult? Function(_SortByCategory value)? sortByCategory,
+    TResult? Function(_Reset value)? reset,
   }) {
     return searchByName?.call(this);
   }
@@ -845,6 +918,7 @@ class _$_SearchByName implements _SearchByName {
     TResult Function(_UpdateCategory value)? updateCategory,
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_SortByCategory value)? sortByCategory,
+    TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
     if (searchByName != null) {
@@ -931,12 +1005,13 @@ class _$_SortByCategory implements _SortByCategory {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
+    required TResult Function(List<Bucket>? bucket) init,
     required TResult Function() addBucket,
     required TResult Function(Bucket bucket, String? bucketId) setBucket,
     required TResult Function(String bucketId, String category) updateCategory,
     required TResult Function(String name, String category) searchByName,
     required TResult Function(String category) sortByCategory,
+    required TResult Function() reset,
   }) {
     return sortByCategory(category);
   }
@@ -944,12 +1019,13 @@ class _$_SortByCategory implements _SortByCategory {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
+    TResult? Function(List<Bucket>? bucket)? init,
     TResult? Function()? addBucket,
     TResult? Function(Bucket bucket, String? bucketId)? setBucket,
     TResult? Function(String bucketId, String category)? updateCategory,
     TResult? Function(String name, String category)? searchByName,
     TResult? Function(String category)? sortByCategory,
+    TResult? Function()? reset,
   }) {
     return sortByCategory?.call(category);
   }
@@ -957,12 +1033,13 @@ class _$_SortByCategory implements _SortByCategory {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
+    TResult Function(List<Bucket>? bucket)? init,
     TResult Function()? addBucket,
     TResult Function(Bucket bucket, String? bucketId)? setBucket,
     TResult Function(String bucketId, String category)? updateCategory,
     TResult Function(String name, String category)? searchByName,
     TResult Function(String category)? sortByCategory,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (sortByCategory != null) {
@@ -980,6 +1057,7 @@ class _$_SortByCategory implements _SortByCategory {
     required TResult Function(_UpdateCategory value) updateCategory,
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_SortByCategory value) sortByCategory,
+    required TResult Function(_Reset value) reset,
   }) {
     return sortByCategory(this);
   }
@@ -993,6 +1071,7 @@ class _$_SortByCategory implements _SortByCategory {
     TResult? Function(_UpdateCategory value)? updateCategory,
     TResult? Function(_SearchByName value)? searchByName,
     TResult? Function(_SortByCategory value)? sortByCategory,
+    TResult? Function(_Reset value)? reset,
   }) {
     return sortByCategory?.call(this);
   }
@@ -1006,6 +1085,7 @@ class _$_SortByCategory implements _SortByCategory {
     TResult Function(_UpdateCategory value)? updateCategory,
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_SortByCategory value)? sortByCategory,
+    TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
     if (sortByCategory != null) {
@@ -1023,6 +1103,136 @@ abstract class _SortByCategory implements QuestionnarieEvent {
   @JsonKey(ignore: true)
   _$$_SortByCategoryCopyWith<_$_SortByCategory> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ResetCopyWith<$Res> {
+  factory _$$_ResetCopyWith(_$_Reset value, $Res Function(_$_Reset) then) =
+      __$$_ResetCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ResetCopyWithImpl<$Res>
+    extends _$QuestionnarieEventCopyWithImpl<$Res, _$_Reset>
+    implements _$$_ResetCopyWith<$Res> {
+  __$$_ResetCopyWithImpl(_$_Reset _value, $Res Function(_$_Reset) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Reset implements _Reset {
+  const _$_Reset();
+
+  @override
+  String toString() {
+    return 'QuestionnarieEvent.reset()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Reset);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(List<Bucket>? bucket) init,
+    required TResult Function() addBucket,
+    required TResult Function(Bucket bucket, String? bucketId) setBucket,
+    required TResult Function(String bucketId, String category) updateCategory,
+    required TResult Function(String name, String category) searchByName,
+    required TResult Function(String category) sortByCategory,
+    required TResult Function() reset,
+  }) {
+    return reset();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<Bucket>? bucket)? init,
+    TResult? Function()? addBucket,
+    TResult? Function(Bucket bucket, String? bucketId)? setBucket,
+    TResult? Function(String bucketId, String category)? updateCategory,
+    TResult? Function(String name, String category)? searchByName,
+    TResult? Function(String category)? sortByCategory,
+    TResult? Function()? reset,
+  }) {
+    return reset?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<Bucket>? bucket)? init,
+    TResult Function()? addBucket,
+    TResult Function(Bucket bucket, String? bucketId)? setBucket,
+    TResult Function(String bucketId, String category)? updateCategory,
+    TResult Function(String name, String category)? searchByName,
+    TResult Function(String category)? sortByCategory,
+    TResult Function()? reset,
+    required TResult orElse(),
+  }) {
+    if (reset != null) {
+      return reset();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_AddBucket value) addBucket,
+    required TResult Function(_SetBucket value) setBucket,
+    required TResult Function(_UpdateCategory value) updateCategory,
+    required TResult Function(_SearchByName value) searchByName,
+    required TResult Function(_SortByCategory value) sortByCategory,
+    required TResult Function(_Reset value) reset,
+  }) {
+    return reset(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Init value)? init,
+    TResult? Function(_AddBucket value)? addBucket,
+    TResult? Function(_SetBucket value)? setBucket,
+    TResult? Function(_UpdateCategory value)? updateCategory,
+    TResult? Function(_SearchByName value)? searchByName,
+    TResult? Function(_SortByCategory value)? sortByCategory,
+    TResult? Function(_Reset value)? reset,
+  }) {
+    return reset?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_AddBucket value)? addBucket,
+    TResult Function(_SetBucket value)? setBucket,
+    TResult Function(_UpdateCategory value)? updateCategory,
+    TResult Function(_SearchByName value)? searchByName,
+    TResult Function(_SortByCategory value)? sortByCategory,
+    TResult Function(_Reset value)? reset,
+    required TResult orElse(),
+  }) {
+    if (reset != null) {
+      return reset(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Reset implements QuestionnarieEvent {
+  const factory _Reset() = _$_Reset;
 }
 
 /// @nodoc

@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:micqui_admin/core/constants/exceptions.dart';
 import 'package:micqui_admin/data/repositories/firestore_repository.dart';
 
 import '../../../data/models/bucket/bucket.dart';
+import '../auth/auth_bloc.dart';
 
 part 'questionnarie_event.dart';
 
@@ -13,11 +16,21 @@ part 'questionnarie_bloc.freezed.dart';
 
 class QuestionnarieBloc extends Bloc<QuestionnarieEvent, QuestionnarieState> {
   final FirestoreRepository firestore;
+  final AuthBloc authBloc;
+  late StreamSubscription _subscription;
 
-  QuestionnarieBloc({required this.firestore})
-      : super(const QuestionnarieState.initial()) {
+  QuestionnarieBloc({
+    required this.firestore,
+    required this.authBloc,
+  }) : super(const QuestionnarieState.initial()) {
     on<QuestionnarieEvent>(_mapBlocToState);
-    add(const QuestionnarieEvent.init());
+
+    _subscription = authBloc.stream.listen((state) {
+      state.maybeMap(
+          authenticated: (s) => add(const QuestionnarieEvent.init()),
+          unauthenticated: (_) => add(const QuestionnarieEvent.reset()),
+          orElse: () {});
+    });
   }
 
   Future<void> _mapBlocToState(
@@ -29,6 +42,7 @@ class QuestionnarieBloc extends Bloc<QuestionnarieEvent, QuestionnarieState> {
       updateCategory: (e) => _updateCategory(e, emit),
       searchByName: (e) => _searchByName(e, emit),
       sortByCategory: (e) => _sortByCategory(e, emit),
+      reset: (e) => _reset(e, emit),
     );
   }
 
@@ -88,5 +102,15 @@ class QuestionnarieBloc extends Bloc<QuestionnarieEvent, QuestionnarieState> {
       _SortByCategory event, Emitter<QuestionnarieState> emit) async {
     final buckets = await firestore.sort(event.category);
     emit(QuestionnarieState.loaded(bucket: buckets));
+  }
+
+  Future<void> _reset(_Reset event, Emitter<QuestionnarieState> emit) async {
+    emit(const QuestionnarieState.initial());
+  }
+
+  @override
+  Future<void> close() {
+    _subscription.cancel();
+    return super.close();
   }
 }

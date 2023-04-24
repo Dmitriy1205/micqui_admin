@@ -5,15 +5,22 @@ import 'package:micqui_admin/presentation/widgets/layout/tablet_layout.dart';
 import 'package:micqui_admin/presentation/widgets/layout/desktop_layout.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  const MainScreen({Key? key, this.child}) : super(key: key);
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: ResponsiveLayout(
-        mobileLayout: MobileLayout(),
-        tabletLayout: TabletLayout(),
-        desktopLayout: DesktopLayout(),
+    return WillPopScope(
+      onWillPop: () => Future(() => false),
+      child: Scaffold(
+        body: ResponsiveLayout(
+            mobileLayout: const MobileLayout(),
+            tabletLayout: TabletLayout(
+              child: child!,
+            ),
+            desktopLayout: DesktopLayout(
+              child: child!,
+            )),
       ),
     );
   }

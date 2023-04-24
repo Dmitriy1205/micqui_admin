@@ -16,7 +16,14 @@ class MobileLayout extends StatelessWidget {
       drawer: AppDrawer(
         backToFirstScreen: () {},
       ),
-      body: const QuestionaireScreen(mobileCardPadding: 17,mobileHeaderSize: 25,mobileBucketSize: 12,mobileRowSize: 10,mobileSearchIconSize: 13,mobileSearchIconSpace: 35,),
+      body: const QuestionaireScreen(
+        mobileCardPadding: 17,
+        mobileHeaderSize: 25,
+        mobileBucketSize: 12,
+        mobileRowSize: 10,
+        mobileSearchIconSize: 13,
+        mobileSearchIconSpace: 35,
+      ),
     );
   }
 }

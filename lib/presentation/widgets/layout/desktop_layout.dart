@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:micqui_admin/presentation/bloc/questionnarie/questionnarie_bloc.dart';
 import 'package:micqui_admin/presentation/widgets/layout/app_drawer.dart';
 
-import '../../screens/questionary_screen.dart';
 
 class DesktopLayout extends StatefulWidget {
-  const DesktopLayout({Key? key}) : super(key: key);
+  final Widget child;
+  const DesktopLayout({Key? key, required this.child}) : super(key: key);
 
   @override
   State<DesktopLayout> createState() => _DesktopLayoutState();
@@ -20,14 +18,11 @@ class _DesktopLayoutState extends State<DesktopLayout> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppDrawer(
-            backToFirstScreen: () {
-              context
-                  .read<QuestionnarieBloc>()
-                  .add(const QuestionnarieEvent.init());
-            },
+            backToFirstScreen: () {},
           ),
-          const Expanded(
-            child: QuestionaireScreen(),
+           Expanded(
+            child: widget.child,
+            // QuestionaireScreen(),
           ),
         ],
       ),

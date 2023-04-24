@@ -7,6 +7,7 @@ import 'package:micqui_admin/presentation/bloc/questionnarie/questionnarie_bloc.
 import 'package:micqui_admin/presentation/screens/bucket_screen.dart';
 import 'package:micqui_admin/presentation/widgets/app_checkbox.dart';
 
+import '../../app/router.dart';
 import '../../core/constants/colors.dart';
 import '../../data/models/bucket/bucket.dart';
 import '../widgets/search_field.dart';
@@ -19,15 +20,15 @@ class QuestionaireScreen extends StatefulWidget {
   final double? mobileSearchIconSize;
   final double? mobileSearchIconSpace;
 
-  const QuestionaireScreen(
-      {Key? key,
-      this.mobileCardPadding,
-      this.mobileHeaderSize,
-      this.mobileBucketSize,
-      this.mobileRowSize,
-      this.mobileSearchIconSize,
-      this.mobileSearchIconSpace})
-      : super(key: key);
+  const QuestionaireScreen({
+    Key? key,
+    this.mobileCardPadding,
+    this.mobileHeaderSize,
+    this.mobileBucketSize,
+    this.mobileRowSize,
+    this.mobileSearchIconSize,
+    this.mobileSearchIconSpace,
+  }) : super(key: key);
 
   @override
   State<QuestionaireScreen> createState() => _QuestionaireScreenState();
@@ -43,6 +44,7 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
 
   List<bool> checkable = [];
   late List<String> selectedValues;
+  late List<Bucket> buckets;
 
   @override
   void dispose() {
@@ -52,197 +54,195 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocConsumer<QuestionnarieBloc, QuestionnarieState>(
-        listener: (context, state) {
-          if (state.bucket != null && state.bucket!.isNotEmpty) {
-            checkable = List.generate(state.bucket!.length, (index) => false);
-            selectedValues = List.generate(
-                state.bucket!.length,
-                (index) =>
-                    state.bucket?[index].category ?? AppStrings.employee);
-          }
-          state.maybeMap(
-              success: (_) => context
-                  .read<QuestionnarieBloc>()
-                  .add(const QuestionnarieEvent.init()),
-              orElse: () {});
-        },
-        builder: (context, state) {
-          return state.maybeMap(
-            loading: (_) => const Center(
-              child: CircularProgressIndicator(),
-            ),
-            orElse: () => SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.all(widget.mobileCardPadding ?? 37),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      AppStrings.questionnaires,
-                      style: AppTheme.themeData.textTheme.headlineLarge!
-                          .copyWith(
-                              color: AppColors.text,
-                              fontSize: widget.mobileHeaderSize ?? 38),
-                    ),
-                    const SizedBox(
-                      height: 52,
-                    ),
-                    ConstrainedBox(
-                      constraints: const BoxConstraints(
-                        maxHeight:
-                            550.0, // set the maximum height of the sized box
+    return WillPopScope(
+      onWillPop: () => Future(() => false),
+      child: Scaffold(
+        body: BlocConsumer<QuestionnarieBloc, QuestionnarieState>(
+          listener: (context, state) {
+            if (state.bucket != null && state.bucket!.isNotEmpty) {
+              checkable = List.generate(state.bucket!.length, (index) => false);
+              selectedValues = List.generate(
+                  state.bucket!.length,
+                  (index) =>
+                      state.bucket?[index].category ?? AppStrings.employee);
+            }
+            state.maybeMap(
+                success: (_) => context
+                    .read<QuestionnarieBloc>()
+                    .add(const QuestionnarieEvent.init()),
+                orElse: () {});
+          },
+          builder: (context, state) {
+            return state.maybeMap(
+              loading: (_) => const Center(
+                child: CircularProgressIndicator(),
+              ),
+              orElse: () => SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.all(widget.mobileCardPadding ?? 37),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        AppStrings.questionnaires,
+                        style: AppTheme.themeData.textTheme.headlineLarge!
+                            .copyWith(
+                                color: AppColors.text,
+                                fontSize: widget.mobileHeaderSize ?? 38),
                       ),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: Card(
-                          elevation: 5,
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  left: widget.mobileRowSize ?? 24,
-                                  right: widget.mobileRowSize ?? 24,
-                                  top: 10,
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "${AppStrings.buckets} (${state.bucket?.length ?? 0})",
-                                      style: AppTheme
-                                          .themeData.textTheme.titleLarge!
-                                          .copyWith(
-                                              color: AppColors.text,
-                                              fontSize:
-                                                  widget.mobileBucketSize ??
-                                                      16),
-                                    ),
-                                    Flexible(
-                                      flex: 2,
-                                      child: SizedBox(
-                                        width: 620,
-                                        height: 38,
-                                        child: SearchField(
-                                          spaceFromIcon: widget
-                                                  .mobileSearchIconSpace ??
-                                              45,
-                                          searchController:
-                                              _searchController,
-                                          onChange: (String name) {
-                                            context
-                                                .read<QuestionnarieBloc>()
-                                                .add(QuestionnarieEvent
-                                                    .searchByName(
-                                                        name: name,
-                                                        category: value));
+                      const SizedBox(
+                        height: 52,
+                      ),
+                      ConstrainedBox(
+                        constraints: const BoxConstraints(
+                          maxHeight:
+                              550.0, // set the maximum height of the sized box
+                        ),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: Card(
+                            elevation: 5,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                    left: widget.mobileRowSize ?? 24,
+                                    right: widget.mobileRowSize ?? 24,
+                                    top: 10,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "${AppStrings.buckets} (${state.bucket?.length ?? 0})",
+                                        style: AppTheme
+                                            .themeData.textTheme.titleLarge!
+                                            .copyWith(
+                                                color: AppColors.text,
+                                                fontSize:
+                                                    widget.mobileBucketSize ??
+                                                        16),
+                                      ),
+                                      Flexible(
+                                        flex: 2,
+                                        child: SizedBox(
+                                          width: 620,
+                                          height: 38,
+                                          child: SearchField(
+                                            spaceFromIcon:
+                                                widget.mobileSearchIconSpace ??
+                                                    45,
+                                            searchController: _searchController,
+                                            onChange: (String name) {
+                                              context
+                                                  .read<QuestionnarieBloc>()
+                                                  .add(QuestionnarieEvent
+                                                      .searchByName(
+                                                          name: name,
+                                                          category: value));
+                                            },
+                                            iconSize:
+                                                widget.mobileSearchIconSize ??
+                                                    20,
+                                          ),
+                                        ),
+                                      ),
+                                      Flexible(
+                                        child: categoryPicker(context),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        child: IconButton(
+                                          constraints: const BoxConstraints(),
+                                          padding: const EdgeInsets.all(2),
+                                          onPressed: () {
+                                            BlocProvider.of<QuestionnarieBloc>(
+                                                    context)
+                                                .add(
+                                              const QuestionnarieEvent
+                                                  .addBucket(),
+                                            );
                                           },
-                                          iconSize:
-                                              widget.mobileSearchIconSize ??
-                                                  20,
+                                          icon: const FaIcon(
+                                            FontAwesomeIcons.circlePlus,
+                                            color: AppColors.green,
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                    Flexible(
-                                      child: categoryPicker(context),
-                                    ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 10),
-                                      child: IconButton(
-                                        constraints: const BoxConstraints(),
-                                        padding: const EdgeInsets.all(2),
-                                        onPressed: () {
-                                          BlocProvider.of<
-                                                      QuestionnarieBloc>(
-                                                  context)
-                                              .add(
-                                            const QuestionnarieEvent
-                                                .addBucket(),
-                                          );
-                                        },
-                                        icon: const FaIcon(
-                                          FontAwesomeIcons.circlePlus,
-                                          color: AppColors.green,
-                                        ),
-                                      ),
-                                    )
-                                  ],
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              checkable.contains(true)
-                                  ? Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 20.0),
-                                      child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            IconButton(
-                                              onPressed: () {
-                                                state.bucket!.removeWhere(
-                                                    (bucket) => checkable[
-                                                        state
-                                                            .bucket!
-                                                            .indexOf(
-                                                                bucket)]);
-                                                checkable.clear();
-                                                checkable.addAll(
-                                                    List.generate(
-                                                        state
-                                                            .bucket!.length,
-                                                        (index) => false));
-                                              },
-                                              icon: const FaIcon(
-                                                FontAwesomeIcons
-                                                    .solidTrashCan,
-                                                size: 20,
-                                                color: AppColors.accent,
+                                checkable.contains(true)
+                                    ? Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 20.0),
+                                        child: Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              IconButton(
+                                                onPressed: () {
+                                                  state.bucket!.removeWhere(
+                                                      (bucket) => checkable[
+                                                          state.bucket!.indexOf(
+                                                              bucket)]);
+                                                  checkable.clear();
+                                                  checkable.addAll(
+                                                      List.generate(
+                                                          state.bucket!.length,
+                                                          (index) => false));
+                                                },
+                                                icon: const FaIcon(
+                                                  FontAwesomeIcons
+                                                      .solidTrashCan,
+                                                  size: 20,
+                                                  color: AppColors.accent,
+                                                ),
                                               ),
-                                            ),
-                                            const SizedBox(
-                                              width: 33,
-                                            ),
-                                            Text(
-                                              'Delete ${checkable.where((value) => value).length} bucket',
-                                              style: AppTheme.themeData
-                                                  .textTheme.labelMedium!
-                                                  .copyWith(
-                                                      color:
-                                                          AppColors.accent),
-                                            )
-                                          ],
+                                              const SizedBox(
+                                                width: 33,
+                                              ),
+                                              Text(
+                                                'Delete ${checkable.where((value) => value).length} bucket',
+                                                style: AppTheme.themeData
+                                                    .textTheme.labelMedium!
+                                                    .copyWith(
+                                                        color:
+                                                            AppColors.accent),
+                                              )
+                                            ],
+                                          ),
                                         ),
+                                      )
+                                    : const SizedBox(),
+                                Divider(
+                                  color: Colors.grey.shade300,
+                                  thickness: 1,
+                                ),
+                                state.bucket == null
+                                    ? const SizedBox()
+                                    : state.maybeMap(
+                                        searchLoading: (_) => const Center(
+                                          child: CircularProgressIndicator(),
+                                        ),
+                                        orElse: () => bucketList(state),
                                       ),
-                                    )
-                                  : const SizedBox(),
-                              Divider(
-                                color: Colors.grey.shade300,
-                                thickness: 1,
-                              ),
-                              state.bucket == null
-                                  ? const SizedBox()
-                                  : state.maybeMap(
-                                      searchLoading: (_) => const Center(
-                                        child: CircularProgressIndicator(),
-                                      ),
-                                      orElse: () => bucketList(state),
-                                    ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
@@ -358,174 +358,176 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
                   ),
                   child: InkWell(
                     onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => BucketScreen(
-                            bucketId: index,
-                            mobileSearchIconSpace: widget.mobileSearchIconSpace,
-                            mobileSearchIconSize: widget.mobileSearchIconSize,
-                            mobileRowSize: widget.mobileRowSize,
-                            mobileBucketSize: widget.mobileBucketSize,
-                            mobileHeaderSize: widget.mobileHeaderSize,
-                            mobileCardPadding: widget.mobileCardPadding,
-                          ),
-                        ),
-                      );
+                      widget.mobileSearchIconSpace == null
+                          ? router.push('/bucket/bucketId=$index')
+                          : Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => BucketScreen(
+                                  bucketId: index,
+                                  mobileSearchIconSpace:
+                                      widget.mobileSearchIconSpace,
+                                  mobileSearchIconSize:
+                                      widget.mobileSearchIconSize,
+                                  mobileRowSize: widget.mobileRowSize,
+                                  mobileBucketSize: widget.mobileBucketSize,
+                                  mobileHeaderSize: widget.mobileHeaderSize,
+                                  mobileCardPadding: widget.mobileCardPadding,
+                                ),
+                              ),
+                            );
                     },
                     child: Padding(
                       padding:
                           const EdgeInsets.only(bottom: 19, top: 14, left: 23),
-                      child: Container(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                top: 5,
-                                right: 20,
-                              ),
-                              child: AppCheckbox(
-                                size: 32,
-                                iconSize: 22,
-                                selectedIconColor: AppColors.green,
-                                selectedColor: AppColors.white,
-                                borderColor: AppColors.greyWhite,
-                                isChecked: checkable[index],
-                                onChange: (v) {
-                                  setState(() {
-                                    checkable[index] = v;
-                                  });
-                                },
-                              ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 5,
+                              right: 20,
                             ),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  EditableText(
-                                    textAlign: TextAlign.start,
-                                    controller: controllers[index]['name']!,
-                                    focusNode: focuses[index]['name']!,
-                                    cursorColor: AppColors.primary,
-                                    backgroundCursorColor: AppColors.primary,
-                                    style: AppTheme
-                                        .themeData.textTheme.labelMedium!
-                                        .copyWith(
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                    selectionControls:
-                                        MaterialTextSelectionControls(),
-                                    keyboardType: TextInputType.text,
-                                    maxLines: 1,
-                                    onSubmitted: (text) {
-                                      focuses[index]['name']!.unfocus();
-                                      FocusScope.of(context).requestFocus(
-                                          focuses[index]['description']!);
-                                    },
-                                    onSelectionHandleTapped: () {
-                                      showAboutDialog(context: context);
-                                    },
+                            child: AppCheckbox(
+                              size: 32,
+                              iconSize: 22,
+                              selectedIconColor: AppColors.green,
+                              selectedColor: AppColors.white,
+                              borderColor: AppColors.greyWhite,
+                              isChecked: checkable[index],
+                              onChange: (v) {
+                                setState(() {
+                                  checkable[index] = v;
+                                });
+                              },
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                EditableText(
+                                  textAlign: TextAlign.start,
+                                  controller: controllers[index]['name']!,
+                                  focusNode: focuses[index]['name']!,
+                                  cursorColor: AppColors.primary,
+                                  backgroundCursorColor: AppColors.primary,
+                                  style: AppTheme
+                                      .themeData.textTheme.labelMedium!
+                                      .copyWith(
+                                    fontWeight: FontWeight.w600,
                                   ),
-                                  EditableText(
-                                    textAlign: TextAlign.start,
-                                    controller: controllers[index]
-                                        ['description']!,
-                                    focusNode: focuses[index]['description']!,
-                                    cursorColor: AppColors.primary,
-                                    backgroundCursorColor: AppColors.primary,
-                                    style: AppTheme
-                                        .themeData.textTheme.labelMedium!,
-                                    selectionControls:
-                                        MaterialTextSelectionControls(),
-                                    keyboardType: TextInputType.text,
-                                    maxLines: 2,
-                                    onSubmitted: (text) {
-                                      focuses[index]['description']!.unfocus();
-                                      context.read<QuestionnarieBloc>().add(
-                                            QuestionnarieEvent.setBucket(
-                                              bucket: Bucket(
-                                                id: state.bucket?[index].id,
-                                                name: controllers[index]
-                                                        ['name']!
-                                                    .text,
-                                                description: controllers[index]
-                                                        ['description']!
-                                                    .text,
-                                                category: selectedValues[index],
-                                              ),
-                                              bucketId: state.bucket?[index].id,
+                                  selectionControls:
+                                      MaterialTextSelectionControls(),
+                                  keyboardType: TextInputType.text,
+                                  maxLines: 1,
+                                  onSubmitted: (text) {
+                                    focuses[index]['name']!.unfocus();
+                                    FocusScope.of(context).requestFocus(
+                                        focuses[index]['description']!);
+                                  },
+                                  onSelectionHandleTapped: () {
+                                    showAboutDialog(context: context);
+                                  },
+                                ),
+                                EditableText(
+                                  textAlign: TextAlign.start,
+                                  controller: controllers[index]
+                                      ['description']!,
+                                  focusNode: focuses[index]['description']!,
+                                  cursorColor: AppColors.primary,
+                                  backgroundCursorColor: AppColors.primary,
+                                  style: AppTheme
+                                      .themeData.textTheme.labelMedium!,
+                                  selectionControls:
+                                      MaterialTextSelectionControls(),
+                                  keyboardType: TextInputType.text,
+                                  maxLines: 2,
+                                  onSubmitted: (text) {
+                                    focuses[index]['description']!.unfocus();
+                                    context.read<QuestionnarieBloc>().add(
+                                          QuestionnarieEvent.setBucket(
+                                            bucket: Bucket(
+                                              id: state.bucket?[index].id,
+                                              name: controllers[index]
+                                                      ['name']!
+                                                  .text,
+                                              description: controllers[index]
+                                                      ['description']!
+                                                  .text,
+                                              category: selectedValues[index],
                                             ),
-                                          );
-                                    },
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                    child: DropdownButton(
-                                      icon: const Visibility(
-                                          visible: false,
-                                          child: Icon(Icons.arrow_downward)),
-                                      dropdownColor: AppColors.white,
-                                      focusColor: AppColors.white,
-                                      borderRadius: BorderRadius.circular(5),
-                                      value: selectedValues[index],
-                                      underline: const SizedBox(),
-                                      items: [
-                                        DropdownMenuItem(
-                                          value: AppStrings.manager,
-                                          child: Text(
-                                            '${AppStrings.manager} >',
-                                            style: AppTheme.themeData.textTheme
-                                                .labelMedium!
-                                                .copyWith(
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                            overflow: TextOverflow.ellipsis,
-                                            softWrap: false,
+                                            bucketId: state.bucket?[index].id,
                                           ),
-                                        ),
-                                        DropdownMenuItem(
-                                          value: AppStrings.employee,
-                                          child: Text(
-                                            '${AppStrings.employee} >',
-                                            style: AppTheme.themeData.textTheme
-                                                .labelMedium!
-                                                .copyWith(
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                            overflow: TextOverflow.ellipsis,
-                                            softWrap: false,
-                                          ),
-                                        ),
-                                      ],
-                                      onChanged: (v) {
-                                        setState(
-                                          () {
-                                            state.bucket![index].id == null
-                                                ? selectedValues[index] = v!
-                                                : context
-                                                    .read<QuestionnarieBloc>()
-                                                    .add(
-                                                      QuestionnarieEvent
-                                                          .updateCategory(
-                                                              bucketId: state
-                                                                  .bucket![
-                                                                      index]
-                                                                  .id!,
-                                                              category: v!),
-                                                    );
-                                          },
                                         );
-                                      },
-                                    ),
+                                  },
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                  child: DropdownButton(
+                                    icon: const Visibility(
+                                        visible: false,
+                                        child: Icon(Icons.arrow_downward)),
+                                    dropdownColor: AppColors.white,
+                                    focusColor: AppColors.white,
+                                    borderRadius: BorderRadius.circular(5),
+                                    value: selectedValues[index],
+                                    underline: const SizedBox(),
+                                    items: [
+                                      DropdownMenuItem(
+                                        value: AppStrings.manager,
+                                        child: Text(
+                                          '${AppStrings.manager} >',
+                                          style: AppTheme.themeData.textTheme
+                                              .labelMedium!
+                                              .copyWith(
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
+                                          softWrap: false,
+                                        ),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: AppStrings.employee,
+                                        child: Text(
+                                          '${AppStrings.employee} >',
+                                          style: AppTheme.themeData.textTheme
+                                              .labelMedium!
+                                              .copyWith(
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
+                                          softWrap: false,
+                                        ),
+                                      ),
+                                    ],
+                                    onChanged: (v) {
+                                      setState(
+                                        () {
+                                          state.bucket![index].id == null
+                                              ? selectedValues[index] = v!
+                                              : context
+                                                  .read<QuestionnarieBloc>()
+                                                  .add(
+                                                    QuestionnarieEvent
+                                                        .updateCategory(
+                                                            bucketId: state
+                                                                .bucket![
+                                                                    index]
+                                                                .id!,
+                                                            category: v!),
+                                                  );
+                                        },
+                                      );
+                                    },
                                   ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
                       ),
                     ),
                   ),
