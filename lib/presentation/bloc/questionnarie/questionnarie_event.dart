@@ -10,5 +10,5 @@ class QuestionnarieEvent with _$QuestionnarieEvent {
   const factory QuestionnarieEvent.sortByCategory({required String category}) = _SortByCategory;
   const factory QuestionnarieEvent.reset() = _Reset;
 
-  const factory QuestionnarieEvent.deleteBucket({required String bucketId})= _DeleteBucket;
+  const factory QuestionnarieEvent.deleteBucket({required String bucketId, List<Bucket>? bucket,int? index})= _DeleteBucket;
 }

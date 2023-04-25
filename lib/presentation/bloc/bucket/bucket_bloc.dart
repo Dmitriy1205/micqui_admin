@@ -25,8 +25,8 @@ class BucketBloc extends Bloc<BucketEvent, BucketState> {
     on<BucketEvent>(_mapBlocToState);
   }
 
-  Future<void> _mapBlocToState(
-      BucketEvent event, Emitter<BucketState> emit) async {
+  Future<void> _mapBlocToState(BucketEvent event,
+      Emitter<BucketState> emit) async {
     await event.maybeMap(
       init: (e) {},
       addQuestion: (e) => _addQuestion(e, emit),
@@ -38,6 +38,7 @@ class BucketBloc extends Bloc<BucketEvent, BucketState> {
       publish: (e) => _publish(e, emit),
       deleteAnswer: (e) => _deleteAnswer(e, emit),
       deleteQuestion: (e) => _deleteQuestion(e, emit),
+      deleteBucket: (e)=> _deleteFullBucket(e, emit),
       orElse: () {},
     );
   }
@@ -56,8 +57,8 @@ class BucketBloc extends Bloc<BucketEvent, BucketState> {
   //   }
   // }
 
-  Future<void> _addQuestion(
-      _AddQuestion event, Emitter<BucketState> emit) async {
+  Future<void> _addQuestion(_AddQuestion event,
+      Emitter<BucketState> emit) async {
     emit(const BucketState.loading());
     List<Questions> questions = List.from(event.questions!);
     const question = Questions(name: 'Name', variants: []);
@@ -66,8 +67,8 @@ class BucketBloc extends Bloc<BucketEvent, BucketState> {
     emit(BucketState.loaded(questionsList: questions));
   }
 
-  Future<void> _setQuestion(
-      _SetQuestion event, Emitter<BucketState> emit) async {
+  Future<void> _setQuestion(_SetQuestion event,
+      Emitter<BucketState> emit) async {
     emit(const BucketState.loading());
     try {
       final questions = await firestore.setQuestion(
@@ -111,8 +112,8 @@ class BucketBloc extends Bloc<BucketEvent, BucketState> {
     }
   }
 
-  Future<void> _removeFromRelease(
-      _RemoveFromRelease event, Emitter<BucketState> emit) async {
+  Future<void> _removeFromRelease(_RemoveFromRelease event,
+      Emitter<BucketState> emit) async {
     emit(const BucketState.loading());
     await firestore.publishBucket(bucketId: event.bucketId, isPublish: false);
     emit(const BucketState.isPublished(isPublished: false));
@@ -125,8 +126,8 @@ class BucketBloc extends Bloc<BucketEvent, BucketState> {
     emit(const BucketState.success());
   }
 
-  Future<void> _deleteAnswer(
-      _DeleteAnswer event, Emitter<BucketState> emit) async {
+  Future<void> _deleteAnswer(_DeleteAnswer event,
+      Emitter<BucketState> emit) async {
     emit(const BucketState.loading());
     try {
       final questions = await firestore.deleteAnswer(
@@ -141,7 +142,8 @@ class BucketBloc extends Bloc<BucketEvent, BucketState> {
       Questions currentQuestion = event.existedQuestions;
       currentQuestion.variants!.removeAt(event.indexToDelete);
       questions.where((e) => e.id == currentQuestion.id);
-      int index = questions.indexWhere((question) => question.id == currentQuestion.id);
+      int index = questions.indexWhere((question) =>
+      question.id == currentQuestion.id);
 
       if (index != -1) {
         questions[index] = currentQuestion;
@@ -150,8 +152,8 @@ class BucketBloc extends Bloc<BucketEvent, BucketState> {
     }
   }
 
-  Future<void> _deleteQuestion(
-      _DeleteQuestion event, Emitter<BucketState> emit) async {
+  Future<void> _deleteQuestion(_DeleteQuestion event,
+      Emitter<BucketState> emit) async {
     emit(const BucketState.loading());
     try {
       final questions = await firestore.deleteQuestion(
@@ -166,8 +168,20 @@ class BucketBloc extends Bloc<BucketEvent, BucketState> {
     }
   }
 
-  Future<void> _searchByName(
-      _SearchByName event, Emitter<BucketState> emit) async {
+  Future<void> _deleteFullBucket(_DeleteFullBucket event,
+      Emitter<BucketState> emit) async {
+    emit(const BucketState.loading());
+    try {
+      await firestore.deleteFullBucket(bucketId: event.bucketId);
+      questionnarieBloc.add(const QuestionnarieEvent.init());
+      emit(const BucketState.success());
+    } on BadRequestException catch (e) {
+      emit(BucketState.error(error: e.message));
+    }
+  }
+
+  Future<void> _searchByName(_SearchByName event,
+      Emitter<BucketState> emit) async {
     emit(const BucketState.searchLoading());
     final q = await firestore.getQuestions(bucketId: event.bucket!.id!);
     if (event.name.isEmpty) {

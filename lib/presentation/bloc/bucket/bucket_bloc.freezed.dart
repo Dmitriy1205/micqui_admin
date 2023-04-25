@@ -38,6 +38,7 @@ mixin _$BucketEvent {
     required TResult Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)
         deleteAnswer,
+    required TResult Function(String bucketId) deleteBucket,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,6 +62,7 @@ mixin _$BucketEvent {
     TResult? Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)?
         deleteAnswer,
+    TResult? Function(String bucketId)? deleteBucket,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -84,6 +86,7 @@ mixin _$BucketEvent {
     TResult Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)?
         deleteAnswer,
+    TResult Function(String bucketId)? deleteBucket,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -99,6 +102,7 @@ mixin _$BucketEvent {
     required TResult Function(_Publish value) publish,
     required TResult Function(_DeleteQuestion value) deleteQuestion,
     required TResult Function(_DeleteAnswer value) deleteAnswer,
+    required TResult Function(_DeleteFullBucket value) deleteBucket,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -113,6 +117,7 @@ mixin _$BucketEvent {
     TResult? Function(_Publish value)? publish,
     TResult? Function(_DeleteQuestion value)? deleteQuestion,
     TResult? Function(_DeleteAnswer value)? deleteAnswer,
+    TResult? Function(_DeleteFullBucket value)? deleteBucket,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -127,6 +132,7 @@ mixin _$BucketEvent {
     TResult Function(_Publish value)? publish,
     TResult Function(_DeleteQuestion value)? deleteQuestion,
     TResult Function(_DeleteAnswer value)? deleteAnswer,
+    TResult Function(_DeleteFullBucket value)? deleteBucket,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -233,6 +239,7 @@ class _$_Init implements _Init {
     required TResult Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)
         deleteAnswer,
+    required TResult Function(String bucketId) deleteBucket,
   }) {
     return init(bucketId);
   }
@@ -259,6 +266,7 @@ class _$_Init implements _Init {
     TResult? Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)?
         deleteAnswer,
+    TResult? Function(String bucketId)? deleteBucket,
   }) {
     return init?.call(bucketId);
   }
@@ -285,6 +293,7 @@ class _$_Init implements _Init {
     TResult Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)?
         deleteAnswer,
+    TResult Function(String bucketId)? deleteBucket,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -306,6 +315,7 @@ class _$_Init implements _Init {
     required TResult Function(_Publish value) publish,
     required TResult Function(_DeleteQuestion value) deleteQuestion,
     required TResult Function(_DeleteAnswer value) deleteAnswer,
+    required TResult Function(_DeleteFullBucket value) deleteBucket,
   }) {
     return init(this);
   }
@@ -323,6 +333,7 @@ class _$_Init implements _Init {
     TResult? Function(_Publish value)? publish,
     TResult? Function(_DeleteQuestion value)? deleteQuestion,
     TResult? Function(_DeleteAnswer value)? deleteAnswer,
+    TResult? Function(_DeleteFullBucket value)? deleteBucket,
   }) {
     return init?.call(this);
   }
@@ -340,6 +351,7 @@ class _$_Init implements _Init {
     TResult Function(_Publish value)? publish,
     TResult Function(_DeleteQuestion value)? deleteQuestion,
     TResult Function(_DeleteAnswer value)? deleteAnswer,
+    TResult Function(_DeleteFullBucket value)? deleteBucket,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -451,6 +463,7 @@ class _$_AddQuestion implements _AddQuestion {
     required TResult Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)
         deleteAnswer,
+    required TResult Function(String bucketId) deleteBucket,
   }) {
     return addQuestion(questions);
   }
@@ -477,6 +490,7 @@ class _$_AddQuestion implements _AddQuestion {
     TResult? Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)?
         deleteAnswer,
+    TResult? Function(String bucketId)? deleteBucket,
   }) {
     return addQuestion?.call(questions);
   }
@@ -503,6 +517,7 @@ class _$_AddQuestion implements _AddQuestion {
     TResult Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)?
         deleteAnswer,
+    TResult Function(String bucketId)? deleteBucket,
     required TResult orElse(),
   }) {
     if (addQuestion != null) {
@@ -524,6 +539,7 @@ class _$_AddQuestion implements _AddQuestion {
     required TResult Function(_Publish value) publish,
     required TResult Function(_DeleteQuestion value) deleteQuestion,
     required TResult Function(_DeleteAnswer value) deleteAnswer,
+    required TResult Function(_DeleteFullBucket value) deleteBucket,
   }) {
     return addQuestion(this);
   }
@@ -541,6 +557,7 @@ class _$_AddQuestion implements _AddQuestion {
     TResult? Function(_Publish value)? publish,
     TResult? Function(_DeleteQuestion value)? deleteQuestion,
     TResult? Function(_DeleteAnswer value)? deleteAnswer,
+    TResult? Function(_DeleteFullBucket value)? deleteBucket,
   }) {
     return addQuestion?.call(this);
   }
@@ -558,6 +575,7 @@ class _$_AddQuestion implements _AddQuestion {
     TResult Function(_Publish value)? publish,
     TResult Function(_DeleteQuestion value)? deleteQuestion,
     TResult Function(_DeleteAnswer value)? deleteAnswer,
+    TResult Function(_DeleteFullBucket value)? deleteBucket,
     required TResult orElse(),
   }) {
     if (addQuestion != null) {
@@ -708,6 +726,7 @@ class _$_SetQuestion implements _SetQuestion {
     required TResult Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)
         deleteAnswer,
+    required TResult Function(String bucketId) deleteBucket,
   }) {
     return setQuestion(bucketId, questionIndex, questionId, question);
   }
@@ -734,6 +753,7 @@ class _$_SetQuestion implements _SetQuestion {
     TResult? Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)?
         deleteAnswer,
+    TResult? Function(String bucketId)? deleteBucket,
   }) {
     return setQuestion?.call(bucketId, questionIndex, questionId, question);
   }
@@ -760,6 +780,7 @@ class _$_SetQuestion implements _SetQuestion {
     TResult Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)?
         deleteAnswer,
+    TResult Function(String bucketId)? deleteBucket,
     required TResult orElse(),
   }) {
     if (setQuestion != null) {
@@ -781,6 +802,7 @@ class _$_SetQuestion implements _SetQuestion {
     required TResult Function(_Publish value) publish,
     required TResult Function(_DeleteQuestion value) deleteQuestion,
     required TResult Function(_DeleteAnswer value) deleteAnswer,
+    required TResult Function(_DeleteFullBucket value) deleteBucket,
   }) {
     return setQuestion(this);
   }
@@ -798,6 +820,7 @@ class _$_SetQuestion implements _SetQuestion {
     TResult? Function(_Publish value)? publish,
     TResult? Function(_DeleteQuestion value)? deleteQuestion,
     TResult? Function(_DeleteAnswer value)? deleteAnswer,
+    TResult? Function(_DeleteFullBucket value)? deleteBucket,
   }) {
     return setQuestion?.call(this);
   }
@@ -815,6 +838,7 @@ class _$_SetQuestion implements _SetQuestion {
     TResult Function(_Publish value)? publish,
     TResult Function(_DeleteQuestion value)? deleteQuestion,
     TResult Function(_DeleteAnswer value)? deleteAnswer,
+    TResult Function(_DeleteFullBucket value)? deleteBucket,
     required TResult orElse(),
   }) {
     if (setQuestion != null) {
@@ -992,6 +1016,7 @@ class _$_AddAnswer implements _AddAnswer {
     required TResult Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)
         deleteAnswer,
+    required TResult Function(String bucketId) deleteBucket,
   }) {
     return addAnswer(question, questionIndex, answerList, questions);
   }
@@ -1018,6 +1043,7 @@ class _$_AddAnswer implements _AddAnswer {
     TResult? Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)?
         deleteAnswer,
+    TResult? Function(String bucketId)? deleteBucket,
   }) {
     return addAnswer?.call(question, questionIndex, answerList, questions);
   }
@@ -1044,6 +1070,7 @@ class _$_AddAnswer implements _AddAnswer {
     TResult Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)?
         deleteAnswer,
+    TResult Function(String bucketId)? deleteBucket,
     required TResult orElse(),
   }) {
     if (addAnswer != null) {
@@ -1065,6 +1092,7 @@ class _$_AddAnswer implements _AddAnswer {
     required TResult Function(_Publish value) publish,
     required TResult Function(_DeleteQuestion value) deleteQuestion,
     required TResult Function(_DeleteAnswer value) deleteAnswer,
+    required TResult Function(_DeleteFullBucket value) deleteBucket,
   }) {
     return addAnswer(this);
   }
@@ -1082,6 +1110,7 @@ class _$_AddAnswer implements _AddAnswer {
     TResult? Function(_Publish value)? publish,
     TResult? Function(_DeleteQuestion value)? deleteQuestion,
     TResult? Function(_DeleteAnswer value)? deleteAnswer,
+    TResult? Function(_DeleteFullBucket value)? deleteBucket,
   }) {
     return addAnswer?.call(this);
   }
@@ -1099,6 +1128,7 @@ class _$_AddAnswer implements _AddAnswer {
     TResult Function(_Publish value)? publish,
     TResult Function(_DeleteQuestion value)? deleteQuestion,
     TResult Function(_DeleteAnswer value)? deleteAnswer,
+    TResult Function(_DeleteFullBucket value)? deleteBucket,
     required TResult orElse(),
   }) {
     if (addAnswer != null) {
@@ -1260,6 +1290,7 @@ class _$_SetAnswer implements _SetAnswer {
     required TResult Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)
         deleteAnswer,
+    required TResult Function(String bucketId) deleteBucket,
   }) {
     return setAnswer(bucketId, questionIndex, question, answer);
   }
@@ -1286,6 +1317,7 @@ class _$_SetAnswer implements _SetAnswer {
     TResult? Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)?
         deleteAnswer,
+    TResult? Function(String bucketId)? deleteBucket,
   }) {
     return setAnswer?.call(bucketId, questionIndex, question, answer);
   }
@@ -1312,6 +1344,7 @@ class _$_SetAnswer implements _SetAnswer {
     TResult Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)?
         deleteAnswer,
+    TResult Function(String bucketId)? deleteBucket,
     required TResult orElse(),
   }) {
     if (setAnswer != null) {
@@ -1333,6 +1366,7 @@ class _$_SetAnswer implements _SetAnswer {
     required TResult Function(_Publish value) publish,
     required TResult Function(_DeleteQuestion value) deleteQuestion,
     required TResult Function(_DeleteAnswer value) deleteAnswer,
+    required TResult Function(_DeleteFullBucket value) deleteBucket,
   }) {
     return setAnswer(this);
   }
@@ -1350,6 +1384,7 @@ class _$_SetAnswer implements _SetAnswer {
     TResult? Function(_Publish value)? publish,
     TResult? Function(_DeleteQuestion value)? deleteQuestion,
     TResult? Function(_DeleteAnswer value)? deleteAnswer,
+    TResult? Function(_DeleteFullBucket value)? deleteBucket,
   }) {
     return setAnswer?.call(this);
   }
@@ -1367,6 +1402,7 @@ class _$_SetAnswer implements _SetAnswer {
     TResult Function(_Publish value)? publish,
     TResult Function(_DeleteQuestion value)? deleteQuestion,
     TResult Function(_DeleteAnswer value)? deleteAnswer,
+    TResult Function(_DeleteFullBucket value)? deleteBucket,
     required TResult orElse(),
   }) {
     if (setAnswer != null) {
@@ -1498,6 +1534,7 @@ class _$_SearchByName implements _SearchByName {
     required TResult Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)
         deleteAnswer,
+    required TResult Function(String bucketId) deleteBucket,
   }) {
     return searchByName(name, bucket);
   }
@@ -1524,6 +1561,7 @@ class _$_SearchByName implements _SearchByName {
     TResult? Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)?
         deleteAnswer,
+    TResult? Function(String bucketId)? deleteBucket,
   }) {
     return searchByName?.call(name, bucket);
   }
@@ -1550,6 +1588,7 @@ class _$_SearchByName implements _SearchByName {
     TResult Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)?
         deleteAnswer,
+    TResult Function(String bucketId)? deleteBucket,
     required TResult orElse(),
   }) {
     if (searchByName != null) {
@@ -1571,6 +1610,7 @@ class _$_SearchByName implements _SearchByName {
     required TResult Function(_Publish value) publish,
     required TResult Function(_DeleteQuestion value) deleteQuestion,
     required TResult Function(_DeleteAnswer value) deleteAnswer,
+    required TResult Function(_DeleteFullBucket value) deleteBucket,
   }) {
     return searchByName(this);
   }
@@ -1588,6 +1628,7 @@ class _$_SearchByName implements _SearchByName {
     TResult? Function(_Publish value)? publish,
     TResult? Function(_DeleteQuestion value)? deleteQuestion,
     TResult? Function(_DeleteAnswer value)? deleteAnswer,
+    TResult? Function(_DeleteFullBucket value)? deleteBucket,
   }) {
     return searchByName?.call(this);
   }
@@ -1605,6 +1646,7 @@ class _$_SearchByName implements _SearchByName {
     TResult Function(_Publish value)? publish,
     TResult Function(_DeleteQuestion value)? deleteQuestion,
     TResult Function(_DeleteAnswer value)? deleteAnswer,
+    TResult Function(_DeleteFullBucket value)? deleteBucket,
     required TResult orElse(),
   }) {
     if (searchByName != null) {
@@ -1712,6 +1754,7 @@ class _$_RemoveFromRelease implements _RemoveFromRelease {
     required TResult Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)
         deleteAnswer,
+    required TResult Function(String bucketId) deleteBucket,
   }) {
     return removeFromRelease(bucketId);
   }
@@ -1738,6 +1781,7 @@ class _$_RemoveFromRelease implements _RemoveFromRelease {
     TResult? Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)?
         deleteAnswer,
+    TResult? Function(String bucketId)? deleteBucket,
   }) {
     return removeFromRelease?.call(bucketId);
   }
@@ -1764,6 +1808,7 @@ class _$_RemoveFromRelease implements _RemoveFromRelease {
     TResult Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)?
         deleteAnswer,
+    TResult Function(String bucketId)? deleteBucket,
     required TResult orElse(),
   }) {
     if (removeFromRelease != null) {
@@ -1785,6 +1830,7 @@ class _$_RemoveFromRelease implements _RemoveFromRelease {
     required TResult Function(_Publish value) publish,
     required TResult Function(_DeleteQuestion value) deleteQuestion,
     required TResult Function(_DeleteAnswer value) deleteAnswer,
+    required TResult Function(_DeleteFullBucket value) deleteBucket,
   }) {
     return removeFromRelease(this);
   }
@@ -1802,6 +1848,7 @@ class _$_RemoveFromRelease implements _RemoveFromRelease {
     TResult? Function(_Publish value)? publish,
     TResult? Function(_DeleteQuestion value)? deleteQuestion,
     TResult? Function(_DeleteAnswer value)? deleteAnswer,
+    TResult? Function(_DeleteFullBucket value)? deleteBucket,
   }) {
     return removeFromRelease?.call(this);
   }
@@ -1819,6 +1866,7 @@ class _$_RemoveFromRelease implements _RemoveFromRelease {
     TResult Function(_Publish value)? publish,
     TResult Function(_DeleteQuestion value)? deleteQuestion,
     TResult Function(_DeleteAnswer value)? deleteAnswer,
+    TResult Function(_DeleteFullBucket value)? deleteBucket,
     required TResult orElse(),
   }) {
     if (removeFromRelease != null) {
@@ -1922,6 +1970,7 @@ class _$_Publish implements _Publish {
     required TResult Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)
         deleteAnswer,
+    required TResult Function(String bucketId) deleteBucket,
   }) {
     return publish(bucketId);
   }
@@ -1948,6 +1997,7 @@ class _$_Publish implements _Publish {
     TResult? Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)?
         deleteAnswer,
+    TResult? Function(String bucketId)? deleteBucket,
   }) {
     return publish?.call(bucketId);
   }
@@ -1974,6 +2024,7 @@ class _$_Publish implements _Publish {
     TResult Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)?
         deleteAnswer,
+    TResult Function(String bucketId)? deleteBucket,
     required TResult orElse(),
   }) {
     if (publish != null) {
@@ -1995,6 +2046,7 @@ class _$_Publish implements _Publish {
     required TResult Function(_Publish value) publish,
     required TResult Function(_DeleteQuestion value) deleteQuestion,
     required TResult Function(_DeleteAnswer value) deleteAnswer,
+    required TResult Function(_DeleteFullBucket value) deleteBucket,
   }) {
     return publish(this);
   }
@@ -2012,6 +2064,7 @@ class _$_Publish implements _Publish {
     TResult? Function(_Publish value)? publish,
     TResult? Function(_DeleteQuestion value)? deleteQuestion,
     TResult? Function(_DeleteAnswer value)? deleteAnswer,
+    TResult? Function(_DeleteFullBucket value)? deleteBucket,
   }) {
     return publish?.call(this);
   }
@@ -2029,6 +2082,7 @@ class _$_Publish implements _Publish {
     TResult Function(_Publish value)? publish,
     TResult Function(_DeleteQuestion value)? deleteQuestion,
     TResult Function(_DeleteAnswer value)? deleteAnswer,
+    TResult Function(_DeleteFullBucket value)? deleteBucket,
     required TResult orElse(),
   }) {
     if (publish != null) {
@@ -2161,6 +2215,7 @@ class _$_DeleteQuestion implements _DeleteQuestion {
     required TResult Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)
         deleteAnswer,
+    required TResult Function(String bucketId) deleteBucket,
   }) {
     return deleteQuestion(bucketId, index, questions);
   }
@@ -2187,6 +2242,7 @@ class _$_DeleteQuestion implements _DeleteQuestion {
     TResult? Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)?
         deleteAnswer,
+    TResult? Function(String bucketId)? deleteBucket,
   }) {
     return deleteQuestion?.call(bucketId, index, questions);
   }
@@ -2213,6 +2269,7 @@ class _$_DeleteQuestion implements _DeleteQuestion {
     TResult Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)?
         deleteAnswer,
+    TResult Function(String bucketId)? deleteBucket,
     required TResult orElse(),
   }) {
     if (deleteQuestion != null) {
@@ -2234,6 +2291,7 @@ class _$_DeleteQuestion implements _DeleteQuestion {
     required TResult Function(_Publish value) publish,
     required TResult Function(_DeleteQuestion value) deleteQuestion,
     required TResult Function(_DeleteAnswer value) deleteAnswer,
+    required TResult Function(_DeleteFullBucket value) deleteBucket,
   }) {
     return deleteQuestion(this);
   }
@@ -2251,6 +2309,7 @@ class _$_DeleteQuestion implements _DeleteQuestion {
     TResult? Function(_Publish value)? publish,
     TResult? Function(_DeleteQuestion value)? deleteQuestion,
     TResult? Function(_DeleteAnswer value)? deleteAnswer,
+    TResult? Function(_DeleteFullBucket value)? deleteBucket,
   }) {
     return deleteQuestion?.call(this);
   }
@@ -2268,6 +2327,7 @@ class _$_DeleteQuestion implements _DeleteQuestion {
     TResult Function(_Publish value)? publish,
     TResult Function(_DeleteQuestion value)? deleteQuestion,
     TResult Function(_DeleteAnswer value)? deleteAnswer,
+    TResult Function(_DeleteFullBucket value)? deleteBucket,
     required TResult orElse(),
   }) {
     if (deleteQuestion != null) {
@@ -2430,6 +2490,7 @@ class _$_DeleteAnswer implements _DeleteAnswer {
     required TResult Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)
         deleteAnswer,
+    required TResult Function(String bucketId) deleteBucket,
   }) {
     return deleteAnswer(bucketId, existedQuestions, indexToDelete, questions);
   }
@@ -2456,6 +2517,7 @@ class _$_DeleteAnswer implements _DeleteAnswer {
     TResult? Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)?
         deleteAnswer,
+    TResult? Function(String bucketId)? deleteBucket,
   }) {
     return deleteAnswer?.call(
         bucketId, existedQuestions, indexToDelete, questions);
@@ -2483,6 +2545,7 @@ class _$_DeleteAnswer implements _DeleteAnswer {
     TResult Function(String bucketId, Questions existedQuestions,
             int indexToDelete, List<Questions>? questions)?
         deleteAnswer,
+    TResult Function(String bucketId)? deleteBucket,
     required TResult orElse(),
   }) {
     if (deleteAnswer != null) {
@@ -2504,6 +2567,7 @@ class _$_DeleteAnswer implements _DeleteAnswer {
     required TResult Function(_Publish value) publish,
     required TResult Function(_DeleteQuestion value) deleteQuestion,
     required TResult Function(_DeleteAnswer value) deleteAnswer,
+    required TResult Function(_DeleteFullBucket value) deleteBucket,
   }) {
     return deleteAnswer(this);
   }
@@ -2521,6 +2585,7 @@ class _$_DeleteAnswer implements _DeleteAnswer {
     TResult? Function(_Publish value)? publish,
     TResult? Function(_DeleteQuestion value)? deleteQuestion,
     TResult? Function(_DeleteAnswer value)? deleteAnswer,
+    TResult? Function(_DeleteFullBucket value)? deleteBucket,
   }) {
     return deleteAnswer?.call(this);
   }
@@ -2538,6 +2603,7 @@ class _$_DeleteAnswer implements _DeleteAnswer {
     TResult Function(_Publish value)? publish,
     TResult Function(_DeleteQuestion value)? deleteQuestion,
     TResult Function(_DeleteAnswer value)? deleteAnswer,
+    TResult Function(_DeleteFullBucket value)? deleteBucket,
     required TResult orElse(),
   }) {
     if (deleteAnswer != null) {
@@ -2560,6 +2626,223 @@ abstract class _DeleteAnswer implements BucketEvent {
   List<Questions>? get questions;
   @JsonKey(ignore: true)
   _$$_DeleteAnswerCopyWith<_$_DeleteAnswer> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_DeleteFullBucketCopyWith<$Res> {
+  factory _$$_DeleteFullBucketCopyWith(
+          _$_DeleteFullBucket value, $Res Function(_$_DeleteFullBucket) then) =
+      __$$_DeleteFullBucketCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String bucketId});
+}
+
+/// @nodoc
+class __$$_DeleteFullBucketCopyWithImpl<$Res>
+    extends _$BucketEventCopyWithImpl<$Res, _$_DeleteFullBucket>
+    implements _$$_DeleteFullBucketCopyWith<$Res> {
+  __$$_DeleteFullBucketCopyWithImpl(
+      _$_DeleteFullBucket _value, $Res Function(_$_DeleteFullBucket) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? bucketId = null,
+  }) {
+    return _then(_$_DeleteFullBucket(
+      bucketId: null == bucketId
+          ? _value.bucketId
+          : bucketId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_DeleteFullBucket implements _DeleteFullBucket {
+  const _$_DeleteFullBucket({required this.bucketId});
+
+  @override
+  final String bucketId;
+
+  @override
+  String toString() {
+    return 'BucketEvent.deleteBucket(bucketId: $bucketId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DeleteFullBucket &&
+            (identical(other.bucketId, bucketId) ||
+                other.bucketId == bucketId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, bucketId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DeleteFullBucketCopyWith<_$_DeleteFullBucket> get copyWith =>
+      __$$_DeleteFullBucketCopyWithImpl<_$_DeleteFullBucket>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? bucketId) init,
+    required TResult Function(List<Questions>? questions) addQuestion,
+    required TResult Function(String bucketId, int? questionIndex,
+            String? questionId, Questions question)
+        setQuestion,
+    required TResult Function(Questions question, int questionIndex,
+            List<Answer>? answerList, List<Questions>? questions)
+        addAnswer,
+    required TResult Function(String bucketId, int? questionIndex,
+            Questions question, Answer answer)
+        setAnswer,
+    required TResult Function(String name, Bucket? bucket) searchByName,
+    required TResult Function(String bucketId) removeFromRelease,
+    required TResult Function(String bucketId) publish,
+    required TResult Function(
+            String bucketId, int index, List<Questions>? questions)
+        deleteQuestion,
+    required TResult Function(String bucketId, Questions existedQuestions,
+            int indexToDelete, List<Questions>? questions)
+        deleteAnswer,
+    required TResult Function(String bucketId) deleteBucket,
+  }) {
+    return deleteBucket(bucketId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? bucketId)? init,
+    TResult? Function(List<Questions>? questions)? addQuestion,
+    TResult? Function(String bucketId, int? questionIndex, String? questionId,
+            Questions question)?
+        setQuestion,
+    TResult? Function(Questions question, int questionIndex,
+            List<Answer>? answerList, List<Questions>? questions)?
+        addAnswer,
+    TResult? Function(String bucketId, int? questionIndex, Questions question,
+            Answer answer)?
+        setAnswer,
+    TResult? Function(String name, Bucket? bucket)? searchByName,
+    TResult? Function(String bucketId)? removeFromRelease,
+    TResult? Function(String bucketId)? publish,
+    TResult? Function(String bucketId, int index, List<Questions>? questions)?
+        deleteQuestion,
+    TResult? Function(String bucketId, Questions existedQuestions,
+            int indexToDelete, List<Questions>? questions)?
+        deleteAnswer,
+    TResult? Function(String bucketId)? deleteBucket,
+  }) {
+    return deleteBucket?.call(bucketId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? bucketId)? init,
+    TResult Function(List<Questions>? questions)? addQuestion,
+    TResult Function(String bucketId, int? questionIndex, String? questionId,
+            Questions question)?
+        setQuestion,
+    TResult Function(Questions question, int questionIndex,
+            List<Answer>? answerList, List<Questions>? questions)?
+        addAnswer,
+    TResult Function(String bucketId, int? questionIndex, Questions question,
+            Answer answer)?
+        setAnswer,
+    TResult Function(String name, Bucket? bucket)? searchByName,
+    TResult Function(String bucketId)? removeFromRelease,
+    TResult Function(String bucketId)? publish,
+    TResult Function(String bucketId, int index, List<Questions>? questions)?
+        deleteQuestion,
+    TResult Function(String bucketId, Questions existedQuestions,
+            int indexToDelete, List<Questions>? questions)?
+        deleteAnswer,
+    TResult Function(String bucketId)? deleteBucket,
+    required TResult orElse(),
+  }) {
+    if (deleteBucket != null) {
+      return deleteBucket(bucketId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_AddQuestion value) addQuestion,
+    required TResult Function(_SetQuestion value) setQuestion,
+    required TResult Function(_AddAnswer value) addAnswer,
+    required TResult Function(_SetAnswer value) setAnswer,
+    required TResult Function(_SearchByName value) searchByName,
+    required TResult Function(_RemoveFromRelease value) removeFromRelease,
+    required TResult Function(_Publish value) publish,
+    required TResult Function(_DeleteQuestion value) deleteQuestion,
+    required TResult Function(_DeleteAnswer value) deleteAnswer,
+    required TResult Function(_DeleteFullBucket value) deleteBucket,
+  }) {
+    return deleteBucket(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Init value)? init,
+    TResult? Function(_AddQuestion value)? addQuestion,
+    TResult? Function(_SetQuestion value)? setQuestion,
+    TResult? Function(_AddAnswer value)? addAnswer,
+    TResult? Function(_SetAnswer value)? setAnswer,
+    TResult? Function(_SearchByName value)? searchByName,
+    TResult? Function(_RemoveFromRelease value)? removeFromRelease,
+    TResult? Function(_Publish value)? publish,
+    TResult? Function(_DeleteQuestion value)? deleteQuestion,
+    TResult? Function(_DeleteAnswer value)? deleteAnswer,
+    TResult? Function(_DeleteFullBucket value)? deleteBucket,
+  }) {
+    return deleteBucket?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_AddQuestion value)? addQuestion,
+    TResult Function(_SetQuestion value)? setQuestion,
+    TResult Function(_AddAnswer value)? addAnswer,
+    TResult Function(_SetAnswer value)? setAnswer,
+    TResult Function(_SearchByName value)? searchByName,
+    TResult Function(_RemoveFromRelease value)? removeFromRelease,
+    TResult Function(_Publish value)? publish,
+    TResult Function(_DeleteQuestion value)? deleteQuestion,
+    TResult Function(_DeleteAnswer value)? deleteAnswer,
+    TResult Function(_DeleteFullBucket value)? deleteBucket,
+    required TResult orElse(),
+  }) {
+    if (deleteBucket != null) {
+      return deleteBucket(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteFullBucket implements BucketEvent {
+  const factory _DeleteFullBucket({required final String bucketId}) =
+      _$_DeleteFullBucket;
+
+  String get bucketId;
+  @JsonKey(ignore: true)
+  _$$_DeleteFullBucketCopyWith<_$_DeleteFullBucket> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

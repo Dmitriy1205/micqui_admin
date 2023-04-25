@@ -83,6 +83,36 @@ class FirestoreRepository {
     }
   }
 
+  Future<void> deleteFullBucket(
+      {required String bucketId}) async {
+    try {
+      await _firestore.collection('buckets').doc(bucketId).delete();
+    } on FirebaseException catch (e) {
+      throw BadRequestException(message: e.message!);
+    }
+  }
+
+  Future<List<Bucket>?> deleteBucket(
+      {required String bucketId,
+      Bucket? existedBucket,
+      int? indexToDelete}) async {
+    try {
+      final buckets = await getBuckets();
+
+      // if (existedBucket == null && indexToDelete == null) {
+      await _firestore.collection('buckets').doc(bucketId).delete();
+      // } else {
+      //   await _firestore.collection('buckets').doc(bucketId).delete();
+      // }
+
+      return buckets;
+    } on FirebaseException catch (e) {
+      throw BadRequestException(message: e.message!);
+    } on Error {
+      throw Error();
+    }
+  }
+
   Future<List<Questions>> setQuestion(
       {required String bucketId,
       required int? index,
@@ -150,7 +180,6 @@ class FirestoreRepository {
 
   Future<List<Questions>> setAnswer(
       {required String bucketId,
-
       required Questions existedQuestions,
       required Answer answer}) async {
     try {
@@ -243,7 +272,7 @@ class FirestoreRepository {
       return questionsData.map((data) => Questions.fromJson(data)).toList();
     } on FirebaseException catch (e) {
       throw BadRequestException(message: e.message!);
-    } on Error{
+    } on Error {
       throw Error();
     }
   }

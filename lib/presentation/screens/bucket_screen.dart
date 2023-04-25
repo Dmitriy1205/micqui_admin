@@ -45,11 +45,12 @@ class BucketScreen extends StatefulWidget {
 class _BucketScreenState extends State<BucketScreen> {
   final BucketBloc _bloc = sl<BucketBloc>();
   final _searchController = TextEditingController();
-  List<Map<String, TextEditingController>> questionControllers = [];
-  List<Map<String, TextEditingController>> answerControllers = [];
-  List<Map<String, FocusNode>> questionFocuses = [];
-  List<Map<String, FocusNode>> answerFocuses = [];
-  late List<Questions> questions;
+  List<TextEditingController> questionControllers = [];
+  List<TextEditingController> answerControllers = [];
+  List<FocusNode> answerNameFocusNodes = [];
+  List<FocusNode> questionNameFocusNodes = [];
+
+  List<Questions> questions = [];
   late List<Answer>? answerVariant;
   late bool published;
   late Bucket bucket;
@@ -61,6 +62,27 @@ class _BucketScreenState extends State<BucketScreen> {
     bucket = context.read<QuestionnarieBloc>().state.bucket![widget.bucketId];
     questions = List.generate(
         bucket.questions?.length ?? 0, (index) => bucket.questions![index]);
+    if (questions.isNotEmpty) {
+      questionControllers.clear();
+      answerControllers.clear();
+      questionNameFocusNodes.clear();
+      answerNameFocusNodes.clear();
+
+      for (var item in questions) {
+        questionControllers
+            .add(TextEditingController(text: item.name ?? 'Name'));
+        questionNameFocusNodes.add(FocusNode());
+        for (var i in item.variants!) {
+          answerVariant = List.generate(
+              item.variants?.length ?? 0, (i) => item.variants![i]);
+          isChecked =
+              List.generate(answerVariant?.length ?? 0, (index) => false);
+          answerControllers
+              .add(TextEditingController(text: i.name ?? 'Answer Name'));
+          answerNameFocusNodes.add(FocusNode());
+        }
+      }
+    }
 
     published = bucket.published!;
     super.initState();
@@ -78,6 +100,32 @@ class _BucketScreenState extends State<BucketScreen> {
       body: BlocConsumer<BucketBloc, BucketState>(
         bloc: _bloc,
         listener: (context, state) {
+          if (state.questionsList != null && state.questionsList!.isNotEmpty) {
+            // checkable = List.generate(state.bucket!.length, (index) => false);
+            // selectedValues = List.generate(
+            //     state.bucket!.length,
+            //         (index) =>
+            //     state.bucket?[index].category ?? AppStrings.employee);
+            questionControllers.clear();
+
+            questionNameFocusNodes.clear();
+            answerNameFocusNodes.clear();
+            answerControllers.clear();
+            for (var item in state.questionsList!) {
+              questionControllers
+                  .add(TextEditingController(text: item.name ?? 'Name'));
+              questionNameFocusNodes.add(FocusNode());
+              for (var i in item.variants!) {
+                answerVariant = List.generate(
+                    item.variants?.length ?? 0, (i) => item.variants![i]);
+                isChecked =
+                    List.generate(answerVariant?.length ?? 0, (index) => false);
+                answerControllers
+                    .add(TextEditingController(text: i.name ?? 'Answer Name'));
+                answerNameFocusNodes.add(FocusNode());
+              }
+            }
+          }
           state.maybeMap(
               searchLoaded: (_) => questions = state.questionsList!,
               loaded: (s) => questions = s.questionsList!,
@@ -381,18 +429,6 @@ class _BucketScreenState extends State<BucketScreen> {
                 itemCount: questions.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  if (questionControllers.length <= index) {
-                    questionControllers.add({
-                      'name': TextEditingController(
-                          text: questions[index].name ?? 'Name'),
-                    });
-                  }
-                  if (questionFocuses.length <= index) {
-                    questionFocuses.add({
-                      'name': FocusNode(),
-                    });
-                  }
-
                   answerVariant = List.generate(
                       questions[index].variants?.length ?? 0,
                       (i) => questions[index].variants![i]);
@@ -418,9 +454,8 @@ class _BucketScreenState extends State<BucketScreen> {
                               Flexible(
                                 child: EditableText(
                                   textAlign: TextAlign.start,
-                                  controller: questionControllers[index]
-                                      ['name']!,
-                                  focusNode: questionFocuses[index]['name']!,
+                                  controller: questionControllers[index],
+                                  focusNode: questionNameFocusNodes[index],
                                   cursorColor: AppColors.primary,
                                   backgroundCursorColor: AppColors.primary,
                                   style: AppTheme
@@ -433,14 +468,13 @@ class _BucketScreenState extends State<BucketScreen> {
                                   keyboardType: TextInputType.text,
                                   maxLines: 1,
                                   onSubmitted: (text) {
-                                    questionFocuses[index]['name']!.unfocus();
+                                    questionNameFocusNodes[index].unfocus();
                                     _bloc.add(BucketEvent.setQuestion(
                                         bucketId: bucket.id!,
                                         questionId: questions[index].id,
                                         question: Questions(
                                             id: questions[index].id,
                                             name: questionControllers[index]
-                                                    ['name']!
                                                 .text),
                                         questionIndex: index));
                                   },
@@ -503,17 +537,6 @@ class _BucketScreenState extends State<BucketScreen> {
       shrinkWrap: true,
       itemCount: answer.length,
       itemBuilder: (context, index) {
-        if (answerControllers.length <= index) {
-          answerControllers.add({
-            'answer': TextEditingController(
-                text: answer[index].name ?? 'Answer Name'),
-          });
-        }
-        if (answerFocuses.length <= index) {
-          answerFocuses.add({
-            'answer': FocusNode(),
-          });
-        }
         return Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -548,16 +571,16 @@ class _BucketScreenState extends State<BucketScreen> {
                     selectionControls: MaterialTextSelectionControls(),
                     keyboardType: TextInputType.text,
                     maxLines: 1,
-                    focusNode: answerFocuses[index]['answer']!,
-                    controller: answerControllers[index]['answer']!,
+                    focusNode: answerNameFocusNodes[index],
+                    controller: answerControllers[index],
                     onSubmitted: (text) {
-                      answerFocuses[index]['answer']!.unfocus();
+                      answerNameFocusNodes[index].unfocus();
                       _bloc.add(BucketEvent.setAnswer(
                         bucketId: bucket.id!,
                         questionIndex: 1,
                         question: currentQuestion,
                         answer: Answer(
-                            name: answerControllers[index]['answer']!.text,
+                            name: answerControllers[index].text,
                             isRight: false),
                       ));
                     },
@@ -649,9 +672,7 @@ class _BucketScreenState extends State<BucketScreen> {
         style: TextStyle(color: AppColors.text),
       ),
       onPressed: () {
-        context
-            .read<QuestionnarieBloc>()
-            .add(QuestionnarieEvent.deleteBucket(bucketId: bucketId));
+        _bloc.add(BucketEvent.deleteBucket(bucketId: bucketId));
         Navigator.pop(context);
       },
     );

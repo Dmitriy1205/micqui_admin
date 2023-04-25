@@ -109,7 +109,16 @@ class QuestionnarieBloc extends Bloc<QuestionnarieEvent, QuestionnarieState> {
     emit(const QuestionnarieState.initial());
   }
   Future<void> _deleteBucket(_DeleteBucket event, Emitter<QuestionnarieState> emit) async {
+    emit(const QuestionnarieState.loading());
+    try {
+      final buckets = await firestore.deleteBucket(bucketId: event.bucketId);
+      emit(QuestionnarieState.loaded(bucket: buckets));
+    } on Error {
+      List<Bucket> buckets = List.from(event.bucket!);
+      buckets.removeAt(event.index!);
 
+      emit(QuestionnarieState.loaded(bucket: buckets));
+    }
   }
   @override
   Future<void> close() {

@@ -37,8 +37,6 @@ class QuestionaireScreen extends StatefulWidget {
 class _QuestionaireScreenState extends State<QuestionaireScreen> {
   final _searchController = TextEditingController();
 
-  // List<Map<String, TextEditingController>> controllers = [];
-  // List<Map<String, FocusNode>> focuses = [];
   List<TextEditingController> nameControllers = [];
   List<TextEditingController> descControllers = [];
   List<FocusNode> nameFocusNodes = [];
@@ -46,9 +44,8 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
   String value = 'All';
 
   List<bool> checkable = [];
-  late List<String> selectedValues;
+  List<String> selectedValues = [];
   late List<Bucket> buckets;
-
 
   @override
   void dispose() {
@@ -64,21 +61,27 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
         body: BlocConsumer<QuestionnarieBloc, QuestionnarieState>(
           listener: (context, state) {
             if (state.bucket != null && state.bucket!.isNotEmpty) {
+
               checkable = List.generate(state.bucket!.length, (index) => false);
               selectedValues = List.generate(
                   state.bucket!.length,
                   (index) =>
                       state.bucket?[index].category ?? AppStrings.employee);
+              nameControllers.clear();
+              descControllers.clear();
+              nameFocusNodes.clear();
+              descControllers.clear();
               for (var item in state.bucket!) {
-                nameControllers.add(TextEditingController(text: item.name ?? 'Name'));
-                descControllers.add(TextEditingController(text: item.description ?? 'Description'));
+                nameControllers
+                    .add(TextEditingController(text: item.name ?? 'Name'));
+                descControllers.add(TextEditingController(
+                    text: item.description ?? 'Description'));
                 nameFocusNodes.add(FocusNode());
                 descFocusNodes.add(FocusNode());
               }
               print(nameControllers);
             }
             state.maybeMap(
-
                 success: (_) => context
                     .read<QuestionnarieBloc>()
                     .add(const QuestionnarieEvent.init()),
@@ -198,10 +201,7 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
                                             children: [
                                               IconButton(
                                                 onPressed: () {
-                                                  state.bucket!.removeWhere(
-                                                      (bucket) => checkable[
-                                                          state.bucket!.indexOf(
-                                                              bucket)]);
+                                                  // context.read<QuestionnarieBloc>().add(QuestionnarieEvent.deleteBucket(bucketId: bucketId))
                                                   checkable.clear();
                                                   checkable.addAll(
                                                       List.generate(
@@ -342,25 +342,7 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
               itemCount: state.bucket!.length,
               shrinkWrap: true,
               itemBuilder: (context, index) {
-                // if (controllers.length >= index) {
-                //   controllers.add({
-                //     'name': TextEditingController(
-                //       text: state.bucket?[index].name ?? 'Name',
-                //     ),
-                //     'description': TextEditingController(
-                //         text:
-                //             state.bucket?[index].description ?? 'Description'),
-                //     'category': TextEditingController(
-                //         text: state.bucket?[index].category ?? 'Category'),
-                //   });
-                // }
-                // if (focuses.length <= index) {
-                //   focuses.add({
-                //     'name': FocusNode(),
-                //     'description': FocusNode(),
-                //   });
-                // }
-                // print(controllers);
+                print(checkable[index]);
                 return Container(
                   key: ObjectKey(index),
                   decoration: BoxDecoration(
@@ -436,8 +418,8 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
                                   maxLines: 1,
                                   onSubmitted: (text) {
                                     nameFocusNodes[index].unfocus();
-                                    FocusScope.of(context).requestFocus(
-                                        nameFocusNodes[index]);
+                                    FocusScope.of(context)
+                                        .requestFocus(descFocusNodes[index]);
                                   },
                                   onSelectionHandleTapped: () {
                                     showAboutDialog(context: context);
@@ -461,10 +443,9 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
                                           QuestionnarieEvent.setBucket(
                                             bucket: Bucket(
                                               id: state.bucket?[index].id,
-                                              name: nameControllers[index]
-                                                  .text,
-                                              description: descControllers[index]
-                                                  .text,
+                                              name: nameControllers[index].text,
+                                              description:
+                                                  descControllers[index].text,
                                               category: selectedValues[index],
                                             ),
                                             bucketId: state.bucket?[index].id,
