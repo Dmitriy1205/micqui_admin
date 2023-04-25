@@ -25,6 +25,7 @@ mixin _$QuestionnarieEvent {
     required TResult Function(String name, String category) searchByName,
     required TResult Function(String category) sortByCategory,
     required TResult Function() reset,
+    required TResult Function(String bucketId) deleteBucket,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -36,6 +37,7 @@ mixin _$QuestionnarieEvent {
     TResult? Function(String name, String category)? searchByName,
     TResult? Function(String category)? sortByCategory,
     TResult? Function()? reset,
+    TResult? Function(String bucketId)? deleteBucket,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,6 +49,7 @@ mixin _$QuestionnarieEvent {
     TResult Function(String name, String category)? searchByName,
     TResult Function(String category)? sortByCategory,
     TResult Function()? reset,
+    TResult Function(String bucketId)? deleteBucket,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -59,6 +62,7 @@ mixin _$QuestionnarieEvent {
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_SortByCategory value) sortByCategory,
     required TResult Function(_Reset value) reset,
+    required TResult Function(_DeleteBucket value) deleteBucket,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,6 +74,7 @@ mixin _$QuestionnarieEvent {
     TResult? Function(_SearchByName value)? searchByName,
     TResult? Function(_SortByCategory value)? sortByCategory,
     TResult? Function(_Reset value)? reset,
+    TResult? Function(_DeleteBucket value)? deleteBucket,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -81,6 +86,7 @@ mixin _$QuestionnarieEvent {
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_SortByCategory value)? sortByCategory,
     TResult Function(_Reset value)? reset,
+    TResult Function(_DeleteBucket value)? deleteBucket,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -181,6 +187,7 @@ class _$_Init implements _Init {
     required TResult Function(String name, String category) searchByName,
     required TResult Function(String category) sortByCategory,
     required TResult Function() reset,
+    required TResult Function(String bucketId) deleteBucket,
   }) {
     return init(bucket);
   }
@@ -195,6 +202,7 @@ class _$_Init implements _Init {
     TResult? Function(String name, String category)? searchByName,
     TResult? Function(String category)? sortByCategory,
     TResult? Function()? reset,
+    TResult? Function(String bucketId)? deleteBucket,
   }) {
     return init?.call(bucket);
   }
@@ -209,6 +217,7 @@ class _$_Init implements _Init {
     TResult Function(String name, String category)? searchByName,
     TResult Function(String category)? sortByCategory,
     TResult Function()? reset,
+    TResult Function(String bucketId)? deleteBucket,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -227,6 +236,7 @@ class _$_Init implements _Init {
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_SortByCategory value) sortByCategory,
     required TResult Function(_Reset value) reset,
+    required TResult Function(_DeleteBucket value) deleteBucket,
   }) {
     return init(this);
   }
@@ -241,6 +251,7 @@ class _$_Init implements _Init {
     TResult? Function(_SearchByName value)? searchByName,
     TResult? Function(_SortByCategory value)? sortByCategory,
     TResult? Function(_Reset value)? reset,
+    TResult? Function(_DeleteBucket value)? deleteBucket,
   }) {
     return init?.call(this);
   }
@@ -255,6 +266,7 @@ class _$_Init implements _Init {
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_SortByCategory value)? sortByCategory,
     TResult Function(_Reset value)? reset,
+    TResult Function(_DeleteBucket value)? deleteBucket,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -317,6 +329,7 @@ class _$_AddBucket implements _AddBucket {
     required TResult Function(String name, String category) searchByName,
     required TResult Function(String category) sortByCategory,
     required TResult Function() reset,
+    required TResult Function(String bucketId) deleteBucket,
   }) {
     return addBucket();
   }
@@ -331,6 +344,7 @@ class _$_AddBucket implements _AddBucket {
     TResult? Function(String name, String category)? searchByName,
     TResult? Function(String category)? sortByCategory,
     TResult? Function()? reset,
+    TResult? Function(String bucketId)? deleteBucket,
   }) {
     return addBucket?.call();
   }
@@ -345,6 +359,7 @@ class _$_AddBucket implements _AddBucket {
     TResult Function(String name, String category)? searchByName,
     TResult Function(String category)? sortByCategory,
     TResult Function()? reset,
+    TResult Function(String bucketId)? deleteBucket,
     required TResult orElse(),
   }) {
     if (addBucket != null) {
@@ -363,6 +378,7 @@ class _$_AddBucket implements _AddBucket {
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_SortByCategory value) sortByCategory,
     required TResult Function(_Reset value) reset,
+    required TResult Function(_DeleteBucket value) deleteBucket,
   }) {
     return addBucket(this);
   }
@@ -377,6 +393,7 @@ class _$_AddBucket implements _AddBucket {
     TResult? Function(_SearchByName value)? searchByName,
     TResult? Function(_SortByCategory value)? sortByCategory,
     TResult? Function(_Reset value)? reset,
+    TResult? Function(_DeleteBucket value)? deleteBucket,
   }) {
     return addBucket?.call(this);
   }
@@ -391,6 +408,7 @@ class _$_AddBucket implements _AddBucket {
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_SortByCategory value)? sortByCategory,
     TResult Function(_Reset value)? reset,
+    TResult Function(_DeleteBucket value)? deleteBucket,
     required TResult orElse(),
   }) {
     if (addBucket != null) {
@@ -494,6 +512,7 @@ class _$_SetBucket implements _SetBucket {
     required TResult Function(String name, String category) searchByName,
     required TResult Function(String category) sortByCategory,
     required TResult Function() reset,
+    required TResult Function(String bucketId) deleteBucket,
   }) {
     return setBucket(bucket, bucketId);
   }
@@ -508,6 +527,7 @@ class _$_SetBucket implements _SetBucket {
     TResult? Function(String name, String category)? searchByName,
     TResult? Function(String category)? sortByCategory,
     TResult? Function()? reset,
+    TResult? Function(String bucketId)? deleteBucket,
   }) {
     return setBucket?.call(bucket, bucketId);
   }
@@ -522,6 +542,7 @@ class _$_SetBucket implements _SetBucket {
     TResult Function(String name, String category)? searchByName,
     TResult Function(String category)? sortByCategory,
     TResult Function()? reset,
+    TResult Function(String bucketId)? deleteBucket,
     required TResult orElse(),
   }) {
     if (setBucket != null) {
@@ -540,6 +561,7 @@ class _$_SetBucket implements _SetBucket {
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_SortByCategory value) sortByCategory,
     required TResult Function(_Reset value) reset,
+    required TResult Function(_DeleteBucket value) deleteBucket,
   }) {
     return setBucket(this);
   }
@@ -554,6 +576,7 @@ class _$_SetBucket implements _SetBucket {
     TResult? Function(_SearchByName value)? searchByName,
     TResult? Function(_SortByCategory value)? sortByCategory,
     TResult? Function(_Reset value)? reset,
+    TResult? Function(_DeleteBucket value)? deleteBucket,
   }) {
     return setBucket?.call(this);
   }
@@ -568,6 +591,7 @@ class _$_SetBucket implements _SetBucket {
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_SortByCategory value)? sortByCategory,
     TResult Function(_Reset value)? reset,
+    TResult Function(_DeleteBucket value)? deleteBucket,
     required TResult orElse(),
   }) {
     if (setBucket != null) {
@@ -670,6 +694,7 @@ class _$_UpdateCategory implements _UpdateCategory {
     required TResult Function(String name, String category) searchByName,
     required TResult Function(String category) sortByCategory,
     required TResult Function() reset,
+    required TResult Function(String bucketId) deleteBucket,
   }) {
     return updateCategory(bucketId, category);
   }
@@ -684,6 +709,7 @@ class _$_UpdateCategory implements _UpdateCategory {
     TResult? Function(String name, String category)? searchByName,
     TResult? Function(String category)? sortByCategory,
     TResult? Function()? reset,
+    TResult? Function(String bucketId)? deleteBucket,
   }) {
     return updateCategory?.call(bucketId, category);
   }
@@ -698,6 +724,7 @@ class _$_UpdateCategory implements _UpdateCategory {
     TResult Function(String name, String category)? searchByName,
     TResult Function(String category)? sortByCategory,
     TResult Function()? reset,
+    TResult Function(String bucketId)? deleteBucket,
     required TResult orElse(),
   }) {
     if (updateCategory != null) {
@@ -716,6 +743,7 @@ class _$_UpdateCategory implements _UpdateCategory {
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_SortByCategory value) sortByCategory,
     required TResult Function(_Reset value) reset,
+    required TResult Function(_DeleteBucket value) deleteBucket,
   }) {
     return updateCategory(this);
   }
@@ -730,6 +758,7 @@ class _$_UpdateCategory implements _UpdateCategory {
     TResult? Function(_SearchByName value)? searchByName,
     TResult? Function(_SortByCategory value)? sortByCategory,
     TResult? Function(_Reset value)? reset,
+    TResult? Function(_DeleteBucket value)? deleteBucket,
   }) {
     return updateCategory?.call(this);
   }
@@ -744,6 +773,7 @@ class _$_UpdateCategory implements _UpdateCategory {
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_SortByCategory value)? sortByCategory,
     TResult Function(_Reset value)? reset,
+    TResult Function(_DeleteBucket value)? deleteBucket,
     required TResult orElse(),
   }) {
     if (updateCategory != null) {
@@ -845,6 +875,7 @@ class _$_SearchByName implements _SearchByName {
     required TResult Function(String name, String category) searchByName,
     required TResult Function(String category) sortByCategory,
     required TResult Function() reset,
+    required TResult Function(String bucketId) deleteBucket,
   }) {
     return searchByName(name, category);
   }
@@ -859,6 +890,7 @@ class _$_SearchByName implements _SearchByName {
     TResult? Function(String name, String category)? searchByName,
     TResult? Function(String category)? sortByCategory,
     TResult? Function()? reset,
+    TResult? Function(String bucketId)? deleteBucket,
   }) {
     return searchByName?.call(name, category);
   }
@@ -873,6 +905,7 @@ class _$_SearchByName implements _SearchByName {
     TResult Function(String name, String category)? searchByName,
     TResult Function(String category)? sortByCategory,
     TResult Function()? reset,
+    TResult Function(String bucketId)? deleteBucket,
     required TResult orElse(),
   }) {
     if (searchByName != null) {
@@ -891,6 +924,7 @@ class _$_SearchByName implements _SearchByName {
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_SortByCategory value) sortByCategory,
     required TResult Function(_Reset value) reset,
+    required TResult Function(_DeleteBucket value) deleteBucket,
   }) {
     return searchByName(this);
   }
@@ -905,6 +939,7 @@ class _$_SearchByName implements _SearchByName {
     TResult? Function(_SearchByName value)? searchByName,
     TResult? Function(_SortByCategory value)? sortByCategory,
     TResult? Function(_Reset value)? reset,
+    TResult? Function(_DeleteBucket value)? deleteBucket,
   }) {
     return searchByName?.call(this);
   }
@@ -919,6 +954,7 @@ class _$_SearchByName implements _SearchByName {
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_SortByCategory value)? sortByCategory,
     TResult Function(_Reset value)? reset,
+    TResult Function(_DeleteBucket value)? deleteBucket,
     required TResult orElse(),
   }) {
     if (searchByName != null) {
@@ -1012,6 +1048,7 @@ class _$_SortByCategory implements _SortByCategory {
     required TResult Function(String name, String category) searchByName,
     required TResult Function(String category) sortByCategory,
     required TResult Function() reset,
+    required TResult Function(String bucketId) deleteBucket,
   }) {
     return sortByCategory(category);
   }
@@ -1026,6 +1063,7 @@ class _$_SortByCategory implements _SortByCategory {
     TResult? Function(String name, String category)? searchByName,
     TResult? Function(String category)? sortByCategory,
     TResult? Function()? reset,
+    TResult? Function(String bucketId)? deleteBucket,
   }) {
     return sortByCategory?.call(category);
   }
@@ -1040,6 +1078,7 @@ class _$_SortByCategory implements _SortByCategory {
     TResult Function(String name, String category)? searchByName,
     TResult Function(String category)? sortByCategory,
     TResult Function()? reset,
+    TResult Function(String bucketId)? deleteBucket,
     required TResult orElse(),
   }) {
     if (sortByCategory != null) {
@@ -1058,6 +1097,7 @@ class _$_SortByCategory implements _SortByCategory {
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_SortByCategory value) sortByCategory,
     required TResult Function(_Reset value) reset,
+    required TResult Function(_DeleteBucket value) deleteBucket,
   }) {
     return sortByCategory(this);
   }
@@ -1072,6 +1112,7 @@ class _$_SortByCategory implements _SortByCategory {
     TResult? Function(_SearchByName value)? searchByName,
     TResult? Function(_SortByCategory value)? sortByCategory,
     TResult? Function(_Reset value)? reset,
+    TResult? Function(_DeleteBucket value)? deleteBucket,
   }) {
     return sortByCategory?.call(this);
   }
@@ -1086,6 +1127,7 @@ class _$_SortByCategory implements _SortByCategory {
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_SortByCategory value)? sortByCategory,
     TResult Function(_Reset value)? reset,
+    TResult Function(_DeleteBucket value)? deleteBucket,
     required TResult orElse(),
   }) {
     if (sortByCategory != null) {
@@ -1148,6 +1190,7 @@ class _$_Reset implements _Reset {
     required TResult Function(String name, String category) searchByName,
     required TResult Function(String category) sortByCategory,
     required TResult Function() reset,
+    required TResult Function(String bucketId) deleteBucket,
   }) {
     return reset();
   }
@@ -1162,6 +1205,7 @@ class _$_Reset implements _Reset {
     TResult? Function(String name, String category)? searchByName,
     TResult? Function(String category)? sortByCategory,
     TResult? Function()? reset,
+    TResult? Function(String bucketId)? deleteBucket,
   }) {
     return reset?.call();
   }
@@ -1176,6 +1220,7 @@ class _$_Reset implements _Reset {
     TResult Function(String name, String category)? searchByName,
     TResult Function(String category)? sortByCategory,
     TResult Function()? reset,
+    TResult Function(String bucketId)? deleteBucket,
     required TResult orElse(),
   }) {
     if (reset != null) {
@@ -1194,6 +1239,7 @@ class _$_Reset implements _Reset {
     required TResult Function(_SearchByName value) searchByName,
     required TResult Function(_SortByCategory value) sortByCategory,
     required TResult Function(_Reset value) reset,
+    required TResult Function(_DeleteBucket value) deleteBucket,
   }) {
     return reset(this);
   }
@@ -1208,6 +1254,7 @@ class _$_Reset implements _Reset {
     TResult? Function(_SearchByName value)? searchByName,
     TResult? Function(_SortByCategory value)? sortByCategory,
     TResult? Function(_Reset value)? reset,
+    TResult? Function(_DeleteBucket value)? deleteBucket,
   }) {
     return reset?.call(this);
   }
@@ -1222,6 +1269,7 @@ class _$_Reset implements _Reset {
     TResult Function(_SearchByName value)? searchByName,
     TResult Function(_SortByCategory value)? sortByCategory,
     TResult Function(_Reset value)? reset,
+    TResult Function(_DeleteBucket value)? deleteBucket,
     required TResult orElse(),
   }) {
     if (reset != null) {
@@ -1233,6 +1281,177 @@ class _$_Reset implements _Reset {
 
 abstract class _Reset implements QuestionnarieEvent {
   const factory _Reset() = _$_Reset;
+}
+
+/// @nodoc
+abstract class _$$_DeleteBucketCopyWith<$Res> {
+  factory _$$_DeleteBucketCopyWith(
+          _$_DeleteBucket value, $Res Function(_$_DeleteBucket) then) =
+      __$$_DeleteBucketCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String bucketId});
+}
+
+/// @nodoc
+class __$$_DeleteBucketCopyWithImpl<$Res>
+    extends _$QuestionnarieEventCopyWithImpl<$Res, _$_DeleteBucket>
+    implements _$$_DeleteBucketCopyWith<$Res> {
+  __$$_DeleteBucketCopyWithImpl(
+      _$_DeleteBucket _value, $Res Function(_$_DeleteBucket) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? bucketId = null,
+  }) {
+    return _then(_$_DeleteBucket(
+      bucketId: null == bucketId
+          ? _value.bucketId
+          : bucketId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_DeleteBucket implements _DeleteBucket {
+  const _$_DeleteBucket({required this.bucketId});
+
+  @override
+  final String bucketId;
+
+  @override
+  String toString() {
+    return 'QuestionnarieEvent.deleteBucket(bucketId: $bucketId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DeleteBucket &&
+            (identical(other.bucketId, bucketId) ||
+                other.bucketId == bucketId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, bucketId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DeleteBucketCopyWith<_$_DeleteBucket> get copyWith =>
+      __$$_DeleteBucketCopyWithImpl<_$_DeleteBucket>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(List<Bucket>? bucket) init,
+    required TResult Function() addBucket,
+    required TResult Function(Bucket bucket, String? bucketId) setBucket,
+    required TResult Function(String bucketId, String category) updateCategory,
+    required TResult Function(String name, String category) searchByName,
+    required TResult Function(String category) sortByCategory,
+    required TResult Function() reset,
+    required TResult Function(String bucketId) deleteBucket,
+  }) {
+    return deleteBucket(bucketId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<Bucket>? bucket)? init,
+    TResult? Function()? addBucket,
+    TResult? Function(Bucket bucket, String? bucketId)? setBucket,
+    TResult? Function(String bucketId, String category)? updateCategory,
+    TResult? Function(String name, String category)? searchByName,
+    TResult? Function(String category)? sortByCategory,
+    TResult? Function()? reset,
+    TResult? Function(String bucketId)? deleteBucket,
+  }) {
+    return deleteBucket?.call(bucketId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<Bucket>? bucket)? init,
+    TResult Function()? addBucket,
+    TResult Function(Bucket bucket, String? bucketId)? setBucket,
+    TResult Function(String bucketId, String category)? updateCategory,
+    TResult Function(String name, String category)? searchByName,
+    TResult Function(String category)? sortByCategory,
+    TResult Function()? reset,
+    TResult Function(String bucketId)? deleteBucket,
+    required TResult orElse(),
+  }) {
+    if (deleteBucket != null) {
+      return deleteBucket(bucketId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_AddBucket value) addBucket,
+    required TResult Function(_SetBucket value) setBucket,
+    required TResult Function(_UpdateCategory value) updateCategory,
+    required TResult Function(_SearchByName value) searchByName,
+    required TResult Function(_SortByCategory value) sortByCategory,
+    required TResult Function(_Reset value) reset,
+    required TResult Function(_DeleteBucket value) deleteBucket,
+  }) {
+    return deleteBucket(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Init value)? init,
+    TResult? Function(_AddBucket value)? addBucket,
+    TResult? Function(_SetBucket value)? setBucket,
+    TResult? Function(_UpdateCategory value)? updateCategory,
+    TResult? Function(_SearchByName value)? searchByName,
+    TResult? Function(_SortByCategory value)? sortByCategory,
+    TResult? Function(_Reset value)? reset,
+    TResult? Function(_DeleteBucket value)? deleteBucket,
+  }) {
+    return deleteBucket?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_AddBucket value)? addBucket,
+    TResult Function(_SetBucket value)? setBucket,
+    TResult Function(_UpdateCategory value)? updateCategory,
+    TResult Function(_SearchByName value)? searchByName,
+    TResult Function(_SortByCategory value)? sortByCategory,
+    TResult Function(_Reset value)? reset,
+    TResult Function(_DeleteBucket value)? deleteBucket,
+    required TResult orElse(),
+  }) {
+    if (deleteBucket != null) {
+      return deleteBucket(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteBucket implements QuestionnarieEvent {
+  const factory _DeleteBucket({required final String bucketId}) =
+      _$_DeleteBucket;
+
+  String get bucketId;
+  @JsonKey(ignore: true)
+  _$$_DeleteBucketCopyWith<_$_DeleteBucket> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

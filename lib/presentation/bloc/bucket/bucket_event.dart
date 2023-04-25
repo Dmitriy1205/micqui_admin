@@ -4,7 +4,7 @@ part of 'bucket_bloc.dart';
 class BucketEvent with _$BucketEvent {
   const factory BucketEvent.init({required String? bucketId}) = _Init;
 
-  const factory BucketEvent.addQuestion() = _AddQuestion;
+  const factory BucketEvent.addQuestion({required List<Questions>? questions}) = _AddQuestion;
 
   const factory BucketEvent.setQuestion({
     required String bucketId,
@@ -17,6 +17,7 @@ class BucketEvent with _$BucketEvent {
     required Questions question,
     required int questionIndex,
     required List<Answer>? answerList,
+    required List<Questions>? questions,
   }) = _AddAnswer;
 
   const factory BucketEvent.setAnswer({
@@ -36,10 +37,12 @@ class BucketEvent with _$BucketEvent {
 
   const factory BucketEvent.deleteQuestion(
       {required String bucketId,
-      required int index}) = _DeleteQuestion;
+      required int index,
+      required List<Questions>? questions}) = _DeleteQuestion;
 
   const factory BucketEvent.deleteAnswer(
       {required String bucketId,
         required Questions existedQuestions,
-        required int indexToDelete}) = _DeleteAnswer;
+        required int indexToDelete,
+        required List<Questions>? questions}) = _DeleteAnswer;
 }

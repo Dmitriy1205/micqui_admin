@@ -43,6 +43,7 @@ class QuestionnarieBloc extends Bloc<QuestionnarieEvent, QuestionnarieState> {
       searchByName: (e) => _searchByName(e, emit),
       sortByCategory: (e) => _sortByCategory(e, emit),
       reset: (e) => _reset(e, emit),
+      deleteBucket: (e) => _deleteBucket(e, emit),
     );
   }
 
@@ -107,7 +108,9 @@ class QuestionnarieBloc extends Bloc<QuestionnarieEvent, QuestionnarieState> {
   Future<void> _reset(_Reset event, Emitter<QuestionnarieState> emit) async {
     emit(const QuestionnarieState.initial());
   }
+  Future<void> _deleteBucket(_DeleteBucket event, Emitter<QuestionnarieState> emit) async {
 
+  }
   @override
   Future<void> close() {
     _subscription.cancel();

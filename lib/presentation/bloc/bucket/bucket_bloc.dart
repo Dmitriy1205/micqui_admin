@@ -36,8 +36,8 @@ class BucketBloc extends Bloc<BucketEvent, BucketState> {
       setAnswer: (e) => _setAnswer(e, emit),
       removeFromRelease: (e) => _removeFromRelease(e, emit),
       publish: (e) => _publish(e, emit),
-      deleteAnswer: (e)=>_deleteAnswer(e, emit),
-      deleteQuestion: (e)=>_deleteQuestion(e, emit),
+      deleteAnswer: (e) => _deleteAnswer(e, emit),
+      deleteQuestion: (e) => _deleteQuestion(e, emit),
       orElse: () {},
     );
   }
@@ -59,22 +59,25 @@ class BucketBloc extends Bloc<BucketEvent, BucketState> {
   Future<void> _addQuestion(
       _AddQuestion event, Emitter<BucketState> emit) async {
     emit(const BucketState.loading());
+    List<Questions> questions = List.from(event.questions!);
     const question = Questions(name: 'Name', variants: []);
+    questions.add(question);
 
-    emit(const BucketState.questionAdded(questions: question));
+    emit(BucketState.loaded(questionsList: questions));
   }
 
   Future<void> _setQuestion(
       _SetQuestion event, Emitter<BucketState> emit) async {
     emit(const BucketState.loading());
     try {
-      await firestore.setQuestion(
+      final questions = await firestore.setQuestion(
         bucketId: event.bucketId,
         questionId: event.questionId,
         question: event.question,
         index: event.questionIndex,
       );
-      emit(const BucketState.loaded());
+      questionnarieBloc.add(const QuestionnarieEvent.init());
+      emit(BucketState.loaded(questionsList: questions));
     } on BadRequestException catch (e) {
       emit(BucketState.error(error: e.message));
     }
@@ -83,25 +86,26 @@ class BucketBloc extends Bloc<BucketEvent, BucketState> {
   Future<void> _addAnswer(_AddAnswer event, Emitter<BucketState> emit) async {
     emit(const BucketState.loading());
     List<Answer> answers = List.from(event.answerList!);
+    List<Questions> questions = List.from(event.questions!);
     answers.add(const Answer(name: 'Answer Name', isRight: false));
 
     Questions question = Questions(
         id: event.question.id, name: event.question.name, variants: answers);
-
-    emit(BucketState.answerAdded(
-        question: question, questionIndex: event.questionIndex));
+    questions[event.questionIndex] = question;
+    emit(BucketState.loaded(questionsList: questions));
   }
 
   Future<void> _setAnswer(_SetAnswer event, Emitter<BucketState> emit) async {
     emit(const BucketState.loading());
     try {
-      await firestore.setAnswer(
+      final questions = await firestore.setAnswer(
         bucketId: event.bucketId,
         existedQuestions: event.question,
-        index: event.questionIndex,
         answer: event.answer,
       );
-      emit(const BucketState.loaded());
+      questionnarieBloc.add(const QuestionnarieEvent.init());
+
+      emit(BucketState.loaded(questionsList: questions));
     } on BadRequestException catch (e) {
       emit(BucketState.error(error: e.message));
     }
@@ -124,41 +128,62 @@ class BucketBloc extends Bloc<BucketEvent, BucketState> {
   Future<void> _deleteAnswer(
       _DeleteAnswer event, Emitter<BucketState> emit) async {
     emit(const BucketState.loading());
-    await firestore.deleteAnswer(
-        bucketId: event.bucketId,
-        existedQuestions: event.existedQuestions,
-        indexToDelete: event.indexToDelete);
+    try {
+      final questions = await firestore.deleteAnswer(
+          bucketId: event.bucketId,
+          existedQuestions: event.existedQuestions,
+          indexToDelete: event.indexToDelete);
+      questionnarieBloc.add(const QuestionnarieEvent.init());
+      emit(BucketState.loaded(questionsList: questions));
+    } on Error {
+      List<Questions> questions = List.from(event.questions!);
 
-    emit(const BucketState.loaded());
+      Questions currentQuestion = event.existedQuestions;
+      currentQuestion.variants!.removeAt(event.indexToDelete);
+      questions.where((e) => e.id == currentQuestion.id);
+      int index = questions.indexWhere((question) => question.id == currentQuestion.id);
+
+      if (index != -1) {
+        questions[index] = currentQuestion;
+      }
+      emit(BucketState.loaded(questionsList: questions));
+    }
   }
 
   Future<void> _deleteQuestion(
       _DeleteQuestion event, Emitter<BucketState> emit) async {
     emit(const BucketState.loading());
-    await firestore.deleteQuestion(
-        bucketId: event.bucketId, index: event.index);
+    try {
+      final questions = await firestore.deleteQuestion(
+          bucketId: event.bucketId, index: event.index);
+      questionnarieBloc.add(const QuestionnarieEvent.init());
+      emit(BucketState.loaded(questionsList: questions));
+    } on Error {
+      List<Questions> questions = List.from(event.questions!);
+      questions.removeAt(event.index);
 
-    emit(const BucketState.loaded());
+      emit(BucketState.loaded(questionsList: questions));
+    }
   }
 
   Future<void> _searchByName(
       _SearchByName event, Emitter<BucketState> emit) async {
     emit(const BucketState.searchLoading());
-
+    final q = await firestore.getQuestions(bucketId: event.bucket!.id!);
     if (event.name.isEmpty) {
-      var questions = List.generate(event.bucket?.questions?.length ?? 0,
-          (index) => event.bucket!.questions![index]);
-      emit(BucketState.searchLoaded(questionsList: questions));
+      var questions = List.generate(q?.length ?? 0, (index) => q![index]);
+      emit(BucketState.loaded(questionsList: questions));
     } else {
-      List<Questions> foundedQuestions = event.bucket!.questions!
+      List<Questions> foundedQuestions = q!
           .where(
               (e) => e.name!.toLowerCase().contains(event.name.toLowerCase()))
           .toList();
+
       print(foundedQuestions);
       if (foundedQuestions.isEmpty) {
-        emit(BucketState.searchLoaded(questionsList: foundedQuestions));
+        emit(BucketState.loaded(questionsList: foundedQuestions));
       } else {
-        emit(BucketState.searchLoaded(questionsList: foundedQuestions));
+        emit(BucketState.loaded(questionsList: foundedQuestions));
       }
     }
   }

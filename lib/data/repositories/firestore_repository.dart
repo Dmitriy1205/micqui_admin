@@ -29,11 +29,14 @@ class FirestoreRepository {
     }
   }
 
-  List<Questions>? getQuestions({required Bucket? bucket}) {
-    for (final i in bucket?.questions ?? []) {
-      questions!.add(i);
-    }
-    return questions;
+  Future<List<Questions>>? getQuestions({required String bucketId}) async {
+    DocumentSnapshot doc =
+        await _firestore.collection('buckets').doc(bucketId).get();
+
+    final questionsData =
+        List<Map<String, dynamic>>.from(doc.get('questions') ?? []);
+
+    return questionsData.map((data) => Questions.fromJson(data)).toList();
   }
 
   addBucket() {
@@ -80,7 +83,7 @@ class FirestoreRepository {
     }
   }
 
-  Future<void> setQuestion(
+  Future<List<Questions>> setQuestion(
       {required String bucketId,
       required int? index,
       required String? questionId,
@@ -133,14 +136,21 @@ class FirestoreRepository {
               .set({'questions': q}, SetOptions(mergeFields: ['questions']));
         }
       }
+      DocumentSnapshot doc =
+          await _firestore.collection('buckets').doc(bucketId).get();
+
+      final questionsData =
+          List<Map<String, dynamic>>.from(doc.get('questions') ?? []);
+
+      return questionsData.map((data) => Questions.fromJson(data)).toList();
     } on FirebaseException catch (e) {
       throw BadRequestException(message: e.message!);
     }
   }
 
-  Future<void> setAnswer(
+  Future<List<Questions>> setAnswer(
       {required String bucketId,
-      required int? index,
+
       required Questions existedQuestions,
       required Answer answer}) async {
     try {
@@ -171,6 +181,13 @@ class FirestoreRepository {
 
       await _firestore.collection('buckets').doc(bucketId).set(
           {'questions': questions}, SetOptions(mergeFields: ['questions']));
+      DocumentSnapshot doc =
+          await _firestore.collection('buckets').doc(bucketId).get();
+
+      final questionsData =
+          List<Map<String, dynamic>>.from(doc.get('questions') ?? []);
+
+      return questionsData.map((data) => Questions.fromJson(data)).toList();
     } on FirebaseException catch (e) {
       throw BadRequestException(message: e.message!);
     }
@@ -188,7 +205,7 @@ class FirestoreRepository {
     }
   }
 
-  Future<void> deleteAnswer(
+  Future<List<Questions>> deleteAnswer(
       {required String bucketId,
       required Questions existedQuestions,
       required int indexToDelete}) async {
@@ -217,12 +234,21 @@ class FirestoreRepository {
 
       await _firestore.collection('buckets').doc(bucketId).set(
           {'questions': questions}, SetOptions(mergeFields: ['questions']));
+      DocumentSnapshot doc =
+          await _firestore.collection('buckets').doc(bucketId).get();
+
+      final questionsData =
+          List<Map<String, dynamic>>.from(doc.get('questions') ?? []);
+
+      return questionsData.map((data) => Questions.fromJson(data)).toList();
     } on FirebaseException catch (e) {
       throw BadRequestException(message: e.message!);
+    } on Error{
+      throw Error();
     }
   }
 
-  Future<void> deleteQuestion(
+  Future<List<Questions>> deleteQuestion(
       {required String bucketId, required int index}) async {
     try {
       final questions =
@@ -237,8 +263,17 @@ class FirestoreRepository {
 
       await _firestore.collection('buckets').doc(bucketId).set(
           {'questions': questions}, SetOptions(mergeFields: ['questions']));
+      DocumentSnapshot doc =
+          await _firestore.collection('buckets').doc(bucketId).get();
+
+      final questionsData =
+          List<Map<String, dynamic>>.from(doc.get('questions') ?? []);
+
+      return questionsData.map((data) => Questions.fromJson(data)).toList();
     } on FirebaseException catch (e) {
       throw BadRequestException(message: e.message!);
+    } on Error {
+      throw Error();
     }
   }
 

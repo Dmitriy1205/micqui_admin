@@ -80,12 +80,10 @@ class _BucketScreenState extends State<BucketScreen> {
         listener: (context, state) {
           state.maybeMap(
               searchLoaded: (_) => questions = state.questionsList!,
-              loaded: (_) => questions = List.generate(
-                  bucket.questions?.length ?? 0,
-                  (index) => bucket.questions![index]),
+              loaded: (s) => questions = s.questionsList!,
               isPublished: (_) => published = state.isPublished!,
-              questionAdded: (_) => questions.add(state.questions!),
-              answerAdded: (i) => questions[i.questionIndex] = i.question!,
+              // questionAdded: (_) => questions.add(state.questions!),
+              // answerAdded: (i) => questions[i.questionIndex] = i.question!,
               error: (e) => ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       backgroundColor: AppColors.accent,
@@ -274,9 +272,7 @@ class _BucketScreenState extends State<BucketScreen> {
                                           searchController: _searchController,
                                           onChange: (name) {
                                             _bloc.add(BucketEvent.searchByName(
-                                              name: name,
-                                              bucket: bucket,
-                                            ));
+                                                name: name, bucket: bucket));
                                           },
                                           iconSize:
                                               widget.mobileSearchIconSize ?? 20,
@@ -290,8 +286,8 @@ class _BucketScreenState extends State<BucketScreen> {
                                         height: 50,
                                         child: IconButton(
                                           onPressed: () {
-                                            _bloc.add(const BucketEvent
-                                                .addQuestion());
+                                            _bloc.add(BucketEvent.addQuestion(
+                                                questions: questions));
                                           },
                                           icon: const FaIcon(
                                             FontAwesomeIcons.circlePlus,
@@ -359,8 +355,9 @@ class _BucketScreenState extends State<BucketScreen> {
                                         color: AppColors.accent,
                                         text: AppStrings.delete,
                                         onPressed: () {
-                                          showAlertDialog(context,
-                                              text: AppStrings.areYouDelete);
+                                          deleteBucketDialog(context,
+                                              text: AppStrings.areYouDelete,
+                                              bucketId: bucket.id!);
                                         })),
                               )
                             ],
@@ -456,14 +453,9 @@ class _BucketScreenState extends State<BucketScreen> {
                                 constraints: const BoxConstraints(),
                                 padding: const EdgeInsets.all(2),
                                 onPressed: () {
-                                  _bloc.add(BucketEvent.deleteQuestion(
-                                      bucketId: bucket.id!, index: index));
-
-                                  setState(() {
-                                    // showAlertDialog(context,
-                                    //     text: AppStrings.areYouQuestion);
-                                    questions.removeAt(index);
-                                  });
+                                  deleteQuestionDialog(context,
+                                      text: AppStrings.areYouQuestion,
+                                      index: index);
                                 },
                                 icon: const FaIcon(
                                   FontAwesomeIcons.solidTrashCan,
@@ -488,7 +480,8 @@ class _BucketScreenState extends State<BucketScreen> {
                                 _bloc.add(BucketEvent.addAnswer(
                                     question: questions[index],
                                     questionIndex: index,
-                                    answerList: questions[index].variants));
+                                    answerList: questions[index].variants,
+                                    questions: questions));
                               },
                               icon: const FaIcon(
                                 FontAwesomeIcons.circlePlus,
@@ -508,7 +501,7 @@ class _BucketScreenState extends State<BucketScreen> {
   Widget answersList(List<Answer> answer, Questions currentQuestion) {
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: answerVariant!.length,
+      itemCount: answer.length,
       itemBuilder: (context, index) {
         if (answerControllers.length <= index) {
           answerControllers.add({
@@ -579,10 +572,8 @@ class _BucketScreenState extends State<BucketScreen> {
                 _bloc.add(BucketEvent.deleteAnswer(
                     bucketId: bucket.id!,
                     existedQuestions: currentQuestion,
-                    indexToDelete: index));
-                setState(() {
-                  answer.removeAt(index);
-                });
+                    indexToDelete: index,
+                    questions: questions));
               },
               icon: const FaIcon(
                 FontAwesomeIcons.solidTrashCan,
@@ -596,7 +587,8 @@ class _BucketScreenState extends State<BucketScreen> {
     );
   }
 
-  showAlertDialog(BuildContext context, {required String text}) {
+  deleteQuestionDialog(BuildContext context,
+      {required String text, required int index}) {
     Widget cancelButton = TextButton(
       child: const Text(
         AppStrings.cancel,
@@ -612,7 +604,9 @@ class _BucketScreenState extends State<BucketScreen> {
         style: TextStyle(color: AppColors.text),
       ),
       onPressed: () {
-        // context.read<AuthBloc>().add(const AuthEvent.logout());
+        _bloc.add(BucketEvent.deleteQuestion(
+            bucketId: bucket.id!, index: index, questions: questions));
+        Navigator.pop(context);
       },
     );
 
@@ -630,6 +624,53 @@ class _BucketScreenState extends State<BucketScreen> {
     );
 
     showDialog(
+      useRootNavigator: false,
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  deleteBucketDialog(BuildContext context,
+      {required String text, required String bucketId}) {
+    Widget cancelButton = TextButton(
+      child: const Text(
+        AppStrings.cancel,
+        style: TextStyle(color: AppColors.text),
+      ),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+    Widget continueButton = TextButton(
+      child: const Text(
+        AppStrings.delete,
+        style: TextStyle(color: AppColors.text),
+      ),
+      onPressed: () {
+        context
+            .read<QuestionnarieBloc>()
+            .add(QuestionnarieEvent.deleteBucket(bucketId: bucketId));
+        Navigator.pop(context);
+      },
+    );
+
+    AlertDialog alert = AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      title: Text(AppStrings.warning,
+          style: AppTheme.themeData.textTheme.titleSmall),
+      content: Text(text, style: AppTheme.themeData.textTheme.bodySmall),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    showDialog(
+      useRootNavigator: false,
       context: context,
       builder: (BuildContext context) {
         return alert;

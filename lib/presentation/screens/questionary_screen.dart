@@ -37,14 +37,18 @@ class QuestionaireScreen extends StatefulWidget {
 class _QuestionaireScreenState extends State<QuestionaireScreen> {
   final _searchController = TextEditingController();
 
-  List<Map<String, TextEditingController>> controllers = [];
-  List<Map<String, FocusNode>> focuses = [];
-
+  // List<Map<String, TextEditingController>> controllers = [];
+  // List<Map<String, FocusNode>> focuses = [];
+  List<TextEditingController> nameControllers = [];
+  List<TextEditingController> descControllers = [];
+  List<FocusNode> nameFocusNodes = [];
+  List<FocusNode> descFocusNodes = [];
   String value = 'All';
 
   List<bool> checkable = [];
   late List<String> selectedValues;
   late List<Bucket> buckets;
+
 
   @override
   void dispose() {
@@ -65,8 +69,16 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
                   state.bucket!.length,
                   (index) =>
                       state.bucket?[index].category ?? AppStrings.employee);
+              for (var item in state.bucket!) {
+                nameControllers.add(TextEditingController(text: item.name ?? 'Name'));
+                descControllers.add(TextEditingController(text: item.description ?? 'Description'));
+                nameFocusNodes.add(FocusNode());
+                descFocusNodes.add(FocusNode());
+              }
+              print(nameControllers);
             }
             state.maybeMap(
+
                 success: (_) => context
                     .read<QuestionnarieBloc>()
                     .add(const QuestionnarieEvent.init()),
@@ -330,25 +342,27 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
               itemCount: state.bucket!.length,
               shrinkWrap: true,
               itemBuilder: (context, index) {
-                if (controllers.length <= index) {
-                  controllers.add({
-                    'name': TextEditingController(
-                        text: state.bucket?[index].name ?? 'Name'),
-                    'description': TextEditingController(
-                        text:
-                            state.bucket?[index].description ?? 'Description'),
-                    'category': TextEditingController(
-                        text: state.bucket?[index].category ?? 'Category'),
-                  });
-                }
-                if (focuses.length <= index) {
-                  focuses.add({
-                    'name': FocusNode(),
-                    'description': FocusNode(),
-                  });
-                }
-
+                // if (controllers.length >= index) {
+                //   controllers.add({
+                //     'name': TextEditingController(
+                //       text: state.bucket?[index].name ?? 'Name',
+                //     ),
+                //     'description': TextEditingController(
+                //         text:
+                //             state.bucket?[index].description ?? 'Description'),
+                //     'category': TextEditingController(
+                //         text: state.bucket?[index].category ?? 'Category'),
+                //   });
+                // }
+                // if (focuses.length <= index) {
+                //   focuses.add({
+                //     'name': FocusNode(),
+                //     'description': FocusNode(),
+                //   });
+                // }
+                // print(controllers);
                 return Container(
+                  key: ObjectKey(index),
                   decoration: BoxDecoration(
                     border: Border(
                       bottom: BorderSide(
@@ -407,8 +421,8 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
                               children: [
                                 EditableText(
                                   textAlign: TextAlign.start,
-                                  controller: controllers[index]['name']!,
-                                  focusNode: focuses[index]['name']!,
+                                  controller: nameControllers[index],
+                                  focusNode: nameFocusNodes[index],
                                   cursorColor: AppColors.primary,
                                   backgroundCursorColor: AppColors.primary,
                                   style: AppTheme
@@ -421,9 +435,9 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
                                   keyboardType: TextInputType.text,
                                   maxLines: 1,
                                   onSubmitted: (text) {
-                                    focuses[index]['name']!.unfocus();
+                                    nameFocusNodes[index].unfocus();
                                     FocusScope.of(context).requestFocus(
-                                        focuses[index]['description']!);
+                                        nameFocusNodes[index]);
                                   },
                                   onSelectionHandleTapped: () {
                                     showAboutDialog(context: context);
@@ -431,28 +445,25 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
                                 ),
                                 EditableText(
                                   textAlign: TextAlign.start,
-                                  controller: controllers[index]
-                                      ['description']!,
-                                  focusNode: focuses[index]['description']!,
+                                  controller: descControllers[index],
+                                  focusNode: descFocusNodes[index],
                                   cursorColor: AppColors.primary,
                                   backgroundCursorColor: AppColors.primary,
-                                  style: AppTheme
-                                      .themeData.textTheme.labelMedium!,
+                                  style:
+                                      AppTheme.themeData.textTheme.labelMedium!,
                                   selectionControls:
                                       MaterialTextSelectionControls(),
                                   keyboardType: TextInputType.text,
                                   maxLines: 2,
                                   onSubmitted: (text) {
-                                    focuses[index]['description']!.unfocus();
+                                    descFocusNodes[index].unfocus();
                                     context.read<QuestionnarieBloc>().add(
                                           QuestionnarieEvent.setBucket(
                                             bucket: Bucket(
                                               id: state.bucket?[index].id,
-                                              name: controllers[index]
-                                                      ['name']!
+                                              name: nameControllers[index]
                                                   .text,
-                                              description: controllers[index]
-                                                      ['description']!
+                                              description: descControllers[index]
                                                   .text,
                                               category: selectedValues[index],
                                             ),
@@ -480,8 +491,8 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
                                         value: AppStrings.manager,
                                         child: Text(
                                           '${AppStrings.manager} >',
-                                          style: AppTheme.themeData.textTheme
-                                              .labelMedium!
+                                          style: AppTheme
+                                              .themeData.textTheme.labelMedium!
                                               .copyWith(
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -493,8 +504,8 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
                                         value: AppStrings.employee,
                                         child: Text(
                                           '${AppStrings.employee} >',
-                                          style: AppTheme.themeData.textTheme
-                                              .labelMedium!
+                                          style: AppTheme
+                                              .themeData.textTheme.labelMedium!
                                               .copyWith(
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -514,8 +525,7 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
                                                     QuestionnarieEvent
                                                         .updateCategory(
                                                             bucketId: state
-                                                                .bucket![
-                                                                    index]
+                                                                .bucket![index]
                                                                 .id!,
                                                             category: v!),
                                                   );

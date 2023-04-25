@@ -9,4 +9,6 @@ class QuestionnarieEvent with _$QuestionnarieEvent {
   const factory QuestionnarieEvent.searchByName({required String name,required String category}) = _SearchByName;
   const factory QuestionnarieEvent.sortByCategory({required String category}) = _SortByCategory;
   const factory QuestionnarieEvent.reset() = _Reset;
+
+  const factory QuestionnarieEvent.deleteBucket({required String bucketId})= _DeleteBucket;
 }
