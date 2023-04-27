@@ -12,7 +12,7 @@ class Bucket with _$Bucket {
     String? description,
     String? category,
     @Default(false)bool? published,
-    List<Questions>? questions,
+    @Default([]) List<Questions> questions,
   }) = _Bucket;
 
   factory Bucket.fromJson(Map<String, dynamic> json) => _$BucketFromJson(json);

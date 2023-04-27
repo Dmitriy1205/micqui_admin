@@ -22,7 +22,7 @@ Questions _$QuestionsFromJson(Map<String, dynamic> json) {
 mixin _$Questions {
   String? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  List<Answer>? get variants => throw _privateConstructorUsedError;
+  List<Answer> get variants => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $QuestionsCopyWith<$Res> {
   factory $QuestionsCopyWith(Questions value, $Res Function(Questions) then) =
       _$QuestionsCopyWithImpl<$Res, Questions>;
   @useResult
-  $Res call({String? id, String? name, List<Answer>? variants});
+  $Res call({String? id, String? name, List<Answer> variants});
 }
 
 /// @nodoc
@@ -53,7 +53,7 @@ class _$QuestionsCopyWithImpl<$Res, $Val extends Questions>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? variants = freezed,
+    Object? variants = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -64,10 +64,10 @@ class _$QuestionsCopyWithImpl<$Res, $Val extends Questions>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      variants: freezed == variants
+      variants: null == variants
           ? _value.variants
           : variants // ignore: cast_nullable_to_non_nullable
-              as List<Answer>?,
+              as List<Answer>,
     ) as $Val);
   }
 }
@@ -79,7 +79,7 @@ abstract class _$$_QuestionsCopyWith<$Res> implements $QuestionsCopyWith<$Res> {
       __$$_QuestionsCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? id, String? name, List<Answer>? variants});
+  $Res call({String? id, String? name, List<Answer> variants});
 }
 
 /// @nodoc
@@ -95,7 +95,7 @@ class __$$_QuestionsCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? variants = freezed,
+    Object? variants = null,
   }) {
     return _then(_$_Questions(
       id: freezed == id
@@ -106,10 +106,10 @@ class __$$_QuestionsCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      variants: freezed == variants
+      variants: null == variants
           ? _value._variants
           : variants // ignore: cast_nullable_to_non_nullable
-              as List<Answer>?,
+              as List<Answer>,
     ));
   }
 }
@@ -117,7 +117,8 @@ class __$$_QuestionsCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Questions implements _Questions {
-  const _$_Questions({this.id, this.name, final List<Answer>? variants})
+  const _$_Questions(
+      {this.id, this.name, final List<Answer> variants = const []})
       : _variants = variants;
 
   factory _$_Questions.fromJson(Map<String, dynamic> json) =>
@@ -127,14 +128,13 @@ class _$_Questions implements _Questions {
   final String? id;
   @override
   final String? name;
-  final List<Answer>? _variants;
+  final List<Answer> _variants;
   @override
-  List<Answer>? get variants {
-    final value = _variants;
-    if (value == null) return null;
+  @JsonKey()
+  List<Answer> get variants {
     if (_variants is EqualUnmodifiableListView) return _variants;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_variants);
   }
 
   @override
@@ -175,7 +175,7 @@ abstract class _Questions implements Questions {
   const factory _Questions(
       {final String? id,
       final String? name,
-      final List<Answer>? variants}) = _$_Questions;
+      final List<Answer> variants}) = _$_Questions;
 
   factory _Questions.fromJson(Map<String, dynamic> json) =
       _$_Questions.fromJson;
@@ -185,7 +185,7 @@ abstract class _Questions implements Questions {
   @override
   String? get name;
   @override
-  List<Answer>? get variants;
+  List<Answer> get variants;
   @override
   @JsonKey(ignore: true)
   _$$_QuestionsCopyWith<_$_Questions> get copyWith =>

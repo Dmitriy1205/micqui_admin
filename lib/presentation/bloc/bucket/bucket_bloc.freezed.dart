@@ -2853,7 +2853,7 @@ mixin _$BucketState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)
         loaded,
     required TResult Function(Questions? questions) questionAdded,
     required TResult Function(Questions? question, int questionIndex)
@@ -2864,7 +2864,7 @@ mixin _$BucketState {
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
     required TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)
         searchLoaded,
   }) =>
       throw _privateConstructorUsedError;
@@ -2873,7 +2873,7 @@ mixin _$BucketState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
     TResult? Function(Questions? questions)? questionAdded,
     TResult? Function(Questions? question, int questionIndex)? answerAdded,
@@ -2883,7 +2883,7 @@ mixin _$BucketState {
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
     TResult? Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         searchLoaded,
   }) =>
       throw _privateConstructorUsedError;
@@ -2892,7 +2892,7 @@ mixin _$BucketState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
     TResult Function(Questions? questions)? questionAdded,
     TResult Function(Questions? question, int questionIndex)? answerAdded,
@@ -2902,7 +2902,7 @@ mixin _$BucketState {
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
     TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         searchLoaded,
     required TResult orElse(),
   }) =>
@@ -3013,7 +3013,7 @@ class _$_Initial extends _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)
         loaded,
     required TResult Function(Questions? questions) questionAdded,
     required TResult Function(Questions? question, int questionIndex)
@@ -3024,7 +3024,7 @@ class _$_Initial extends _Initial {
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
     required TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)
         searchLoaded,
   }) {
     return initial();
@@ -3036,7 +3036,7 @@ class _$_Initial extends _Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
     TResult? Function(Questions? questions)? questionAdded,
     TResult? Function(Questions? question, int questionIndex)? answerAdded,
@@ -3046,7 +3046,7 @@ class _$_Initial extends _Initial {
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
     TResult? Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         searchLoaded,
   }) {
     return initial?.call();
@@ -3058,7 +3058,7 @@ class _$_Initial extends _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
     TResult Function(Questions? questions)? questionAdded,
     TResult Function(Questions? question, int questionIndex)? answerAdded,
@@ -3068,7 +3068,7 @@ class _$_Initial extends _Initial {
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
     TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         searchLoaded,
     required TResult orElse(),
   }) {
@@ -3182,7 +3182,7 @@ class _$_Loading extends _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)
         loaded,
     required TResult Function(Questions? questions) questionAdded,
     required TResult Function(Questions? question, int questionIndex)
@@ -3193,7 +3193,7 @@ class _$_Loading extends _Loading {
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
     required TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)
         searchLoaded,
   }) {
     return loading();
@@ -3205,7 +3205,7 @@ class _$_Loading extends _Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
     TResult? Function(Questions? questions)? questionAdded,
     TResult? Function(Questions? question, int questionIndex)? answerAdded,
@@ -3215,7 +3215,7 @@ class _$_Loading extends _Loading {
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
     TResult? Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         searchLoaded,
   }) {
     return loading?.call();
@@ -3227,7 +3227,7 @@ class _$_Loading extends _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
     TResult Function(Questions? questions)? questionAdded,
     TResult Function(Questions? question, int questionIndex)? answerAdded,
@@ -3237,7 +3237,7 @@ class _$_Loading extends _Loading {
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
     TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         searchLoaded,
     required TResult orElse(),
   }) {
@@ -3316,8 +3316,7 @@ abstract class _$$_LoadedCopyWith<$Res> {
   factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
       __$$_LoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {List<Questions>? questionsList, Bucket? bucket, bool? isPublished});
+  $Res call({List<Questions> questionsList, Bucket? bucket, bool? isPublished});
 
   $BucketCopyWith<$Res>? get bucket;
 }
@@ -3332,15 +3331,15 @@ class __$$_LoadedCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? questionsList = freezed,
+    Object? questionsList = null,
     Object? bucket = freezed,
     Object? isPublished = freezed,
   }) {
     return _then(_$_Loaded(
-      questionsList: freezed == questionsList
+      questionsList: null == questionsList
           ? _value._questionsList
           : questionsList // ignore: cast_nullable_to_non_nullable
-              as List<Questions>?,
+              as List<Questions>,
       bucket: freezed == bucket
           ? _value.bucket
           : bucket // ignore: cast_nullable_to_non_nullable
@@ -3369,18 +3368,19 @@ class __$$_LoadedCopyWithImpl<$Res>
 
 class _$_Loaded extends _Loaded {
   const _$_Loaded(
-      {final List<Questions>? questionsList, this.bucket, this.isPublished})
+      {final List<Questions> questionsList = const [],
+      this.bucket,
+      this.isPublished})
       : _questionsList = questionsList,
         super._();
 
-  final List<Questions>? _questionsList;
+  final List<Questions> _questionsList;
   @override
-  List<Questions>? get questionsList {
-    final value = _questionsList;
-    if (value == null) return null;
+  @JsonKey()
+  List<Questions> get questionsList {
     if (_questionsList is EqualUnmodifiableListView) return _questionsList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_questionsList);
   }
 
   @override
@@ -3421,7 +3421,7 @@ class _$_Loaded extends _Loaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)
         loaded,
     required TResult Function(Questions? questions) questionAdded,
     required TResult Function(Questions? question, int questionIndex)
@@ -3432,7 +3432,7 @@ class _$_Loaded extends _Loaded {
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
     required TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)
         searchLoaded,
   }) {
     return loaded(questionsList, bucket, this.isPublished);
@@ -3444,7 +3444,7 @@ class _$_Loaded extends _Loaded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
     TResult? Function(Questions? questions)? questionAdded,
     TResult? Function(Questions? question, int questionIndex)? answerAdded,
@@ -3454,7 +3454,7 @@ class _$_Loaded extends _Loaded {
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
     TResult? Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         searchLoaded,
   }) {
     return loaded?.call(questionsList, bucket, this.isPublished);
@@ -3466,7 +3466,7 @@ class _$_Loaded extends _Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
     TResult Function(Questions? questions)? questionAdded,
     TResult Function(Questions? question, int questionIndex)? answerAdded,
@@ -3476,7 +3476,7 @@ class _$_Loaded extends _Loaded {
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
     TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         searchLoaded,
     required TResult orElse(),
   }) {
@@ -3547,12 +3547,12 @@ class _$_Loaded extends _Loaded {
 
 abstract class _Loaded extends BucketState {
   const factory _Loaded(
-      {final List<Questions>? questionsList,
+      {final List<Questions> questionsList,
       final Bucket? bucket,
       final bool? isPublished}) = _$_Loaded;
   const _Loaded._() : super._();
 
-  List<Questions>? get questionsList;
+  List<Questions> get questionsList;
   Bucket? get bucket;
   bool? get isPublished;
   @JsonKey(ignore: true)
@@ -3642,7 +3642,7 @@ class _$_QuestionAdded extends _QuestionAdded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)
         loaded,
     required TResult Function(Questions? questions) questionAdded,
     required TResult Function(Questions? question, int questionIndex)
@@ -3653,7 +3653,7 @@ class _$_QuestionAdded extends _QuestionAdded {
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
     required TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)
         searchLoaded,
   }) {
     return questionAdded(questions);
@@ -3665,7 +3665,7 @@ class _$_QuestionAdded extends _QuestionAdded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
     TResult? Function(Questions? questions)? questionAdded,
     TResult? Function(Questions? question, int questionIndex)? answerAdded,
@@ -3675,7 +3675,7 @@ class _$_QuestionAdded extends _QuestionAdded {
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
     TResult? Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         searchLoaded,
   }) {
     return questionAdded?.call(questions);
@@ -3687,7 +3687,7 @@ class _$_QuestionAdded extends _QuestionAdded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
     TResult Function(Questions? questions)? questionAdded,
     TResult Function(Questions? question, int questionIndex)? answerAdded,
@@ -3697,7 +3697,7 @@ class _$_QuestionAdded extends _QuestionAdded {
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
     TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         searchLoaded,
     required TResult orElse(),
   }) {
@@ -3868,7 +3868,7 @@ class _$_AnswerAdded extends _AnswerAdded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)
         loaded,
     required TResult Function(Questions? questions) questionAdded,
     required TResult Function(Questions? question, int questionIndex)
@@ -3879,7 +3879,7 @@ class _$_AnswerAdded extends _AnswerAdded {
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
     required TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)
         searchLoaded,
   }) {
     return answerAdded(question, questionIndex);
@@ -3891,7 +3891,7 @@ class _$_AnswerAdded extends _AnswerAdded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
     TResult? Function(Questions? questions)? questionAdded,
     TResult? Function(Questions? question, int questionIndex)? answerAdded,
@@ -3901,7 +3901,7 @@ class _$_AnswerAdded extends _AnswerAdded {
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
     TResult? Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         searchLoaded,
   }) {
     return answerAdded?.call(question, questionIndex);
@@ -3913,7 +3913,7 @@ class _$_AnswerAdded extends _AnswerAdded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
     TResult Function(Questions? questions)? questionAdded,
     TResult Function(Questions? question, int questionIndex)? answerAdded,
@@ -3923,7 +3923,7 @@ class _$_AnswerAdded extends _AnswerAdded {
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
     TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         searchLoaded,
     required TResult orElse(),
   }) {
@@ -4045,7 +4045,7 @@ class _$_Success extends _Success {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)
         loaded,
     required TResult Function(Questions? questions) questionAdded,
     required TResult Function(Questions? question, int questionIndex)
@@ -4056,7 +4056,7 @@ class _$_Success extends _Success {
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
     required TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)
         searchLoaded,
   }) {
     return success();
@@ -4068,7 +4068,7 @@ class _$_Success extends _Success {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
     TResult? Function(Questions? questions)? questionAdded,
     TResult? Function(Questions? question, int questionIndex)? answerAdded,
@@ -4078,7 +4078,7 @@ class _$_Success extends _Success {
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
     TResult? Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         searchLoaded,
   }) {
     return success?.call();
@@ -4090,7 +4090,7 @@ class _$_Success extends _Success {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
     TResult Function(Questions? questions)? questionAdded,
     TResult Function(Questions? question, int questionIndex)? answerAdded,
@@ -4100,7 +4100,7 @@ class _$_Success extends _Success {
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
     TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         searchLoaded,
     required TResult orElse(),
   }) {
@@ -4242,7 +4242,7 @@ class _$_IsPublished extends _IsPublished {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)
         loaded,
     required TResult Function(Questions? questions) questionAdded,
     required TResult Function(Questions? question, int questionIndex)
@@ -4253,7 +4253,7 @@ class _$_IsPublished extends _IsPublished {
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
     required TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)
         searchLoaded,
   }) {
     return isPublished(this.isPublished);
@@ -4265,7 +4265,7 @@ class _$_IsPublished extends _IsPublished {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
     TResult? Function(Questions? questions)? questionAdded,
     TResult? Function(Questions? question, int questionIndex)? answerAdded,
@@ -4275,7 +4275,7 @@ class _$_IsPublished extends _IsPublished {
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
     TResult? Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         searchLoaded,
   }) {
     return isPublished?.call(this.isPublished);
@@ -4287,7 +4287,7 @@ class _$_IsPublished extends _IsPublished {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
     TResult Function(Questions? questions)? questionAdded,
     TResult Function(Questions? question, int questionIndex)? answerAdded,
@@ -4297,7 +4297,7 @@ class _$_IsPublished extends _IsPublished {
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
     TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         searchLoaded,
     required TResult orElse(),
   }) {
@@ -4442,7 +4442,7 @@ class _$_Error extends _Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)
         loaded,
     required TResult Function(Questions? questions) questionAdded,
     required TResult Function(Questions? question, int questionIndex)
@@ -4453,7 +4453,7 @@ class _$_Error extends _Error {
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
     required TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)
         searchLoaded,
   }) {
     return error(this.error);
@@ -4465,7 +4465,7 @@ class _$_Error extends _Error {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
     TResult? Function(Questions? questions)? questionAdded,
     TResult? Function(Questions? question, int questionIndex)? answerAdded,
@@ -4475,7 +4475,7 @@ class _$_Error extends _Error {
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
     TResult? Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         searchLoaded,
   }) {
     return error?.call(this.error);
@@ -4487,7 +4487,7 @@ class _$_Error extends _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
     TResult Function(Questions? questions)? questionAdded,
     TResult Function(Questions? question, int questionIndex)? answerAdded,
@@ -4497,7 +4497,7 @@ class _$_Error extends _Error {
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
     TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         searchLoaded,
     required TResult orElse(),
   }) {
@@ -4617,7 +4617,7 @@ class _$_SearchLoading extends _SearchLoading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)
         loaded,
     required TResult Function(Questions? questions) questionAdded,
     required TResult Function(Questions? question, int questionIndex)
@@ -4628,7 +4628,7 @@ class _$_SearchLoading extends _SearchLoading {
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
     required TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)
         searchLoaded,
   }) {
     return searchLoading();
@@ -4640,7 +4640,7 @@ class _$_SearchLoading extends _SearchLoading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
     TResult? Function(Questions? questions)? questionAdded,
     TResult? Function(Questions? question, int questionIndex)? answerAdded,
@@ -4650,7 +4650,7 @@ class _$_SearchLoading extends _SearchLoading {
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
     TResult? Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         searchLoaded,
   }) {
     return searchLoading?.call();
@@ -4662,7 +4662,7 @@ class _$_SearchLoading extends _SearchLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
     TResult Function(Questions? questions)? questionAdded,
     TResult Function(Questions? question, int questionIndex)? answerAdded,
@@ -4672,7 +4672,7 @@ class _$_SearchLoading extends _SearchLoading {
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
     TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         searchLoaded,
     required TResult orElse(),
   }) {
@@ -4813,7 +4813,7 @@ class _$_SearchError extends _SearchError {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)
         loaded,
     required TResult Function(Questions? questions) questionAdded,
     required TResult Function(Questions? question, int questionIndex)
@@ -4824,7 +4824,7 @@ class _$_SearchError extends _SearchError {
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
     required TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)
         searchLoaded,
   }) {
     return searchError(this.error);
@@ -4836,7 +4836,7 @@ class _$_SearchError extends _SearchError {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
     TResult? Function(Questions? questions)? questionAdded,
     TResult? Function(Questions? question, int questionIndex)? answerAdded,
@@ -4846,7 +4846,7 @@ class _$_SearchError extends _SearchError {
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
     TResult? Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         searchLoaded,
   }) {
     return searchError?.call(this.error);
@@ -4858,7 +4858,7 @@ class _$_SearchError extends _SearchError {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
     TResult Function(Questions? questions)? questionAdded,
     TResult Function(Questions? question, int questionIndex)? answerAdded,
@@ -4868,7 +4868,7 @@ class _$_SearchError extends _SearchError {
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
     TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         searchLoaded,
     required TResult orElse(),
   }) {
@@ -4953,8 +4953,7 @@ abstract class _$$_SearchLoadedCopyWith<$Res> {
           _$_SearchLoaded value, $Res Function(_$_SearchLoaded) then) =
       __$$_SearchLoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {List<Questions>? questionsList, Bucket? bucket, bool? isPublished});
+  $Res call({List<Questions> questionsList, Bucket? bucket, bool? isPublished});
 
   $BucketCopyWith<$Res>? get bucket;
 }
@@ -4970,15 +4969,15 @@ class __$$_SearchLoadedCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? questionsList = freezed,
+    Object? questionsList = null,
     Object? bucket = freezed,
     Object? isPublished = freezed,
   }) {
     return _then(_$_SearchLoaded(
-      questionsList: freezed == questionsList
+      questionsList: null == questionsList
           ? _value._questionsList
           : questionsList // ignore: cast_nullable_to_non_nullable
-              as List<Questions>?,
+              as List<Questions>,
       bucket: freezed == bucket
           ? _value.bucket
           : bucket // ignore: cast_nullable_to_non_nullable
@@ -5007,18 +5006,19 @@ class __$$_SearchLoadedCopyWithImpl<$Res>
 
 class _$_SearchLoaded extends _SearchLoaded {
   const _$_SearchLoaded(
-      {final List<Questions>? questionsList, this.bucket, this.isPublished})
+      {final List<Questions> questionsList = const [],
+      this.bucket,
+      this.isPublished})
       : _questionsList = questionsList,
         super._();
 
-  final List<Questions>? _questionsList;
+  final List<Questions> _questionsList;
   @override
-  List<Questions>? get questionsList {
-    final value = _questionsList;
-    if (value == null) return null;
+  @JsonKey()
+  List<Questions> get questionsList {
     if (_questionsList is EqualUnmodifiableListView) return _questionsList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_questionsList);
   }
 
   @override
@@ -5059,7 +5059,7 @@ class _$_SearchLoaded extends _SearchLoaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)
         loaded,
     required TResult Function(Questions? questions) questionAdded,
     required TResult Function(Questions? question, int questionIndex)
@@ -5070,7 +5070,7 @@ class _$_SearchLoaded extends _SearchLoaded {
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
     required TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)
         searchLoaded,
   }) {
     return searchLoaded(questionsList, bucket, this.isPublished);
@@ -5082,7 +5082,7 @@ class _$_SearchLoaded extends _SearchLoaded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
     TResult? Function(Questions? questions)? questionAdded,
     TResult? Function(Questions? question, int questionIndex)? answerAdded,
@@ -5092,7 +5092,7 @@ class _$_SearchLoaded extends _SearchLoaded {
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
     TResult? Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         searchLoaded,
   }) {
     return searchLoaded?.call(questionsList, bucket, this.isPublished);
@@ -5104,7 +5104,7 @@ class _$_SearchLoaded extends _SearchLoaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         loaded,
     TResult Function(Questions? questions)? questionAdded,
     TResult Function(Questions? question, int questionIndex)? answerAdded,
@@ -5114,7 +5114,7 @@ class _$_SearchLoaded extends _SearchLoaded {
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
     TResult Function(
-            List<Questions>? questionsList, Bucket? bucket, bool? isPublished)?
+            List<Questions> questionsList, Bucket? bucket, bool? isPublished)?
         searchLoaded,
     required TResult orElse(),
   }) {
@@ -5185,12 +5185,12 @@ class _$_SearchLoaded extends _SearchLoaded {
 
 abstract class _SearchLoaded extends BucketState {
   const factory _SearchLoaded(
-      {final List<Questions>? questionsList,
+      {final List<Questions> questionsList,
       final Bucket? bucket,
       final bool? isPublished}) = _$_SearchLoaded;
   const _SearchLoaded._() : super._();
 
-  List<Questions>? get questionsList;
+  List<Questions> get questionsList;
   Bucket? get bucket;
   bool? get isPublished;
   @JsonKey(ignore: true)

@@ -25,7 +25,7 @@ mixin _$Bucket {
   String? get description => throw _privateConstructorUsedError;
   String? get category => throw _privateConstructorUsedError;
   bool? get published => throw _privateConstructorUsedError;
-  List<Questions>? get questions => throw _privateConstructorUsedError;
+  List<Questions> get questions => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +43,7 @@ abstract class $BucketCopyWith<$Res> {
       String? description,
       String? category,
       bool? published,
-      List<Questions>? questions});
+      List<Questions> questions});
 }
 
 /// @nodoc
@@ -64,7 +64,7 @@ class _$BucketCopyWithImpl<$Res, $Val extends Bucket>
     Object? description = freezed,
     Object? category = freezed,
     Object? published = freezed,
-    Object? questions = freezed,
+    Object? questions = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -87,10 +87,10 @@ class _$BucketCopyWithImpl<$Res, $Val extends Bucket>
           ? _value.published
           : published // ignore: cast_nullable_to_non_nullable
               as bool?,
-      questions: freezed == questions
+      questions: null == questions
           ? _value.questions
           : questions // ignore: cast_nullable_to_non_nullable
-              as List<Questions>?,
+              as List<Questions>,
     ) as $Val);
   }
 }
@@ -107,7 +107,7 @@ abstract class _$$_BucketCopyWith<$Res> implements $BucketCopyWith<$Res> {
       String? description,
       String? category,
       bool? published,
-      List<Questions>? questions});
+      List<Questions> questions});
 }
 
 /// @nodoc
@@ -125,7 +125,7 @@ class __$$_BucketCopyWithImpl<$Res>
     Object? description = freezed,
     Object? category = freezed,
     Object? published = freezed,
-    Object? questions = freezed,
+    Object? questions = null,
   }) {
     return _then(_$_Bucket(
       id: freezed == id
@@ -148,10 +148,10 @@ class __$$_BucketCopyWithImpl<$Res>
           ? _value.published
           : published // ignore: cast_nullable_to_non_nullable
               as bool?,
-      questions: freezed == questions
+      questions: null == questions
           ? _value._questions
           : questions // ignore: cast_nullable_to_non_nullable
-              as List<Questions>?,
+              as List<Questions>,
     ));
   }
 }
@@ -165,7 +165,7 @@ class _$_Bucket implements _Bucket {
       this.description,
       this.category,
       this.published = false,
-      final List<Questions>? questions})
+      final List<Questions> questions = const []})
       : _questions = questions;
 
   factory _$_Bucket.fromJson(Map<String, dynamic> json) =>
@@ -182,14 +182,13 @@ class _$_Bucket implements _Bucket {
   @override
   @JsonKey()
   final bool? published;
-  final List<Questions>? _questions;
+  final List<Questions> _questions;
   @override
-  List<Questions>? get questions {
-    final value = _questions;
-    if (value == null) return null;
+  @JsonKey()
+  List<Questions> get questions {
     if (_questions is EqualUnmodifiableListView) return _questions;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_questions);
   }
 
   @override
@@ -240,7 +239,7 @@ abstract class _Bucket implements Bucket {
       final String? description,
       final String? category,
       final bool? published,
-      final List<Questions>? questions}) = _$_Bucket;
+      final List<Questions> questions}) = _$_Bucket;
 
   factory _Bucket.fromJson(Map<String, dynamic> json) = _$_Bucket.fromJson;
 
@@ -255,7 +254,7 @@ abstract class _Bucket implements Bucket {
   @override
   bool? get published;
   @override
-  List<Questions>? get questions;
+  List<Questions> get questions;
   @override
   @JsonKey(ignore: true)
   _$$_BucketCopyWith<_$_Bucket> get copyWith =>
