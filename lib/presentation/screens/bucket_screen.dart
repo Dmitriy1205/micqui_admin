@@ -49,12 +49,11 @@ class _BucketScreenState extends State<BucketScreen> {
   final BucketBloc _bloc = sl<BucketBloc>();
   final _searchController = TextEditingController();
   List<TextEditingController> questionControllers = [];
-  List<TextEditingController> answerControllers = [];
-  List<FocusNode> answerNameFocusNodes = [];
+  List<List<TextEditingController>> answerControllers = [];
+  List<List<FocusNode>> answerNameFocusNodes = [];
   List<FocusNode> questionNameFocusNodes = [];
 
   List<Questions> questions = [];
-  late List<Answer>? answerVariant;
   late bool published;
   late Bucket bucket;
 
@@ -64,26 +63,18 @@ class _BucketScreenState extends State<BucketScreen> {
   void initState() {
     bucket = context.read<QuestionnarieBloc>().state.bucket![widget.bucketId];
     questions = List.generate(
-        bucket.questions?.length ?? 0, (index) => bucket.questions![index]);
+        bucket.questions.length, (index) => bucket.questions[index]);
     if (questions.isNotEmpty) {
       questionControllers.clear();
-      answerControllers.clear();
       questionNameFocusNodes.clear();
-      answerNameFocusNodes.clear();
 
-      for (var item in questions) {
+      answerControllers = List.generate(questions.length, (index) => questions[index].variants.map((e) => TextEditingController(text: e.name ?? 'New Question')).toList());
+      answerNameFocusNodes = List.generate(questions.length, (index) => questions[index].variants.map((e) => FocusNode()).toList());
+
+      for (int i = 0; i < questions.length; i++) {
         questionControllers
-            .add(TextEditingController(text: item.name ?? 'Question Name'));
+            .add(TextEditingController(text: questions[i].name ?? 'Question Name'));
         questionNameFocusNodes.add(FocusNode());
-        for (var i in item.variants!) {
-          answerVariant = List.generate(
-              item.variants?.length ?? 0, (i) => item.variants![i]);
-          isChecked =
-              List.generate(answerVariant?.length ?? 0, (index) => false);
-          answerControllers
-              .add(TextEditingController(text: i.name ?? 'New Question'));
-          answerNameFocusNodes.add(FocusNode());
-        }
       }
     }
 
@@ -103,34 +94,38 @@ class _BucketScreenState extends State<BucketScreen> {
       body: BlocConsumer<BucketBloc, BucketState>(
         bloc: _bloc,
         listener: (context, state) {
-          if (state.questionsList != null && state.questionsList!.isNotEmpty) {
-            // checkable = List.generate(state.bucket!.length, (index) => false);
-            // selectedValues = List.generate(
-            //     state.bucket!.length,
-            //         (index) =>
-            //     state.bucket?[index].category ?? AppStrings.employee);
-            questionControllers.clear();
-
-            questionNameFocusNodes.clear();
-            answerNameFocusNodes.clear();
-            answerControllers.clear();
-            for (var item in state.questionsList!) {
-              questionControllers.add(
-                  TextEditingController(text: item.name ?? 'Question Name'));
-              questionNameFocusNodes.add(FocusNode());
-              for (var i in item.variants!) {
-                answerVariant = List.generate(
-                    item.variants?.length ?? 0, (i) => item.variants![i]);
-                isChecked =
-                    List.generate(answerVariant?.length ?? 0, (index) => false);
-                answerControllers
-                    .add(TextEditingController(text: i.name ?? 'New Question'));
-                answerNameFocusNodes.add(FocusNode());
-              }
-            }
-          }
           state.maybeMap(
-              searchLoaded: (_) => questions = state.questionsList!,
+              loaded: (_){
+                questions = [...state.questionsList];
+                if (state.questionsList.isNotEmpty) {
+                  // checkable = List.generate(state.bucket!.length, (index) => false);
+                  // selectedValues = List.generate(
+                  //     state.bucket!.length,
+                  //         (index) =>
+                  //     state.bucket?[index].category ?? AppStrings.employee);
+                  questionControllers.clear();
+                  questionNameFocusNodes.clear();
+
+                  answerControllers = List.generate(questions.length, (index) => questions[index].variants.map((e) => TextEditingController(text: e.name ?? 'New Question')).toList());
+                  answerNameFocusNodes = List.generate(questions.length, (index) => questions[index].variants.map((e) => FocusNode()).toList());
+
+
+
+                  for (int i = 0; i < questions.length; i++) {
+                    questionControllers
+                        .add(TextEditingController(text: questions[i].name ?? 'Question Name'));
+                    questionNameFocusNodes.add(FocusNode());
+                  }
+
+                  print(answerNameFocusNodes.toString());
+                  print(questions.toString());
+                  print(answerNameFocusNodes.toString());
+
+                }
+              },
+              orElse: (){});
+          state.maybeMap(
+              searchLoaded: (_) => questions = state.questionsList,
               loaded: (s) => questions = s.questionsList!,
               isPublished: (_) => published = state.isPublished!,
               // questionAdded: (_) => questions.add(state.questions!),
@@ -439,11 +434,6 @@ class _BucketScreenState extends State<BucketScreen> {
                 itemCount: questions.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  answerVariant = List.generate(
-                      questions[index].variants?.length ?? 0,
-                      (i) => questions[index].variants![i]);
-                  isChecked = List.generate(
-                      answerVariant?.length ?? 0, (index) => false);
                   return Container(
                     decoration: BoxDecoration(
                       border: Border(
@@ -511,13 +501,11 @@ class _BucketScreenState extends State<BucketScreen> {
                               ),
                             ],
                           ),
-                          answerVariant == null
-                              ? const SizedBox()
-                              : Padding(
-                                  padding: const EdgeInsets.only(top: 20),
-                                  child: answersList(
-                                      answerVariant!, questions[index]),
-                                ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20),
+                            child: answersList(
+                                questions[index].variants, questions[index], index),
+                          ),
                           const SizedBox(
                             height: 23,
                           ),
@@ -544,7 +532,7 @@ class _BucketScreenState extends State<BucketScreen> {
     );
   }
 
-  Widget answersList(List<Answer> answer, Questions currentQuestion) {
+  Widget answersList(List<Answer> answer, Questions currentQuestion, int questionIndex) {
     return ListView.builder(
       shrinkWrap: true,
       itemCount: answer.length,
@@ -562,11 +550,9 @@ class _BucketScreenState extends State<BucketScreen> {
                 selectedIconColor: AppColors.green,
                 selectedColor: AppColors.white,
                 borderColor: AppColors.greyWhite,
-                isChecked: isChecked[index],
+                isChecked: false,
                 onChange: (v) {
-                  setState(() {
-                    isChecked[index] = v;
-                  });
+
                 },
               ),
             ),
@@ -583,16 +569,16 @@ class _BucketScreenState extends State<BucketScreen> {
                     selectionControls: MaterialTextSelectionControls(),
                     keyboardType: TextInputType.text,
                     maxLines: 1,
-                    focusNode: answerNameFocusNodes[index],
-                    controller: answerControllers[index],
+                    focusNode: answerNameFocusNodes[questionIndex][index],
+                    controller: answerControllers[questionIndex][index],
                     onSubmitted: (text) {
-                      answerNameFocusNodes[index].unfocus();
+                      answerNameFocusNodes[questionIndex][index].unfocus();
                       _bloc.add(BucketEvent.setAnswer(
                         bucketId: bucket.id!,
                         questionIndex: 1,
                         question: currentQuestion,
                         answer: Answer(
-                            name: answerControllers[index].text,
+                            name: answerControllers[questionIndex][index].text,
                             isRight: false),
                       ));
                       showToast(msg: AppStrings.questionIsAdded);

@@ -9,7 +9,7 @@ class Questions with _$Questions{
   const factory Questions({
     String? id,
     String? name,
-    List<Answer>? variants,
+    @Default([]) List<Answer> variants,
 }) = _Questions;
   factory Questions.fromJson(Map<String, dynamic> json) => _$QuestionsFromJson(json);
 }

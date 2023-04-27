@@ -13,8 +13,9 @@ _$_Bucket _$$_BucketFromJson(Map<String, dynamic> json) => _$_Bucket(
       category: json['category'] as String?,
       published: json['published'] as bool? ?? false,
       questions: (json['questions'] as List<dynamic>?)
-          ?.map((e) => Questions.fromJson(e as Map<String, dynamic>))
-          .toList(),
+              ?.map((e) => Questions.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$_BucketToJson(_$_Bucket instance) => <String, dynamic>{

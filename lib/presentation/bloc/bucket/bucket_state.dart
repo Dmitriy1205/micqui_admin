@@ -16,15 +16,15 @@ class BucketState with _$BucketState {
   Answer? get answer =>
       maybeMap(answerAdded: (state) => state.answer, orElse: () => null);
 
-  List<Questions>? get questionsList =>
-      maybeMap(loaded: (state) => state.questionsList, orElse: () => null);
+  List<Questions> get questionsList =>
+      maybeMap(loaded: (state) => state.questionsList, orElse: () => []);
 
   const factory BucketState.initial() = _Initial;
 
   const factory BucketState.loading() = _Loading;
 
   const factory BucketState.loaded(
-      {List<Questions>? questionsList,
+      {@Default([])List<Questions> questionsList,
       Bucket? bucket,
       bool? isPublished}) = _Loaded;
 
@@ -45,7 +45,7 @@ class BucketState with _$BucketState {
   const factory BucketState.searchError({required String error}) = _SearchError;
 
   const factory BucketState.searchLoaded(
-      {List<Questions>? questionsList,
+      {@Default([]) List<Questions> questionsList,
       Bucket? bucket,
       bool? isPublished}) = _SearchLoaded;
 }
