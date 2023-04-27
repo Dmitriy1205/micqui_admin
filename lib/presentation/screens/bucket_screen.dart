@@ -68,12 +68,20 @@ class _BucketScreenState extends State<BucketScreen> {
       questionControllers.clear();
       questionNameFocusNodes.clear();
 
-      answerControllers = List.generate(questions.length, (index) => questions[index].variants.map((e) => TextEditingController(text: e.name ?? 'New Question')).toList());
-      answerNameFocusNodes = List.generate(questions.length, (index) => questions[index].variants.map((e) => FocusNode()).toList());
+      answerControllers = List.generate(
+          questions.length,
+          (index) => questions[index]
+              .variants
+              .map((e) => TextEditingController(text: e.name ?? 'New Question'))
+              .toList());
+      answerNameFocusNodes = List.generate(
+          questions.length,
+          (index) =>
+              questions[index].variants.map((e) => FocusNode()).toList());
 
       for (int i = 0; i < questions.length; i++) {
-        questionControllers
-            .add(TextEditingController(text: questions[i].name ?? 'Question Name'));
+        questionControllers.add(
+            TextEditingController(text: questions[i].name ?? 'Question Name'));
         questionNameFocusNodes.add(FocusNode());
       }
     }
@@ -95,7 +103,7 @@ class _BucketScreenState extends State<BucketScreen> {
         bloc: _bloc,
         listener: (context, state) {
           state.maybeMap(
-              loaded: (_){
+              loaded: (_) {
                 questions = [...state.questionsList];
                 if (state.questionsList.isNotEmpty) {
                   // checkable = List.generate(state.bucket!.length, (index) => false);
@@ -106,24 +114,32 @@ class _BucketScreenState extends State<BucketScreen> {
                   questionControllers.clear();
                   questionNameFocusNodes.clear();
 
-                  answerControllers = List.generate(questions.length, (index) => questions[index].variants.map((e) => TextEditingController(text: e.name ?? 'New Question')).toList());
-                  answerNameFocusNodes = List.generate(questions.length, (index) => questions[index].variants.map((e) => FocusNode()).toList());
-
-
+                  answerControllers = List.generate(
+                      questions.length,
+                      (index) => questions[index]
+                          .variants
+                          .map((e) => TextEditingController(
+                              text: e.name ?? 'New Question'))
+                          .toList());
+                  answerNameFocusNodes = List.generate(
+                      questions.length,
+                      (index) => questions[index]
+                          .variants
+                          .map((e) => FocusNode())
+                          .toList());
 
                   for (int i = 0; i < questions.length; i++) {
-                    questionControllers
-                        .add(TextEditingController(text: questions[i].name ?? 'Question Name'));
+                    questionControllers.add(TextEditingController(
+                        text: questions[i].name ?? 'Question Name'));
                     questionNameFocusNodes.add(FocusNode());
                   }
 
                   print(answerNameFocusNodes.toString());
                   print(questions.toString());
                   print(answerNameFocusNodes.toString());
-
                 }
               },
-              orElse: (){});
+              orElse: () {});
           state.maybeMap(
               searchLoaded: (_) => questions = state.questionsList,
               loaded: (s) => questions = s.questionsList!,
@@ -393,7 +409,8 @@ class _BucketScreenState extends State<BucketScreen> {
                                     onPressed: () {
                                       _bloc.add(BucketEvent.publish(
                                           bucketId: bucket.id!));
-                                      showToast(msg: AppStrings.bucketIsPublished);
+                                      showToast(
+                                          msg: AppStrings.bucketIsPublished);
                                     },
                                   ),
                                 ),
@@ -503,8 +520,8 @@ class _BucketScreenState extends State<BucketScreen> {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 20),
-                            child: answersList(
-                                questions[index].variants, questions[index], index),
+                            child: answersList(questions[index].variants,
+                                questions[index], index),
                           ),
                           const SizedBox(
                             height: 23,
@@ -532,7 +549,8 @@ class _BucketScreenState extends State<BucketScreen> {
     );
   }
 
-  Widget answersList(List<Answer> answer, Questions currentQuestion, int questionIndex) {
+  Widget answersList(
+      List<Answer> answer, Questions currentQuestion, int questionIndex) {
     return ListView.builder(
       shrinkWrap: true,
       itemCount: answer.length,
@@ -551,9 +569,7 @@ class _BucketScreenState extends State<BucketScreen> {
                 selectedColor: AppColors.white,
                 borderColor: AppColors.greyWhite,
                 isChecked: false,
-                onChange: (v) {
-
-                },
+                onChange: (v) {},
               ),
             ),
             Expanded(

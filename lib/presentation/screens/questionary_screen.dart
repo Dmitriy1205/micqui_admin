@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:micqui_admin/core/constants/strings.dart';
 import 'package:micqui_admin/core/themes/theme.dart';
@@ -12,6 +11,7 @@ import '../../app/router.dart';
 import '../../core/constants/colors.dart';
 import '../../data/models/bucket/bucket.dart';
 import '../widgets/search_field.dart';
+import '../widgets/toast.dart';
 
 class QuestionaireScreen extends StatefulWidget {
   final double? mobileCardPadding;
@@ -598,13 +598,3 @@ deleteBucketDialog(BuildContext context,
   );
 }
 
-showToast({required String msg}) {
-  Fluttertoast.showToast(
-      msg: msg,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 5,
-      backgroundColor: Colors.grey,
-      textColor: Colors.white,
-      fontSize: 16.0);
-}

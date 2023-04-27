@@ -18,7 +18,13 @@ class AuthRepository {
     required String password,
   }) async {
     try {
-      await auth.signInWithEmailAndPassword(email: email, password: password);
+      if (email == 'admin@admin.com') {
+        await auth.signInWithEmailAndPassword(email: email, password: password);
+      } else {
+        throw BadRequestException(
+          message: 'NO ACCESS FOR THIS USER',
+        );
+      }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found' || e.code == 'wrong-password') {
         throw BadRequestException(
