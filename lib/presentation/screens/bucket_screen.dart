@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:micqui_admin/data/models/questions/questions.dart';
 import 'package:micqui_admin/presentation/bloc/questionnarie/questionnarie_bloc.dart';
 import 'package:micqui_admin/presentation/widgets/app_elevated_button.dart';
+import 'package:micqui_admin/presentation/widgets/toast.dart';
 
 import '../../app/router.dart';
 import '../../core/constants/colors.dart';
@@ -22,6 +23,7 @@ class BucketScreen extends StatefulWidget {
   final int bucketId;
   final double? mobileCardPadding;
   final double? mobileHeaderSize;
+  final FontWeight? mobileFontWeight;
   final double? mobileBucketSize;
   final double? mobileRowSize;
   final double? mobileSearchIconSize;
@@ -36,6 +38,7 @@ class BucketScreen extends StatefulWidget {
     this.mobileRowSize,
     this.mobileSearchIconSize,
     this.mobileSearchIconSpace,
+    this.mobileFontWeight,
   }) : super(key: key);
 
   @override
@@ -70,7 +73,7 @@ class _BucketScreenState extends State<BucketScreen> {
 
       for (var item in questions) {
         questionControllers
-            .add(TextEditingController(text: item.name ?? 'Name'));
+            .add(TextEditingController(text: item.name ?? 'Question Name'));
         questionNameFocusNodes.add(FocusNode());
         for (var i in item.variants!) {
           answerVariant = List.generate(
@@ -78,7 +81,7 @@ class _BucketScreenState extends State<BucketScreen> {
           isChecked =
               List.generate(answerVariant?.length ?? 0, (index) => false);
           answerControllers
-              .add(TextEditingController(text: i.name ?? 'Answer Name'));
+              .add(TextEditingController(text: i.name ?? 'New Question'));
           answerNameFocusNodes.add(FocusNode());
         }
       }
@@ -112,8 +115,8 @@ class _BucketScreenState extends State<BucketScreen> {
             answerNameFocusNodes.clear();
             answerControllers.clear();
             for (var item in state.questionsList!) {
-              questionControllers
-                  .add(TextEditingController(text: item.name ?? 'Name'));
+              questionControllers.add(
+                  TextEditingController(text: item.name ?? 'Question Name'));
               questionNameFocusNodes.add(FocusNode());
               for (var i in item.variants!) {
                 answerVariant = List.generate(
@@ -121,7 +124,7 @@ class _BucketScreenState extends State<BucketScreen> {
                 isChecked =
                     List.generate(answerVariant?.length ?? 0, (index) => false);
                 answerControllers
-                    .add(TextEditingController(text: i.name ?? 'Answer Name'));
+                    .add(TextEditingController(text: i.name ?? 'New Question'));
                 answerNameFocusNodes.add(FocusNode());
               }
             }
@@ -184,7 +187,10 @@ class _BucketScreenState extends State<BucketScreen> {
                                         .copyWith(
                                             color: AppColors.text,
                                             fontSize:
-                                                widget.mobileHeaderSize ?? 38),
+                                                widget.mobileHeaderSize ?? 38,
+                                            fontWeight:
+                                                widget.mobileFontWeight ??
+                                                    FontWeight.w400),
                                   ),
                                   Text(
                                     bucket.name!,
@@ -246,7 +252,10 @@ class _BucketScreenState extends State<BucketScreen> {
                                         .copyWith(
                                             color: AppColors.text,
                                             fontSize:
-                                                widget.mobileHeaderSize ?? 38),
+                                                widget.mobileHeaderSize ?? 38,
+                                            fontWeight:
+                                                widget.mobileFontWeight ??
+                                                    FontWeight.w400),
                                   ),
                                   Text(
                                     bucket.name!,
@@ -389,6 +398,7 @@ class _BucketScreenState extends State<BucketScreen> {
                                     onPressed: () {
                                       _bloc.add(BucketEvent.publish(
                                           bucketId: bucket.id!));
+                                      showToast(msg: AppStrings.bucketIsPublished);
                                     },
                                   ),
                                 ),
@@ -477,6 +487,8 @@ class _BucketScreenState extends State<BucketScreen> {
                                             name: questionControllers[index]
                                                 .text),
                                         questionIndex: index));
+                                    showToast(
+                                        msg: AppStrings.questionIsCreated);
                                   },
                                   onSelectionHandleTapped: () {
                                     showAboutDialog(context: context);
@@ -583,6 +595,7 @@ class _BucketScreenState extends State<BucketScreen> {
                             name: answerControllers[index].text,
                             isRight: false),
                       ));
+                      showToast(msg: AppStrings.questionIsAdded);
                     },
                   ),
                 ],

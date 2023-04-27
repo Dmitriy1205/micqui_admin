@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:micqui_admin/core/constants/strings.dart';
 import 'package:micqui_admin/core/themes/theme.dart';
@@ -15,6 +16,7 @@ import '../widgets/search_field.dart';
 class QuestionaireScreen extends StatefulWidget {
   final double? mobileCardPadding;
   final double? mobileHeaderSize;
+  final FontWeight? mobileFontWeight;
   final double? mobileBucketSize;
   final double? mobileRowSize;
   final double? mobileSearchIconSize;
@@ -28,6 +30,7 @@ class QuestionaireScreen extends StatefulWidget {
     this.mobileRowSize,
     this.mobileSearchIconSize,
     this.mobileSearchIconSpace,
+    this.mobileFontWeight,
   }) : super(key: key);
 
   @override
@@ -101,7 +104,9 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
                         style: AppTheme.themeData.textTheme.headlineLarge!
                             .copyWith(
                                 color: AppColors.text,
-                                fontSize: widget.mobileHeaderSize ?? 38),
+                                fontSize: widget.mobileHeaderSize ?? 38,
+                                fontWeight:
+                                    widget.mobileFontWeight ?? FontWeight.w400),
                       ),
                       const SizedBox(
                         height: 52,
@@ -199,12 +204,25 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
                                             children: [
                                               IconButton(
                                                 onPressed: () {
-                                                  // context.read<QuestionnarieBloc>().add(QuestionnarieEvent.deleteBucket(bucketId: bucketId))
-                                                  checkable.clear();
-                                                  checkable.addAll(
-                                                      List.generate(
-                                                          state.bucket!.length,
-                                                          (index) => false));
+                                                  deleteBucketDialog(context,
+                                                      text: checkable
+                                                                  .where(
+                                                                      (value) =>
+                                                                          value)
+                                                                  .length >
+                                                              1
+                                                          ? AppStrings
+                                                              .areYouDeleteMore
+                                                          : AppStrings
+                                                              .areYouDelete,
+                                                      checkable: checkable,
+                                                      buckets: state.bucket);
+
+                                                  // checkable.clear();
+                                                  // checkable.addAll(
+                                                  //     List.generate(
+                                                  //         state.bucket!.length,
+                                                  //         (index) => false));
                                                 },
                                                 icon: const FaIcon(
                                                   FontAwesomeIcons
@@ -365,6 +383,7 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
                                   mobileBucketSize: widget.mobileBucketSize,
                                   mobileHeaderSize: widget.mobileHeaderSize,
                                   mobileCardPadding: widget.mobileCardPadding,
+                                  mobileFontWeight: widget.mobileFontWeight,
                                 ),
                               ),
                             );
@@ -448,6 +467,7 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
                                             bucketId: state.bucket?[index].id,
                                           ),
                                         );
+                                    showToast(msg: AppStrings.bucketIsCreated);
                                   },
                                 ),
                                 const SizedBox(
@@ -527,4 +547,64 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
       ),
     );
   }
+}
+
+deleteBucketDialog(BuildContext context,
+    {required String text,
+    required List<Bucket>? buckets,
+    required List<bool>? checkable}) {
+  Widget cancelButton = TextButton(
+    child: const Text(
+      AppStrings.cancel,
+      style: TextStyle(color: AppColors.text),
+    ),
+    onPressed: () {
+      Navigator.pop(context);
+    },
+  );
+  Widget continueButton = TextButton(
+    child: const Text(
+      AppStrings.delete,
+      style: TextStyle(color: AppColors.text),
+    ),
+    onPressed: () {
+      context.read<QuestionnarieBloc>().add(QuestionnarieEvent.deleteBucket(
+            checkable: checkable,
+            bucket: buckets,
+          ));
+      Navigator.pop(context);
+    },
+  );
+
+  AlertDialog alert = AlertDialog(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10.0),
+    ),
+    title: Text(AppStrings.warning,
+        style: AppTheme.themeData.textTheme.titleSmall),
+    content: Text(text, style: AppTheme.themeData.textTheme.bodySmall),
+    actions: [
+      cancelButton,
+      continueButton,
+    ],
+  );
+
+  showDialog(
+    useRootNavigator: false,
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+
+showToast({required String msg}) {
+  Fluttertoast.showToast(
+      msg: msg,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 5,
+      backgroundColor: Colors.grey,
+      textColor: Colors.white,
+      fontSize: 16.0);
 }

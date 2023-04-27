@@ -90,14 +90,13 @@ class FirestoreRepository {
   }
 
   Future<List<Bucket>?> deleteBucket(
-      {required String bucketId,
-      Bucket? existedBucket,
-      int? indexToDelete}) async {
+      {required String bucketId}) async {
     try {
+      await _firestore.collection('buckets').doc(bucketId).delete();
       final buckets = await getBuckets();
 
       // if (existedBucket == null && indexToDelete == null) {
-      await _firestore.collection('buckets').doc(bucketId).delete();
+
       // } else {
       //   await _firestore.collection('buckets').doc(bucketId).delete();
       // }

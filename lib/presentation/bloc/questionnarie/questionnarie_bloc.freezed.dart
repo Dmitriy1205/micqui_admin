@@ -25,7 +25,8 @@ mixin _$QuestionnarieEvent {
     required TResult Function(String name, String category) searchByName,
     required TResult Function(String category) sortByCategory,
     required TResult Function() reset,
-    required TResult Function(String bucketId, List<Bucket>? bucket, int? index)
+    required TResult Function(String? bucketId, List<Bucket>? bucket,
+            int? index, List<bool>? checkable)
         deleteBucket,
   }) =>
       throw _privateConstructorUsedError;
@@ -38,7 +39,8 @@ mixin _$QuestionnarieEvent {
     TResult? Function(String name, String category)? searchByName,
     TResult? Function(String category)? sortByCategory,
     TResult? Function()? reset,
-    TResult? Function(String bucketId, List<Bucket>? bucket, int? index)?
+    TResult? Function(String? bucketId, List<Bucket>? bucket, int? index,
+            List<bool>? checkable)?
         deleteBucket,
   }) =>
       throw _privateConstructorUsedError;
@@ -51,7 +53,8 @@ mixin _$QuestionnarieEvent {
     TResult Function(String name, String category)? searchByName,
     TResult Function(String category)? sortByCategory,
     TResult Function()? reset,
-    TResult Function(String bucketId, List<Bucket>? bucket, int? index)?
+    TResult Function(String? bucketId, List<Bucket>? bucket, int? index,
+            List<bool>? checkable)?
         deleteBucket,
     required TResult orElse(),
   }) =>
@@ -190,7 +193,8 @@ class _$_Init implements _Init {
     required TResult Function(String name, String category) searchByName,
     required TResult Function(String category) sortByCategory,
     required TResult Function() reset,
-    required TResult Function(String bucketId, List<Bucket>? bucket, int? index)
+    required TResult Function(String? bucketId, List<Bucket>? bucket,
+            int? index, List<bool>? checkable)
         deleteBucket,
   }) {
     return init(bucket);
@@ -206,7 +210,8 @@ class _$_Init implements _Init {
     TResult? Function(String name, String category)? searchByName,
     TResult? Function(String category)? sortByCategory,
     TResult? Function()? reset,
-    TResult? Function(String bucketId, List<Bucket>? bucket, int? index)?
+    TResult? Function(String? bucketId, List<Bucket>? bucket, int? index,
+            List<bool>? checkable)?
         deleteBucket,
   }) {
     return init?.call(bucket);
@@ -222,7 +227,8 @@ class _$_Init implements _Init {
     TResult Function(String name, String category)? searchByName,
     TResult Function(String category)? sortByCategory,
     TResult Function()? reset,
-    TResult Function(String bucketId, List<Bucket>? bucket, int? index)?
+    TResult Function(String? bucketId, List<Bucket>? bucket, int? index,
+            List<bool>? checkable)?
         deleteBucket,
     required TResult orElse(),
   }) {
@@ -335,7 +341,8 @@ class _$_AddBucket implements _AddBucket {
     required TResult Function(String name, String category) searchByName,
     required TResult Function(String category) sortByCategory,
     required TResult Function() reset,
-    required TResult Function(String bucketId, List<Bucket>? bucket, int? index)
+    required TResult Function(String? bucketId, List<Bucket>? bucket,
+            int? index, List<bool>? checkable)
         deleteBucket,
   }) {
     return addBucket();
@@ -351,7 +358,8 @@ class _$_AddBucket implements _AddBucket {
     TResult? Function(String name, String category)? searchByName,
     TResult? Function(String category)? sortByCategory,
     TResult? Function()? reset,
-    TResult? Function(String bucketId, List<Bucket>? bucket, int? index)?
+    TResult? Function(String? bucketId, List<Bucket>? bucket, int? index,
+            List<bool>? checkable)?
         deleteBucket,
   }) {
     return addBucket?.call();
@@ -367,7 +375,8 @@ class _$_AddBucket implements _AddBucket {
     TResult Function(String name, String category)? searchByName,
     TResult Function(String category)? sortByCategory,
     TResult Function()? reset,
-    TResult Function(String bucketId, List<Bucket>? bucket, int? index)?
+    TResult Function(String? bucketId, List<Bucket>? bucket, int? index,
+            List<bool>? checkable)?
         deleteBucket,
     required TResult orElse(),
   }) {
@@ -521,7 +530,8 @@ class _$_SetBucket implements _SetBucket {
     required TResult Function(String name, String category) searchByName,
     required TResult Function(String category) sortByCategory,
     required TResult Function() reset,
-    required TResult Function(String bucketId, List<Bucket>? bucket, int? index)
+    required TResult Function(String? bucketId, List<Bucket>? bucket,
+            int? index, List<bool>? checkable)
         deleteBucket,
   }) {
     return setBucket(bucket, bucketId);
@@ -537,7 +547,8 @@ class _$_SetBucket implements _SetBucket {
     TResult? Function(String name, String category)? searchByName,
     TResult? Function(String category)? sortByCategory,
     TResult? Function()? reset,
-    TResult? Function(String bucketId, List<Bucket>? bucket, int? index)?
+    TResult? Function(String? bucketId, List<Bucket>? bucket, int? index,
+            List<bool>? checkable)?
         deleteBucket,
   }) {
     return setBucket?.call(bucket, bucketId);
@@ -553,7 +564,8 @@ class _$_SetBucket implements _SetBucket {
     TResult Function(String name, String category)? searchByName,
     TResult Function(String category)? sortByCategory,
     TResult Function()? reset,
-    TResult Function(String bucketId, List<Bucket>? bucket, int? index)?
+    TResult Function(String? bucketId, List<Bucket>? bucket, int? index,
+            List<bool>? checkable)?
         deleteBucket,
     required TResult orElse(),
   }) {
@@ -706,7 +718,8 @@ class _$_UpdateCategory implements _UpdateCategory {
     required TResult Function(String name, String category) searchByName,
     required TResult Function(String category) sortByCategory,
     required TResult Function() reset,
-    required TResult Function(String bucketId, List<Bucket>? bucket, int? index)
+    required TResult Function(String? bucketId, List<Bucket>? bucket,
+            int? index, List<bool>? checkable)
         deleteBucket,
   }) {
     return updateCategory(bucketId, category);
@@ -722,7 +735,8 @@ class _$_UpdateCategory implements _UpdateCategory {
     TResult? Function(String name, String category)? searchByName,
     TResult? Function(String category)? sortByCategory,
     TResult? Function()? reset,
-    TResult? Function(String bucketId, List<Bucket>? bucket, int? index)?
+    TResult? Function(String? bucketId, List<Bucket>? bucket, int? index,
+            List<bool>? checkable)?
         deleteBucket,
   }) {
     return updateCategory?.call(bucketId, category);
@@ -738,7 +752,8 @@ class _$_UpdateCategory implements _UpdateCategory {
     TResult Function(String name, String category)? searchByName,
     TResult Function(String category)? sortByCategory,
     TResult Function()? reset,
-    TResult Function(String bucketId, List<Bucket>? bucket, int? index)?
+    TResult Function(String? bucketId, List<Bucket>? bucket, int? index,
+            List<bool>? checkable)?
         deleteBucket,
     required TResult orElse(),
   }) {
@@ -890,7 +905,8 @@ class _$_SearchByName implements _SearchByName {
     required TResult Function(String name, String category) searchByName,
     required TResult Function(String category) sortByCategory,
     required TResult Function() reset,
-    required TResult Function(String bucketId, List<Bucket>? bucket, int? index)
+    required TResult Function(String? bucketId, List<Bucket>? bucket,
+            int? index, List<bool>? checkable)
         deleteBucket,
   }) {
     return searchByName(name, category);
@@ -906,7 +922,8 @@ class _$_SearchByName implements _SearchByName {
     TResult? Function(String name, String category)? searchByName,
     TResult? Function(String category)? sortByCategory,
     TResult? Function()? reset,
-    TResult? Function(String bucketId, List<Bucket>? bucket, int? index)?
+    TResult? Function(String? bucketId, List<Bucket>? bucket, int? index,
+            List<bool>? checkable)?
         deleteBucket,
   }) {
     return searchByName?.call(name, category);
@@ -922,7 +939,8 @@ class _$_SearchByName implements _SearchByName {
     TResult Function(String name, String category)? searchByName,
     TResult Function(String category)? sortByCategory,
     TResult Function()? reset,
-    TResult Function(String bucketId, List<Bucket>? bucket, int? index)?
+    TResult Function(String? bucketId, List<Bucket>? bucket, int? index,
+            List<bool>? checkable)?
         deleteBucket,
     required TResult orElse(),
   }) {
@@ -1066,7 +1084,8 @@ class _$_SortByCategory implements _SortByCategory {
     required TResult Function(String name, String category) searchByName,
     required TResult Function(String category) sortByCategory,
     required TResult Function() reset,
-    required TResult Function(String bucketId, List<Bucket>? bucket, int? index)
+    required TResult Function(String? bucketId, List<Bucket>? bucket,
+            int? index, List<bool>? checkable)
         deleteBucket,
   }) {
     return sortByCategory(category);
@@ -1082,7 +1101,8 @@ class _$_SortByCategory implements _SortByCategory {
     TResult? Function(String name, String category)? searchByName,
     TResult? Function(String category)? sortByCategory,
     TResult? Function()? reset,
-    TResult? Function(String bucketId, List<Bucket>? bucket, int? index)?
+    TResult? Function(String? bucketId, List<Bucket>? bucket, int? index,
+            List<bool>? checkable)?
         deleteBucket,
   }) {
     return sortByCategory?.call(category);
@@ -1098,7 +1118,8 @@ class _$_SortByCategory implements _SortByCategory {
     TResult Function(String name, String category)? searchByName,
     TResult Function(String category)? sortByCategory,
     TResult Function()? reset,
-    TResult Function(String bucketId, List<Bucket>? bucket, int? index)?
+    TResult Function(String? bucketId, List<Bucket>? bucket, int? index,
+            List<bool>? checkable)?
         deleteBucket,
     required TResult orElse(),
   }) {
@@ -1211,7 +1232,8 @@ class _$_Reset implements _Reset {
     required TResult Function(String name, String category) searchByName,
     required TResult Function(String category) sortByCategory,
     required TResult Function() reset,
-    required TResult Function(String bucketId, List<Bucket>? bucket, int? index)
+    required TResult Function(String? bucketId, List<Bucket>? bucket,
+            int? index, List<bool>? checkable)
         deleteBucket,
   }) {
     return reset();
@@ -1227,7 +1249,8 @@ class _$_Reset implements _Reset {
     TResult? Function(String name, String category)? searchByName,
     TResult? Function(String category)? sortByCategory,
     TResult? Function()? reset,
-    TResult? Function(String bucketId, List<Bucket>? bucket, int? index)?
+    TResult? Function(String? bucketId, List<Bucket>? bucket, int? index,
+            List<bool>? checkable)?
         deleteBucket,
   }) {
     return reset?.call();
@@ -1243,7 +1266,8 @@ class _$_Reset implements _Reset {
     TResult Function(String name, String category)? searchByName,
     TResult Function(String category)? sortByCategory,
     TResult Function()? reset,
-    TResult Function(String bucketId, List<Bucket>? bucket, int? index)?
+    TResult Function(String? bucketId, List<Bucket>? bucket, int? index,
+            List<bool>? checkable)?
         deleteBucket,
     required TResult orElse(),
   }) {
@@ -1313,7 +1337,11 @@ abstract class _$$_DeleteBucketCopyWith<$Res> {
           _$_DeleteBucket value, $Res Function(_$_DeleteBucket) then) =
       __$$_DeleteBucketCopyWithImpl<$Res>;
   @useResult
-  $Res call({String bucketId, List<Bucket>? bucket, int? index});
+  $Res call(
+      {String? bucketId,
+      List<Bucket>? bucket,
+      int? index,
+      List<bool>? checkable});
 }
 
 /// @nodoc
@@ -1327,15 +1355,16 @@ class __$$_DeleteBucketCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bucketId = null,
+    Object? bucketId = freezed,
     Object? bucket = freezed,
     Object? index = freezed,
+    Object? checkable = freezed,
   }) {
     return _then(_$_DeleteBucket(
-      bucketId: null == bucketId
+      bucketId: freezed == bucketId
           ? _value.bucketId
           : bucketId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       bucket: freezed == bucket
           ? _value._bucket
           : bucket // ignore: cast_nullable_to_non_nullable
@@ -1344,6 +1373,10 @@ class __$$_DeleteBucketCopyWithImpl<$Res>
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
               as int?,
+      checkable: freezed == checkable
+          ? _value._checkable
+          : checkable // ignore: cast_nullable_to_non_nullable
+              as List<bool>?,
     ));
   }
 }
@@ -1352,11 +1385,15 @@ class __$$_DeleteBucketCopyWithImpl<$Res>
 
 class _$_DeleteBucket implements _DeleteBucket {
   const _$_DeleteBucket(
-      {required this.bucketId, final List<Bucket>? bucket, this.index})
-      : _bucket = bucket;
+      {this.bucketId,
+      final List<Bucket>? bucket,
+      this.index,
+      final List<bool>? checkable})
+      : _bucket = bucket,
+        _checkable = checkable;
 
   @override
-  final String bucketId;
+  final String? bucketId;
   final List<Bucket>? _bucket;
   @override
   List<Bucket>? get bucket {
@@ -1369,10 +1406,19 @@ class _$_DeleteBucket implements _DeleteBucket {
 
   @override
   final int? index;
+  final List<bool>? _checkable;
+  @override
+  List<bool>? get checkable {
+    final value = _checkable;
+    if (value == null) return null;
+    if (_checkable is EqualUnmodifiableListView) return _checkable;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'QuestionnarieEvent.deleteBucket(bucketId: $bucketId, bucket: $bucket, index: $index)';
+    return 'QuestionnarieEvent.deleteBucket(bucketId: $bucketId, bucket: $bucket, index: $index, checkable: $checkable)';
   }
 
   @override
@@ -1383,12 +1429,18 @@ class _$_DeleteBucket implements _DeleteBucket {
             (identical(other.bucketId, bucketId) ||
                 other.bucketId == bucketId) &&
             const DeepCollectionEquality().equals(other._bucket, _bucket) &&
-            (identical(other.index, index) || other.index == index));
+            (identical(other.index, index) || other.index == index) &&
+            const DeepCollectionEquality()
+                .equals(other._checkable, _checkable));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, bucketId,
-      const DeepCollectionEquality().hash(_bucket), index);
+  int get hashCode => Object.hash(
+      runtimeType,
+      bucketId,
+      const DeepCollectionEquality().hash(_bucket),
+      index,
+      const DeepCollectionEquality().hash(_checkable));
 
   @JsonKey(ignore: true)
   @override
@@ -1406,10 +1458,11 @@ class _$_DeleteBucket implements _DeleteBucket {
     required TResult Function(String name, String category) searchByName,
     required TResult Function(String category) sortByCategory,
     required TResult Function() reset,
-    required TResult Function(String bucketId, List<Bucket>? bucket, int? index)
+    required TResult Function(String? bucketId, List<Bucket>? bucket,
+            int? index, List<bool>? checkable)
         deleteBucket,
   }) {
-    return deleteBucket(bucketId, bucket, index);
+    return deleteBucket(bucketId, bucket, index, checkable);
   }
 
   @override
@@ -1422,10 +1475,11 @@ class _$_DeleteBucket implements _DeleteBucket {
     TResult? Function(String name, String category)? searchByName,
     TResult? Function(String category)? sortByCategory,
     TResult? Function()? reset,
-    TResult? Function(String bucketId, List<Bucket>? bucket, int? index)?
+    TResult? Function(String? bucketId, List<Bucket>? bucket, int? index,
+            List<bool>? checkable)?
         deleteBucket,
   }) {
-    return deleteBucket?.call(bucketId, bucket, index);
+    return deleteBucket?.call(bucketId, bucket, index, checkable);
   }
 
   @override
@@ -1438,12 +1492,13 @@ class _$_DeleteBucket implements _DeleteBucket {
     TResult Function(String name, String category)? searchByName,
     TResult Function(String category)? sortByCategory,
     TResult Function()? reset,
-    TResult Function(String bucketId, List<Bucket>? bucket, int? index)?
+    TResult Function(String? bucketId, List<Bucket>? bucket, int? index,
+            List<bool>? checkable)?
         deleteBucket,
     required TResult orElse(),
   }) {
     if (deleteBucket != null) {
-      return deleteBucket(bucketId, bucket, index);
+      return deleteBucket(bucketId, bucket, index, checkable);
     }
     return orElse();
   }
@@ -1500,13 +1555,15 @@ class _$_DeleteBucket implements _DeleteBucket {
 
 abstract class _DeleteBucket implements QuestionnarieEvent {
   const factory _DeleteBucket(
-      {required final String bucketId,
+      {final String? bucketId,
       final List<Bucket>? bucket,
-      final int? index}) = _$_DeleteBucket;
+      final int? index,
+      final List<bool>? checkable}) = _$_DeleteBucket;
 
-  String get bucketId;
+  String? get bucketId;
   List<Bucket>? get bucket;
   int? get index;
+  List<bool>? get checkable;
   @JsonKey(ignore: true)
   _$$_DeleteBucketCopyWith<_$_DeleteBucket> get copyWith =>
       throw _privateConstructorUsedError;

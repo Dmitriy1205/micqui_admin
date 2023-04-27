@@ -19,6 +19,7 @@ class MobileLayout extends StatelessWidget {
       body: const QuestionaireScreen(
         mobileCardPadding: 17,
         mobileHeaderSize: 25,
+        mobileFontWeight: FontWeight.w600,
         mobileBucketSize: 12,
         mobileRowSize: 10,
         mobileSearchIconSize: 13,

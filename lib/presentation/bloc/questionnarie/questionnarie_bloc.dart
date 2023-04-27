@@ -108,18 +108,31 @@ class QuestionnarieBloc extends Bloc<QuestionnarieEvent, QuestionnarieState> {
   Future<void> _reset(_Reset event, Emitter<QuestionnarieState> emit) async {
     emit(const QuestionnarieState.initial());
   }
-  Future<void> _deleteBucket(_DeleteBucket event, Emitter<QuestionnarieState> emit) async {
+
+  Future<void> _deleteBucket(
+      _DeleteBucket event, Emitter<QuestionnarieState> emit) async {
     emit(const QuestionnarieState.loading());
     try {
-      final buckets = await firestore.deleteBucket(bucketId: event.bucketId);
+      List<Bucket>? buckets = [];
+
+      for (int i = 0; i < event.checkable!.length; i++) {
+        if (event.checkable![i]) {
+          buckets =
+              await firestore.deleteBucket(bucketId: event.bucket![i].id!);
+        }
+      }
       emit(QuestionnarieState.loaded(bucket: buckets));
     } on Error {
       List<Bucket> buckets = List.from(event.bucket!);
-      buckets.removeAt(event.index!);
-
+      for (int i = 0; i < event.checkable!.length; i++) {
+        if (event.checkable![i]) {
+          buckets.removeAt(i);
+        }
+      }
       emit(QuestionnarieState.loaded(bucket: buckets));
     }
   }
+
   @override
   Future<void> close() {
     _subscription.cancel();

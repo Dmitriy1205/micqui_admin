@@ -61,7 +61,7 @@ class BucketBloc extends Bloc<BucketEvent, BucketState> {
       Emitter<BucketState> emit) async {
     emit(const BucketState.loading());
     List<Questions> questions = List.from(event.questions!);
-    const question = Questions(name: 'Name', variants: []);
+    const question = Questions(name: 'Question Name', variants: []);
     questions.add(question);
 
     emit(BucketState.loaded(questionsList: questions));
@@ -88,7 +88,7 @@ class BucketBloc extends Bloc<BucketEvent, BucketState> {
     emit(const BucketState.loading());
     List<Answer> answers = List.from(event.answerList!);
     List<Questions> questions = List.from(event.questions!);
-    answers.add(const Answer(name: 'Answer Name', isRight: false));
+    answers.add(const Answer(name: 'New Question', isRight: false));
 
     Questions question = Questions(
         id: event.question.id, name: event.question.name, variants: answers);
