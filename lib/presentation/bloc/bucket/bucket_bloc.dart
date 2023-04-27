@@ -116,6 +116,7 @@ class BucketBloc extends Bloc<BucketEvent, BucketState> {
       Emitter<BucketState> emit) async {
     emit(const BucketState.loading());
     await firestore.publishBucket(bucketId: event.bucketId, isPublish: false);
+    questionnarieBloc.add(const QuestionnarieEvent.init());
     emit(const BucketState.isPublished(isPublished: false));
   }
 
@@ -193,7 +194,6 @@ class BucketBloc extends Bloc<BucketEvent, BucketState> {
               (e) => e.name!.toLowerCase().contains(event.name.toLowerCase()))
           .toList();
 
-      print(foundedQuestions);
       if (foundedQuestions.isEmpty) {
         emit(BucketState.loaded(questionsList: foundedQuestions));
       } else {

@@ -61,7 +61,6 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
         body: BlocConsumer<QuestionnarieBloc, QuestionnarieState>(
           listener: (context, state) {
             if (state.bucket != null && state.bucket!.isNotEmpty) {
-
               checkable = List.generate(state.bucket!.length, (index) => false);
               selectedValues = List.generate(
                   state.bucket!.length,
@@ -79,7 +78,6 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
                 nameFocusNodes.add(FocusNode());
                 descFocusNodes.add(FocusNode());
               }
-              print(nameControllers);
             }
             state.maybeMap(
                 success: (_) => context
@@ -342,7 +340,6 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
               itemCount: state.bucket!.length,
               shrinkWrap: true,
               itemBuilder: (context, index) {
-                print(checkable[index]);
                 return Container(
                   key: ObjectKey(index),
                   decoration: BoxDecoration(

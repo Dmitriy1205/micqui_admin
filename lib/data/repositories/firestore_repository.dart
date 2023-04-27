@@ -44,17 +44,14 @@ class FirestoreRepository {
       name: 'Name',
       description: 'Description',
     ));
-    print('==================$buckets');
     return buckets;
   }
 
   addQuestion({required String id}) async {
     try {
       questions!.add(const Questions(name: 'Name', variants: []));
-      print('===============$questions');
       return questions;
     } on BadRequestException catch (e) {
-      print(e.message);
     }
   }
 

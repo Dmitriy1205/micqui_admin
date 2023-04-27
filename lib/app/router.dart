@@ -1,49 +1,83 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:micqui_admin/presentation/bloc/auth/auth_bloc.dart';
 
+import '../core/services/service_locator.dart';
 import '../presentation/screens/auth/signin_screen/signin_screen.dart';
 import '../presentation/screens/bucket_screen.dart';
 import '../presentation/screens/main_screen.dart';
 import '../presentation/screens/questionary_screen.dart';
 
+final AuthBloc _bloc = sl<AuthBloc>();
+
 final GoRouter router = GoRouter(
-  initialLocation: '/',
-  routes: [
-    GoRoute(
-      path: '/',
-      pageBuilder: (c, s) => const MaterialPage(child: SignInScreen()),
-    ),
-    ShellRoute(
-      builder: (context, state, child) => Scaffold(
-        body: MainScreen(
-          child: child,
-        ),
+    initialLocation: '/',
+    routes: [
+      GoRoute(
+        path: '/',
+        pageBuilder: (c, s) => const MaterialPage(child: SignInScreen()),
+        redirect: (contest, state) {
+          final st = _bloc.state;
+          return st.maybeMap(
+              authenticated: (_) => '/questionnarie',
+              unauthenticated: (_) => '/',
+              orElse: () => null);
+        },
       ),
-      routes: [
-        GoRoute(
-          path: '/questionnarie',
-          pageBuilder: (context, state) => pageTransition<void>(
-            context: context,
-            state: state,
-            child: const QuestionaireScreen(),
+      ShellRoute(
+        builder: (context, state, child) => Scaffold(
+          body: MainScreen(
+            child: child,
           ),
         ),
-        GoRoute(
-          path: '/bucket/bucketId=:bucketId',
-          pageBuilder: (context, state) {
-            return pageTransition<void>(
+        routes: [
+          GoRoute(
+            path: '/questionnarie',
+            pageBuilder: (context, state) => pageTransition<void>(
               context: context,
               state: state,
-              child: BucketScreen(
-                bucketId: int.parse(state.params['bucketId']!),
-              ),
-            );
-          },
-        ),
-      ],
-    ),
-  ],
-);
+              child: const QuestionaireScreen(),
+            ),
+          ),
+          GoRoute(
+            path: '/bucket/bucketId=:bucketId',
+            pageBuilder: (context, state) {
+              return pageTransition<void>(
+                context: context,
+                state: state,
+                child: BucketScreen(
+                  bucketId: int.parse(state.params['bucketId']!),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    ],
+    redirect: (contest, state) {
+      final st = _bloc.state;
+      return st.maybeMap(unauthenticated: (_) => '/', orElse: () => null);
+    },
+    refreshListenable: GoRouterRefreshStream(_bloc.stream));
+
+class GoRouterRefreshStream extends ChangeNotifier {
+  GoRouterRefreshStream(Stream<dynamic> stream) {
+    notifyListeners();
+    _subscription = stream.asBroadcastStream().listen(
+          (event) => notifyListeners(),
+        );
+  }
+
+  late final StreamSubscription _subscription;
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
+  }
+}
 
 CustomTransitionPage pageTransition<T>({
   Key? key,
