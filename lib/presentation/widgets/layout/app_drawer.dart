@@ -42,7 +42,7 @@ class AppDrawer extends StatelessWidget {
                     color: AppColors.background,
                   ),
                   title: Text(
-                    AppStrings.questionnaires,
+                    AppStrings.myBuckets,
                     style: AppTheme.themeData.textTheme.titleLarge,
                   ),
                 ),

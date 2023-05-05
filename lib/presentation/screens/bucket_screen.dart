@@ -7,7 +7,7 @@ import 'package:micqui_admin/data/models/questions/questions.dart';
 import 'package:micqui_admin/presentation/bloc/questionnarie/questionnarie_bloc.dart';
 import 'package:micqui_admin/presentation/widgets/app_elevated_button.dart';
 import 'package:micqui_admin/presentation/widgets/toast.dart';
-
+import 'dart:html' as html;
 import '../../app/router.dart';
 import '../../core/constants/colors.dart';
 import '../../core/constants/strings.dart';
@@ -241,10 +241,20 @@ class _BucketScreenState extends State<BucketScreen> {
                                   SizedBox(
                                     width: widget.mobileHeaderSize ?? 48,
                                   ),
-                                  FaIcon(
-                                    FontAwesomeIcons.qrcode,
-                                    size: widget.mobileHeaderSize ?? 64,
-                                    color: AppColors.text,
+                                  Tooltip(
+                                    message: AppStrings.generateCode,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        // router.pushReplacement('/qrcode/${bucket.id}');
+
+                                        html.window.open('/#/qrcode/${bucket.id}', 'qrcode',);
+                                      },
+                                      child: FaIcon(
+                                        FontAwesomeIcons.qrcode,
+                                        size: widget.mobileHeaderSize ?? 64,
+                                        color: AppColors.second,
+                                      ),
+                                    ),
                                   ),
                                 ],
                               )
@@ -352,14 +362,17 @@ class _BucketScreenState extends State<BucketScreen> {
                                       child: SizedBox(
                                         width: 50,
                                         height: 50,
-                                        child: IconButton(
-                                          onPressed: () {
-                                            _bloc.add(BucketEvent.addQuestion(
-                                                questions: questions));
-                                          },
-                                          icon: const FaIcon(
-                                            FontAwesomeIcons.circlePlus,
-                                            color: AppColors.green,
+                                        child: Tooltip(
+                                          message: AppStrings.addNewQuestion,
+                                          child: IconButton(
+                                            onPressed: () {
+                                              _bloc.add(BucketEvent.addQuestion(
+                                                  questions: questions));
+                                            },
+                                            icon: const FaIcon(
+                                              FontAwesomeIcons.circlePlus,
+                                              color: AppColors.green,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -469,75 +482,81 @@ class _BucketScreenState extends State<BucketScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Flexible(
-                                child: EditableText(
-                                  textAlign: TextAlign.start,
-                                  controller: questionControllers[index],
-                                  focusNode: questionNameFocusNodes[index],
-                                  cursorColor: AppColors.primary,
-                                  backgroundCursorColor: AppColors.primary,
-                                  style: AppTheme
-                                      .themeData.textTheme.labelMedium!
-                                      .copyWith(
-                                    fontWeight: FontWeight.w600,
+                                child: Tooltip(
+                                  message: AppStrings.pressEnterSaveQuestion,
+                                  child: EditableText(
+                                    textAlign: TextAlign.start,
+                                    controller: questionControllers[index],
+                                    focusNode: questionNameFocusNodes[index],
+                                    cursorColor: AppColors.primary,
+                                    backgroundCursorColor: AppColors.primary,
+                                    style: AppTheme
+                                        .themeData.textTheme.labelMedium!
+                                        .copyWith(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    selectionControls:
+                                        MaterialTextSelectionControls(),
+                                    keyboardType: TextInputType.text,
+                                    maxLines: 1,
+                                    onSubmitted: (text) {
+                                      questionNameFocusNodes[index].unfocus();
+                                      _bloc.add(BucketEvent.setQuestion(
+                                          bucketId: bucket.id!,
+                                          questionId: questions[index].id,
+                                          question: Questions(
+                                              id: questions[index].id,
+                                              name: questionControllers[index]
+                                                  .text),
+                                          questionIndex: index));
+                                      showToast(
+                                          msg: AppStrings.questionIsCreated);
+                                    },
+                                    onSelectionHandleTapped: () {
+                                      showAboutDialog(context: context);
+                                    },
                                   ),
-                                  selectionControls:
-                                      MaterialTextSelectionControls(),
-                                  keyboardType: TextInputType.text,
-                                  maxLines: 1,
-                                  onSubmitted: (text) {
-                                    questionNameFocusNodes[index].unfocus();
-                                    _bloc.add(BucketEvent.setQuestion(
-                                        bucketId: bucket.id!,
-                                        questionId: questions[index].id,
-                                        question: Questions(
-                                            id: questions[index].id,
-                                            name: questionControllers[index]
-                                                .text),
-                                        questionIndex: index));
-                                    showToast(
-                                        msg: AppStrings.questionIsCreated);
-                                  },
-                                  onSelectionHandleTapped: () {
-                                    showAboutDialog(context: context);
-                                  },
                                 ),
                               ),
-                              IconButton(
-                                constraints: const BoxConstraints(),
-                                padding: const EdgeInsets.all(2),
-                                onPressed: () {
-                                  deleteQuestionDialog(context,
-                                      text: AppStrings.areYouQuestion,
-                                      index: index);
-                                },
-                                icon: const FaIcon(
-                                  FontAwesomeIcons.solidTrashCan,
-                                  size: 20,
-                                  color: AppColors.accent,
+                              Tooltip(
+                                message: AppStrings.deleteCurrentQuestion,
+                                child: IconButton(
+                                  constraints: const BoxConstraints(),
+                                  padding: const EdgeInsets.all(2),
+                                  onPressed: () {
+                                    deleteQuestionDialog(context,
+                                        text: AppStrings.areYouQuestion,
+                                        index: index);
+                                  },
+                                  icon: const FaIcon(
+                                    FontAwesomeIcons.solidTrashCan,
+                                    size: 20,
+                                    color: AppColors.accent,
+                                  ),
                                 ),
                               ),
                             ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20),
-                            child: answersList(questions[index].variants,
-                                questions[index], index),
-                          ),
-                          const SizedBox(
-                            height: 23,
-                          ),
-                          IconButton(
-                              onPressed: () {
-                                _bloc.add(BucketEvent.addAnswer(
-                                    question: questions[index],
-                                    questionIndex: index,
-                                    answerList: questions[index].variants,
-                                    questions: questions));
-                              },
-                              icon: const FaIcon(
-                                FontAwesomeIcons.circlePlus,
-                                color: AppColors.green,
-                              )),
+                          // Padding(
+                          //   padding: const EdgeInsets.only(top: 20),
+                          //   child: answersList(questions[index].variants,
+                          //       questions[index], index),
+                          // ),
+                          // const SizedBox(
+                          //   height: 23,
+                          // ),
+                          // IconButton(
+                          //     onPressed: () {
+                          //       _bloc.add(BucketEvent.addAnswer(
+                          //           question: questions[index],
+                          //           questionIndex: index,
+                          //           answerList: questions[index].variants,
+                          //           questions: questions));
+                          //     },
+                          //     icon: const FaIcon(
+                          //       FontAwesomeIcons.circlePlus,
+                          //       color: AppColors.green,
+                          //     )),
                         ],
                       ),
                     ),
@@ -607,11 +626,10 @@ class _BucketScreenState extends State<BucketScreen> {
               constraints: const BoxConstraints(),
               padding: const EdgeInsets.all(2),
               onPressed: () {
-                _bloc.add(BucketEvent.deleteAnswer(
-                    bucketId: bucket.id!,
-                    existedQuestions: currentQuestion,
-                    indexToDelete: index,
-                    questions: questions));
+                deleteNewQuestionDialog(context,
+                    text: AppStrings.areYouQuestion,
+                    index: index,
+                    currentQuestion: currentQuestion);
               },
               icon: const FaIcon(
                 FontAwesomeIcons.solidTrashCan,
@@ -644,6 +662,56 @@ class _BucketScreenState extends State<BucketScreen> {
       onPressed: () {
         _bloc.add(BucketEvent.deleteQuestion(
             bucketId: bucket.id!, index: index, questions: questions));
+        Navigator.pop(context);
+      },
+    );
+
+    AlertDialog alert = AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      title: Text(AppStrings.warning,
+          style: AppTheme.themeData.textTheme.titleSmall),
+      content: Text(text, style: AppTheme.themeData.textTheme.bodySmall),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    showDialog(
+      useRootNavigator: false,
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  deleteNewQuestionDialog(BuildContext context,
+      {required String text,
+      required int index,
+      required Questions currentQuestion}) {
+    Widget cancelButton = TextButton(
+      child: const Text(
+        AppStrings.cancel,
+        style: TextStyle(color: AppColors.text),
+      ),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+    Widget continueButton = TextButton(
+      child: const Text(
+        AppStrings.delete,
+        style: TextStyle(color: AppColors.text),
+      ),
+      onPressed: () {
+        _bloc.add(BucketEvent.deleteAnswer(
+            bucketId: bucket.id!,
+            existedQuestions: currentQuestion,
+            indexToDelete: index,
+            questions: questions));
         Navigator.pop(context);
       },
     );

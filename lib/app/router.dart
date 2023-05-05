@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:micqui_admin/presentation/bloc/auth/auth_bloc.dart';
 
 import '../core/services/service_locator.dart';
+import '../presentation/qr_screen.dart';
 import '../presentation/screens/auth/signin_screen/signin_screen.dart';
 import '../presentation/screens/bucket_screen.dart';
 import '../presentation/screens/main_screen.dart';
@@ -13,15 +14,16 @@ import '../presentation/screens/questionary_screen.dart';
 final AuthBloc _bloc = sl<AuthBloc>();
 
 final GoRouter router = GoRouter(
-    initialLocation: '/',
+    // initialLocation: '/',
     routes: [
       GoRoute(
         path: '/',
         pageBuilder: (c, s) => const MaterialPage(child: SignInScreen()),
         redirect: (contest, state) {
           final st = _bloc.state;
+
           return st.maybeMap(
-              authenticated: (_) => '/questionnarie',
+              authenticated: (_) => '/buckets',
               unauthenticated: (_) => '/',
               orElse: () => null);
         },
@@ -34,7 +36,7 @@ final GoRouter router = GoRouter(
         ),
         routes: [
           GoRoute(
-            path: '/questionnarie',
+            path: '/buckets',
             pageBuilder: (context, state) => pageTransition<void>(
               context: context,
               state: state,
@@ -55,9 +57,22 @@ final GoRouter router = GoRouter(
           ),
         ],
       ),
+      GoRoute(
+        path: '/qrcode/:code',
+        name: 'qrcode',
+        builder: (context, state) {
+          return QrScreen(
+            code: state.params['code']!,
+          );
+        },
+      ),
     ],
-    redirect: (contest, state) {
+    redirect: (context, state) {
       final st = _bloc.state;
+      print(state..name);
+      if (state.name == 'qrcode') {
+        return null;
+      }
       return st.maybeMap(unauthenticated: (_) => '/', orElse: () => null);
     },
     refreshListenable: GoRouterRefreshStream(_bloc.stream));

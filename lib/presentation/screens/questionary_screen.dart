@@ -100,7 +100,7 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        AppStrings.questionnaires,
+                        AppStrings.buckets,
                         style: AppTheme.themeData.textTheme.headlineLarge!
                             .copyWith(
                                 color: AppColors.text,
@@ -172,20 +172,23 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(left: 10),
-                                        child: IconButton(
-                                          constraints: const BoxConstraints(),
-                                          padding: const EdgeInsets.all(2),
-                                          onPressed: () {
-                                            BlocProvider.of<QuestionnarieBloc>(
-                                                    context)
-                                                .add(
-                                              const QuestionnarieEvent
-                                                  .addBucket(),
-                                            );
-                                          },
-                                          icon: const FaIcon(
-                                            FontAwesomeIcons.circlePlus,
-                                            color: AppColors.green,
+                                        child: Tooltip(
+                                          message: AppStrings.addNewBucket,
+                                          child: IconButton(
+                                            constraints: const BoxConstraints(),
+                                            padding: const EdgeInsets.all(2),
+                                            onPressed: () {
+                                              BlocProvider.of<QuestionnarieBloc>(
+                                                      context)
+                                                  .add(
+                                                const QuestionnarieEvent
+                                                    .addBucket(),
+                                              );
+                                            },
+                                            icon: const FaIcon(
+                                              FontAwesomeIcons.circlePlus,
+                                              color: AppColors.green,
+                                            ),
                                           ),
                                         ),
                                       )
@@ -441,34 +444,37 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
                                     showAboutDialog(context: context);
                                   },
                                 ),
-                                EditableText(
-                                  textAlign: TextAlign.start,
-                                  controller: descControllers[index],
-                                  focusNode: descFocusNodes[index],
-                                  cursorColor: AppColors.primary,
-                                  backgroundCursorColor: AppColors.primary,
-                                  style:
-                                      AppTheme.themeData.textTheme.labelMedium!,
-                                  selectionControls:
-                                      MaterialTextSelectionControls(),
-                                  keyboardType: TextInputType.text,
-                                  maxLines: 2,
-                                  onSubmitted: (text) {
-                                    descFocusNodes[index].unfocus();
-                                    context.read<QuestionnarieBloc>().add(
-                                          QuestionnarieEvent.setBucket(
-                                            bucket: Bucket(
-                                              id: state.bucket?[index].id,
-                                              name: nameControllers[index].text,
-                                              description:
-                                                  descControllers[index].text,
-                                              category: selectedValues[index],
+                                Tooltip(
+                                  message: AppStrings.pressEnterSaveBucket,
+                                  child: EditableText(
+                                    textAlign: TextAlign.start,
+                                    controller: descControllers[index],
+                                    focusNode: descFocusNodes[index],
+                                    cursorColor: AppColors.primary,
+                                    backgroundCursorColor: AppColors.primary,
+                                    style:
+                                        AppTheme.themeData.textTheme.labelMedium!,
+                                    selectionControls:
+                                        MaterialTextSelectionControls(),
+                                    keyboardType: TextInputType.text,
+                                    maxLines: 2,
+                                    onSubmitted: (text) {
+                                      descFocusNodes[index].unfocus();
+                                      context.read<QuestionnarieBloc>().add(
+                                            QuestionnarieEvent.setBucket(
+                                              bucket: Bucket(
+                                                id: state.bucket?[index].id,
+                                                name: nameControllers[index].text,
+                                                description:
+                                                    descControllers[index].text,
+                                                category: selectedValues[index],
+                                              ),
+                                              bucketId: state.bucket?[index].id,
                                             ),
-                                            bucketId: state.bucket?[index].id,
-                                          ),
-                                        );
-                                    showToast(msg: AppStrings.bucketIsCreated);
-                                  },
+                                          );
+                                      showToast(msg: AppStrings.bucketIsCreated);
+                                    },
+                                  ),
                                 ),
                                 const SizedBox(
                                   height: 10,

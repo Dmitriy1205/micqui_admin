@@ -14,6 +14,7 @@ class AppStrings{
   static const String logout = 'Logout';
   static const String search = 'Search';
   static const String buckets = 'Buckets';
+  static const String myBuckets = 'My Buckets';
   static const String bucket = 'Bucket';
   static const String cancel = 'Cancel';
   static const String warning = 'Warning';
@@ -31,4 +32,11 @@ class AppStrings{
   static const String draft = 'Draft';
   static const String delete = 'Delete';
   static const String publish = 'Publish';
+  static const String generateCode = 'Generate QR Code';
+  static const String scanQr = 'Scan Qr-code in micqui app';
+  static const String deleteCurrentQuestion = 'Delete Current Question';
+  static const String addNewQuestion = 'Add New Question';
+  static const String addNewBucket = 'Add New Bucket';
+  static const String pressEnterSaveQuestion = 'Press enter to confirm adding new question';
+  static const String pressEnterSaveBucket = 'Press enter to confirm adding new bucket';
 }
