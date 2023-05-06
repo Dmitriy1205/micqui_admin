@@ -44,7 +44,6 @@ final GoRouter router = GoRouter(
             ),
           ),
           GoRoute(
-
             path: '/bucket/bucketId=:bucketId',
             pageBuilder: (context, state) {
               return pageTransition<void>(
@@ -56,29 +55,24 @@ final GoRouter router = GoRouter(
               );
             },
           ),
-
         ],
-
       ),
       GoRoute(
         path: '/qrcode/:code',
         name: 'qrcode',
         builder: (context, state) {
-          return QrScreen(code: state.params['code']!,);
-
+          return QrScreen(
+            code: state.params['code']!,
+          );
         },
       ),
     ],
     redirect: (context, state) {
       final st = _bloc.state;
-      print(state..name);
-      if (state.name == 'qrcode' ) {
-
-        return null;
+      if (state.subloc.contains('/qrcode/')) {
+        return state.subloc;
       }
-        return st.maybeMap(unauthenticated: (_) => '/', orElse: () => null);
-
-
+      return st.maybeMap(unauthenticated: (_) => '/', orElse: () => null);
     },
     refreshListenable: GoRouterRefreshStream(_bloc.stream));
 
