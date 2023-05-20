@@ -14,7 +14,6 @@ class MobileLayout extends StatelessWidget {
         centerTitle: false,
       ),
       drawer: AppDrawer(
-        backToFirstScreen: () {},
       ),
       body: const QuestionaireScreen(
         mobileCardPadding: 17,

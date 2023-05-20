@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:micqui_admin/data/models/questions/questions.dart';
 import 'package:micqui_admin/presentation/bloc/questionnarie/questionnarie_bloc.dart';
+import 'package:micqui_admin/presentation/screens/responses_screen.dart';
 import 'package:micqui_admin/presentation/widgets/app_elevated_button.dart';
 import 'package:micqui_admin/presentation/widgets/toast.dart';
 import 'dart:html' as html;
@@ -68,12 +69,12 @@ class _BucketScreenState extends State<BucketScreen> {
       questionControllers.clear();
       questionNameFocusNodes.clear();
 
-      answerControllers = List.generate(
-          questions.length,
-          (index) => questions[index]
-              .variants
-              .map((e) => TextEditingController(text: e.name ?? 'New Question'))
-              .toList());
+      // answerControllers = List.generate(
+      //     questions.length,
+      //     (index) => questions[index]
+      //         .variants
+      //         .map((e) => TextEditingController(text: e.name ?? 'New Question'))
+      //         .toList());
       answerNameFocusNodes = List.generate(
           questions.length,
           (index) =>
@@ -114,13 +115,13 @@ class _BucketScreenState extends State<BucketScreen> {
                   questionControllers.clear();
                   questionNameFocusNodes.clear();
 
-                  answerControllers = List.generate(
-                      questions.length,
-                      (index) => questions[index]
-                          .variants
-                          .map((e) => TextEditingController(
-                              text: e.name ?? 'New Question'))
-                          .toList());
+                  // answerControllers = List.generate(
+                  //     questions.length,
+                  //     (index) => questions[index]
+                  //         .variants
+                  //         .map((e) => TextEditingController(
+                  //             text: e.name ?? 'New Question'))
+                  //         .toList());
                   answerNameFocusNodes = List.generate(
                       questions.length,
                       (index) => questions[index]
@@ -175,15 +176,22 @@ class _BucketScreenState extends State<BucketScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    IconButton(
-                        constraints: const BoxConstraints(),
-                        padding: const EdgeInsets.all(5),
-                        onPressed: () {
-                          widget.mobileCardPadding == null
-                              ? router.pop()
-                              : Navigator.pop(context);
-                        },
-                        icon: const Icon(Icons.arrow_back)),
+                    SizedBox(
+                      width: 48,
+                      height: 48,
+                      child: Card(
+                        elevation: 2,
+                        child: IconButton(
+                            constraints: const BoxConstraints(),
+                            padding: const EdgeInsets.all(5),
+                            onPressed: () {
+                              widget.mobileCardPadding == null
+                                  ? router.pop()
+                                  : Navigator.pop(context);
+                            },
+                            icon: const Icon(Icons.arrow_back)),
+                      ),
+                    ),
                     published
                         ? Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -247,7 +255,10 @@ class _BucketScreenState extends State<BucketScreen> {
                                       onTap: () {
                                         // router.pushReplacement('/qrcode/${bucket.id}');
 
-                                        html.window.open('/#/qrcode/${bucket.id}', 'qrcode',);
+                                        html.window.open(
+                                          '/#/qrcode/${bucket.id}',
+                                          'qrcode',
+                                        );
                                       },
                                       child: FaIcon(
                                         FontAwesomeIcons.qrcode,
@@ -401,15 +412,62 @@ class _BucketScreenState extends State<BucketScreen> {
                       height: 38,
                     ),
                     published
-                        ? SizedBox(
-                            width: 278,
-                            child: AppElevatedButton(
-                              text: AppStrings.removeFromRelease,
-                              onPressed: () {
-                                _bloc.add(BucketEvent.removeFromRelease(
-                                    bucketId: bucket.id!));
-                              },
-                            ),
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(
+                                child: SizedBox(
+                                  width: 278,
+                                  child: AppElevatedButton(
+                                    color: AppColors.signalRed,
+                                    text: AppStrings.removeFromRelease,
+                                    onPressed: () {
+                                      _bloc.add(BucketEvent.removeFromRelease(
+                                          bucketId: bucket.id!));
+                                    },
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Flexible(
+                                child: SizedBox(
+                                  width: 225,
+                                  child: AppElevatedButton(
+                                    color: AppColors.text,
+                                    text: AppStrings.viewResponses,
+                                    onPressed: () {
+                                      widget.mobileSearchIconSpace == null
+                                          ? router.push(
+                                              '/responses/${bucket.id}/${bucket.name}')
+                                          : Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ResponsesScreen(
+                                                  bucketId: bucket.id!,
+                                                  mobileSearchIconSpace: widget
+                                                      .mobileSearchIconSpace,
+                                                  mobileSearchIconSize: widget
+                                                      .mobileSearchIconSize,
+                                                  mobileRowSize:
+                                                      widget.mobileRowSize,
+                                                  mobileBucketSize:
+                                                      widget.mobileBucketSize,
+                                                  mobileHeaderSize:
+                                                      widget.mobileHeaderSize,
+                                                  mobileCardPadding:
+                                                      widget.mobileCardPadding,
+                                                  mobileFontWeight:
+                                                      widget.mobileFontWeight, bucketName: bucket.name!,
+                                                ),
+                                              ),
+                                            );
+                                    },
+                                  ),
+                                ),
+                              )
+                            ],
                           )
                         : Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -418,6 +476,7 @@ class _BucketScreenState extends State<BucketScreen> {
                                 child: SizedBox(
                                   width: 225,
                                   child: AppElevatedButton(
+                                    color: AppColors.signalGreen,
                                     text: AppStrings.publish,
                                     onPressed: () {
                                       _bloc.add(BucketEvent.publish(
@@ -435,7 +494,7 @@ class _BucketScreenState extends State<BucketScreen> {
                                 child: SizedBox(
                                     width: 164,
                                     child: AppElevatedButton(
-                                        color: AppColors.accent,
+                                        color: AppColors.signalRed,
                                         text: AppStrings.delete,
                                         onPressed: () {
                                           deleteBucketDialog(context,
@@ -569,7 +628,7 @@ class _BucketScreenState extends State<BucketScreen> {
   }
 
   Widget answersList(
-      List<Answer> answer, Questions currentQuestion, int questionIndex) {
+      List<Answers> answer, Questions currentQuestion, int questionIndex) {
     return ListView.builder(
       shrinkWrap: true,
       itemCount: answer.length,
@@ -595,30 +654,30 @@ class _BucketScreenState extends State<BucketScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  EditableText(
-                    textAlign: TextAlign.start,
-                    style: AppTheme.themeData.textTheme.labelMedium!
-                        .copyWith(fontSize: 14),
-                    cursorColor: AppColors.primary,
-                    backgroundCursorColor: AppColors.primary,
-                    selectionControls: MaterialTextSelectionControls(),
-                    keyboardType: TextInputType.text,
-                    maxLines: 1,
-                    focusNode: answerNameFocusNodes[questionIndex][index],
-                    controller: answerControllers[questionIndex][index],
-                    onSubmitted: (text) {
-                      answerNameFocusNodes[questionIndex][index].unfocus();
-                      _bloc.add(BucketEvent.setAnswer(
-                        bucketId: bucket.id!,
-                        questionIndex: 1,
-                        question: currentQuestion,
-                        answer: Answer(
-                            name: answerControllers[questionIndex][index].text,
-                            isRight: false),
-                      ));
-                      showToast(msg: AppStrings.questionIsAdded);
-                    },
-                  ),
+                  // EditableText(
+                  //   textAlign: TextAlign.start,
+                  //   style: AppTheme.themeData.textTheme.labelMedium!
+                  //       .copyWith(fontSize: 14),
+                  //   cursorColor: AppColors.primary,
+                  //   backgroundCursorColor: AppColors.primary,
+                  //   selectionControls: MaterialTextSelectionControls(),
+                  //   keyboardType: TextInputType.text,
+                  //   maxLines: 1,
+                  //   focusNode: answerNameFocusNodes[questionIndex][index],
+                  //   controller: answerControllers[questionIndex][index],
+                  //   onSubmitted: (text) {
+                  //     answerNameFocusNodes[questionIndex][index].unfocus();
+                  //     _bloc.add(BucketEvent.setAnswer(
+                  //       bucketId: bucket.id!,
+                  //       questionIndex: 1,
+                  //       question: currentQuestion,
+                  //       answer: Answers(
+                  //           name: answerControllers[questionIndex][index].text,
+                  //           isRight: false),
+                  //     ));
+                  //     showToast(msg: AppStrings.questionIsAdded);
+                  //   },
+                  // ),
                 ],
               ),
             ),

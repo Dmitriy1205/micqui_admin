@@ -14,6 +14,7 @@ void main() async {
       appId: "1:48858966559:web:3a98edd8330722c3bb832a",
       messagingSenderId: "48858966559",
       projectId: "micqui",
+      storageBucket: 'micqui.appspot.com'
     ),
   );
   await sl.init();

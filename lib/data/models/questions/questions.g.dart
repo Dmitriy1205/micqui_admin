@@ -10,7 +10,11 @@ _$_Questions _$$_QuestionsFromJson(Map<String, dynamic> json) => _$_Questions(
       id: json['id'] as String?,
       name: json['name'] as String?,
       variants: (json['variants'] as List<dynamic>?)
-              ?.map((e) => Answer.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => QuestionAnswer.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      users: (json['users'] as List<dynamic>?)
+              ?.map((e) => UserModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
     );
@@ -20,4 +24,5 @@ Map<String, dynamic> _$$_QuestionsToJson(_$_Questions instance) =>
       'id': instance.id,
       'name': instance.name,
       'variants': instance.variants,
+      'users': instance.users,
     };

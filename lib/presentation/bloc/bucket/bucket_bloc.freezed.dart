@@ -24,10 +24,10 @@ mixin _$BucketEvent {
             String? questionId, Questions question)
         setQuestion,
     required TResult Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)
+            List<Answers>? answerList, List<Questions>? questions)
         addAnswer,
     required TResult Function(String bucketId, int? questionIndex,
-            Questions question, Answer answer)
+            Questions question, Answers answer)
         setAnswer,
     required TResult Function(String name, Bucket? bucket) searchByName,
     required TResult Function(String bucketId) removeFromRelease,
@@ -49,10 +49,10 @@ mixin _$BucketEvent {
             Questions question)?
         setQuestion,
     TResult? Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)?
+            List<Answers>? answerList, List<Questions>? questions)?
         addAnswer,
     TResult? Function(String bucketId, int? questionIndex, Questions question,
-            Answer answer)?
+            Answers answer)?
         setAnswer,
     TResult? Function(String name, Bucket? bucket)? searchByName,
     TResult? Function(String bucketId)? removeFromRelease,
@@ -73,10 +73,10 @@ mixin _$BucketEvent {
             Questions question)?
         setQuestion,
     TResult Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)?
+            List<Answers>? answerList, List<Questions>? questions)?
         addAnswer,
     TResult Function(String bucketId, int? questionIndex, Questions question,
-            Answer answer)?
+            Answers answer)?
         setAnswer,
     TResult Function(String name, Bucket? bucket)? searchByName,
     TResult Function(String bucketId)? removeFromRelease,
@@ -225,10 +225,10 @@ class _$_Init implements _Init {
             String? questionId, Questions question)
         setQuestion,
     required TResult Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)
+            List<Answers>? answerList, List<Questions>? questions)
         addAnswer,
     required TResult Function(String bucketId, int? questionIndex,
-            Questions question, Answer answer)
+            Questions question, Answers answer)
         setAnswer,
     required TResult Function(String name, Bucket? bucket) searchByName,
     required TResult Function(String bucketId) removeFromRelease,
@@ -253,10 +253,10 @@ class _$_Init implements _Init {
             Questions question)?
         setQuestion,
     TResult? Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)?
+            List<Answers>? answerList, List<Questions>? questions)?
         addAnswer,
     TResult? Function(String bucketId, int? questionIndex, Questions question,
-            Answer answer)?
+            Answers answer)?
         setAnswer,
     TResult? Function(String name, Bucket? bucket)? searchByName,
     TResult? Function(String bucketId)? removeFromRelease,
@@ -280,10 +280,10 @@ class _$_Init implements _Init {
             Questions question)?
         setQuestion,
     TResult Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)?
+            List<Answers>? answerList, List<Questions>? questions)?
         addAnswer,
     TResult Function(String bucketId, int? questionIndex, Questions question,
-            Answer answer)?
+            Answers answer)?
         setAnswer,
     TResult Function(String name, Bucket? bucket)? searchByName,
     TResult Function(String bucketId)? removeFromRelease,
@@ -449,10 +449,10 @@ class _$_AddQuestion implements _AddQuestion {
             String? questionId, Questions question)
         setQuestion,
     required TResult Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)
+            List<Answers>? answerList, List<Questions>? questions)
         addAnswer,
     required TResult Function(String bucketId, int? questionIndex,
-            Questions question, Answer answer)
+            Questions question, Answers answer)
         setAnswer,
     required TResult Function(String name, Bucket? bucket) searchByName,
     required TResult Function(String bucketId) removeFromRelease,
@@ -477,10 +477,10 @@ class _$_AddQuestion implements _AddQuestion {
             Questions question)?
         setQuestion,
     TResult? Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)?
+            List<Answers>? answerList, List<Questions>? questions)?
         addAnswer,
     TResult? Function(String bucketId, int? questionIndex, Questions question,
-            Answer answer)?
+            Answers answer)?
         setAnswer,
     TResult? Function(String name, Bucket? bucket)? searchByName,
     TResult? Function(String bucketId)? removeFromRelease,
@@ -504,10 +504,10 @@ class _$_AddQuestion implements _AddQuestion {
             Questions question)?
         setQuestion,
     TResult Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)?
+            List<Answers>? answerList, List<Questions>? questions)?
         addAnswer,
     TResult Function(String bucketId, int? questionIndex, Questions question,
-            Answer answer)?
+            Answers answer)?
         setAnswer,
     TResult Function(String name, Bucket? bucket)? searchByName,
     TResult Function(String bucketId)? removeFromRelease,
@@ -712,10 +712,10 @@ class _$_SetQuestion implements _SetQuestion {
             String? questionId, Questions question)
         setQuestion,
     required TResult Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)
+            List<Answers>? answerList, List<Questions>? questions)
         addAnswer,
     required TResult Function(String bucketId, int? questionIndex,
-            Questions question, Answer answer)
+            Questions question, Answers answer)
         setAnswer,
     required TResult Function(String name, Bucket? bucket) searchByName,
     required TResult Function(String bucketId) removeFromRelease,
@@ -740,10 +740,10 @@ class _$_SetQuestion implements _SetQuestion {
             Questions question)?
         setQuestion,
     TResult? Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)?
+            List<Answers>? answerList, List<Questions>? questions)?
         addAnswer,
     TResult? Function(String bucketId, int? questionIndex, Questions question,
-            Answer answer)?
+            Answers answer)?
         setAnswer,
     TResult? Function(String name, Bucket? bucket)? searchByName,
     TResult? Function(String bucketId)? removeFromRelease,
@@ -767,10 +767,10 @@ class _$_SetQuestion implements _SetQuestion {
             Questions question)?
         setQuestion,
     TResult Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)?
+            List<Answers>? answerList, List<Questions>? questions)?
         addAnswer,
     TResult Function(String bucketId, int? questionIndex, Questions question,
-            Answer answer)?
+            Answers answer)?
         setAnswer,
     TResult Function(String name, Bucket? bucket)? searchByName,
     TResult Function(String bucketId)? removeFromRelease,
@@ -873,7 +873,7 @@ abstract class _$$_AddAnswerCopyWith<$Res> {
   $Res call(
       {Questions question,
       int questionIndex,
-      List<Answer>? answerList,
+      List<Answers>? answerList,
       List<Questions>? questions});
 
   $QuestionsCopyWith<$Res> get question;
@@ -907,7 +907,7 @@ class __$$_AddAnswerCopyWithImpl<$Res>
       answerList: freezed == answerList
           ? _value._answerList
           : answerList // ignore: cast_nullable_to_non_nullable
-              as List<Answer>?,
+              as List<Answers>?,
       questions: freezed == questions
           ? _value._questions
           : questions // ignore: cast_nullable_to_non_nullable
@@ -930,7 +930,7 @@ class _$_AddAnswer implements _AddAnswer {
   const _$_AddAnswer(
       {required this.question,
       required this.questionIndex,
-      required final List<Answer>? answerList,
+      required final List<Answers>? answerList,
       required final List<Questions>? questions})
       : _answerList = answerList,
         _questions = questions;
@@ -939,9 +939,9 @@ class _$_AddAnswer implements _AddAnswer {
   final Questions question;
   @override
   final int questionIndex;
-  final List<Answer>? _answerList;
+  final List<Answers>? _answerList;
   @override
-  List<Answer>? get answerList {
+  List<Answers>? get answerList {
     final value = _answerList;
     if (value == null) return null;
     if (_answerList is EqualUnmodifiableListView) return _answerList;
@@ -1002,10 +1002,10 @@ class _$_AddAnswer implements _AddAnswer {
             String? questionId, Questions question)
         setQuestion,
     required TResult Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)
+            List<Answers>? answerList, List<Questions>? questions)
         addAnswer,
     required TResult Function(String bucketId, int? questionIndex,
-            Questions question, Answer answer)
+            Questions question, Answers answer)
         setAnswer,
     required TResult Function(String name, Bucket? bucket) searchByName,
     required TResult Function(String bucketId) removeFromRelease,
@@ -1030,10 +1030,10 @@ class _$_AddAnswer implements _AddAnswer {
             Questions question)?
         setQuestion,
     TResult? Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)?
+            List<Answers>? answerList, List<Questions>? questions)?
         addAnswer,
     TResult? Function(String bucketId, int? questionIndex, Questions question,
-            Answer answer)?
+            Answers answer)?
         setAnswer,
     TResult? Function(String name, Bucket? bucket)? searchByName,
     TResult? Function(String bucketId)? removeFromRelease,
@@ -1057,10 +1057,10 @@ class _$_AddAnswer implements _AddAnswer {
             Questions question)?
         setQuestion,
     TResult Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)?
+            List<Answers>? answerList, List<Questions>? questions)?
         addAnswer,
     TResult Function(String bucketId, int? questionIndex, Questions question,
-            Answer answer)?
+            Answers answer)?
         setAnswer,
     TResult Function(String name, Bucket? bucket)? searchByName,
     TResult Function(String bucketId)? removeFromRelease,
@@ -1142,12 +1142,12 @@ abstract class _AddAnswer implements BucketEvent {
   const factory _AddAnswer(
       {required final Questions question,
       required final int questionIndex,
-      required final List<Answer>? answerList,
+      required final List<Answers>? answerList,
       required final List<Questions>? questions}) = _$_AddAnswer;
 
   Questions get question;
   int get questionIndex;
-  List<Answer>? get answerList;
+  List<Answers>? get answerList;
   List<Questions>? get questions;
   @JsonKey(ignore: true)
   _$$_AddAnswerCopyWith<_$_AddAnswer> get copyWith =>
@@ -1161,10 +1161,13 @@ abstract class _$$_SetAnswerCopyWith<$Res> {
       __$$_SetAnswerCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {String bucketId, int? questionIndex, Questions question, Answer answer});
+      {String bucketId,
+      int? questionIndex,
+      Questions question,
+      Answers answer});
 
   $QuestionsCopyWith<$Res> get question;
-  $AnswerCopyWith<$Res> get answer;
+  $AnswersCopyWith<$Res> get answer;
 }
 
 /// @nodoc
@@ -1199,7 +1202,7 @@ class __$$_SetAnswerCopyWithImpl<$Res>
       answer: null == answer
           ? _value.answer
           : answer // ignore: cast_nullable_to_non_nullable
-              as Answer,
+              as Answers,
     ));
   }
 
@@ -1213,8 +1216,8 @@ class __$$_SetAnswerCopyWithImpl<$Res>
 
   @override
   @pragma('vm:prefer-inline')
-  $AnswerCopyWith<$Res> get answer {
-    return $AnswerCopyWith<$Res>(_value.answer, (value) {
+  $AnswersCopyWith<$Res> get answer {
+    return $AnswersCopyWith<$Res>(_value.answer, (value) {
       return _then(_value.copyWith(answer: value));
     });
   }
@@ -1236,7 +1239,7 @@ class _$_SetAnswer implements _SetAnswer {
   @override
   final Questions question;
   @override
-  final Answer answer;
+  final Answers answer;
 
   @override
   String toString() {
@@ -1276,10 +1279,10 @@ class _$_SetAnswer implements _SetAnswer {
             String? questionId, Questions question)
         setQuestion,
     required TResult Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)
+            List<Answers>? answerList, List<Questions>? questions)
         addAnswer,
     required TResult Function(String bucketId, int? questionIndex,
-            Questions question, Answer answer)
+            Questions question, Answers answer)
         setAnswer,
     required TResult Function(String name, Bucket? bucket) searchByName,
     required TResult Function(String bucketId) removeFromRelease,
@@ -1304,10 +1307,10 @@ class _$_SetAnswer implements _SetAnswer {
             Questions question)?
         setQuestion,
     TResult? Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)?
+            List<Answers>? answerList, List<Questions>? questions)?
         addAnswer,
     TResult? Function(String bucketId, int? questionIndex, Questions question,
-            Answer answer)?
+            Answers answer)?
         setAnswer,
     TResult? Function(String name, Bucket? bucket)? searchByName,
     TResult? Function(String bucketId)? removeFromRelease,
@@ -1331,10 +1334,10 @@ class _$_SetAnswer implements _SetAnswer {
             Questions question)?
         setQuestion,
     TResult Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)?
+            List<Answers>? answerList, List<Questions>? questions)?
         addAnswer,
     TResult Function(String bucketId, int? questionIndex, Questions question,
-            Answer answer)?
+            Answers answer)?
         setAnswer,
     TResult Function(String name, Bucket? bucket)? searchByName,
     TResult Function(String bucketId)? removeFromRelease,
@@ -1417,12 +1420,12 @@ abstract class _SetAnswer implements BucketEvent {
       {required final String bucketId,
       required final int? questionIndex,
       required final Questions question,
-      required final Answer answer}) = _$_SetAnswer;
+      required final Answers answer}) = _$_SetAnswer;
 
   String get bucketId;
   int? get questionIndex;
   Questions get question;
-  Answer get answer;
+  Answers get answer;
   @JsonKey(ignore: true)
   _$$_SetAnswerCopyWith<_$_SetAnswer> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1520,10 +1523,10 @@ class _$_SearchByName implements _SearchByName {
             String? questionId, Questions question)
         setQuestion,
     required TResult Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)
+            List<Answers>? answerList, List<Questions>? questions)
         addAnswer,
     required TResult Function(String bucketId, int? questionIndex,
-            Questions question, Answer answer)
+            Questions question, Answers answer)
         setAnswer,
     required TResult Function(String name, Bucket? bucket) searchByName,
     required TResult Function(String bucketId) removeFromRelease,
@@ -1548,10 +1551,10 @@ class _$_SearchByName implements _SearchByName {
             Questions question)?
         setQuestion,
     TResult? Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)?
+            List<Answers>? answerList, List<Questions>? questions)?
         addAnswer,
     TResult? Function(String bucketId, int? questionIndex, Questions question,
-            Answer answer)?
+            Answers answer)?
         setAnswer,
     TResult? Function(String name, Bucket? bucket)? searchByName,
     TResult? Function(String bucketId)? removeFromRelease,
@@ -1575,10 +1578,10 @@ class _$_SearchByName implements _SearchByName {
             Questions question)?
         setQuestion,
     TResult Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)?
+            List<Answers>? answerList, List<Questions>? questions)?
         addAnswer,
     TResult Function(String bucketId, int? questionIndex, Questions question,
-            Answer answer)?
+            Answers answer)?
         setAnswer,
     TResult Function(String name, Bucket? bucket)? searchByName,
     TResult Function(String bucketId)? removeFromRelease,
@@ -1740,10 +1743,10 @@ class _$_RemoveFromRelease implements _RemoveFromRelease {
             String? questionId, Questions question)
         setQuestion,
     required TResult Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)
+            List<Answers>? answerList, List<Questions>? questions)
         addAnswer,
     required TResult Function(String bucketId, int? questionIndex,
-            Questions question, Answer answer)
+            Questions question, Answers answer)
         setAnswer,
     required TResult Function(String name, Bucket? bucket) searchByName,
     required TResult Function(String bucketId) removeFromRelease,
@@ -1768,10 +1771,10 @@ class _$_RemoveFromRelease implements _RemoveFromRelease {
             Questions question)?
         setQuestion,
     TResult? Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)?
+            List<Answers>? answerList, List<Questions>? questions)?
         addAnswer,
     TResult? Function(String bucketId, int? questionIndex, Questions question,
-            Answer answer)?
+            Answers answer)?
         setAnswer,
     TResult? Function(String name, Bucket? bucket)? searchByName,
     TResult? Function(String bucketId)? removeFromRelease,
@@ -1795,10 +1798,10 @@ class _$_RemoveFromRelease implements _RemoveFromRelease {
             Questions question)?
         setQuestion,
     TResult Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)?
+            List<Answers>? answerList, List<Questions>? questions)?
         addAnswer,
     TResult Function(String bucketId, int? questionIndex, Questions question,
-            Answer answer)?
+            Answers answer)?
         setAnswer,
     TResult Function(String name, Bucket? bucket)? searchByName,
     TResult Function(String bucketId)? removeFromRelease,
@@ -1956,10 +1959,10 @@ class _$_Publish implements _Publish {
             String? questionId, Questions question)
         setQuestion,
     required TResult Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)
+            List<Answers>? answerList, List<Questions>? questions)
         addAnswer,
     required TResult Function(String bucketId, int? questionIndex,
-            Questions question, Answer answer)
+            Questions question, Answers answer)
         setAnswer,
     required TResult Function(String name, Bucket? bucket) searchByName,
     required TResult Function(String bucketId) removeFromRelease,
@@ -1984,10 +1987,10 @@ class _$_Publish implements _Publish {
             Questions question)?
         setQuestion,
     TResult? Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)?
+            List<Answers>? answerList, List<Questions>? questions)?
         addAnswer,
     TResult? Function(String bucketId, int? questionIndex, Questions question,
-            Answer answer)?
+            Answers answer)?
         setAnswer,
     TResult? Function(String name, Bucket? bucket)? searchByName,
     TResult? Function(String bucketId)? removeFromRelease,
@@ -2011,10 +2014,10 @@ class _$_Publish implements _Publish {
             Questions question)?
         setQuestion,
     TResult Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)?
+            List<Answers>? answerList, List<Questions>? questions)?
         addAnswer,
     TResult Function(String bucketId, int? questionIndex, Questions question,
-            Answer answer)?
+            Answers answer)?
         setAnswer,
     TResult Function(String name, Bucket? bucket)? searchByName,
     TResult Function(String bucketId)? removeFromRelease,
@@ -2201,10 +2204,10 @@ class _$_DeleteQuestion implements _DeleteQuestion {
             String? questionId, Questions question)
         setQuestion,
     required TResult Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)
+            List<Answers>? answerList, List<Questions>? questions)
         addAnswer,
     required TResult Function(String bucketId, int? questionIndex,
-            Questions question, Answer answer)
+            Questions question, Answers answer)
         setAnswer,
     required TResult Function(String name, Bucket? bucket) searchByName,
     required TResult Function(String bucketId) removeFromRelease,
@@ -2229,10 +2232,10 @@ class _$_DeleteQuestion implements _DeleteQuestion {
             Questions question)?
         setQuestion,
     TResult? Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)?
+            List<Answers>? answerList, List<Questions>? questions)?
         addAnswer,
     TResult? Function(String bucketId, int? questionIndex, Questions question,
-            Answer answer)?
+            Answers answer)?
         setAnswer,
     TResult? Function(String name, Bucket? bucket)? searchByName,
     TResult? Function(String bucketId)? removeFromRelease,
@@ -2256,10 +2259,10 @@ class _$_DeleteQuestion implements _DeleteQuestion {
             Questions question)?
         setQuestion,
     TResult Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)?
+            List<Answers>? answerList, List<Questions>? questions)?
         addAnswer,
     TResult Function(String bucketId, int? questionIndex, Questions question,
-            Answer answer)?
+            Answers answer)?
         setAnswer,
     TResult Function(String name, Bucket? bucket)? searchByName,
     TResult Function(String bucketId)? removeFromRelease,
@@ -2476,10 +2479,10 @@ class _$_DeleteAnswer implements _DeleteAnswer {
             String? questionId, Questions question)
         setQuestion,
     required TResult Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)
+            List<Answers>? answerList, List<Questions>? questions)
         addAnswer,
     required TResult Function(String bucketId, int? questionIndex,
-            Questions question, Answer answer)
+            Questions question, Answers answer)
         setAnswer,
     required TResult Function(String name, Bucket? bucket) searchByName,
     required TResult Function(String bucketId) removeFromRelease,
@@ -2504,10 +2507,10 @@ class _$_DeleteAnswer implements _DeleteAnswer {
             Questions question)?
         setQuestion,
     TResult? Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)?
+            List<Answers>? answerList, List<Questions>? questions)?
         addAnswer,
     TResult? Function(String bucketId, int? questionIndex, Questions question,
-            Answer answer)?
+            Answers answer)?
         setAnswer,
     TResult? Function(String name, Bucket? bucket)? searchByName,
     TResult? Function(String bucketId)? removeFromRelease,
@@ -2532,10 +2535,10 @@ class _$_DeleteAnswer implements _DeleteAnswer {
             Questions question)?
         setQuestion,
     TResult Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)?
+            List<Answers>? answerList, List<Questions>? questions)?
         addAnswer,
     TResult Function(String bucketId, int? questionIndex, Questions question,
-            Answer answer)?
+            Answers answer)?
         setAnswer,
     TResult Function(String name, Bucket? bucket)? searchByName,
     TResult Function(String bucketId)? removeFromRelease,
@@ -2700,10 +2703,10 @@ class _$_DeleteFullBucket implements _DeleteFullBucket {
             String? questionId, Questions question)
         setQuestion,
     required TResult Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)
+            List<Answers>? answerList, List<Questions>? questions)
         addAnswer,
     required TResult Function(String bucketId, int? questionIndex,
-            Questions question, Answer answer)
+            Questions question, Answers answer)
         setAnswer,
     required TResult Function(String name, Bucket? bucket) searchByName,
     required TResult Function(String bucketId) removeFromRelease,
@@ -2728,10 +2731,10 @@ class _$_DeleteFullBucket implements _DeleteFullBucket {
             Questions question)?
         setQuestion,
     TResult? Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)?
+            List<Answers>? answerList, List<Questions>? questions)?
         addAnswer,
     TResult? Function(String bucketId, int? questionIndex, Questions question,
-            Answer answer)?
+            Answers answer)?
         setAnswer,
     TResult? Function(String name, Bucket? bucket)? searchByName,
     TResult? Function(String bucketId)? removeFromRelease,
@@ -2755,10 +2758,10 @@ class _$_DeleteFullBucket implements _DeleteFullBucket {
             Questions question)?
         setQuestion,
     TResult Function(Questions question, int questionIndex,
-            List<Answer>? answerList, List<Questions>? questions)?
+            List<Answers>? answerList, List<Questions>? questions)?
         addAnswer,
     TResult Function(String bucketId, int? questionIndex, Questions question,
-            Answer answer)?
+            Answers answer)?
         setAnswer,
     TResult Function(String name, Bucket? bucket)? searchByName,
     TResult Function(String bucketId)? removeFromRelease,

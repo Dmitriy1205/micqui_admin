@@ -1,6 +1,5 @@
-class AppStrings{
+class AppStrings {
   static const String logoImage = 'assets/images/logo.png';
-
 
   static const String useName = 'Username';
   static const String password = 'Password';
@@ -19,9 +18,14 @@ class AppStrings{
   static const String cancel = 'Cancel';
   static const String warning = 'Warning';
   static const String areYouSure = 'Are you sure you want to logout?';
-  static const String areYouDelete = 'Are you sure you want to delete this bucket?';
-  static const String areYouDeleteMore = 'Are you sure you want to delete this buckets?';
-  static const String areYouQuestion = 'Are you sure you want to delete this question?';
+  static const String areYouDelete =
+      'Are you sure you want to delete this bucket?';
+  static const String areYouDeleteMore =
+      'Are you sure you want to delete this buckets?';
+  static const String areYouQuestion =
+      'Are you sure you want to delete this question?';
+  static const String areYouUser =
+      'Are you sure you want to delete this user?';
   static const String all = 'All';
   static const String manager = 'Manager';
   static const String employee = 'Employee';
@@ -37,6 +41,27 @@ class AppStrings{
   static const String deleteCurrentQuestion = 'Delete Current Question';
   static const String addNewQuestion = 'Add New Question';
   static const String addNewBucket = 'Add New Bucket';
-  static const String pressEnterSaveQuestion = 'Press enter to confirm adding new question';
-  static const String pressEnterSaveBucket = 'Press enter to confirm adding new bucket';
+  static const String viewResponses = 'View Responses';
+  static const String users = 'Users';
+  static const String editUser = 'Edit User';
+  static const String additionalInformation = 'Additional information';
+  static const String companyName = 'Company name';
+  static const String role = 'Role';
+  static const String edit = 'Edit User';
+  static const String deleteUser = 'Delete User';
+  static const String brief = 'Brief';
+  static const String joinedLink = 'Joined link';
+  static const String finishedQuestionnaire = 'Finished questionnaire';
+  static const String loadMore = 'Load More';
+  static const String shrink = 'Shrink';
+  static const String responses = 'Responses';
+  static const String conversion = 'Conversion';
+  static const String fullName = 'Full name';
+  static const String saveEdits = 'Save Edits';
+  static const String pressEnterSaveQuestion =
+      'Press enter to confirm adding new question';
+  static const String pressEnterSaveBucket =
+      'Press enter to confirm adding new bucket';
+
+  static const List<String> roles = ['Employee', 'Manager'];
 }

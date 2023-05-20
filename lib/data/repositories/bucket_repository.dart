@@ -2,28 +2,31 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:micqui_admin/core/constants/strings.dart';
+import 'package:micqui_admin/core/services/firestore_sevice.dart';
 import 'package:micqui_admin/data/models/answer/answer.dart';
 import 'package:micqui_admin/data/models/bucket/bucket.dart';
 
 import '../../core/constants/exceptions.dart';
 import '../models/questions/questions.dart';
 
-class FirestoreRepository {
+class BucketRepository {
+  final FirestoreService fr;
   final FirebaseFirestore _firestore;
 
-  FirestoreRepository({required FirebaseFirestore firestore})
-      : _firestore = firestore;
+  BucketRepository({
+    required FirebaseFirestore firestore,
+    required this.fr,
+  }) : _firestore = firestore;
   List<Bucket>? buckets = [];
   List<Questions>? questions = [];
   late Bucket bucket;
 
   Future<List<Bucket>?> getBuckets() async {
     try {
-      final data = await _firestore.collection('buckets').get();
+      final data = await fr.readAllFields(collectionPath: 'buckets');
+
       buckets = data.docs.map((e) => Bucket.fromJson(e.data())).toList();
       return buckets;
-    } on FirebaseException catch (e) {
-      throw BadRequestException(message: e.message!);
     } on Exception catch (e) {
       throw BadRequestException(message: e.toString());
     }
@@ -39,6 +42,14 @@ class FirestoreRepository {
     return questionsData.map((data) => Questions.fromJson(data)).toList();
   }
 
+  Future<List<Answers>?> getAnswers() async {
+    final data = await fr.readAllFields(collectionPath: 'answers');
+    List<Answers> answers =
+        data.docs.map((e) => Answers.fromJson(e.data())).toList();
+
+    return answers;
+  }
+
   addBucket() {
     buckets!.add(const Bucket(
       name: 'Name',
@@ -51,8 +62,7 @@ class FirestoreRepository {
     try {
       questions!.add(const Questions(name: 'Name', variants: []));
       return questions;
-    } on BadRequestException catch (e) {
-    }
+    } on BadRequestException catch (e) {}
   }
 
   Future<void> setBucket(
@@ -80,8 +90,7 @@ class FirestoreRepository {
     }
   }
 
-  Future<void> deleteFullBucket(
-      {required String bucketId}) async {
+  Future<void> deleteFullBucket({required String bucketId}) async {
     try {
       await _firestore.collection('buckets').doc(bucketId).delete();
     } on FirebaseException catch (e) {
@@ -89,8 +98,7 @@ class FirestoreRepository {
     }
   }
 
-  Future<List<Bucket>?> deleteBucket(
-      {required String bucketId}) async {
+  Future<List<Bucket>?> deleteBucket({required String bucketId}) async {
     try {
       await _firestore.collection('buckets').doc(bucketId).delete();
       final buckets = await getBuckets();
@@ -174,49 +182,49 @@ class FirestoreRepository {
     }
   }
 
-  Future<List<Questions>> setAnswer(
-      {required String bucketId,
-      required Questions existedQuestions,
-      required Answer answer}) async {
-    try {
-      final questions =
-          (await _firestore.collection('buckets').doc(bucketId).get())
-              .data()!['questions'] as List<dynamic>;
-
-      final question = questions.firstWhere(
-          (q) => q['id'] == existedQuestions.id,
-          orElse: () => null);
-      if (question != null) {
-        final i = questions.indexOf(question);
-        final variants =
-            List<Map<String, dynamic>>.from(question['variants'] ?? []);
-
-        variants.add({
-          'name': answer.name,
-          'isRight': answer.isRight
-        }); // Modify the variant list as needed
-        final updatedQuestion = {
-          'id': question['id'],
-          'name': question['name'],
-          'variants': variants,
-        };
-
-        questions[i] = updatedQuestion;
-      }
-
-      await _firestore.collection('buckets').doc(bucketId).set(
-          {'questions': questions}, SetOptions(mergeFields: ['questions']));
-      DocumentSnapshot doc =
-          await _firestore.collection('buckets').doc(bucketId).get();
-
-      final questionsData =
-          List<Map<String, dynamic>>.from(doc.get('questions') ?? []);
-
-      return questionsData.map((data) => Questions.fromJson(data)).toList();
-    } on FirebaseException catch (e) {
-      throw BadRequestException(message: e.message!);
-    }
-  }
+  // Future<List<Questions>> setAnswer(
+  //     {required String bucketId,
+  //     required Questions existedQuestions,
+  //     required Answers answer}) async {
+  //   try {
+  //     final questions =
+  //         (await _firestore.collection('buckets').doc(bucketId).get())
+  //             .data()!['questions'] as List<dynamic>;
+  //
+  //     final question = questions.firstWhere(
+  //         (q) => q['id'] == existedQuestions.id,
+  //         orElse: () => null);
+  //     if (question != null) {
+  //       final i = questions.indexOf(question);
+  //       final variants =
+  //           List<Map<String, dynamic>>.from(question['variants'] ?? []);
+  //
+  //       variants.add({
+  //         'name': answer.name,
+  //         'isRight': answer.isRight
+  //       }); // Modify the variant list as needed
+  //       final updatedQuestion = {
+  //         'id': question['id'],
+  //         'name': question['name'],
+  //         'variants': variants,
+  //       };
+  //
+  //       questions[i] = updatedQuestion;
+  //     }
+  //
+  //     await _firestore.collection('buckets').doc(bucketId).set(
+  //         {'questions': questions}, SetOptions(mergeFields: ['questions']));
+  //     DocumentSnapshot doc =
+  //         await _firestore.collection('buckets').doc(bucketId).get();
+  //
+  //     final questionsData =
+  //         List<Map<String, dynamic>>.from(doc.get('questions') ?? []);
+  //
+  //     return questionsData.map((data) => Questions.fromJson(data)).toList();
+  //   } on FirebaseException catch (e) {
+  //     throw BadRequestException(message: e.message!);
+  //   }
+  // }
 
   Future<void> updateBucketCategory(
       {required String bucketId, required String category}) async {

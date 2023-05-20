@@ -51,6 +51,12 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
   late List<Bucket> buckets;
 
   @override
+  void initState() {
+    context.read<QuestionnarieBloc>().add(QuestionnarieEvent.init());
+    super.initState();
+  }
+
+  @override
   void dispose() {
     _searchController.dispose();
     super.dispose();

@@ -2,11 +2,32 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'answer.freezed.dart';
 
 part 'answer.g.dart';
+
 @freezed
-class Answer with _$Answer{
-  const factory Answer({
-    String? name,
-    bool? isRight,
-}) = _Answer;
-  factory Answer.fromJson(Map<String, dynamic> json) => _$AnswerFromJson(json);
+class Answers with _$Answers {
+  const factory Answers({
+    String? userId,
+    String? bucketId,
+    bool? completed,
+    bool? joined,
+    List<QuestionAnswer>? answers,
+    String? nickName,
+    String? fullName,
+    String? email,
+    String? avatar,
+  }) = _Answers;
+
+  factory Answers.fromJson(Map<String, dynamic> json) =>
+      _$AnswersFromJson(json);
+}
+
+@freezed
+class QuestionAnswer with _$QuestionAnswer {
+  const factory QuestionAnswer({
+    String? question,
+    String? answer,
+  }) = _QuestionAnswer;
+
+  factory QuestionAnswer.fromJson(Map<String, dynamic> json) =>
+      _$QuestionAnswerFromJson(json);
 }

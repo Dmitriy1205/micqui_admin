@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:micqui_admin/core/constants/exceptions.dart';
-import 'package:micqui_admin/data/repositories/firestore_repository.dart';
+import 'package:micqui_admin/data/repositories/bucket_repository.dart';
 
 import '../../../data/models/bucket/bucket.dart';
 import '../auth/auth_bloc.dart';
@@ -15,7 +15,7 @@ part 'questionnarie_state.dart';
 part 'questionnarie_bloc.freezed.dart';
 
 class QuestionnarieBloc extends Bloc<QuestionnarieEvent, QuestionnarieState> {
-  final FirestoreRepository firestore;
+  final BucketRepository firestore;
   final AuthBloc authBloc;
   late StreamSubscription _subscription;
 
@@ -25,7 +25,7 @@ class QuestionnarieBloc extends Bloc<QuestionnarieEvent, QuestionnarieState> {
   }) : super(const QuestionnarieState.initial()) {
     on<QuestionnarieEvent>(_mapBlocToState);
 
-    _subscription = authBloc.stream.listen((state) {
+    _subscription = authBloc.stream.listen((state){
       state.maybeMap(
           authenticated: (s) => add(const QuestionnarieEvent.init()),
           unauthenticated: (_) => add(const QuestionnarieEvent.reset()),

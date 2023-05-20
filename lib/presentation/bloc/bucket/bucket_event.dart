@@ -17,7 +17,7 @@ class BucketEvent with _$BucketEvent {
   const factory BucketEvent.addAnswer({
     required Questions question,
     required int questionIndex,
-    required List<Answer>? answerList,
+    required List<Answers>? answerList,
     required List<Questions>? questions,
   }) = _AddAnswer;
 
@@ -25,7 +25,7 @@ class BucketEvent with _$BucketEvent {
     required String bucketId,
     required int? questionIndex,
     required Questions question,
-    required Answer answer,
+    required Answers answer,
   }) = _SetAnswer;
 
   const factory BucketEvent.searchByName(

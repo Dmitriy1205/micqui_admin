@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:micqui_admin/presentation/widgets/layout/app_drawer.dart';
 
-
 class DesktopLayout extends StatefulWidget {
   final Widget child;
+
   const DesktopLayout({Key? key, required this.child}) : super(key: key);
 
   @override
@@ -17,10 +17,8 @@ class _DesktopLayoutState extends State<DesktopLayout> {
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppDrawer(
-            backToFirstScreen: () {},
-          ),
-           Expanded(
+          AppDrawer(),
+          Expanded(
             child: widget.child,
             // QuestionaireScreen(),
           ),

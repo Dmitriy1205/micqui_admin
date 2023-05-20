@@ -46,10 +46,12 @@ dependencies:
   go_router: ^6.5.7
   fluttertoast: ^8.2.1
   qr_flutter: ^4.0.0
+  image_picker: ^0.8.7+5
 
   firebase_core: ^2.8.0
   firebase_auth: ^4.3.0
   cloud_firestore: ^4.4.5
+  firebase_storage: ^11.2.1
 
 dev_dependencies:
   flutter_test:
@@ -86,6 +88,9 @@ flutter:
         - asset: assets/fonts/Roboto-Bold.ttf
         - asset: assets/fonts/Roboto-Medium.ttf
         - asset: assets/fonts/Roboto-Regular.ttf
+    - family: users
+      fonts:
+        - asset: assets/icons/users.ttf
 
 
 

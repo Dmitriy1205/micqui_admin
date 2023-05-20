@@ -21,11 +21,6 @@ class _TabletLayoutState extends State<TabletLayout> {
         centerTitle: false,
       ),
       drawer: AppDrawer(
-        backToFirstScreen: () {
-          // context
-          //     .read<QuestionnarieBloc>()
-          //     .add(const QuestionnarieEvent.init());
-        },
       ),
       body: widget.child,
       // const QuestionaireScreen(),

@@ -13,7 +13,7 @@ class BucketState with _$BucketState {
   Questions? get questions =>
       maybeMap(questionAdded: (state) => state.questions, orElse: () => null);
 
-  Answer? get answer =>
+  Answers? get answer =>
       maybeMap(answerAdded: (state) => state.answer, orElse: () => null);
 
   List<Questions> get questionsList =>

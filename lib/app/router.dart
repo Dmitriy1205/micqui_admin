@@ -1,8 +1,12 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:micqui_admin/data/models/user/user_model.dart';
 import 'package:micqui_admin/presentation/bloc/auth/auth_bloc.dart';
+import 'package:micqui_admin/presentation/screens/edit_user_screen.dart';
+import 'package:micqui_admin/presentation/screens/responses_screen.dart';
 
 import '../core/services/service_locator.dart';
 import '../presentation/qr_screen.dart';
@@ -10,6 +14,7 @@ import '../presentation/screens/auth/signin_screen/signin_screen.dart';
 import '../presentation/screens/bucket_screen.dart';
 import '../presentation/screens/main_screen.dart';
 import '../presentation/screens/questionary_screen.dart';
+import '../presentation/screens/users_screen.dart';
 
 final AuthBloc _bloc = sl<AuthBloc>();
 
@@ -51,6 +56,40 @@ final GoRouter router = GoRouter(
                 state: state,
                 child: BucketScreen(
                   bucketId: int.parse(state.params['bucketId']!),
+                ),
+              );
+            },
+          ),
+          GoRoute(
+            path: '/users',
+            pageBuilder: (context, state) => pageTransition<void>(
+              context: context,
+              state: state,
+              child: const UsersScreen(),
+            ),
+          ),
+          GoRoute(
+            path: '/edit_user/:userModel',
+            pageBuilder: (context, state) {
+              final userModelJson = state.params['userModel']!;
+              final userModel = UserModel.fromJson(jsonDecode(userModelJson));
+              return pageTransition<void>(
+                context: context,
+                state: state,
+                child: EditUserScreen(
+                  user: userModel,
+                ),
+              );
+            },
+          ),
+          GoRoute(
+            path: '/responses/:bucketId/:bucketName',
+            pageBuilder: (context, state) {
+              return pageTransition<void>(
+                context: context,
+                state: state,
+                child: ResponsesScreen(
+                  bucketId: state.params['bucketId']!, bucketName: state.params['bucketName']!,
                 ),
               );
             },

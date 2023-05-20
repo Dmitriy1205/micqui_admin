@@ -5,7 +5,7 @@ import 'package:micqui_admin/core/constants/exceptions.dart';
 import '../../../data/models/answer/answer.dart';
 import '../../../data/models/bucket/bucket.dart';
 import '../../../data/models/questions/questions.dart';
-import '../../../data/repositories/firestore_repository.dart';
+import '../../../data/repositories/bucket_repository.dart';
 import '../questionnarie/questionnarie_bloc.dart';
 
 part 'bucket_event.dart';
@@ -15,7 +15,7 @@ part 'bucket_state.dart';
 part 'bucket_bloc.freezed.dart';
 
 class BucketBloc extends Bloc<BucketEvent, BucketState> {
-  final FirestoreRepository firestore;
+  final BucketRepository firestore;
   final QuestionnarieBloc questionnarieBloc;
 
   BucketBloc({
@@ -33,7 +33,7 @@ class BucketBloc extends Bloc<BucketEvent, BucketState> {
       addAnswer: (e) => _addAnswer(e, emit),
       searchByName: (e) => _searchByName(e, emit),
       setQuestion: (e) => _setQuestion(e, emit),
-      setAnswer: (e) => _setAnswer(e, emit),
+      // setAnswer: (e) => _setAnswer(e, emit),
       removeFromRelease: (e) => _removeFromRelease(e, emit),
       publish: (e) => _publish(e, emit),
       deleteAnswer: (e) => _deleteAnswer(e, emit),
@@ -86,31 +86,32 @@ class BucketBloc extends Bloc<BucketEvent, BucketState> {
 
   Future<void> _addAnswer(_AddAnswer event, Emitter<BucketState> emit) async {
     emit(const BucketState.loading());
-    List<Answer> answers = List.from(event.answerList!);
+    List<Answers> answers = List.from(event.answerList!);
     List<Questions> questions = List.from(event.questions!);
-    answers.add(const Answer(name: 'New Question', isRight: false));
+    // answers.add(const Answers(name: 'New Question', isRight: false));
 
     Questions question = Questions(
-        id: event.question.id, name: event.question.name, variants: answers);
+        id: event.question.id, name: event.question.name, variants: []);
     questions[event.questionIndex] = question;
     emit(BucketState.loaded(questionsList: questions));
   }
 
-  Future<void> _setAnswer(_SetAnswer event, Emitter<BucketState> emit) async {
-    emit(const BucketState.loading());
-    try {
-      final questions = await firestore.setAnswer(
-        bucketId: event.bucketId,
-        existedQuestions: event.question,
-        answer: event.answer,
-      );
-      questionnarieBloc.add(const QuestionnarieEvent.init());
-
-      emit(BucketState.loaded(questionsList: questions));
-    } on BadRequestException catch (e) {
-      emit(BucketState.error(error: e.message));
-    }
-  }
+  // Future<void> _setAnswer(_SetAnswer event, Emitter<BucketState> emit) async {
+  //   emit(const BucketState.loading());
+  //   try {
+  //     final
+  //     // final questions = await firestore.setAnswer(
+  //     //   bucketId: event.bucketId,
+  //     //   existedQuestions: event.question,
+  //     //   answer: event.answer,
+  //     // );
+  //     questionnarieBloc.add(const QuestionnarieEvent.init());
+  //
+  //     emit(BucketState.loaded(questionsList: questions));
+  //   } on BadRequestException catch (e) {
+  //     emit(BucketState.error(error: e.message));
+  //   }
+  // }
 
   Future<void> _removeFromRelease(_RemoveFromRelease event,
       Emitter<BucketState> emit) async {

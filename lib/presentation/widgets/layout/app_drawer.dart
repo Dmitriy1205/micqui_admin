@@ -3,15 +3,17 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:micqui_admin/app/router.dart';
 import 'package:micqui_admin/core/constants/colors.dart';
 import 'package:micqui_admin/core/themes/theme.dart';
 import 'package:micqui_admin/presentation/bloc/auth/auth_bloc.dart';
 
+import '../../../core/constants/icons.dart';
 import '../../../core/constants/strings.dart';
 
 class AppDrawer extends StatelessWidget {
-  final Function() backToFirstScreen;
-  const AppDrawer({Key? key, required this.backToFirstScreen}) : super(key: key);
+  // final Function() backToFirstScreen;
+  const AppDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +38,29 @@ class AppDrawer extends StatelessWidget {
                   thickness: 1,
                 ),
                 ListTile(
-                  onTap: backToFirstScreen,
+                  onTap: (){
+                    router.go('/buckets');
+                  },
                   leading: const FaIcon(
                     FontAwesomeIcons.solidCircleCheck,
                     color: AppColors.background,
                   ),
                   title: Text(
                     AppStrings.myBuckets,
+                    style: AppTheme.themeData.textTheme.titleLarge,
+                  ),
+                ),
+                ListTile(
+                  onTap: (){
+                    router.go('/users');
+                  },
+                  leading: const Icon(
+                    AppIcon.users,
+                    color: AppColors.background,
+                    size: 20,
+                  ),
+                  title: Text(
+                    AppStrings.users,
                     style: AppTheme.themeData.textTheme.titleLarge,
                   ),
                 ),
