@@ -12,6 +12,15 @@ class BriefCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    String convertValue() {
+      var conversion = (quantity/joined) * 100 > 100 ? 0 : (quantity/joined) * 100;
+      if (conversion.isNaN) {
+        return '0';
+      } else {
+        return conversion.toString();
+      }
+    }
     return SizedBox(
       width: 240,
       height: 138,
@@ -80,7 +89,7 @@ class BriefCard extends StatelessWidget {
                   children: [
                     const TextSpan(text: '${AppStrings.conversion} - '),
                     TextSpan(
-                      text: '${joined/quantity * 100 > 100 ? 0 : joined/quantity * 100}%',
+                      text: '${convertValue()}%',
                       style: AppTheme.themeData.textTheme.labelMedium!.copyWith(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,

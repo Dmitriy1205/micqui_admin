@@ -4,7 +4,6 @@ import 'package:micqui_admin/data/models/answer/answer.dart';
 import 'package:micqui_admin/data/models/questions/questions.dart';
 import 'package:micqui_admin/data/models/user/user_model.dart';
 
-import '../../../data/models/bucket/bucket.dart';
 import '../../../data/repositories/bucket_repository.dart';
 import '../../../data/repositories/users_repository.dart';
 
@@ -66,26 +65,47 @@ class ResponsesBloc extends Bloc<ResponsesEvent, ResponsesState> {
         .toList();
     print(allQuestionAnswers.length);
 ////
-    List<Questions> newQuestionList = allBucketQuestions!.map((question) {
-      List<QuestionAnswer>? matchingAnswers = allQuestionAnswers
-          .where(
-            (answer) => answer.question == question.name,
-          )
-          .toList();
+//     List<Questions> filteredQuestionList = allBucketQuestions!.map((question) {
+//       List<QuestionAnswer>? matchingAnswers = allQuestionAnswers
+//           .where(
+//             (answer) => answer.question == question.name,
+//           )
+//           .toList();
+//
+//       List<UserModel> matchingUsers = allUsers!
+//           .where((user) => allAnswers.any((answer) => user.id == answer.userId))
+//           .toList();
+//       return question.copyWith(
+//           variants: matchingAnswers.isNotEmpty ? matchingAnswers : [],
+//           users: matchingUsers.isNotEmpty ? matchingUsers : []);
+//     }).toList();
+////
+    List<Questions> filteredQuestionList = allBucketQuestions!.map((question) {
+      List<QuestionAnswer> matchingAnswers = [];
+      List<UserModel> matchingUsers = [];
 
-      List<UserModel> matchingUsers = allUsers!
-          .where((user) => allAnswers.any((answer) => user.id == answer.userId))
-          .toList();
+      for (UserModel user in allUsers!) {
+        for (Answers answers in allAnswers) {
+          if (answers.userId == user.id) {
+            for (QuestionAnswer questionAnswer in answers.answers!) {
+              if (questionAnswer.question == question.name) {
+                matchingAnswers.add(questionAnswer);
+                matchingUsers.add(user);
+                break;
+              }
+            }
+          }
+        }
+      }
+
       return question.copyWith(
           variants: matchingAnswers.isNotEmpty ? matchingAnswers : [],
           users: matchingUsers.isNotEmpty ? matchingUsers : []);
     }).toList();
-////
 
-    print(newQuestionList[4].variants);
 
     emit(ResponsesState.loaded(
-        questions: newQuestionList,
+        questions: filteredQuestionList,
         completedQuiz: completedQuiz.length,
         joined: joinedQuiz.length));
   }

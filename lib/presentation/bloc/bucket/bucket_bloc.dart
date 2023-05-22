@@ -142,7 +142,7 @@ class BucketBloc extends Bloc<BucketEvent, BucketState> {
       List<Questions> questions = List.from(event.questions!);
 
       Questions currentQuestion = event.existedQuestions;
-      currentQuestion.variants!.removeAt(event.indexToDelete);
+      currentQuestion.variants.removeAt(event.indexToDelete);
       questions.where((e) => e.id == currentQuestion.id);
       int index = questions.indexWhere((question) =>
       question.id == currentQuestion.id);

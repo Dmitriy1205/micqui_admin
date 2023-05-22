@@ -14,7 +14,7 @@ class MainScreen extends StatelessWidget {
       onWillPop: () => Future(() => false),
       child: Scaffold(
         body: ResponsiveLayout(
-            mobileLayout: const MobileLayout(),
+            mobileLayout: MobileLayout(),
             tabletLayout: TabletLayout(
               child: child!,
             ),

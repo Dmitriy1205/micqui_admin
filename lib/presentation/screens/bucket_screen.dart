@@ -135,15 +135,12 @@ class _BucketScreenState extends State<BucketScreen> {
                     questionNameFocusNodes.add(FocusNode());
                   }
 
-                  print(answerNameFocusNodes.toString());
-                  print(questions.toString());
-                  print(answerNameFocusNodes.toString());
                 }
               },
               orElse: () {});
           state.maybeMap(
               searchLoaded: (_) => questions = state.questionsList,
-              loaded: (s) => questions = s.questionsList!,
+              loaded: (s) => questions = s.questionsList,
               isPublished: (_) => published = state.isPublished!,
               // questionAdded: (_) => questions.add(state.questions!),
               // answerAdded: (i) => questions[i.questionIndex] = i.question!,
@@ -532,8 +529,8 @@ class _BucketScreenState extends State<BucketScreen> {
                       ),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.only(
-                          bottom: 19, top: 14, left: 23, right: 37),
+                      padding: EdgeInsets.only(
+                          bottom: 19, top: 14, left: 23, right: widget.mobileRowSize ?? 37),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -650,37 +647,7 @@ class _BucketScreenState extends State<BucketScreen> {
                 onChange: (v) {},
               ),
             ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // EditableText(
-                  //   textAlign: TextAlign.start,
-                  //   style: AppTheme.themeData.textTheme.labelMedium!
-                  //       .copyWith(fontSize: 14),
-                  //   cursorColor: AppColors.primary,
-                  //   backgroundCursorColor: AppColors.primary,
-                  //   selectionControls: MaterialTextSelectionControls(),
-                  //   keyboardType: TextInputType.text,
-                  //   maxLines: 1,
-                  //   focusNode: answerNameFocusNodes[questionIndex][index],
-                  //   controller: answerControllers[questionIndex][index],
-                  //   onSubmitted: (text) {
-                  //     answerNameFocusNodes[questionIndex][index].unfocus();
-                  //     _bloc.add(BucketEvent.setAnswer(
-                  //       bucketId: bucket.id!,
-                  //       questionIndex: 1,
-                  //       question: currentQuestion,
-                  //       answer: Answers(
-                  //           name: answerControllers[questionIndex][index].text,
-                  //           isRight: false),
-                  //     ));
-                  //     showToast(msg: AppStrings.questionIsAdded);
-                  //   },
-                  // ),
-                ],
-              ),
-            ),
+
             IconButton(
               constraints: const BoxConstraints(),
               padding: const EdgeInsets.all(2),

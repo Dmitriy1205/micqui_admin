@@ -12,7 +12,6 @@ import '../../core/constants/colors.dart';
 import '../../core/constants/strings.dart';
 import '../../core/services/service_locator.dart';
 import '../../core/themes/theme.dart';
-import '../bloc/bucket/bucket_bloc.dart';
 import '../widgets/image_picker.dart';
 
 class EditUserScreen extends StatefulWidget {
@@ -258,7 +257,7 @@ class _EditUserScreenState extends State<EditUserScreen> {
                                             autovalidateMode: AutovalidateMode
                                                 .onUserInteraction,
                                             controller: _companyNameController,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 color: AppColors.text,
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: 12),
@@ -324,7 +323,7 @@ class _EditUserScreenState extends State<EditUserScreen> {
                                                     value: role,
                                                     child: Text(
                                                       role,
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                           color: AppColors.text,
                                                           fontWeight:
                                                               FontWeight.w400,

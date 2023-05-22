@@ -52,8 +52,8 @@ class AppStrings {
   static const String brief = 'Brief';
   static const String joinedLink = 'Joined link';
   static const String finishedQuestionnaire = 'Finished questionnaire';
-  static const String loadMore = 'Load More';
-  static const String shrink = 'Shrink';
+  static const String showMore = 'Show More';
+  static const String showLess = 'Show Less';
   static const String responses = 'Responses';
   static const String conversion = 'Conversion';
   static const String fullName = 'Full name';

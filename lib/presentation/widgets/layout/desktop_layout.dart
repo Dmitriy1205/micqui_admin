@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:micqui_admin/presentation/widgets/layout/app_drawer.dart';
 
+import '../../../app/router.dart';
+
 class DesktopLayout extends StatefulWidget {
   final Widget child;
 
@@ -17,7 +19,14 @@ class _DesktopLayoutState extends State<DesktopLayout> {
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppDrawer(),
+          AppDrawer(
+            goToMyBuckets: () {
+              router.go('/buckets');
+            },
+            goToUsers: () {router.go('/users');
+
+            },
+          ),
           Expanded(
             child: widget.child,
             // QuestionaireScreen(),

@@ -32,7 +32,6 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
     emit(const UsersState.loading());
     try {
       List<UserModel>? users = await repo.getUsers();
-      print(users);
       emit(UsersState.loaded(users: users));
     } on BadRequestException catch (e) {
       emit(UsersState.error(error: e.message));

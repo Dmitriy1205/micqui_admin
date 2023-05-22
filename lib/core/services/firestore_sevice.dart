@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:micqui_admin/core/constants/exceptions.dart';
 
 class FirestoreService {
   final FirebaseFirestore firestore;

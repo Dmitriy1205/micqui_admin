@@ -5,18 +5,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:micqui_admin/core/constants/strings.dart';
 import 'package:micqui_admin/core/themes/theme.dart';
-import 'package:micqui_admin/presentation/bloc/questionnarie/questionnarie_bloc.dart';
 import 'package:micqui_admin/presentation/bloc/users/users_bloc.dart';
-import 'package:micqui_admin/presentation/screens/bucket_screen.dart';
-import 'package:micqui_admin/presentation/widgets/app_checkbox.dart';
 
 import '../../app/router.dart';
 import '../../core/constants/colors.dart';
 import '../../core/services/service_locator.dart';
 import '../../core/utils/utils.dart';
-import '../../data/models/bucket/bucket.dart';
 import '../widgets/search_field.dart';
-import '../widgets/toast.dart';
 import 'edit_user_screen.dart';
 
 class UsersScreen extends StatefulWidget {
@@ -283,14 +278,14 @@ class _UsersScreenState extends State<UsersScreen> {
                   //   ),
                   // ),
                   child: Padding(
-                    padding: const EdgeInsets.only(
-                        bottom: 19, top: 14, left: 23, right: 23),
+                    padding: EdgeInsets.only(
+                        bottom: 19, top: 14, left:widget.mobileRowSize ?? 23, right:widget.mobileRowSize?? 23),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(
-                            right: 20,
+                          padding:  EdgeInsets.only(
+                            right:widget.mobileRowSize?? 20,
                           ),
                           child: SizedBox(
                             width: 36,
@@ -326,13 +321,13 @@ class _UsersScreenState extends State<UsersScreen> {
                                       style: AppTheme
                                           .themeData.textTheme.labelMedium!
                                           .copyWith(
-                                        fontWeight: FontWeight.w500,
+                                        fontWeight: FontWeight.w600,
                                       ))
                                   : Text(state.users![index].fullName!,
                                       style: AppTheme
                                           .themeData.textTheme.labelMedium!
                                           .copyWith(
-                                        fontWeight: FontWeight.w500,
+                                        fontWeight: FontWeight.w600,
                                       )),
                               RichText(
                                 text: TextSpan(
@@ -363,17 +358,18 @@ class _UsersScreenState extends State<UsersScreen> {
                           ),
                         ),
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Tooltip(
                               message: AppStrings.edit,
                               child: IconButton(
                                   constraints: const BoxConstraints(),
-                                  padding: const EdgeInsets.all(4),
+                                  padding:  EdgeInsets.zero,
                                   onPressed: () {
                                     final usersModel =
                                         jsonEncode(state.users![index]);
                                     widget.mobileSearchIconSpace == null
-                                        ? router.push('/edit_user/$usersModel')
+                                        ? router.push('/edit_user/${Uri.encodeComponent(usersModel)}')
                                         :
                                     Navigator.of(context).push(
                                             MaterialPageRoute(
@@ -406,14 +402,14 @@ class _UsersScreenState extends State<UsersScreen> {
                                     ),
                                   )),
                             ),
-                            const SizedBox(
-                              width: 23,
+                             SizedBox(
+                              width:widget.mobileRowSize == null ? 23 : 0,
                             ),
                             Tooltip(
                               message: AppStrings.deleteUser,
                               child: IconButton(
                                   constraints: const BoxConstraints(),
-                                  padding: const EdgeInsets.all(4),
+                                  padding: EdgeInsets.zero,
                                   onPressed: () {
                                     deleteUserDialog(context,
                                         text: state.users![index].fullName!,

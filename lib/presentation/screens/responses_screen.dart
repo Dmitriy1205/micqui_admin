@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:micqui_admin/data/models/questions/questions.dart';
-import 'package:micqui_admin/presentation/bloc/questionnarie/questionnarie_bloc.dart';
 import 'package:micqui_admin/presentation/bloc/responses/responses_bloc.dart';
 import '../../app/router.dart';
 import '../../core/constants/colors.dart';
@@ -13,9 +12,7 @@ import '../../core/services/service_locator.dart';
 import '../../core/themes/theme.dart';
 import '../../core/utils/utils.dart';
 import '../../data/models/answer/answer.dart';
-import '../../data/models/bucket/bucket.dart';
 import '../../data/models/user/user_model.dart';
-import '../bloc/bucket/bucket_bloc.dart';
 import '../widgets/brief_card.dart';
 import '../widgets/search_field.dart';
 
@@ -50,6 +47,7 @@ class ResponsesScreen extends StatefulWidget {
 class _ResponsesScreenState extends State<ResponsesScreen> {
   final ResponsesBloc _bloc = sl<ResponsesBloc>();
   final _searchController = TextEditingController();
+  List<bool> showAnswers = [];
 
   // List<Questions> questions = [];
   // late Bucket bucket;
@@ -162,7 +160,8 @@ class _ResponsesScreenState extends State<ResponsesScreen> {
                       height: 30,
                     ),
                     BriefCard(
-                      quantity: state.completedQuiz ?? 0, joined: state.joined ?? 0,
+                      quantity: state.completedQuiz ?? 0,
+                      joined: state.joined ?? 0,
                     ),
                     const SizedBox(
                       height: 37,
@@ -219,10 +218,10 @@ class _ResponsesScreenState extends State<ResponsesScreen> {
                                         ),
                                       ),
                                     ),
-                                    const Padding(
-                                      padding: EdgeInsets.only(left: 10),
+                                     Padding(
+                                      padding: const EdgeInsets.only(left: 10),
                                       child: SizedBox(
-                                        width: 50,
+                                        width: widget.mobileRowSize ?? 50,
                                         height: 50,
                                       ),
                                     ),
@@ -265,6 +264,10 @@ class _ResponsesScreenState extends State<ResponsesScreen> {
                 itemCount: state.questions!.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
+
+                  if (showAnswers.length < state.questions!.length) {
+                    showAnswers.add(false);
+                  }
                   return Container(
                     decoration: BoxDecoration(
                       border: Border(
@@ -282,11 +285,13 @@ class _ResponsesScreenState extends State<ResponsesScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                state.questions![index].name!,
-                                style: AppTheme.themeData.textTheme.labelMedium!
-                                    .copyWith(
-                                  fontWeight: FontWeight.w600,
+                              Flexible(
+                                child: Text(
+                                  state.questions![index].name!,
+                                  style: AppTheme.themeData.textTheme.labelMedium!
+                                      .copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
                               ),
                             ],
@@ -296,10 +301,34 @@ class _ResponsesScreenState extends State<ResponsesScreen> {
                             child: answersList(
                               state.questions![index].variants,
                               state.questions![index].users,
+                              showAnswers[index],
                               state.questions![index],
                               index,
                             ),
                           ),
+                          const SizedBox(
+                            height: 17,
+                          ),
+                          state.questions![index].variants.length > 3
+                              ? InkWell(
+                            customBorder: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),),
+                            hoverColor: Colors.transparent,
+                                  splashColor: Colors.transparent,
+                                  onTap: () {
+                                    setState(() {
+                                      showAnswers[index] = !showAnswers[index];
+                                    });
+                                  },
+                                  child: Text(
+                                    !showAnswers[index]
+                                        ? AppStrings.showMore
+                                        : AppStrings.showLess,
+                                    style: AppTheme
+                                        .themeData.textTheme.labelMedium!
+                                        .copyWith(color: Colors.blue,),
+                                  ))
+                              : Container(),
                         ],
                       ),
                     ),
@@ -312,15 +341,16 @@ class _ResponsesScreenState extends State<ResponsesScreen> {
   }
 
   Widget answersList(List<QuestionAnswer> answer, List<UserModel> user,
-      Questions currentQuestion, int questionIndex) {
+      bool showMore, Questions currentQuestion, int questionIndex) {
+    int itemCount = answer.length > 3 ? 3 : answer.length;
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: answer.length,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: !showMore ? itemCount : answer.length,
       itemBuilder: (context, index) {
-        String? separatedNickName =
-        separateNickName(user[index].email);
+        String? separatedNickName = separateNickName(user[index].email);
         String nickName = user[index].nickName == null ||
-            user[index].nickName!.trim().isNotEmpty
+                user[index].nickName!.trim().isNotEmpty
             ? user[index].nickName!
             : separatedNickName ?? 'M';
 
@@ -329,17 +359,29 @@ class _ResponsesScreenState extends State<ResponsesScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(
-                right: 20,
+              padding:  EdgeInsets.only(
+                right:widget.mobileRowSize ?? 20,
               ),
-              child: CircleAvatar(
-                backgroundColor: AppColors.colors[firstSymbol],
-                child:  Center(
-                  child: Text(
-                    firstSymbol,
-                    style: const TextStyle(fontSize: 25),
-                  ),
-                ),
+              child: SizedBox(
+                width: 36,
+                height: 36,
+                child: user[index].avatar == null || user[index].avatar!.isEmpty
+                    ? CircleAvatar(
+                        backgroundColor: AppColors.colors[firstSymbol],
+                        child: Center(
+                          child: Text(
+                            firstSymbol,
+                            style: const TextStyle(fontSize: 25),
+                          ),
+                        ),
+                      )
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(40),
+                        child: Image.network(
+                          user[index].avatar!,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
               ),
             ),
             Expanded(
@@ -351,7 +393,7 @@ class _ResponsesScreenState extends State<ResponsesScreen> {
                     Text(user[index].fullName!,
                         style:
                             AppTheme.themeData.textTheme.labelMedium!.copyWith(
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                         )),
                     Text(answer[index].answer!,
                         style:

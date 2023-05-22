@@ -21,7 +21,7 @@ class QrScreen extends StatelessWidget {
   Widget _buildMobileLayout(BuildContext context) {
     return Center(
       child: Padding(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: 10,
           vertical: 180,
         ),
@@ -31,7 +31,7 @@ class QrScreen extends StatelessWidget {
           ),
           color: AppColors.second,
           child: Padding(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -43,14 +43,14 @@ class QrScreen extends StatelessWidget {
                     fontSize: 20,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 QrImage(
                   data: code,
                   size: 150,
                   backgroundColor: AppColors.second,
                   version: QrVersions.auto,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(
                   code.toUpperCase(),
                   style: AppTheme.themeData.textTheme.bodySmall!.copyWith(

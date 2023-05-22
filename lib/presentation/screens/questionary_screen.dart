@@ -52,7 +52,7 @@ class _QuestionaireScreenState extends State<QuestionaireScreen> {
 
   @override
   void initState() {
-    context.read<QuestionnarieBloc>().add(QuestionnarieEvent.init());
+    context.read<QuestionnarieBloc>().add(const QuestionnarieEvent.init());
     super.initState();
   }
 
