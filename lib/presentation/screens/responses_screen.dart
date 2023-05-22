@@ -13,6 +13,7 @@ import '../../core/themes/theme.dart';
 import '../../core/utils/utils.dart';
 import '../../data/models/answer/answer.dart';
 import '../../data/models/user/user_model.dart';
+import '../bloc/bucket/bucket_bloc.dart';
 import '../widgets/brief_card.dart';
 import '../widgets/search_field.dart';
 
@@ -160,8 +161,8 @@ class _ResponsesScreenState extends State<ResponsesScreen> {
                       height: 30,
                     ),
                     BriefCard(
-                      quantity: state.completedQuiz ?? 0,
-                      joined: state.joined ?? 0,
+                      quantity: context.read<BucketBloc>().state.completedQuiz ?? 0,
+                      joined: context.read<BucketBloc>().state.joined ?? 0,
                     ),
                     const SizedBox(
                       height: 37,

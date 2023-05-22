@@ -49,4 +49,6 @@ class BucketEvent with _$BucketEvent {
 
   const factory BucketEvent.deleteBucket({required String bucketId}) =
       _DeleteFullBucket;
+  const factory BucketEvent.getStatistics({required String bucketId}) =
+  _GetStatistics;
 }

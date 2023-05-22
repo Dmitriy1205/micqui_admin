@@ -383,9 +383,7 @@ mixin _$ResponsesState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<Questions>? questions, int? completedQuiz, int? joined)
-        loaded,
+    required TResult Function(List<Questions>? questions) loaded,
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
     required TResult Function(String error) error,
@@ -395,9 +393,7 @@ mixin _$ResponsesState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<Questions>? questions, int? completedQuiz, int? joined)?
-        loaded,
+    TResult? Function(List<Questions>? questions)? loaded,
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
     TResult? Function(String error)? error,
@@ -407,9 +403,7 @@ mixin _$ResponsesState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<Questions>? questions, int? completedQuiz, int? joined)?
-        loaded,
+    TResult Function(List<Questions>? questions)? loaded,
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
     TResult Function(String error)? error,
@@ -506,9 +500,7 @@ class _$_Initial extends _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<Questions>? questions, int? completedQuiz, int? joined)
-        loaded,
+    required TResult Function(List<Questions>? questions) loaded,
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
     required TResult Function(String error) error,
@@ -521,9 +513,7 @@ class _$_Initial extends _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<Questions>? questions, int? completedQuiz, int? joined)?
-        loaded,
+    TResult? Function(List<Questions>? questions)? loaded,
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
     TResult? Function(String error)? error,
@@ -536,9 +526,7 @@ class _$_Initial extends _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<Questions>? questions, int? completedQuiz, int? joined)?
-        loaded,
+    TResult Function(List<Questions>? questions)? loaded,
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
     TResult Function(String error)? error,
@@ -638,9 +626,7 @@ class _$_Loading extends _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<Questions>? questions, int? completedQuiz, int? joined)
-        loaded,
+    required TResult Function(List<Questions>? questions) loaded,
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
     required TResult Function(String error) error,
@@ -653,9 +639,7 @@ class _$_Loading extends _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<Questions>? questions, int? completedQuiz, int? joined)?
-        loaded,
+    TResult? Function(List<Questions>? questions)? loaded,
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
     TResult? Function(String error)? error,
@@ -668,9 +652,7 @@ class _$_Loading extends _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<Questions>? questions, int? completedQuiz, int? joined)?
-        loaded,
+    TResult Function(List<Questions>? questions)? loaded,
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
     TResult Function(String error)? error,
@@ -736,7 +718,7 @@ abstract class _$$_LoadedCopyWith<$Res> {
   factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
       __$$_LoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Questions>? questions, int? completedQuiz, int? joined});
+  $Res call({List<Questions>? questions});
 }
 
 /// @nodoc
@@ -750,22 +732,12 @@ class __$$_LoadedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? questions = freezed,
-    Object? completedQuiz = freezed,
-    Object? joined = freezed,
   }) {
     return _then(_$_Loaded(
       questions: freezed == questions
           ? _value._questions
           : questions // ignore: cast_nullable_to_non_nullable
               as List<Questions>?,
-      completedQuiz: freezed == completedQuiz
-          ? _value.completedQuiz
-          : completedQuiz // ignore: cast_nullable_to_non_nullable
-              as int?,
-      joined: freezed == joined
-          ? _value.joined
-          : joined // ignore: cast_nullable_to_non_nullable
-              as int?,
     ));
   }
 }
@@ -773,8 +745,7 @@ class __$$_LoadedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Loaded extends _Loaded {
-  const _$_Loaded(
-      {final List<Questions>? questions, this.completedQuiz, this.joined})
+  const _$_Loaded({final List<Questions>? questions})
       : _questions = questions,
         super._();
 
@@ -789,13 +760,8 @@ class _$_Loaded extends _Loaded {
   }
 
   @override
-  final int? completedQuiz;
-  @override
-  final int? joined;
-
-  @override
   String toString() {
-    return 'ResponsesState.loaded(questions: $questions, completedQuiz: $completedQuiz, joined: $joined)';
+    return 'ResponsesState.loaded(questions: $questions)';
   }
 
   @override
@@ -804,15 +770,12 @@ class _$_Loaded extends _Loaded {
         (other.runtimeType == runtimeType &&
             other is _$_Loaded &&
             const DeepCollectionEquality()
-                .equals(other._questions, _questions) &&
-            (identical(other.completedQuiz, completedQuiz) ||
-                other.completedQuiz == completedQuiz) &&
-            (identical(other.joined, joined) || other.joined == joined));
+                .equals(other._questions, _questions));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_questions), completedQuiz, joined);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_questions));
 
   @JsonKey(ignore: true)
   @override
@@ -825,14 +788,12 @@ class _$_Loaded extends _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<Questions>? questions, int? completedQuiz, int? joined)
-        loaded,
+    required TResult Function(List<Questions>? questions) loaded,
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
     required TResult Function(String error) error,
   }) {
-    return loaded(questions, completedQuiz, joined);
+    return loaded(questions);
   }
 
   @override
@@ -840,14 +801,12 @@ class _$_Loaded extends _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<Questions>? questions, int? completedQuiz, int? joined)?
-        loaded,
+    TResult? Function(List<Questions>? questions)? loaded,
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
     TResult? Function(String error)? error,
   }) {
-    return loaded?.call(questions, completedQuiz, joined);
+    return loaded?.call(questions);
   }
 
   @override
@@ -855,16 +814,14 @@ class _$_Loaded extends _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<Questions>? questions, int? completedQuiz, int? joined)?
-        loaded,
+    TResult Function(List<Questions>? questions)? loaded,
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(questions, completedQuiz, joined);
+      return loaded(questions);
     }
     return orElse();
   }
@@ -914,15 +871,10 @@ class _$_Loaded extends _Loaded {
 }
 
 abstract class _Loaded extends ResponsesState {
-  const factory _Loaded(
-      {final List<Questions>? questions,
-      final int? completedQuiz,
-      final int? joined}) = _$_Loaded;
+  const factory _Loaded({final List<Questions>? questions}) = _$_Loaded;
   const _Loaded._() : super._();
 
   List<Questions>? get questions;
-  int? get completedQuiz;
-  int? get joined;
   @JsonKey(ignore: true)
   _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -968,9 +920,7 @@ class _$_SearchLoading extends _SearchLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<Questions>? questions, int? completedQuiz, int? joined)
-        loaded,
+    required TResult Function(List<Questions>? questions) loaded,
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
     required TResult Function(String error) error,
@@ -983,9 +933,7 @@ class _$_SearchLoading extends _SearchLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<Questions>? questions, int? completedQuiz, int? joined)?
-        loaded,
+    TResult? Function(List<Questions>? questions)? loaded,
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
     TResult? Function(String error)? error,
@@ -998,9 +946,7 @@ class _$_SearchLoading extends _SearchLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<Questions>? questions, int? completedQuiz, int? joined)?
-        loaded,
+    TResult Function(List<Questions>? questions)? loaded,
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
     TResult Function(String error)? error,
@@ -1127,9 +1073,7 @@ class _$_SearchError extends _SearchError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<Questions>? questions, int? completedQuiz, int? joined)
-        loaded,
+    required TResult Function(List<Questions>? questions) loaded,
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
     required TResult Function(String error) error,
@@ -1142,9 +1086,7 @@ class _$_SearchError extends _SearchError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<Questions>? questions, int? completedQuiz, int? joined)?
-        loaded,
+    TResult? Function(List<Questions>? questions)? loaded,
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
     TResult? Function(String error)? error,
@@ -1157,9 +1099,7 @@ class _$_SearchError extends _SearchError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<Questions>? questions, int? completedQuiz, int? joined)?
-        loaded,
+    TResult Function(List<Questions>? questions)? loaded,
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
     TResult Function(String error)? error,
@@ -1289,9 +1229,7 @@ class _$_Error extends _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<Questions>? questions, int? completedQuiz, int? joined)
-        loaded,
+    required TResult Function(List<Questions>? questions) loaded,
     required TResult Function() searchLoading,
     required TResult Function(String error) searchError,
     required TResult Function(String error) error,
@@ -1304,9 +1242,7 @@ class _$_Error extends _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<Questions>? questions, int? completedQuiz, int? joined)?
-        loaded,
+    TResult? Function(List<Questions>? questions)? loaded,
     TResult? Function()? searchLoading,
     TResult? Function(String error)? searchError,
     TResult? Function(String error)? error,
@@ -1319,9 +1255,7 @@ class _$_Error extends _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<Questions>? questions, int? completedQuiz, int? joined)?
-        loaded,
+    TResult Function(List<Questions>? questions)? loaded,
     TResult Function()? searchLoading,
     TResult Function(String error)? searchError,
     TResult Function(String error)? error,

@@ -47,7 +47,7 @@ class BucketScreen extends StatefulWidget {
 }
 
 class _BucketScreenState extends State<BucketScreen> {
-  final BucketBloc _bloc = sl<BucketBloc>();
+  // final BucketBloc _bloc = sl<BucketBloc>();
   final _searchController = TextEditingController();
   List<TextEditingController> questionControllers = [];
   List<List<TextEditingController>> answerControllers = [];
@@ -101,7 +101,7 @@ class _BucketScreenState extends State<BucketScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocConsumer<BucketBloc, BucketState>(
-        bloc: _bloc,
+        // bloc: _bloc,
         listener: (context, state) {
           state.maybeMap(
               loaded: (_) {
@@ -357,7 +357,7 @@ class _BucketScreenState extends State<BucketScreen> {
                                                   45,
                                           searchController: _searchController,
                                           onChange: (name) {
-                                            _bloc.add(BucketEvent.searchByName(
+                                            context.read<BucketBloc>().add(BucketEvent.searchByName(
                                                 name: name, bucket: bucket));
                                           },
                                           iconSize:
@@ -374,7 +374,7 @@ class _BucketScreenState extends State<BucketScreen> {
                                           message: AppStrings.addNewQuestion,
                                           child: IconButton(
                                             onPressed: () {
-                                              _bloc.add(BucketEvent.addQuestion(
+                                              context.read<BucketBloc>().add(BucketEvent.addQuestion(
                                                   questions: questions));
                                             },
                                             icon: const FaIcon(
@@ -419,7 +419,7 @@ class _BucketScreenState extends State<BucketScreen> {
                                     color: AppColors.signalRed,
                                     text: AppStrings.removeFromRelease,
                                     onPressed: () {
-                                      _bloc.add(BucketEvent.removeFromRelease(
+                                      context.read<BucketBloc>().add(BucketEvent.removeFromRelease(
                                           bucketId: bucket.id!));
                                     },
                                   ),
@@ -435,6 +435,7 @@ class _BucketScreenState extends State<BucketScreen> {
                                     color: AppColors.text,
                                     text: AppStrings.viewResponses,
                                     onPressed: () {
+                                      context.read<BucketBloc>().add(BucketEvent.getStatistics(bucketId: bucket.id!));
                                       widget.mobileSearchIconSpace == null
                                           ? router.push(
                                               '/responses/${bucket.id}/${bucket.name}')
@@ -476,7 +477,7 @@ class _BucketScreenState extends State<BucketScreen> {
                                     color: AppColors.signalGreen,
                                     text: AppStrings.publish,
                                     onPressed: () {
-                                      _bloc.add(BucketEvent.publish(
+                                      context.read<BucketBloc>().add(BucketEvent.publish(
                                           bucketId: bucket.id!));
                                       showToast(
                                           msg: AppStrings.bucketIsPublished);
@@ -557,7 +558,7 @@ class _BucketScreenState extends State<BucketScreen> {
                                     maxLines: 1,
                                     onSubmitted: (text) {
                                       questionNameFocusNodes[index].unfocus();
-                                      _bloc.add(BucketEvent.setQuestion(
+                                      context.read<BucketBloc>().add(BucketEvent.setQuestion(
                                           bucketId: bucket.id!,
                                           questionId: questions[index].id,
                                           question: Questions(
@@ -686,7 +687,7 @@ class _BucketScreenState extends State<BucketScreen> {
         style: TextStyle(color: AppColors.text),
       ),
       onPressed: () {
-        _bloc.add(BucketEvent.deleteQuestion(
+        context.read<BucketBloc>().add(BucketEvent.deleteQuestion(
             bucketId: bucket.id!, index: index, questions: questions));
         Navigator.pop(context);
       },
@@ -733,7 +734,7 @@ class _BucketScreenState extends State<BucketScreen> {
         style: TextStyle(color: AppColors.text),
       ),
       onPressed: () {
-        _bloc.add(BucketEvent.deleteAnswer(
+        context.read<BucketBloc>().add(BucketEvent.deleteAnswer(
             bucketId: bucket.id!,
             existedQuestions: currentQuestion,
             indexToDelete: index,
@@ -781,7 +782,7 @@ class _BucketScreenState extends State<BucketScreen> {
         style: TextStyle(color: AppColors.text),
       ),
       onPressed: () {
-        _bloc.add(BucketEvent.deleteBucket(bucketId: bucketId));
+        context.read<BucketBloc>().add(BucketEvent.deleteBucket(bucketId: bucketId));
         Navigator.pop(context);
       },
     );

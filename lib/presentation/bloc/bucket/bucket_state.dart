@@ -4,6 +4,12 @@ part of 'bucket_bloc.dart';
 class BucketState with _$BucketState {
   const BucketState._();
 
+  int? get completedQuiz =>
+      maybeMap(loaded: (state) => state.completedQuiz, orElse: () => null);
+
+  int? get joined =>
+      maybeMap(loaded: (state) => state.joined, orElse: () => null);
+
   bool? get isPublished =>
       maybeMap(loaded: (state) => state.isPublished, orElse: () => null);
 
@@ -24,14 +30,15 @@ class BucketState with _$BucketState {
   const factory BucketState.loading() = _Loading;
 
   const factory BucketState.loaded(
-      {@Default([])List<Questions> questionsList,
+      {@Default([]) List<Questions> questionsList,
       Bucket? bucket,
       bool? isPublished}) = _Loaded;
 
   const factory BucketState.questionAdded({Questions? questions}) =
       _QuestionAdded;
 
-  const factory BucketState.answerAdded({Questions? question, required int questionIndex}) = _AnswerAdded;
+  const factory BucketState.answerAdded(
+      {Questions? question, required int questionIndex}) = _AnswerAdded;
 
   const factory BucketState.success() = _Success;
 
@@ -48,4 +55,7 @@ class BucketState with _$BucketState {
       {@Default([]) List<Questions> questionsList,
       Bucket? bucket,
       bool? isPublished}) = _SearchLoaded;
+
+  const factory BucketState.calculated({int? completedQuiz, int? joined}) =
+      _Calculated;
 }
