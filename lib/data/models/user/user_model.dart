@@ -8,7 +8,7 @@ part 'user_model.g.dart';
 class UserModel with _$UserModel {
  const UserModel._();
 
-  String? get fullName => "$firstName  $lastName";
+  String? get fullName => "$firstName $lastName";
 
   bool get isInitialized => firstName != null && lastName != null && country != null && role != null && companyName != null;
 

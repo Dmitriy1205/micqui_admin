@@ -78,7 +78,8 @@ class _EditUserScreenState extends State<EditUserScreen> {
         bloc: _bloc,
         listener: (context, state) {
           state.maybeMap(
-              success: (_) => router.pop(),
+              success: (_) =>widget.mobileCardPadding == null
+                  ? router.pop() : Navigator.pop(context),
               error: (e) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(

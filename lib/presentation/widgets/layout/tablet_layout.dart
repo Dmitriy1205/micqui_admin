@@ -12,18 +12,22 @@ class TabletLayout extends StatefulWidget {
 }
 
 class _TabletLayoutState extends State<TabletLayout> {
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         centerTitle: false,
       ),
       drawer: AppDrawer(
         goToMyBuckets: () {
+          scaffoldKey.currentState?.openEndDrawer();
           router.go('/buckets');
         },
         goToUsers: () {
+          scaffoldKey.currentState?.openEndDrawer();
           router.go('/users');
         },
       ),
